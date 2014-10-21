@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Arefin\Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>10/03/2014 15:41:08</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>10/15/2014 14:15:34</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>10/15/2014 14:15:34</publishTime>
+    </File>
+    <File Include="bin/CASPortal.dll">
+      <publishTime>10/15/2014 14:15:20</publishTime>
+    </File>
+    <File Include="bin/CASPortal.XmlSerializers.dll">
+      <publishTime>10/15/2014 14:15:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>10/03/2014 15:41:07</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/03/2014 15:41:07</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/03/2014 15:41:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/03/2014 15:41:07</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>10/03/2014 15:41:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/03/2014 15:41:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/03/2014 15:41:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/03/2014 15:41:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/03/2014 15:41:06</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>10/03/2014 15:41:08</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="Content/css/bootstrap.css">
+      <publishTime>06/26/2014 23:58:44</publishTime>
+    </File>
+    <File Include="Content/css/bootstrap.min.css">
+      <publishTime>06/26/2014 23:58:44</publishTime>
+    </File>
+    <File Include="Content/css/casportal.css">
+      <publishTime>10/13/2014 14:37:21</publishTime>
+    </File>
+    <File Include="Content/css/plugins/dataTables.bootstrap.css">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/css/plugins/metisMenu/metisMenu.css">
+      <publishTime>10/13/2014 15:48:44</publishTime>
+    </File>
+    <File Include="Content/css/plugins/metisMenu/metisMenu.min.css">
+      <publishTime>06/24/2014 19:47:26</publishTime>
+    </File>
+    <File Include="Content/css/plugins/morris.css">
+      <publishTime>06/17/2014 23:31:06</publishTime>
+    </File>
+    <File Include="Content/css/plugins/social-buttons.css">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/css/plugins/timeline.css">
+      <publishTime>06/24/2014 21:00:22</publishTime>
+    </File>
+    <File Include="Content/css/sb-admin-2.css">
+      <publishTime>06/25/2014 17:59:12</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/css/font-awesome.css">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/css/font-awesome.min.css">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/fonts/fontawesome-webfont.eot">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/fonts/fontawesome-webfont.svg">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/fonts/fontawesome-webfont.ttf">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/fonts/fontawesome-webfont.woff">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/fonts/FontAwesome.otf">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/bordered-pulled.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/core.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/fixed-width.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/font-awesome.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/icons.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/larger.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/list.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/mixins.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/path.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/rotated-flipped.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/spinning.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/stacked.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/less/variables.less">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/font-awesome.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_bordered-pulled.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_core.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_fixed-width.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_icons.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_larger.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_list.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_mixins.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_path.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_rotated-flipped.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_spinning.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_stacked.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/font-awesome-4.1.0/scss/_variables.scss">
+      <publishTime>06/09/2014 19:18:44</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>06/26/2014 23:58:44</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>06/26/2014 23:58:44</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>06/26/2014 23:58:44</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>06/26/2014 23:58:44</publishTime>
+    </File>
+    <File Include="Content/images/loading.gif">
+      <publishTime>07/16/2013 14:22:53</publishTime>
+    </File>
+    <File Include="Content/images/logo.jpg">
+      <publishTime>09/30/2014 11:20:00</publishTime>
+    </File>
+    <File Include="Content/images/servicepro_logo.png">
+      <publishTime>09/29/2014 11:55:23</publishTime>
+    </File>
+    <File Include="Content/images/temisoft.png">
+      <publishTime>09/29/2014 17:45:45</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/demo/demo.css">
+      <publishTime>05/19/2013 01:52:41</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/demo/demo.html">
+      <publishTime>05/19/2013 01:39:45</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/jquery-te-1.4.0.css">
+      <publishTime>09/12/2013 07:06:25</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/jquery-te-1.4.0.min.js">
+      <publishTime>09/12/2013 07:06:04</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/jquery-te.png">
+      <publishTime>05/18/2013 19:48:06</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/license/AUTHOR.txt">
+      <publishTime>08/15/2013 22:08:58</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/license/MIT-LICENSE.txt">
+      <publishTime>02/25/2013 17:40:21</publishTime>
+    </File>
+    <File Include="Content/jQuery_TE/uncompressed/jquery-te-1.4.0.js">
+      <publishTime>09/12/2013 07:06:07</publishTime>
+    </File>
+    <File Include="Content/js/bootstrap.js">
+      <publishTime>06/26/2014 23:58:46</publishTime>
+    </File>
+    <File Include="Content/js/bootstrap.min.js">
+      <publishTime>06/26/2014 23:58:46</publishTime>
+    </File>
+    <File Include="Content/js/customerinformation.js">
+      <publishTime>10/13/2014 14:32:37</publishTime>
+    </File>
+    <File Include="Content/js/jquery-1.11.0.js">
+      <publishTime>06/09/2014 18:47:18</publishTime>
+    </File>
+    <File Include="Content/js/jquery.jclock.js">
+      <publishTime>04/27/2012 13:26:03</publishTime>
+    </File>
+    <File Include="Content/js/plugins/dataTables/dataTables.bootstrap.js">
+      <publishTime>09/30/2014 12:51:36</publishTime>
+    </File>
+    <File Include="Content/js/plugins/dataTables/jquery.dataTables.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/excanvas.min.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/flot-data.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.pie.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.resize.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.tooltip.min.js">
+      <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/metisMenu/metisMenu.js">
+      <publishTime>06/24/2014 19:47:26</publishTime>
+    </File>
+    <File Include="Content/js/plugins/metisMenu/metisMenu.min.js">
+      <publishTime>06/24/2014 19:47:26</publishTime>
+    </File>
+    <File Include="Content/js/plugins/morris/morris-data.js">
+      <publishTime>06/24/2014 19:32:26</publishTime>
+    </File>
+    <File Include="Content/js/plugins/morris/morris.js">
+      <publishTime>06/17/2014 23:31:06</publishTime>
+    </File>
+    <File Include="Content/js/plugins/morris/morris.min.js">
+      <publishTime>06/17/2014 23:31:06</publishTime>
+    </File>
+    <File Include="Content/js/plugins/morris/raphael.min.js">
+      <publishTime>06/17/2014 23:33:08</publishTime>
+    </File>
+    <File Include="Content/js/sb-admin-2.js">
+      <publishTime>06/25/2014 17:47:48</publishTime>
+    </File>
+    <File Include="Content/less/mixins.less">
+      <publishTime>06/24/2014 20:45:16</publishTime>
+    </File>
+    <File Include="Content/less/sb-admin-2.less">
+      <publishTime>06/25/2014 17:55:42</publishTime>
+    </File>
+    <File Include="Content/less/variables.less">
+      <publishTime>06/24/2014 20:55:24</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>10/03/2014 15:41:08</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>10/15/2014 14:15:27</publishTime>
+    </File>
+    <File Include="Properties/DataSources/System.Data.DataSet.datasource">
+      <publishTime>10/03/2014 16:13:54</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>10/03/2014 15:41:02</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>10/03/2014 15:41:02</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>10/03/2014 15:41:03</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>10/03/2014 15:41:07</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>10/03/2014 15:41:08</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>10/03/2014 15:41:08</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>10/15/2014 13:43:58</publishTime>
+    </File>
+    <File Include="Service References/CASService/CASPortal.CASService.LoginProcessResponse.datasource">
+      <publishTime>10/03/2014 16:13:54</publishTime>
+    </File>
+    <File Include="Views/CustomerInformation/Index.cshtml">
+      <publishTime>10/10/2014 12:48:53</publishTime>
+    </File>
+    <File Include="Views/CustomerInformation/LoadPrivateFolders.cshtml">
+      <publishTime>10/03/2014 17:04:31</publishTime>
+    </File>
+    <File Include="Views/CustomerInformation/TextEditor.cshtml">
+      <publishTime>10/13/2014 12:07:53</publishTime>
+    </File>
+    <File Include="Views/CustomerInformation/WelcomeMessage.cshtml">
+      <publishTime>10/10/2014 13:25:37</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Views/Login/Index.cshtml">
+      <publishTime>10/13/2014 13:06:47</publishTime>
+    </File>
+    <File Include="Views/Scheduler/Index.cshtml">
+      <publishTime>10/15/2014 13:15:04</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Views/Shared/_Advertisements.cshtml">
+      <publishTime>10/10/2014 11:10:20</publishTime>
+    </File>
+    <File Include="Views/Shared/_HeaderLogo.cshtml">
+      <publishTime>10/10/2014 11:04:03</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>10/14/2014 15:23:08</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Web References/CASService/Reference.map">
+      <publishTime>10/09/2014 10:18:13</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/15/2014 14:15:24</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
