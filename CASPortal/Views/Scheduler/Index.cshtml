@@ -78,8 +78,9 @@
     #txtEndTime {
         width: 140px;
     }
-        
-    .occupied {
+
+    .occupied,
+    .afterhour {
         width: 20px;
         height: 50px;
         color: #ffffff;
@@ -132,7 +133,7 @@
                 </div>
                 <div class="modal-body">
                     <label>Subject: <input class="form-control input-sm"></label><br/>
-                    <label>Date: <input id="txtDate" class="form-control input-sm"></label>
+                    <label>Date: <input id="txtDate" class="form-control input-sm" readonly style="background-color: #FFFFFF;"></label>
                     <br />
                     <div class="row">
                         <label>Time Start: <input id="txtStartTime" class="form-control input-sm hourtimes" readonly style="background-color: #FFFFFF;"></label>
@@ -250,6 +251,13 @@
             combidend = "id" + combidend;
             $("#hdncombidend").val(combidend);
             alert("Schedule cannot be set as this time is booked.");
+        }
+        else if ($("#tblTime").find('[combid="' + combidend + '"]').hasClass("afterhour")) {
+            _hours = _hours - 10;
+            combidend = parseInt(combidend.replace("id", "")) - 10;
+            combidend = "id" + combidend;
+            $("#hdncombidend").val(combidend);
+            alert("Schedule cannot be set after " + $("#txtEndTime").val() + ".");
         }
         else
             $("#txtEndTime").val(AddHour());
@@ -430,8 +438,8 @@
                     _businessStartHour = parseInt(data.MinStartHour);
                     var businessEndHour = parseInt(data.MaxEndHour);
 
-                    //_businessStartHour = 6.5;
-                     //businessEndHour = 19.5;
+                    _businessStartHour = 6;
+                     businessEndHour = 19;
 
                     _duration = parseInt(data.Duration);
                     _duration = 30;
@@ -482,8 +490,9 @@
 
                         dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
 
-                        if (dayDiff >= 0) {
-                            endindex = (parseInt(bsHour.BusinessStartHour) - parseInt(_businessStartHour)) * 2
+                        //Color will be set for next five days
+                        if (dayDiff >= 0 && dayDiff <= 5) {
+                            endindex = (parseFloat(bsHour.BusinessStartHour) - parseFloat(_businessStartHour)) * 2
 
                             startindex = parseInt(1 + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);
@@ -494,7 +503,7 @@
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
-                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                             }
@@ -505,11 +514,11 @@
                     $.each(data.BusinessHours, function (i, bsHour) {
 
                         dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                        //dayDiff += 1;
-
-                        if (dayDiff >= 0) {
-                            startindex = (((parseInt(bsHour.BusinessEndHour) - parseInt(_businessStartHour)) * 2) + 1);
-                            endindex = ((businessEndHour - parseInt(_businessStartHour))) *2;
+                        
+                        //Color will be set for next five days
+                        if (dayDiff >= 0 && dayDiff <= 5) {
+                            startindex = (((parseFloat(bsHour.BusinessEndHour) - parseFloat(_businessStartHour)) * 2) + 1);
+                            endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
 
                             startindex = parseInt(startindex + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);
@@ -520,7 +529,7 @@
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
-                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                             }
@@ -531,11 +540,11 @@
                     $.each(data.TimeSlots, function (i, occupied) {
 
                         dayDiff = (new Date(occupied.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                        //dayDiff += 1;
-
-                        if (dayDiff >= 0) {
-                            startindex = (((parseInt(occupied.StartTime) - parseInt(_businessStartHour)) * 2) + 1);
-                            endindex = ((parseInt(occupied.EndTime) - parseInt(_businessStartHour)) * 2);
+                        
+                        //Color will be set for next five days
+                        if (dayDiff >= 0 && dayDiff <= 5) {
+                            startindex = (((parseFloat(occupied.StartTime) - parseFloat(_businessStartHour)) * 2) + 1);
+                            endindex = ((parseFloat(occupied.EndTime) - parseFloat(_businessStartHour)) * 2);
 
                             startindex = parseInt(startindex + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);

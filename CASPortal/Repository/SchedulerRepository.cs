@@ -77,19 +77,37 @@ namespace CASPortal.Repository
                 {
                     ItemID = 2,
                     Date = DateTime.Now.AddDays(1).ToString("dd/MMM/yyyy"),
-                    BusinessStartHour = 9,
-                    BusinessEndHour = 15,
-                    StartTime = 13,
-                    EndTime = 14
+                    BusinessStartHour = 9.5F,
+                    BusinessEndHour = 15.5F,
+                    StartTime = 13.5F,
+                    EndTime = 14.5F
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = DateTime.Now.AddDays(1).ToString("dd/MMM/yyyy"),
-                    BusinessStartHour = 9,
-                    BusinessEndHour = 15,
-                    StartTime = 9,
-                    EndTime = 11
+                    BusinessStartHour = 9.5F,
+                    BusinessEndHour = 15.5F,
+                    StartTime = 10,
+                    EndTime = 11.5F
+                },
+                new TimeSlot
+                {
+                    ItemID = 2,
+                    Date = new DateTime(2014, 11, 5).ToString("dd/MMM/yyyy"),
+                    BusinessStartHour = 9.5F,
+                    BusinessEndHour = 15.5F,
+                    StartTime = 11.5F,
+                    EndTime = 12F
+                },
+                new TimeSlot
+                {
+                    ItemID = 2,
+                    Date = new DateTime(2014, 11, 5).ToString("dd/MMM/yyyy"),
+                    BusinessStartHour = 9.5F,
+                    BusinessEndHour = 15.5F,
+                    StartTime = 13F,
+                    EndTime = 14.5F
                 }
             };
 
