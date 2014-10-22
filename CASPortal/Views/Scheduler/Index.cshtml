@@ -9,6 +9,11 @@
         margin-left:0px;
     }
 
+    #ddlItems,
+    #divDatePicker {
+        padding-left: 0px;
+    }
+
     #tblDate tr th {
         text-align: right;
         padding-right: 5px;
@@ -106,7 +111,27 @@
 
 <div id="page-wrapper">
     <br/>
-    <p><label>Date : <input class="form-control input-sm" id="datepicker" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;"></label></p>
+    <input type="hidden" id="hdnItemID" />
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlItems">
+            <label>Services :</label>
+            <div class="btn-group">
+                <a class="btn btn-info dropdown-toggle dropdown-item" data-toggle="dropdown" href="#">
+                    <span data-bind="label"></span> <span class="caret"></span>
+                </a>
+                <ul id="ulItems" class="dropdown-menu">
+                    @Html.Raw(ViewBag.Items)
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divDatePicker">
+            <p><label>Date : <input class="form-control input-sm" id="datepicker" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;"></label></p>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -120,7 +145,7 @@
     
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <span style="color: #808080; font-size: 12px; float: left; margin-left: -15px;">Click on any available cell to set schedule.</span>
+            <span id="tblDesc" style="color: #808080; font-size: 12px; float: left; margin-left: -15px;">Click on any available cell to set schedule.</span>
         </div>
     </div>
 
@@ -161,6 +186,8 @@
     //It has dynamic interval multiplicable by 30 minutes.
     //Booked time slot cannot be set for another task.
 
+    var listItem = $("#ulItems > :first-child");
+
     var _hours = 0;
     var _minhours = "7:00";
     var _maxhours = "18:00";
@@ -171,7 +198,13 @@
     //Populate Date and Time table
     $(function () {
 
-        var isMouseDown = false;
+        $("#divDatePicker").hide();
+        $("#tblDate").hide();
+        $("#tblTime").hide();
+        $("#tblDesc").hide();
+
+        var ulItem = $("#ulItems > :first-child").text();
+        $(".dropdown-item").find('[data-bind="label"]').text(ulItem);
 
         generateTimes();
         generateDays(new Date());
@@ -186,6 +219,10 @@
             altFormat: "yy-mm-dd",
             onSelect: function (date) {
                 if (CheckDate()) {
+                    $("#tblDate").show();
+                    $("#tblTime").show();
+                    $("#tblDesc").show();
+
                     generateDays($(this).datepicker('getDate'));
                     generateTimes();
                 }
@@ -195,6 +232,39 @@
                 }
             }
         });
+    });
+
+    $(document.body).on('click', '#ulItems li', function (event) {
+        var $target = $(event.currentTarget);
+        $("#ulItems > :first-child").show();
+        listItem.css("background-color", "#FFFFFF");
+
+        if (listItem != $(this)) {
+            listItem.show();
+        }
+
+        $(this).css("background-color", "#f9f9c0");
+
+        if ($target.text() == $(this).text()) {
+            listItem = $(this);
+        }
+
+        /*$("#folderHeading").html("Private Folder :: ");
+        $("#folderName").html($target.text());*/
+
+        $target.closest('.btn-group')
+           .find('[data-bind="label"]').text($target.text())
+              .end()
+           .children('.dropdown-item').dropdown('toggle');
+
+        if($target.text() != "Select Item"){
+            $("#divDatePicker").show();
+            $("#hdnItemID").val($(this).attr("id"));
+        }
+        else
+            $("#divDatePicker").hide();
+
+        return false;
     });
 
     function CheckDate() {
@@ -427,7 +497,7 @@
         $.ajax({
             url: urlVal,
             type: "GET",
-            data: { dateStartedFrom: calDate },
+            data: { dateStartedFrom: calDate, itemID: $("#hdnItemID").val() },
             dataType: "json",
             success: function (data) {
                 if (data != null) {
@@ -438,8 +508,8 @@
                     _businessStartHour = parseInt(data.MinStartHour);
                     var businessEndHour = parseInt(data.MaxEndHour);
 
-                    _businessStartHour = 6;
-                     businessEndHour = 19;
+                    //_businessStartHour = 6;
+                     //businessEndHour = 19;
 
                     _duration = parseInt(data.Duration);
                     _duration = 30;
