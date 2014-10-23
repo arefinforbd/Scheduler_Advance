@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "TextEditor";
+    Layout = null;
+}
+
+<script src="@Url.Content("~/Content/js/jquery-1.11.0.js")"></script>
+<link href="@Url.Content("~/Content/jQuery_TE/jquery-te-1.4.0.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Content/jQuery_TE/jquery-te-1.4.0.min.js")"></script>
+
+<style>
+    .jqte_tool_9,
+    .jqte_tool_10,
+    .jqte_tool_11,
+    .jqte_tool_12,
+    .jqte_tool_16,
+    .jqte_tool_17,
+    .jqte_tool_18,
+    .jqte_tool_19,
+    .jqte_tool_20,
+    .jqte_tool_21
+    {
+        display:none;
+    }
+
+    .jqte_editor{
+        height: 300px;
+    }
+</style>
+
+<h2>TextEditor</h2>
+
+<div style="width: 600px;">
+    <textarea name="textarea" class="jqte-test"></textarea>
+</div>
+
+<script>
+    $('.jqte-test').jqte();
+
+    // settings of status
+    var jqteStatus = true;
+    $(".status").click(function () {
+        jqteStatus = jqteStatus ? false : true;
+        $('.jqte-test').jqte({ "status": jqteStatus })
+    });
+
+</script>

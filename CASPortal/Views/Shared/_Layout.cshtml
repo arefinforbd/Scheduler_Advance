@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using CASPortal.Helper;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,6 +20,31 @@
 
     <link href="@Url.Content("~/Content/css/casportal.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/js/jquery-ui-1.11.1/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    @{
+        if(!BaseHelper.AdvertisementStatus){
+            <script>
+                $(function () {
+                    $("#mainDiv").html("<b>Processing...</b>");
+
+                    $("#maintable").removeClass("col-lg-8");
+                    $("#maintable").addClass("col-lg-12");
+                    $("#ddlprivatefolder").removeClass("col-lg-6");
+                    $("#ddlprivatefolder").addClass("col-lg-4");
+                    $("#ddlpublicfolder").removeClass("col-lg-6");
+                    $("#ddlpublicfolder").addClass("col-lg-8");
+                });
+            </script>
+            <style>
+                #advertisements{
+                    display:none;
+                }
+                #applogo {
+                    float: left !important;
+                }
+            </style>
+        }
+    }
 
 </head>
 <body>

@@ -1,18 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Scheduler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
-    .row{
-        margin-left:0px;
-    }
-
-    #ddlItems,
-    #divDatePicker,
-    #divContinueButton {
-        padding-left: 0px;
+    .row {
+        margin-left: 0px;
     }
 
     #tblDate tr th {
@@ -46,18 +39,18 @@
         width: 80px;
     }
 
-    table#tblDate th#dateheader {
-        height: 40px;
-    }
+        table#tblDate th#dateheader {
+            height: 40px;
+        }
 
     table#tblTime td.td00 {
         border-right: 1px dotted #FF0000;
     }
 
-    table#tblTime td.td00:hover {
-        background-color: #ffd571;
-        cursor: pointer;
-    }
+        table#tblTime td.td00:hover {
+            background-color: #ffd571;
+            cursor: pointer;
+        }
 
     table#tblTime td.td30:hover {
         background-color: #aad7fe;
@@ -65,18 +58,18 @@
     }
 
     .col-lg-1,
-    .col-lg-11{
-        padding:0px;
+    .col-lg-11 {
+        padding: 0px;
     }
 
     .modal.in .modal-dialog {
         transform: translate3d(-630px, 50px, 0px);
     }
-    
+
     .ui-widget {
         font-size: 1em;
     }
-    
+
     #txtStartTime {
         width: 135px;
     }
@@ -85,8 +78,7 @@
         width: 140px;
     }
 
-    .occupied,
-    .afterhour {
+    .occupied {
         width: 20px;
         height: 50px;
         color: #ffffff;
@@ -105,43 +97,13 @@
             margin-top: 0px;
         }
     }
-
 </style>
 
+<h2>Index</h2>
+
 <div id="page-wrapper">
-    <br/>
-    <input type="hidden" id="hdnItemID" />
-
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlItems">
-            <label>Services : </label>
-            <div class="btn-group">
-                <a class="btn btn-info dropdown-toggle dropdown-item" data-toggle="dropdown" href="#">
-                    <span data-bind="label"></span> <span class="caret"></span>
-                </a>
-                <ul id="ulItems" class="dropdown-menu">
-                    @Html.Raw(ViewBag.Items)
-                </ul>
-            </div>
-        </div>
-    </div>
     <br />
-
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divDatePicker">
-            <label>Date : </label>
-            <div class="btn-group" style="margin-left:30px;">
-                <input class="form-control input-sm" id="datepicker" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="divAjaxLoading"></div>
-        </div>
-    </div>
+    <p><label>Date : <input class="form-control input-sm" id="datepicker" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;"></label></p>
 
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -152,27 +114,10 @@
             <table border="1" id="tblTime" class="table-hover table"></table>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <span id="tblDesc" style="color: #808080; font-size: 12px; float: left; margin-left: -15px;">Click on any available cell to set schedule.</span>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divContinueButton">
-            @using (Html.BeginForm("CustomerInformation", "Scheduler"))
-{
-                <input type="hidden" id="itemID" name="itemID" />
-                <input type="hidden" id="scheduleDate" name="scheduleDate" />
-                <input type="hidden" id="scheduleStartTime" name="scheduleStartTime" />
-                <input type="hidden" id="scheduleEndTime" name="scheduleEndTime" />
-                <input type="hidden" id="specialInstruction" name="specialInstruction" />
-
-                <div id="div_btnContinue">
-                    <button class="btn btn-success" type="submit">Continue</button>
-                </div>
-}
+            <span style="color: #808080; font-size: 12px; float: left; margin-left: -15px;">Click on any available cell to set schedule.</span>
         </div>
     </div>
 
@@ -184,8 +129,8 @@
                     <h4 id="myModalLabel" class="modal-title">Add Schedule</h4>
                 </div>
                 <div class="modal-body">
-                    <label>Subject: <input class="form-control input-sm"></label><br/>
-                    <label>Date: <input id="txtDate" class="form-control input-sm" readonly style="background-color: #FFFFFF;"></label>
+                    <label>Subject: <input class="form-control input-sm"></label><br />
+                    <label>Date: <input id="txtDate" class="form-control input-sm"></label>
                     <br />
                     <div class="row">
                         <label>Time Start: <input id="txtStartTime" class="form-control input-sm hourtimes" readonly style="background-color: #FFFFFF;"></label>
@@ -193,7 +138,7 @@
                         <button id="btnAddHour" class="btn btn-default btn-sm" type="button">Add Hour</button>
                     </div>
                     <br />
-                    <label>Special Instruction: <textarea id="txtSpecialInstruction" class="form-control" rows="3" cols="50"></textarea></label>
+                    <label>Special Instruction: <textarea class="form-control" rows="3" cols="50"></textarea></label>
                     <input type="hidden" id="hdncombid" />
                     <input type="hidden" id="hdncombidend" />
                 </div>
@@ -213,8 +158,6 @@
     //It has dynamic interval multiplicable by 30 minutes.
     //Booked time slot cannot be set for another task.
 
-    var listItem = $("#ulItems > :first-child");
-
     var _hours = 0;
     var _minhours = "7:00";
     var _maxhours = "18:00";
@@ -225,16 +168,12 @@
     //Populate Date and Time table
     $(function () {
 
-        $("#divDatePicker").hide();
-        $("#tblDate").hide();
-        $("#tblTime").hide();
-        $("#tblDesc").hide();
-        $("#divContinueButton").hide();
+        var isMouseDown = false;
 
-        var ulItem = $("#ulItems > :first-child").text();
-        $(".dropdown-item").find('[data-bind="label"]').text(ulItem);
-
+        generateTimes();
+        generateDays(new Date());
         $(document).tooltip();
+
         $("#datepicker").val("");
 
         $("#datepicker").datepicker({
@@ -243,19 +182,9 @@
             selectOtherMonths: true,
             altFormat: "yy-mm-dd",
             onSelect: function (date) {
-                $("#divContinueButton").hide();
                 if (CheckDate()) {
-                    $("#tblDate").show();
-                    $("#tblTime").show();
-                    $("#tblDesc").show();
-
-                    $("#divAjaxLoading").html("<img alt= title= src=/Content/Images/ajax-loading.gif width='10%' />");
-
                     generateDays($(this).datepicker('getDate'));
                     generateTimes();
-
-                    $("#divAjaxLoading").html("");
-                    $("#divAjaxLoading").attr("style", "display:none");
                 }
                 else {
                     alert("Back date cannot be selected.");
@@ -263,48 +192,6 @@
                 }
             }
         });
-    });
-
-    $(document.body).on('click', '#ulItems li', function (event) {
-        var $target = $(event.currentTarget);
-        $("#ulItems > :first-child").show();
-        listItem.css("background-color", "#FFFFFF");
-
-        if (listItem != $(this)) {
-            listItem.show();
-        }
-
-        $(this).css("background-color", "#f9f9c0");
-
-        if ($target.text() == $(this).text()) {
-            listItem = $(this);
-        }
-
-        /*$("#folderHeading").html("Private Folder :: ");
-        $("#folderName").html($target.text());*/
-
-        $target.closest('.btn-group')
-           .find('[data-bind="label"]').text($target.text())
-              .end()
-           .children('.dropdown-item').dropdown('toggle');
-
-        if($target.text() != "Select Item"){
-            $("#divDatePicker").show();
-            $("#hdnItemID").val($(this).attr("id"));
-            $("#tblDate").hide();
-            $("#tblTime").hide();
-            $("#tblDesc").hide();
-            $("#divContinueButton").hide();
-        }
-        else{
-            $("#divDatePicker").hide();
-            $("#tblDate").hide();
-            $("#tblTime").hide();
-            $("#tblDesc").hide();
-            $("#divContinueButton").hide();
-        }
-
-        return false;
     });
 
     function CheckDate() {
@@ -362,20 +249,13 @@
             $("#hdncombidend").val(combidend);
             alert("Schedule cannot be set as this time is booked.");
         }
-        else if ($("#tblTime").find('[combid="' + combidend + '"]').hasClass("afterhour")) {
-            _hours = _hours - 10;
-            combidend = parseInt(combidend.replace("id", "")) - 10;
-            combidend = "id" + combidend;
-            $("#hdncombidend").val(combidend);
-            alert("Schedule cannot be set after " + $("#txtEndTime").val() + ".");
-        }
         else
             $("#txtEndTime").val(AddHour());
     });
 
     //Save button selects and sets the occupied time slots
     $("#btnSave").click(function () {
-        if (window.confirm("Are you sure to set schedule from " + $("#txtStartTime").val() + " to " +$("#txtEndTime").val() + "?")) {
+        if (window.confirm("Are you sure to set schedule from " + $("#txtStartTime").val() + " to " + $("#txtEndTime").val() + "?")) {
             var combid = $("#hdncombid").val();
             var combidend = $("#hdncombidend").val();
 
@@ -397,13 +277,6 @@
             _hours = 0;
             $("#hdncombid").val("");
             $("#hdncombidend").val("");
-            $("#divContinueButton").show();
-
-            $("#scheduleDate").val($("#txtDate").val());
-            $("#scheduleStartTime").val($("#txtStartTime").val());
-            $("#scheduleEndTime").val($("#txtEndTime").val());
-            $("#specialInstruction").val($("#txtSpecialInstruction").val());
-            $("#itemID").val($("#hdnItemID").val());
         }
         else {
             return false;
@@ -443,8 +316,7 @@
             startHR = _businessStartHour;
             endHR = _businessStartHour + _duration;
         }
-        else
-        {
+        else {
             endHR = _businessStartHour + (parseInt(idval) * _duration);
             startHR = endHR - _duration;
         }
@@ -544,7 +416,7 @@
         $.ajax({
             url: urlVal,
             type: "GET",
-            data: { dateStartedFrom: calDate, itemID: $("#hdnItemID").val() },
+            data: { dateStartedFrom: calDate },
             dataType: "json",
             success: function (data) {
                 if (data != null) {
@@ -555,8 +427,8 @@
                     _businessStartHour = parseInt(data.MinStartHour);
                     var businessEndHour = parseInt(data.MaxEndHour);
 
-                    //_businessStartHour = 6;
-                     //businessEndHour = 19;
+                    _businessStartHour = 6;
+                    businessEndHour = 19;
 
                     _duration = parseInt(data.Duration);
                     _duration = 30;
@@ -607,9 +479,8 @@
 
                         dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
 
-                        //Color will be set for next five days
-                        if (dayDiff >= 0 && dayDiff <= 5) {
-                            endindex = (parseFloat(bsHour.BusinessStartHour) - parseFloat(_businessStartHour)) * 2
+                        if (dayDiff >= 0) {
+                            endindex = (parseInt(bsHour.BusinessStartHour) - parseInt(_businessStartHour)) * 2
 
                             startindex = parseInt(1 + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);
@@ -620,7 +491,7 @@
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
-                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                             }
@@ -631,11 +502,11 @@
                     $.each(data.BusinessHours, function (i, bsHour) {
 
                         dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                        
-                        //Color will be set for next five days
-                        if (dayDiff >= 0 && dayDiff <= 5) {
-                            startindex = (((parseFloat(bsHour.BusinessEndHour) - parseFloat(_businessStartHour)) * 2) + 1);
-                            endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
+                        //dayDiff += 1;
+
+                        if (dayDiff >= 0) {
+                            startindex = (((parseInt(bsHour.BusinessEndHour) - parseInt(_businessStartHour)) * 2) + 1);
+                            endindex = ((businessEndHour - parseInt(_businessStartHour))) * 2;
 
                             startindex = parseInt(startindex + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);
@@ -646,7 +517,7 @@
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
-                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                             }
@@ -657,11 +528,11 @@
                     $.each(data.TimeSlots, function (i, occupied) {
 
                         dayDiff = (new Date(occupied.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                        
-                        //Color will be set for next five days
-                        if (dayDiff >= 0 && dayDiff <= 5) {
-                            startindex = (((parseFloat(occupied.StartTime) - parseFloat(_businessStartHour)) * 2) + 1);
-                            endindex = ((parseFloat(occupied.EndTime) - parseFloat(_businessStartHour)) * 2);
+                        //dayDiff += 1;
+
+                        if (dayDiff >= 0) {
+                            startindex = (((parseInt(occupied.StartTime) - parseInt(_businessStartHour)) * 2) + 1);
+                            endindex = ((parseInt(occupied.EndTime) - parseInt(_businessStartHour)) * 2);
 
                             startindex = parseInt(startindex + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);

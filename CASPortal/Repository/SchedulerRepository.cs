@@ -8,6 +8,35 @@ namespace CASPortal.Repository
 {
     public class SchedulerRepository
     {
+        public List<Item> GetAllItem()
+        {
+            Item item = new Item();
+            List<Item> itemList;
+
+            itemList = new List<Item>(){
+                new Item
+                {
+                    ItemID = 10,
+                    ItemName = "Pest Control 10",
+                    SpecialInstruction = "SP Description 100"
+                },
+                new Item
+                {
+                    ItemID = 2,
+                    ItemName = "Pest Control 2",
+                    SpecialInstruction = "SP Description 20"
+                },
+                new Item
+                {
+                    ItemID = 5,
+                    ItemName = "Pest Control 5",
+                    SpecialInstruction = "SP Description 50"
+                }
+            };
+
+            return itemList;
+        }
+
         public Item GetItem()
         {
             Item item = new Item();
@@ -22,7 +51,6 @@ namespace CASPortal.Repository
             item.Price = 150;
 
             item.TimeSlots = new List<TimeSlot>(){
-
                 new TimeSlot
                 {
                     ItemID = 2,

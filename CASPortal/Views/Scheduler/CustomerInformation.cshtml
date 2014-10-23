@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "Customer Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #FFFFFF;
+    }
+
+    .panel-heading{
+        font-size: 18px;
+        padding: 8px 10px;
+    }
+
+    .custinput{
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .custDivColLeft {
+        padding-left: 0px;
+    }
+
+    .custDivColRight {
+        padding-right: 4px;
+    }
+
+    .cusDivLessBottomMargin{
+        margin-bottom: 6px;
+    }
+    .maxWidth{
+        max-width: 436px;
+    }
+
+    .submitClass {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .panelStyle {
+        border: 1px solid #eeeeee;
+        padding: 10px;
+    }
+
+    .panelBottom1 {
+        border-bottom: solid #fbdd8a;
+    }
+
+    .panelBottom2 {
+        border-bottom: solid #9ee1e8;
+    }
+
+    .panelBottom3 {
+        border-bottom: solid #99fbad;
+    }
+</style>
+
+<div id="page-wrapper">
+    <br/>
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            @using (Html.BeginForm("SendCustomerInformation", "Scheduler", FormMethod.Post, new { @id="frmCustInfo" }))
+            {
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>Customer Information</label>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="panel panelStyle panelBottom1">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    First Name
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="firstname" class="form-control custinput" placeholder="First Name" name="firstname" type="text" required="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Last Name
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="lastname" class="form-control custinput" placeholder="Last Name" name="lastname" type="text" value="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panelStyle panelBottom2">
+                            Address
+                            <div class="row">
+                                <div class="col-lg-2 custDivColRight">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="houseno" class="form-control custinput" placeholder="House/Unit No" name="houseno" type="text" value="" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 ">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="streetname" class="form-control custinput" placeholder="Street name" name="streetname" type="text" value="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="address" class="form-control custinput maxWidth" placeholder="" name="address" type="text" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 custDivColRight">
+                                    <div class="form-group cusDivLessBottomMargin ">
+                                        <input id="city" class="form-control custinput" placeholder="City" name="city" type="text" value="" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 custDivColRight">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="state" class="form-control custinput" placeholder="State" name="state" type="text" value="" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="postcode" class="form-control custinput" placeholder="Post Code" name="postcode" type="number" value="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panelStyle panelBottom3">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Phone No
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="phoneno" class="form-control custinput" placeholder="Phone No" name="phoneno" type="text" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Mobile No
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="mobileno" class="form-control custinput" placeholder="Mobile No" name="mobileno" type="text" value="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <div id="div_btnContinue">
+                            <input id="btnSubmit" class="btn btn-info submitClass" value="Submit" type="button" name="submit">
+                        </div>
+                    </div>
+                    
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $("#btnSubmit").click(function () {
+
+        if (Validate()) {
+
+            if (confirm("Are you sure to send your information?")) {
+
+                var firstName = $("#firstname").val().trim();
+                var lastName = $("#lastname").val().trim();
+                var houseNo = $("#houseno").val().trim();
+                var streetName = $("#streetname").val().trim();
+                var address = $("#address").val().trim();
+                var city = $("#city").val().trim();
+                var state = $("#state").val().trim();
+                var postCode = $("#postcode").val().trim();
+                var phoneNo = $("#phoneno").val().trim();
+                var mobileNo = $("#mobileno").val().trim();
+
+                $.ajaxSetup({ cache: false });
+                $.ajax({
+                    url: "/Scheduler/SendCustomerInformation",
+                    type: "POST",
+                    data: { firstname: firstName, lastname: lastName, houseno: houseNo, streetname: streetName, address: address, city: city, state: state, postcode: postCode, phoneno: phoneNo, mobileno: mobileNo },
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data != null && data == "successfull") {
+                            alert("Thank you. Your information has been sent.");
+                            window.location.href = "/Scheduler/";
+                        }
+                        else
+                            alert("Please try again. Something went wrong.");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Please try again. Something went wrong.");
+                    },
+                    complete: function (jqXHR, textStatus) {
+
+                    }
+                });
+            }
+        }
+    });
+
+    function Validate() {
+
+        if ($("#firstname").val().trim().length <= 0) {
+            alert("Please enter First Name.");
+            $("#firstname").focus();
+            return false;
+        }
+
+        if ($("#lastname").val().trim().length <= 0) {
+            alert("Please enter Last Name.");
+            $("#lastname").focus();
+            return false;
+        }
+
+        if ($("#houseno").val().trim().length <= 0) {
+            alert("Please enter House No.");
+            $("#houseno").focus();
+            return false;
+        }
+
+        if ($("#streetname").val().trim().length <= 0) {
+            alert("Please enter Street Name.");
+            $("#streetname").focus();
+            return false;
+        }
+
+        if ($("#city").val().trim().length <= 0) {
+            alert("Please enter City.");
+            $("#city").focus();
+            return false;
+        }
+
+        if ($("#state").val().trim().length <= 0) {
+            alert("Please enter State.");
+            $("#state").focus();
+            return false;
+        }
+
+        if ($("#postcode").val().trim().length <= 0) {
+            alert("Please enter Post Code.");
+            $("#postcode").val("");
+            $("#postcode").focus();
+            return false;
+        }
+
+        if ($("#mobileno").val().trim().length <= 0) {
+            alert("Please enter Mobile No.");
+            $("#mobileno").focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>

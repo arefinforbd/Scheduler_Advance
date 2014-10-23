@@ -22,9 +22,9 @@
     margin-bottom: 8px;
 }
 
-.panelUpperLogo .panel-footer {
-    padding: 5px 15px;
-}
+    .panelUpperLogo .panel-footer {
+        padding: 5px 15px;
+    }
 
 #datatablefiles_paginate .pagination {
     float: right !important;
