@@ -1,5 +1,6 @@
 ﻿using CASPortal.Models;
 using CASPortal.Repository;
+using CASPortal.WebParser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,15 @@ namespace CASPortal.Controllers
         {
             List<Item> itemList = new List<Item>();
             SchedulerRepository repository = new SchedulerRepository();
+            SchedulerParser parser = new SchedulerParser();
 
             StringBuilder sb = new StringBuilder("");
             sb.Append("<li style='cursor:pointer'><a>Select Item</a></li>");
 
+            if (Session["BusinessHours"] == null)
+            {
+                parser.GetBusinessTime();
+            }
             itemList = repository.GetAllItem();
 
             foreach (var item in itemList)
@@ -38,7 +44,7 @@ namespace CASPortal.Controllers
             Item item = new Item();
             SchedulerRepository repository = new SchedulerRepository();
 
-            item = repository.GetItem();
+            item = repository.GetItem(dateStartedFrom);
 
             return Json(item, JsonRequestBehavior.AllowGet);
         }
