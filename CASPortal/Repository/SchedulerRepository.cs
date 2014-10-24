@@ -81,49 +81,47 @@ namespace CASPortal.Repository
             if (HttpContext.Current.Session["BusinessHours"] != null)
             {
                 fixedBusinessHours = (List<BusinessHour>)HttpContext.Current.Session["BusinessHours"];
+                item = parser.GetBookedDays();
+
+                var listMaxHour = fixedBusinessHours.GroupBy(i => new { BusinessEndHour = i.BusinessEndHour })
+                     .Select(group => new
+                     {
+                         BusinessEndHour = group.First().BusinessEndHour
+                     })
+                     .OrderByDescending(i => i.BusinessEndHour).ToList();
+
+                item.MaxEndHour = listMaxHour[0].BusinessEndHour;
+
+                var listMinHour = fixedBusinessHours.GroupBy(i => new { BusinessStartHour = i.BusinessStartHour })
+                     .Select(group => new
+                     {
+                         BusinessStartHour = group.First().BusinessStartHour
+                     })
+                     .OrderBy(i => i.BusinessStartHour).ToList();
+
+                item.MinStartHour = listMinHour[0].BusinessStartHour;
+
+                var list = item.TimeSlots.GroupBy(i => new { Date = i.Date })
+                     .Select(group => new
+                     {
+                         Date = group.First().Date
+                     })
+                     .OrderBy(i => DateTime.Parse(i.Date));
+
+                foreach (var bhour in list)
+                {
+                    businessHour = new BusinessHour();
+
+                    businessHour.Date = bhour.Date;
+                    businessHour.BusinessStartHour = GetBusinessTime(bhour.Date).BusinessStartHour;
+                    businessHour.BusinessEndHour = GetBusinessTime(bhour.Date).BusinessEndHour;
+                    businessHour.IsWorkingDay = GetBusinessTime(bhour.Date).IsWorkingDay;
+
+                    businessHours.Add(businessHour);
+                }
+
+                item.BusinessHours = businessHours;
             }
-
-            item = parser.GetBookedDays();
-
-            var listMaxHour = fixedBusinessHours.GroupBy(i => new { BusinessEndHour = i.BusinessEndHour })
-                 .Select(group => new
-                 {
-                     BusinessEndHour = group.First().BusinessEndHour
-                 })
-                 .OrderByDescending(i => i.BusinessEndHour).ToList();
-
-            item.MaxEndHour = listMaxHour[0].BusinessEndHour;
-
-            var listMinHour = fixedBusinessHours.GroupBy(i => new { BusinessStartHour = i.BusinessStartHour })
-                 .Select(group => new
-                 {
-                     BusinessStartHour = group.First().BusinessStartHour
-                 })
-                 .OrderBy(i => i.BusinessStartHour).ToList();
-
-            item.MinStartHour = listMinHour[0].BusinessStartHour;
-
-            var list = item.TimeSlots.GroupBy(i => new { Date = i.Date })
-                 .Select(group => new
-                 {
-                     Date = group.First().Date
-                 })
-                 .OrderBy(i => DateTime.Parse(i.Date));
-
-            foreach (var bhour in list)
-            {
-                businessHour = new BusinessHour();
-
-                businessHour.Date = bhour.Date;
-                businessHour.BusinessStartHour = GetBusinessTime(bhour.Date).BusinessStartHour;
-                businessHour.BusinessEndHour = GetBusinessTime(bhour.Date).BusinessEndHour;
-                businessHour.IsWorkingDay = GetBusinessTime(bhour.Date).IsWorkingDay;
-
-                businessHours.Add(businessHour);
-            }
-
-            item.BusinessHours = businessHours;
-
             return item;
         }
     }

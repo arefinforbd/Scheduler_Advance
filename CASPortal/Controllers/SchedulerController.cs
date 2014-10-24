@@ -41,12 +41,19 @@ namespace CASPortal.Controllers
 
         public ActionResult GetTimeSlots(string dateStartedFrom, int itemID)
         {
-            Item item = new Item();
-            SchedulerRepository repository = new SchedulerRepository();
+            try
+            {
+                Item item = new Item();
+                SchedulerRepository repository = new SchedulerRepository();
 
-            item = repository.GetItem(dateStartedFrom);
+                item = repository.GetItem(dateStartedFrom);
 
-            return Json(item, JsonRequestBehavior.AllowGet);
+                return Json(item, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         public ActionResult CustomerInformation(FormCollection form)

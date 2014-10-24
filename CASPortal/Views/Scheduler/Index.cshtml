@@ -221,6 +221,7 @@
     var _interval = "30";
     var _duration = 0;
     var _businessStartHour = 0;
+    var _thresholdDay = 0;
 
     //Populate Date and Time table
     $(function () {
@@ -601,15 +602,47 @@
                     var dayDiff = 0;
                     var startindex = 0;
                     var endindex = 0;
+                    var diff = 0;
 
                     //Setting color for the cells before starting hours of everyday
                     $.each(data.BusinessHours, function (i, bsHour) {
 
                         dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+                        diff = dayDiff;
+                        
+                        if(_thresholdDay == 0 && new Date(FormatDateA(calDate)).getDate() == new Date().getDate() 
+                            && new Date(FormatDateA(calDate)).getMonth() == new Date().getMonth()
+                            && new Date(FormatDateA(calDate)).getYear() == new Date().getYear()){
+                            dayDiff++;
+                        }
 
                         //Color will be set for next five days
                         if (dayDiff >= 0 && dayDiff <= 7) {
                             endindex = (parseFloat(bsHour.BusinessStartHour) - parseFloat(_businessStartHour)) * 2
+
+                            startindex = parseInt(1 + "" + dayDiff);
+                            endindex = parseInt(endindex + "" + dayDiff);
+
+                            for (var lIndex = startindex; lIndex <= endindex; lIndex += 10) {
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("background-color", "#CCCCCC")
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-target");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
+                            }
+                        }
+
+                        if(_thresholdDay == 0 && diff == 0){
+                            var currentHour = new Date().getHours();
+                            var currentMinute = new Date().getMinutes();
+
+                            if(currentMinute > 30)
+                                currentHour++;
+
+                            endindex = (parseFloat(currentHour) - parseFloat(_businessStartHour)) * 2
 
                             startindex = parseInt(1 + "" + dayDiff);
                             endindex = parseInt(endindex + "" + dayDiff);
@@ -631,6 +664,12 @@
                     $.each(data.BusinessHours, function (i, bsHour) {
 
                         dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+                        
+                        if(_thresholdDay == 0 && new Date(FormatDateA(calDate)).getDate() == new Date().getDate() 
+                            && new Date(FormatDateA(calDate)).getMonth() == new Date().getMonth()
+                            && new Date(FormatDateA(calDate)).getYear() == new Date().getYear()){
+                            dayDiff++;
+                        }
                         
                         //Color will be set for next five days
                         if (dayDiff >= 0 && dayDiff <= 7) {
@@ -654,6 +693,7 @@
                             }
                             else
                             {
+                                //If weekend
                                 endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
                                 startindex = parseInt("1" + dayDiff);
                                 endindex = parseInt(endindex + "" + dayDiff);
@@ -683,6 +723,12 @@
                     $.each(data.TimeSlots, function (i, occupied) {
 
                         dayDiff = (new Date(occupied.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+                        
+                        if(_thresholdDay == 0 && new Date(FormatDateA(calDate)).getDate() == new Date().getDate() 
+                            && new Date(FormatDateA(calDate)).getMonth() == new Date().getMonth()
+                            && new Date(FormatDateA(calDate)).getYear() == new Date().getYear()){
+                            dayDiff++;
+                        }
                         
                         //Color will be set for next five days
                         if (dayDiff >= 0 && dayDiff <= 7) {
@@ -751,9 +797,35 @@
         var dayparam = day;
         var html = '<thead><tr class="timeheader"><th id="dateheader"></th></tr>';
 
+        /*$.ajaxSetup({ cache: false });
+        $.ajax({
+            url: "/Scheduler/GetThresholdDay",
+            type: "GET",
+            data: { },
+            dataType: "JSON",
+            success: function (data) {
+                if (data != null && data == "successfull") {
+                    _thresholdDay = data.ThresholdDay;    
+                }
+                else
+                    alert("Please try again. Something went wrong.");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Please try again. Something went wrong.");
+            },
+            complete: function (jqXHR, textStatus) {
+
+            }
+        });*/
+
+        _thresholdDay = 0;
+
+        //Scheduler will start from few days after as per thresholdDay value.
+        day = new Date(day.setDate(day.getDate() + (_thresholdDay - 1)));
+
         for (index = 1; index <= 7; index++) {
-            dateval = new Date(dayparam.setDate(day.getDate() + 1))
-            html += '<tr><th>' + FormatDate(dateval) + '</th></tr>';
+            day = new Date(dayparam.setDate(day.getDate() + 1));
+            html += '<tr><th>' + FormatDate(day) + '</th></tr>';
         }
         html += '</thead>';
 
@@ -772,7 +844,6 @@
 
         var finalDate = (dd[1] ? dd : "0" + dd[0]) + "-" + mm + "-" + yyyy + "<br/>" + dayNames[datevalue.getDay()];
 
-        //return (dd[1] ? dd : "0" + dd[0]) + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + yyyy;
         return finalDate;
     }
 
@@ -784,7 +855,6 @@
         var mm = monthNames[datevalue.getMonth()];
         var dd = datevalue.getDate().toString();
 
-        //return (dd[1] ? dd : "0" + dd[0]) + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + yyyy;
         return (dd[1] ? dd : "0" + dd[0]) + "/" + mm + "/" + yyyy;
     }
 

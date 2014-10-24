@@ -90,6 +90,13 @@ namespace CASPortal.WebParser
                 new TimeSlot
                 {
                     ItemID = 2,
+                    Date = DateTime.Now.AddDays(0).ToString("dd/MMM/yyyy"),
+                    StartTime = 9,
+                    EndTime = 10
+                },
+                new TimeSlot
+                {
+                    ItemID = 2,
                     Date = DateTime.Now.AddDays(3).ToString("dd/MMM/yyyy"),
                     StartTime = 14,
                     EndTime = 16
