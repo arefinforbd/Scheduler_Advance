@@ -641,6 +641,8 @@
 
                             if(currentMinute > 30)
                                 currentHour++;
+                            else
+                                currentHour += 0.5;
 
                             endindex = (parseFloat(currentHour) - parseFloat(_businessStartHour)) * 2
 
