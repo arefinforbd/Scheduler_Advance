@@ -119,11 +119,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerInformationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\BaseHelper.cs" />
     <Compile Include="Models\BusinessHour.cs" />
+    <Compile Include="Models\Folder.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\TimeSlot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +138,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repository\SchedulerRepository.cs" />
+    <Compile Include="Web References\CASService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebParser\SchedulerParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -147,11 +158,13 @@
     <Content Include="Content\css\plugins\social-buttons.css" />
     <Content Include="Content\css\plugins\timeline.css" />
     <Content Include="Content\css\sb-admin-2.css" />
+    <Content Include="Content\css\scheduler.css" />
+    <Content Include="Content\css\sendcustomerinformation.css" />
     <Content Include="Content\font-awesome-4.1.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.1.0\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\ajax-loading.gif" />
     <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\servicepro_logo.png" />
     <Content Include="Content\images\temisoft.png" />
@@ -183,6 +196,8 @@
     <Content Include="Content\js\plugins\morris\morris.min.js" />
     <Content Include="Content\js\plugins\morris\raphael.min.js" />
     <Content Include="Content\js\sb-admin-2.js" />
+    <Content Include="Content\js\scheduler.js" />
+    <Content Include="Content\js\sendcustomerinformation.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -240,7 +255,11 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\_HeaderLogo.cshtml" />
     <Content Include="Views\Shared\_Advertisements.cshtml" />
+    <Content Include="Views\CustomerInformation\TextEditor.cshtml" />
     <Content Include="Views\Scheduler\Index.cshtml" />
+    <Content Include="Views\Scheduler\DynamicInterval.cshtml" />
+    <Content Include="Views\Scheduler\CustomerInformation.cshtml" />
+    <None Include="Web References\CASService\CASWebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -254,7 +273,18 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\CustomerInformation\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\CustomerInformation\WelcomeMessage.cshtml" />
+    <None Include="Web References\CASService\CASWebService.wsdl" />
+    <Content Include="Web References\CASService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -265,6 +295,22 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:55854/CASWebService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CASService\</RelPath>
+      <UpdateFromURL>http://localhost:55854/CASWebService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CASPortal_CASService_CASWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
