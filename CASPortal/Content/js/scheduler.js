@@ -628,7 +628,7 @@ $("#btnContinue").click(function () {
         type: "POST",
         data: { timeSlots: JSON.stringify(_timeSlots), itemID: $("#hdnItemID").val().trim() },
         dataType: "JSON",
-        success: function (result) {
+        success: function (data) {
             if (data != null && data == "successfull") {
                 alert("OK sent.");
                 window.location.href = "/Scheduler/CustomerInformation";

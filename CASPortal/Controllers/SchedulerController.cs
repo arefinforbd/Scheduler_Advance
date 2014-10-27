@@ -53,6 +53,7 @@ namespace CASPortal.Controllers
                 Item item = new Item();
                 SchedulerRepository repository = new SchedulerRepository();
 
+                TempData.Clear();
                 item = repository.GetItem(dateStartedFrom);
 
                 return Json(item, JsonRequestBehavior.AllowGet);
@@ -67,12 +68,13 @@ namespace CASPortal.Controllers
         public ActionResult PostTimeSlot(string itemID, string timeSlots)
         {
             TempData["ItemID"] = itemID;
-            var selectedTtemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
-
+            var selectedItemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
+            TempData["TimeSlots"] = selectedItemSlots;
+            
             return Json("successfull", JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CustomerInformation(FormCollection form)
+        public ActionResult CustomerInformation()
         {
             return View();
         }
@@ -82,7 +84,11 @@ namespace CASPortal.Controllers
         {
             try
             {
-                string output = firstname + "/" + TempData["ScheduleDate"] + "/" + TempData["SpecialInstruction"];
+                List<TimeSlot> timeSlots;
+                string output = firstname;
+
+                if(TempData["TimeSlots"] != null)
+                    timeSlots = (List<TimeSlot>)TempData["TimeSlots"];
 
                 return Json("successfull", JsonRequestBehavior.AllowGet);
             }

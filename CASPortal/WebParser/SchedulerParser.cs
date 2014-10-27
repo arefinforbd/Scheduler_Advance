@@ -77,65 +77,65 @@ namespace CASPortal.WebParser
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 9,
-                    EndTime = 10
+                    StartTime = "9",
+                    EndTime = "10"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 14,
-                    EndTime = 16
+                    StartTime = "14",
+                    EndTime = "16"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("01/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 10,
-                    EndTime = 12
+                    StartTime = "10",
+                    EndTime = "12"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("30/Oct/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 12.5F,
-                    EndTime = 13.5F
+                    StartTime = "12.5",
+                    EndTime = "13.5"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("30/Oct/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 10,
-                    EndTime = 11.5F
+                    StartTime = "10",
+                    EndTime = "11.5"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("02/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 16.5F,
-                    EndTime = 17.5F
+                    StartTime = "16.5",
+                    EndTime = "17.5"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("05/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 15,
-                    EndTime = 16
+                    StartTime = "15",
+                    EndTime = "16"
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("04/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 0,
-                    EndTime = 0,
+                    StartTime = "0",
+                    EndTime = "0",
                     IsPublicHoliDay = true
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
                     Date = Convert.ToDateTime("31/Oct/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = 0,
-                    EndTime = 0
+                    StartTime = "0",
+                    EndTime = "0"
                 }
             };
 
