@@ -1,0 +1,100 @@
+﻿    .row{
+        margin-left:0px;
+    }
+
+    #ddlItems,
+    #divDatePicker,
+    #divContinueButton {
+        padding-left: 0px;
+    }
+
+    #tblDate tr th {
+        text-align: center;
+        padding-right: 5px;
+    }
+
+    table#tblDate,
+    table#tblTime {
+        border: 1px solid #CCCCCC;
+    }
+
+    table#tblDate {
+        color: #3e92e2;
+        font-size: 12px;
+    }
+
+    tr.timeheader th {
+        height: 40px;
+        text-align: center;
+        background-color: #fcf6af;
+    }
+
+    table#tblTime td.tdTime {
+        width: 20px;
+        height: 50px;
+    }
+
+    table#tblDate th {
+        height: 50px;
+        width: 80px;
+    }
+
+    table#tblDate th#dateheader {
+        height: 40px;
+    }
+
+    table#tblTime td.td00 {
+        border-right: 1px dotted #FF0000;
+    }
+
+    table#tblTime td.td00:hover {
+        background-color: #ffd571;
+        cursor: pointer;
+    }
+
+    table#tblTime td.td30:hover {
+        background-color: #aad7fe;
+        cursor: pointer;
+    }
+
+    .col-lg-1,
+    .col-lg-11{
+        padding:0px;
+    }
+
+    .modal.in .modal-dialog {
+        transform: translate3d(-630px, 50px, 0px);
+    }
+    
+    .ui-widget {
+        font-size: 1em;
+    }
+    
+    #txtStartTime {
+        width: 135px;
+    }
+
+    #txtEndTime {
+        width: 140px;
+    }
+
+    .occupied,
+    .afterhour {
+        width: 20px;
+        height: 50px;
+        color: #ffffff;
+        text-align: center;
+        font-weight: bold;
+        cursor: not-allowed;
+        font-size: 13px;
+    }
+
+    #btnAddHour {
+        margin-top: 45px;
+    }
+
+    @@media screen and (-webkit-min-device-pixel-ratio:0) {
+        #btnAddHour {
+            margin-top: 0px;
+        }
+    }
