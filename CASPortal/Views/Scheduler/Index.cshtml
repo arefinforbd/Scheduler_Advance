@@ -59,18 +59,9 @@
     <br/>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divContinueButton">
-            @using (Html.BeginForm("CustomerInformation", "Scheduler"))
-{
-                <input type="hidden" id="itemID" name="itemID" />
-                <input type="hidden" id="scheduleDate" name="scheduleDate" />
-                <input type="hidden" id="scheduleStartTime" name="scheduleStartTime" />
-                <input type="hidden" id="scheduleEndTime" name="scheduleEndTime" />
-                <input type="hidden" id="specialInstruction" name="specialInstruction" />
-
-                <div id="div_btnContinue">
-                    <button class="btn btn-success" type="submit">Continue</button>
-                </div>
-}
+            <div id="div_btnContinue">
+                <button id="btnContinue" class="btn btn-success" type="button">Continue</button>
+            </div>
         </div>
     </div>
 

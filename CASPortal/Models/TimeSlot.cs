@@ -11,6 +11,7 @@ namespace CASPortal.Models
         public string Date { get; set; }
         public float StartTime { get; set; }
         public float EndTime { get; set; }
+        public string SpecialInstruction { get; set; }
         public bool IsPublicHoliDay { get; set; }
     }
 }

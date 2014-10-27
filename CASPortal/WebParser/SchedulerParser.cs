@@ -76,70 +76,56 @@ namespace CASPortal.WebParser
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(7).ToString("dd/MMM/yyyy"),
-                    StartTime = 16,
-                    EndTime = 17
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = DateTime.Now.AddDays(7).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 9,
                     EndTime = 10
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(0).ToString("dd/MMM/yyyy"),
-                    StartTime = 9,
-                    EndTime = 10
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = DateTime.Now.AddDays(3).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 14,
                     EndTime = 16
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(3).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("01/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 10,
                     EndTime = 12
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(4).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("30/Oct/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 12.5F,
                     EndTime = 13.5F
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(1).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("30/Oct/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 10,
                     EndTime = 11.5F
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(6).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("02/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 16.5F,
                     EndTime = 17.5F
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(6).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("05/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 15,
                     EndTime = 16
                 },
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(5).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("04/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 0,
                     EndTime = 0,
                     IsPublicHoliDay = true
@@ -147,7 +133,7 @@ namespace CASPortal.WebParser
                 new TimeSlot
                 {
                     ItemID = 2,
-                    Date = DateTime.Now.AddDays(2).ToString("dd/MMM/yyyy"),
+                    Date = Convert.ToDateTime("31/Oct/2014").ToString("dd/MMM/yyyy"),
                     StartTime = 0,
                     EndTime = 0
                 }

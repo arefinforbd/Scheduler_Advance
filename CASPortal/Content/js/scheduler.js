@@ -12,6 +12,7 @@ var _interval = "30";
 var _duration = 0;
 var _businessStartHour = 0;
 var _thresholdDay = 0;
+var _timeSlots = [];
 
 //Populate Date and Time table
 $(function () {
@@ -182,6 +183,7 @@ $("#btnSave").click(function () {
             $("#tblTime").find('[combid="id' + index + '"]').removeAttr("class");
             $("#tblTime").find('[combid="id' + index + '"]').html("N/A");
             $("#tblTime").find('[combid="id' + index + '"]').addClass("occupied");
+            $("#tblTime").find('[combid="id' + index + '"]').addClass("selectedtimeslot");
             $("#tblTime").find('[combid="id' + index + '"]').css("vertical-align", "middle");
             $("#tblTime").find('[combid="id' + index + '"]').css("padding", "0px");
         }
@@ -190,14 +192,16 @@ $("#btnSave").click(function () {
         $("#hdncombidend").val("");
         $("#divContinueButton").show();
 
-        var scheduledDate = $("#txtDate").val().substring(0, $("#txtDate").val().indexOf("<br/>"));
-        scheduledDate = new Date(scheduledDate);
+        var scheduledDate = $("#txtDate").val().replace(/-/g, '/');
 
-        $("#scheduleDate").val(scheduledDate);
-        $("#scheduleStartTime").val($("#txtStartTime").val());
-        $("#scheduleEndTime").val($("#txtEndTime").val());
-        $("#specialInstruction").val($("#txtSpecialInstruction").val());
-        $("#itemID").val($("#hdnItemID").val());
+        _timeSlots.push({
+            ItemID: $("#hdnItemID").val().trim(),
+            Date: scheduledDate,
+            StartTime: $("#txtStartTime").val(),
+            EndTime: $("#txtEndTime").val(),
+            SpecialInstruction: $("#txtSpecialInstruction").val(),
+            IsPublicHoliDay: true
+        });
     }
     else {
         return false;
@@ -428,6 +432,7 @@ function generateTimes() {
                         }
                     }
 
+                    //If scheduler starts from the current date, starting time will be after current time.
                     if (_thresholdDay == 0 && diff == 0) {
                         var currentHour = new Date().getHours();
                         var currentMinute = new Date().getMinutes();
@@ -580,6 +585,7 @@ function generateDays(day) {
     var index = 0;
     var dayparam = day;
     var html = '<thead><tr class="timeheader"><th id="dateheader"></th></tr>';
+    _timeSlots = [];
 
     /*$.ajaxSetup({ cache: false });
     $.ajax({
@@ -602,7 +608,7 @@ function generateDays(day) {
         }
     });*/
 
-    _thresholdDay = 3;
+    _thresholdDay = 0;
 
     //Scheduler will start from few days after as per thresholdDay value.
     day = new Date(day.setDate(day.getDate() + (_thresholdDay - 1)));
@@ -615,6 +621,24 @@ function generateDays(day) {
 
     $("#tblDate").html(html);
 }
+
+$("#btnContinue").click(function () {
+    $.ajax({
+        url: "/Scheduler/PostTimeSlot",
+        type: "POST",
+        data: { timeSlots: JSON.stringify(_timeSlots), itemID: $("#hdnItemID").val().trim() },
+        dataType: "JSON",
+        success: function (result) {
+            if (data != null && data == "successfull") {
+                alert("OK sent.");
+                window.location.href = "/Scheduler/CustomerInformation";
+            }
+        },
+        error: function (request) {
+            alert("Please try again. Something went wrong.");
+        }
+    });
+});
 
 function FormatDate(datevalue) {
     var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",

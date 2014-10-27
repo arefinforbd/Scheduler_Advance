@@ -1,4 +1,5 @@
-﻿using CASPortal.Models;
+﻿using CASPortal.Helper;
+using CASPortal.Models;
 using CASPortal.Repository;
 using CASPortal.WebParser;
 using System;
@@ -7,11 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace CASPortal.Controllers
 {
     public class SchedulerController : Controller
     {
+        public JavaScriptSerializer Serializer
+        {
+            get { return new JavaScriptSerializer(); }
+        }
+
         //
         // GET: /Scheduler/
         public ActionResult Index()
@@ -56,20 +63,17 @@ namespace CASPortal.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult PostTimeSlot(string itemID, string timeSlots)
+        {
+            TempData["ItemID"] = itemID;
+            var selectedTtemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
+
+            return Json("successfull", JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult CustomerInformation(FormCollection form)
         {
-            string itemID = form["itemID"];
-            string scheduleDate = form["scheduleDate"];
-            string scheduleStartTime = form["scheduleStartTime"];
-            string scheduleEndTime = form["scheduleEndTime"];
-            string specialInstruction = form["specialInstruction"];
-
-            TempData["ItemID"] = itemID;
-            TempData["ScheduleDate"] = scheduleDate;
-            TempData["ScheduleStartTime"] = scheduleStartTime;
-            TempData["ScheduleEndTime"] = scheduleEndTime;
-            TempData["SpecialInstruction"] = specialInstruction;
-
             return View();
         }
 
