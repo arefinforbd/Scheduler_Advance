@@ -95,6 +95,7 @@ $(document.body).on('click', '#ulItems li', function (event) {
         $("#divContinueButton").hide();
         $("#itemDescription").html($(this).attr("desc"));
         $("#itemDescription").show();
+        _duration = $(this).attr("duration");
     }
     else {
         $("#divDatePicker").hide();
@@ -371,8 +372,8 @@ function generateTimes() {
                 //_businessStartHour = 6;
                 //businessEndHour = 19;
 
-                _duration = parseInt(data.Duration);
-                _duration = 30;
+                //_duration = parseInt(data.Duration);
+                //_duration = 30;
                 _duration = (_duration / 60);
 
                 if (businessEndHour.toString().indexOf(".5") > 0) {
