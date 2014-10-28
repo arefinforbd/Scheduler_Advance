@@ -187,5 +187,41 @@ namespace CASPortal.WebParser
 
             return item;
         }
+
+        public List<Item> GetItems()
+        {
+            Item item;
+            List<Item> items = new List<Item>();
+            DataSet ds = new DataSet();
+            CASWebService cas = new CASWebService();
+
+            /*string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());*/
+
+            ds = cas.GetCategoryProductService("kevorkt", "", "1.000", 1);
+            //ds = cas.GetCategoryProductService(companyID, companyPassword, customerPassword, level4ID);
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    item = new Item();
+
+                    item.CategoryName = row["pd_category"].ToString();
+                    item.ProductName = row["pd_code"].ToString();
+                    item.ItemName = row["pdl_prcode"].ToString();
+                    item.ItemID = Convert.ToInt32(row["pdl_lineno"].ToString());
+                    item.Description = row["pdl_desc"].ToString();
+                    item.Price = Convert.ToDouble(row["pdl_price"].ToString());
+                    item.Duration = Convert.ToInt32(row["pdl_duration"].ToString());
+
+                    items.Add(item);
+                }
+            }
+
+            return items;
+        }
     }
 }

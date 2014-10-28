@@ -46,7 +46,7 @@ namespace CASPortal.Controllers
 
             foreach (var item in itemList)
             {
-                sb.Append("<li id=" + item.ItemID + " style='cursor:pointer'><a>" + item.ItemName + " (" + item.SpecialInstruction + ")" + "</a></li>");
+                sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
             }
 
             ViewBag.Items = sb;

@@ -15,27 +15,9 @@ namespace CASPortal.Repository
         {
             Item item = new Item();
             List<Item> itemList;
+            SchedulerParser parser = new SchedulerParser();
 
-            itemList = new List<Item>(){
-                new Item
-                {
-                    ItemID = 10,
-                    ItemName = "Pest Control 10",
-                    SpecialInstruction = "SP Description 100"
-                },
-                new Item
-                {
-                    ItemID = 2,
-                    ItemName = "Pest Control 2",
-                    SpecialInstruction = "SP Description 20"
-                },
-                new Item
-                {
-                    ItemID = 5,
-                    ItemName = "Pest Control 5",
-                    SpecialInstruction = "SP Description 50"
-                }
-            };
+            itemList = parser.GetItems();
 
             return itemList;
         }

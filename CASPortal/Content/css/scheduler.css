@@ -21,6 +21,7 @@
     table#tblDate {
         color: #3e92e2;
         font-size: 12px;
+        width: 100%;
     }
 
     tr.timeheader th {

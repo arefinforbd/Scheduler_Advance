@@ -8,10 +8,12 @@ namespace CASPortal.Models
     public class Item
     {
         public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public int ItemID { get; set; }
         public string ItemName { get; set; }
-        public string SpecialInstruction { get; set; }
+        public string Description { get; set; }
         public int Duration { get; set; }
         public double Price { get; set; }
         public float MinStartHour { get; set; }

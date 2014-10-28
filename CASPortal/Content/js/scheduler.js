@@ -17,6 +17,7 @@ var _timeSlots = [];
 //Populate Date and Time table
 $(function () {
 
+    HideNavBar();
     $("#divDatePicker").hide();
     $("#tblDate").hide();
     $("#tblTime").hide();
@@ -57,6 +58,14 @@ $(function () {
     });
 });
 
+function HideNavBar() {
+    if (location.href.indexOf("?customerid") > 0) {
+        $(".navbar-static-top").hide();
+        $("#page-wrapper").css("margin", "20px");
+        $("#page-wrapper").css("border", "1px solid #DDDDDD");
+    }
+}
+
 $(document.body).on('click', '#ulItems li', function (event) {
     var $target = $(event.currentTarget);
     $("#ulItems > :first-child").show();
@@ -72,9 +81,6 @@ $(document.body).on('click', '#ulItems li', function (event) {
         listItem = $(this);
     }
 
-    /*$("#folderHeading").html("Private Folder :: ");
-    $("#folderName").html($target.text());*/
-
     $target.closest('.btn-group')
        .find('[data-bind="label"]').text($target.text())
           .end()
@@ -87,6 +93,8 @@ $(document.body).on('click', '#ulItems li', function (event) {
         $("#tblTime").hide();
         $("#tblDesc").hide();
         $("#divContinueButton").hide();
+        $("#itemDescription").html($(this).attr("desc"));
+        $("#itemDescription").show();
     }
     else {
         $("#divDatePicker").hide();
@@ -94,6 +102,8 @@ $(document.body).on('click', '#ulItems li', function (event) {
         $("#tblTime").hide();
         $("#tblDesc").hide();
         $("#divContinueButton").hide();
+        $("#itemDescription").html("");
+        $("#itemDescription").hide();
     }
 
     return false;
