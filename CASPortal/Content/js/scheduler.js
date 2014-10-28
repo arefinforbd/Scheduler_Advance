@@ -486,30 +486,6 @@ function generateTimes() {
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                             }
                         }
-                        else {
-                            //If weekend
-                            endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
-                            startindex = parseInt("1" + dayDiff);
-                            endindex = parseInt(endindex + "" + dayDiff);
-
-                            var incIndex = startindex + 10;
-                            var colSpan = ((endindex - startindex) + 10) / 10;
-
-                            for (var lIndex = incIndex; lIndex <= endindex; lIndex += 10) {
-                                $("#tblTime").find('[combid="id' + lIndex + '"]').remove();
-                            }
-
-                            $("#tblTime").find('[combid="id' + startindex + '"]').css("background-color", "#CCCCCC")
-                            $("#tblTime").find('[combid="id' + startindex + '"]').css("font-size", "16px");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').css("vertical-align", "middle");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').css("padding", "0px");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').attr("colspan", colSpan);
-                            $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("data-target");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("data-toggle");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("class");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').addClass("afterhour");
-                            $("#tblTime").find('[combid="id' + startindex + '"]').html("Weekend");
-                        }
                     }
                 });
 
@@ -564,6 +540,44 @@ function generateTimes() {
                             $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("class");
                             $("#tblTime").find('[combid="id' + startindex + '"]').addClass("afterhour");
                             $("#tblTime").find('[combid="id' + startindex + '"]').html("Public Holiday");
+                        }
+                    }
+                });
+
+                //Setting color for the weekend
+                $.each(data.BusinessHours, function (i, bsHour) {
+
+                    dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+                    dayDiff = dayDiff - _thresholdDay + 1;
+
+                    //Color will be set for next five days
+                    if (dayDiff >= 0 && dayDiff <= 7) {
+                        startindex = (((parseFloat(bsHour.BusinessEndHour) - parseFloat(_businessStartHour)) * 2) + 1);
+                        endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
+
+                        if (!bsHour.IsWorkingDay) {
+                            //If weekend
+                            endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
+                            startindex = parseInt("1" + dayDiff);
+                            endindex = parseInt(endindex + "" + dayDiff);
+
+                            var incIndex = startindex + 10;
+                            var colSpan = ((endindex - startindex) + 10) / 10;
+
+                            for (var lIndex = incIndex; lIndex <= endindex; lIndex += 10) {
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').remove();
+                            }
+
+                            $("#tblTime").find('[combid="id' + startindex + '"]').css("background-color", "#CCCCCC")
+                            $("#tblTime").find('[combid="id' + startindex + '"]').css("font-size", "16px");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').css("vertical-align", "middle");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').css("padding", "0px");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').attr("colspan", colSpan);
+                            $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("data-target");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("data-toggle");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("class");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').addClass("afterhour");
+                            $("#tblTime").find('[combid="id' + startindex + '"]').html("Weekend");
                         }
                     }
                 });

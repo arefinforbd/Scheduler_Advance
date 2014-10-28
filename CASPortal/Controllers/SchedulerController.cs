@@ -23,6 +23,14 @@ namespace CASPortal.Controllers
         // GET: /Scheduler/
         public ActionResult Index()
         {
+            /*BaseHelper helper = new BaseHelper();
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");
+             
+             if(Request["customerid"] != null){
+             }
+             */
+
             List<Item> itemList = new List<Item>();
             SchedulerRepository repository = new SchedulerRepository();
             SchedulerParser parser = new SchedulerParser();
@@ -50,6 +58,10 @@ namespace CASPortal.Controllers
         {
             try
             {
+                /*BaseHelper helper = new BaseHelper();
+                if (!helper.IsValidUser())
+                    return RedirectToAction("Index", "Login");*/
+
                 Item item = new Item();
                 SchedulerRepository repository = new SchedulerRepository();
 
@@ -67,6 +79,10 @@ namespace CASPortal.Controllers
         [HttpPost]
         public ActionResult PostTimeSlot(string itemID, string timeSlots)
         {
+            /*BaseHelper helper = new BaseHelper();
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");*/
+
             TempData["ItemID"] = itemID;
             var selectedItemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
             TempData["TimeSlots"] = selectedItemSlots;
@@ -76,6 +92,10 @@ namespace CASPortal.Controllers
 
         public ActionResult CustomerInformation()
         {
+            /*BaseHelper helper = new BaseHelper();
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");*/
+
             return View();
         }
 
@@ -84,6 +104,10 @@ namespace CASPortal.Controllers
         {
             try
             {
+                /*BaseHelper helper = new BaseHelper();
+                if (!helper.IsValidUser())
+                    return RedirectToAction("Index", "Login");*/
+
                 List<TimeSlot> timeSlots;
                 string output = firstname;
 

@@ -21,7 +21,12 @@ namespace CASPortal.WebParser
                 List<BusinessHour> businessHours = new List<BusinessHour>();
                 CASWebService cas = new CASWebService();
 
+                /*string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+                string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();*/
+
                 ds = cas.GetBusinessTime("kevorkt", "", "1.000", 1);
+                //ds = cas.GetBusinessTime(companyID, companyPassword, customerPassword, 1);
 
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -62,11 +67,52 @@ namespace CASPortal.WebParser
             }
         }
 
-        public Item GetBookedDays()
+        public Item GetBookedDays(string dateStart)
         {
+            DateTime scheduledDate;
+            string startTime = string.Empty;
+            string endTime = string.Empty;
             Item item = new Item();
+            List<TimeSlot> timeSlots = new List<TimeSlot>();
+            DataSet ds = new DataSet();
+            CASWebService cas = new CASWebService();
 
-            item.ItemID = 2;
+            /*string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();*/
+
+            dateStart = dateStart.Substring(0, dateStart.IndexOf("GMT") - 1);
+            ds = cas.GetScheduledTime("kevorkt", "", "1.000", Convert.ToDateTime(dateStart));
+            //ds = cas.GetScheduledTime(companyID, companyPassword, customerPassword, Convert.ToDateTime(dateStart));
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    scheduledDate = Convert.ToDateTime(row["tt_ts_date"].ToString());
+                    startTime = row["tt_ts_start_time"].ToString();
+                    endTime = row["tt_ts_end_time"].ToString();
+
+                    startTime = (Convert.ToSingle(startTime) / 100).ToString();
+                    endTime = (Convert.ToSingle(endTime) / 100).ToString();
+
+                    startTime = startTime.Replace(".3", ".5");
+                    endTime = endTime.Replace(".3", ".5");
+
+                    timeSlots.Add(
+                        new TimeSlot()
+                        {
+                            Date = scheduledDate.ToString("dd/MMM/yyyy"),
+                            StartTime = startTime,
+                            EndTime = endTime
+                        }
+                    );
+                }
+            }
+
+            item.TimeSlots = timeSlots;
+
+            /*item.ItemID = 2;
             item.ItemName = "Item 2";
             item.SpecialInstruction = "Description Description Description 2002";
             item.Duration = 30;
@@ -137,7 +183,7 @@ namespace CASPortal.WebParser
                     StartTime = "0",
                     EndTime = "0"
                 }
-            };
+            };*/
 
             return item;
         }

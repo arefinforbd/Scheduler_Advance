@@ -13,16 +13,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/15/2014 14:15:34</publishTime>
+      <publishTime>10/22/2014 11:07:41</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/15/2014 14:15:34</publishTime>
+      <publishTime>10/22/2014 11:07:40</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>10/15/2014 14:15:20</publishTime>
+      <publishTime>10/22/2014 11:07:28</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
-      <publishTime>10/15/2014 14:15:23</publishTime>
+      <publishTime>10/22/2014 11:07:31</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>10/03/2014 15:41:07</publishTime>
@@ -67,7 +67,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 23:58:44</publishTime>
     </File>
     <File Include="Content/css/casportal.css">
-      <publishTime>10/13/2014 14:37:21</publishTime>
+      <publishTime>10/16/2014 11:44:45</publishTime>
     </File>
     <File Include="Content/css/plugins/dataTables.bootstrap.css">
       <publishTime>04/14/2014 14:55:52</publishTime>
@@ -244,7 +244,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 23:58:46</publishTime>
     </File>
     <File Include="Content/js/customerinformation.js">
-      <publishTime>10/13/2014 14:32:37</publishTime>
+      <publishTime>10/17/2014 10:57:54</publishTime>
     </File>
     <File Include="Content/js/jquery-1.11.0.js">
       <publishTime>06/09/2014 18:47:18</publishTime>
@@ -328,7 +328,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/15/2014 14:15:27</publishTime>
+      <publishTime>10/22/2014 11:07:35</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -387,8 +387,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Login/Index.cshtml">
       <publishTime>10/13/2014 13:06:47</publishTime>
     </File>
+    <File Include="Views/Scheduler/DynamicInterval.cshtml">
+      <publishTime>10/22/2014 10:06:54</publishTime>
+    </File>
     <File Include="Views/Scheduler/Index.cshtml">
-      <publishTime>10/15/2014 13:15:04</publishTime>
+      <publishTime>10/22/2014 11:07:04</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -400,7 +403,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/10/2014 11:04:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/14/2014 15:23:08</publishTime>
+      <publishTime>10/21/2014 16:24:10</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -412,7 +415,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/09/2014 10:18:13</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/15/2014 14:15:24</publishTime>
+      <publishTime>10/22/2014 11:07:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

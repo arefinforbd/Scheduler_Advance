@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 function GetAdvertiseStatus() {
 
-    urlVal = "/CustomerInformation/GetAdvertiseStatus";
+    var urlVal = "/CAS/CustomerInformation/GetAdvertiseStatus";
 
     $.ajaxSetup({ cache: false });
     $.ajax({
@@ -123,7 +123,7 @@ function onFolderSelection(folderType) {
 
     hideSbtBtn();
 
-    urlVal = "/CustomerInformation/GetFolderFiles";
+    urlVal = "/CAS/CustomerInformation/GetFolderFiles";
     var clientTimeZoneOffSet = (new Date().getTimezoneOffset()) * (-1);
 
     //private folder
@@ -193,23 +193,6 @@ function onFolderSelection(folderType) {
         }
     });
 }
-
-function sessionTimeOut() {
-    $.confirm({
-        'title': 'ServicePRO-Online ( CAS )',
-        'message': 'Session Timed Out. Please Login Again.',
-        'buttons': {
-            'OK': {
-                'action': function () {
-                    window.location = '/';
-                }
-            }
-        }
-    });
-}
-
-var radioBtnVal;
-var SESSION_TIME_OUT = "sessionTimeOut";
 
 $(document.body).on('click', '.fileclass', function (event) {
     $("#hiddenfoldertype").val($("#folderHeading").html());

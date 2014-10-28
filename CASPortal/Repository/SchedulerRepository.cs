@@ -81,7 +81,7 @@ namespace CASPortal.Repository
             if (HttpContext.Current.Session["BusinessHours"] != null)
             {
                 fixedBusinessHours = (List<BusinessHour>)HttpContext.Current.Session["BusinessHours"];
-                item = parser.GetBookedDays();
+                item = parser.GetBookedDays(dateStart);
 
                 var listMaxHour = fixedBusinessHours.GroupBy(i => new { BusinessEndHour = i.BusinessEndHour })
                      .Select(group => new
