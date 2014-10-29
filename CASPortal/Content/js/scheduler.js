@@ -65,6 +65,7 @@ $(document.body).on('click', '#ulItems li', function (event) {
     var $target = $(event.currentTarget);
     $("#ulItems > :first-child").show();
     listItem.css("background-color", "#FFFFFF");
+    $("#datepicker").val("");
 
     if (listItem != $(this)) {
         listItem.show();
@@ -255,6 +256,20 @@ function CheckAvailableTime(combid) {
     return false;
 }
 
+function CheckMaximumTime(combid) {
+
+    var startHour = $("#tblTime").find('[combid="' + combid + '"]').attr("starthour");
+    startHour = startHour.replace(":30", "50");
+    startHour = parseFloat(startHour.replace(":", "")) / 100 + ($("#hdnDuration").val() / 60);
+    startHour = parseFloat(startHour) * 100;
+
+    if (parseFloat(startHour) > parseFloat(_maxhours.replace(":", ""))) {
+        alert("Schedule cannot be set after " + (_maxhours.indexOf(":50") > 0 ? _maxhours.replace(":50", ":30") : _maxhours));
+        return true;
+    }
+    return false;
+}
+
 //Yellow cell click event. Popup opens and set date, starting and ending time.
 $(document.body).on('click', '#tblTime td.td00', function (event) {
 
@@ -264,6 +279,12 @@ $(document.body).on('click', '#tblTime td.td00', function (event) {
 
     if (CheckAvailableTime(combid)) {
         alert("There is no available time. Please select another time.");
+        $(this).removeAttr("data-target");
+        event.preventDefault();
+        return;
+    }
+
+    if (CheckMaximumTime(combid)) {
         $(this).removeAttr("data-target");
         event.preventDefault();
         return;
@@ -310,6 +331,12 @@ $(document.body).on('click', '#tblTime td.td30', function (event) {
 
     if (CheckAvailableTime(combid)) {
         alert("There is no available time. Please select another time.");
+        $(this).removeAttr("data-target");
+        event.preventDefault();
+        return;
+    }
+
+    if (CheckMaximumTime(combid)) {
         $(this).removeAttr("data-target");
         event.preventDefault();
         return;
@@ -477,7 +504,7 @@ function generateTimes() {
                     diff = dayDiff;
                     dayDiff = dayDiff - _thresholdDay + 1;
 
-                    //Color will be set for next five days
+                    //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
                         endindex = (parseFloat(bsHour.BusinessStartHour) - parseFloat(_businessStartHour)) * 2
 
@@ -530,7 +557,7 @@ function generateTimes() {
                     dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
                     dayDiff = dayDiff - _thresholdDay + 1;
 
-                    //Color will be set for next five days
+                    //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
                         startindex = (((parseFloat(bsHour.BusinessEndHour) - parseFloat(_businessStartHour)) * 2) + 1);
                         endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
@@ -559,7 +586,7 @@ function generateTimes() {
                     dayDiff = (new Date(occupied.Date) - new Date(FormatDateA(calDate))) / dateDiff;
                     dayDiff = dayDiff - _thresholdDay + 1;
 
-                    //Color will be set for next five days
+                    //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
                         startindex = (((parseFloat(occupied.StartTime) - parseFloat(_businessStartHour)) * 2) + 1);
 
@@ -614,7 +641,7 @@ function generateTimes() {
                     dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
                     dayDiff = dayDiff - _thresholdDay + 1;
 
-                    //Color will be set for next five days
+                    //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
                         startindex = (((parseFloat(bsHour.BusinessEndHour) - parseFloat(_businessStartHour)) * 2) + 1);
                         endindex = ((businessEndHour - parseFloat(_businessStartHour))) * 2;
