@@ -148,27 +148,40 @@ function AddHour() {
 
 //Add button of popup
 $("#btnAddHour").click(function () {
-    var combid = ""
+    var combid = "";
+    var combidend = "";
 
     if (_combid == "")
         combid = _combid = $("#hdncombid").val();
     else
         combid = _combid;
 
-    combid = parseInt(combid.replace("id", "")) + (_duration * 20) - 10;
-    var combidend = parseInt($("#hdncombidend").val().replace("id", "")) + (_duration * 20) - 10;
+    if (_duration.toString().indexOf("0.5") == 0) {
+        combid = parseInt(combid.replace("id", "")) + (_duration * 20);
+        combid = "id" + combid;
+        combidend = parseInt($("#hdncombidend").val().replace("id", "")) + (_duration * 20);
+    }
+    else {
+        combid = _combid.replace("id", "");
+        combid = parseInt(combid) + (_duration * 20);
+        combid = "id" + combid;
+        combidend = parseInt($("#hdncombidend").val().replace("id", "")) + (_duration * 20);
+    }
+
     combidend = "id" + combidend;
     _combid = combidend;
-    combidend = parseInt(combidend.replace("id", "")) + 10;
-    combidend = "id" + combidend;
+    $("#hdncombidend").val(combidend);
 
-    if (CheckAvailableTime(combidend)) {
+    if (CheckAvailableTime(combid)) {
+        combidend = parseInt(combidend.replace("id", "")) - (_duration * 20);
+        _combid = "id" + combidend;
+        $("#hdncombidend").val(_combid);
         alert("There is no available time. Please select another time.");
         return;
     }
     else {
         $("#txtEndTime").val(AddHour());
-        $("#hdncombidend").val(_combid);
+        _combid = combid;
     }
 });
 
