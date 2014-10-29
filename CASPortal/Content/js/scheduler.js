@@ -5,7 +5,6 @@
 
 var listItem = $("#ulItems > :first-child");
 
-var _hours = 0;
 var _minhours = "7:00";
 var _maxhours = "18:00";
 var _interval = "30";
@@ -13,6 +12,7 @@ var _duration = 0;
 var _businessStartHour = 0;
 var _thresholdDay = 0;
 var _timeSlots = [];
+var _combid = "";
 
 //Populate Date and Time table
 $(function () {
@@ -42,13 +42,8 @@ $(function () {
                 $("#tblTime").show();
                 $("#tblDesc").show();
 
-                $("#divAjaxLoading").html("<img alt= title= src=/Content/Images/ajax-loading.gif width='10%' />");
-
                 generateDays($(this).datepicker('getDate'));
                 generateTimes();
-
-                $("#divAjaxLoading").html("");
-                $("#divAjaxLoading").attr("style", "display:none");
             }
             else {
                 alert("Back date cannot be selected.");
@@ -93,9 +88,9 @@ $(document.body).on('click', '#ulItems li', function (event) {
         $("#tblTime").hide();
         $("#tblDesc").hide();
         $("#divContinueButton").hide();
-        $("#itemDescription").html($(this).attr("desc"));
+        $("#itemDescription").html($(this).attr("desc") + "-" + $(this).attr("duration"));
         $("#itemDescription").show();
-        _duration = $(this).attr("duration");
+        $("#hdnDuration").val($(this).attr("duration"));
     }
     else {
         $("#divDatePicker").hide();
@@ -133,11 +128,11 @@ function AddHour() {
         ttime = ttime.replace(":30", ":50");
     }
 
+    _duration = parseInt($("#hdnDuration").val()) / 60;
     ttime = parseInt(ttime.replace(":", "")) + (_duration * 100);
 
     if (ttime > parseInt(_maxhours.replace(":", ""))) {
         hour = _maxhours;
-        _hours -= 10;
         ttime = ttime - (_duration * 100);
         alert("Schedule cannot be set after " + (_maxhours.indexOf(":50") > 0 ? _maxhours.replace(":50", ":30") : _maxhours));
     }
@@ -153,27 +148,28 @@ function AddHour() {
 
 //Add button of popup
 $("#btnAddHour").click(function () {
-    var combid = $("#hdncombid").val();
-    _hours += 10;
-    combid = parseInt(combid.replace("id", "")) + _hours;
-    var combidend = "id" + combid;
-    $("#hdncombidend").val(combidend);
-    if ($("#tblTime").find('[combid="' + combidend + '"]').hasClass("occupied")) {
-        _hours = _hours - 10;
-        combidend = parseInt(combidend.replace("id", "")) - 10;
-        combidend = "id" + combidend;
-        $("#hdncombidend").val(combidend);
-        alert("Schedule cannot be set as this time is booked.");
-    }
-    else if ($("#tblTime").find('[combid="' + combidend + '"]').hasClass("afterhour")) {
-        _hours = _hours - 10;
-        combidend = parseInt(combidend.replace("id", "")) - 10;
-        combidend = "id" + combidend;
-        $("#hdncombidend").val(combidend);
-        alert("Schedule cannot be set after " + $("#txtEndTime").val() + ".");
-    }
+    var combid = ""
+
+    if (_combid == "")
+        combid = _combid = $("#hdncombid").val();
     else
+        combid = _combid;
+
+    combid = parseInt(combid.replace("id", "")) + (_duration * 20) - 10;
+    var combidend = parseInt($("#hdncombidend").val().replace("id", "")) + (_duration * 20) - 10;
+    combidend = "id" + combidend;
+    _combid = combidend;
+    combidend = parseInt(combidend.replace("id", "")) + 10;
+    combidend = "id" + combidend;
+
+    if (CheckAvailableTime(combidend)) {
+        alert("There is no available time. Please select another time.");
+        return;
+    }
+    else {
         $("#txtEndTime").val(AddHour());
+        $("#hdncombidend").val(_combid);
+    }
 });
 
 //Save button selects and sets the occupied time slots
@@ -198,7 +194,6 @@ $("#btnSave").click(function () {
             $("#tblTime").find('[combid="id' + index + '"]').css("vertical-align", "middle");
             $("#tblTime").find('[combid="id' + index + '"]').css("padding", "0px");
         }
-        _hours = 0;
         $("#hdncombid").val("");
         $("#hdncombidend").val("");
         $("#divContinueButton").show();
@@ -232,10 +227,35 @@ function SelectedDate(row) {
     return FormatDate(dateval);
 }
 
+function CheckAvailableTime(combid) {
+
+    var startindex = parseInt(combid.replace("id", ""));
+    var endindex = startindex + (parseInt($("#hdnDuration").val() / 30) * 10);
+
+    for (var index = startindex; index < endindex; index += 10) {
+        if ($("#tblTime").find('[combid="id' + index + '"]').hasClass("occupied")
+            || $("#tblTime").find('[combid="id' + index + '"]').hasClass("afterhour")) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 //Yellow cell click event. Popup opens and set date, starting and ending time.
 $(document.body).on('click', '#tblTime td.td00', function (event) {
 
-    _hours = 0;
+    _combid = "";
+    var combid = $(this).attr("combid");
+    var combidend = "";
+
+    if (CheckAvailableTime(combid)) {
+        alert("There is no available time. Please select another time.");
+        $(this).removeAttr("data-target");
+        event.preventDefault();
+        return;
+    }
+
     $("#hdncombidend").val("");
 
     var idval = $(this).attr("id");
@@ -244,75 +264,77 @@ $(document.body).on('click', '#tblTime td.td00', function (event) {
 
     var startHRStr = "";
     var endHRStr = "";
-    var startHR = 0;
-    var endHR = 0;
-    var hour = 0;
 
-    if (parseInt(idval) == 1) {
-        startHR = _businessStartHour;
-        endHR = _businessStartHour + _duration;
-    }
-    else {
-        endHR = _businessStartHour + (parseInt(idval) * _duration);
-        startHR = endHR - _duration;
-    }
+    _duration = parseFloat($("#hdnDuration").val()) / 60;
 
-    if (startHR.toString().indexOf(".5") > 0)
-        startHR = startHR.toString().replace(".5", ":30");
+    startHRStr = $(this).attr("starthour").replace(":00", "");
+    endHRStr = parseFloat(startHRStr) + _duration;
+    startHRStr = startHRStr + ":00";
+
+    if (endHRStr.toString().indexOf(".5") > 0)
+        endHRStr = endHRStr.toString().replace(".5", ":30");
     else
-        startHR = startHR.toString() + ":00";
-
-    if (endHR.toString().indexOf(".5") > 0)
-        endHR = endHR.toString().replace(".5", ":30");
-    else
-        endHR = endHR.toString() + ":00";
+        endHRStr = endHRStr.toString() + ":00";
 
     var scheduledDate = SelectedDate($(this).attr("row"));
     scheduledDate = scheduledDate.substring(0, scheduledDate.indexOf("<br/>"));
+    combidend = parseInt(combid.replace("id", "")) + (_duration * 20) - 10;
+    combidend = "id" + combidend;
 
     $("#txtDate").val(scheduledDate);
-    $("#txtStartTime").val(startHR);
-    $("#txtEndTime").val(endHR);
-    $("#hdncombid").val($(this).attr("combid"));
+    $("#txtStartTime").val(startHRStr);
+    $("#txtEndTime").val(endHRStr);
+    $("#hdncombid").val(combid);
+    $("#hdncombidend").val(combidend);
 });
 
 //Blue cell click event. Popup opens and set date, starting and ending time.
 $(document.body).on('click', '#tblTime td.td30', function (event) {
 
-    var startHRStr = "";
-    var endHRStr = "";
-    var startHR = 0;
-    var endHR = 0;
+    _combid = "";
+    var combid = $(this).attr("combid");
+    var combidend = "";
 
-    _hours = 0;
+    if (CheckAvailableTime(combid)) {
+        alert("There is no available time. Please select another time.");
+        $(this).removeAttr("data-target");
+        event.preventDefault();
+        return;
+    }
+
     $("#hdncombidend").val("");
 
     var idval = $(this).attr("id");
+    var caldate = $("#datepicker").datepicker('getDate');
     idval = idval.replace("id", "");
 
-    endHR = _businessStartHour + (parseInt(idval) * _duration);
-    startHR = endHR - _duration;
+    var startHRStr = "";
+    var endHRStr = "";
 
-    if (startHR.toString().indexOf(".5") > 0)
-        startHR = startHR.toString().replace(".5", ":30");
-    else
-        startHR = startHR.toString() + ":00";
+    _duration = parseFloat($("#hdnDuration").val()) / 60;
 
-    if (endHR.toString().indexOf(".5") > 0)
-        endHR = endHR.toString().replace(".5", ":30");
+    startHRStr = $(this).attr("starthour").replace(":30", ".5");
+    endHRStr = parseFloat(startHRStr) + _duration;
+    startHRStr = startHRStr.replace(".5", ":30");
+
+    if (endHRStr.toString().indexOf(".5") > 0)
+        endHRStr = endHRStr.toString().replace(".5", ":30");
     else
-        endHR = endHR.toString() + ":00";
+        endHRStr = endHRStr.toString() + ":00";
 
     var scheduledDate = SelectedDate($(this).attr("row"));
     scheduledDate = scheduledDate.substring(0, scheduledDate.indexOf("<br/>"));
+    combidend = parseInt(combid.replace("id", "")) + (_duration * 20) - 10;
+    combidend = "id" + combidend;
 
     $("#txtDate").val(scheduledDate);
-    $("#txtStartTime").val(startHR);
-    $("#txtEndTime").val(endHR);
+    $("#txtStartTime").val(startHRStr);
+    $("#txtEndTime").val(endHRStr);
     $("#hdncombid").val($(this).attr("combid"));
+    $("#hdncombidend").val(combidend);
 });
 
-function GetTitleHour(idval) {
+function GetStartingHour(idval) {
 
     var result = "";
     var startHR = 0;
@@ -326,12 +348,26 @@ function GetTitleHour(idval) {
     else
         startHR = startHR.toString() + ":00";
 
+    result = startHR;
+
+    return result;
+}
+
+function GetEndingHour(idval) {
+
+    var result = "";
+    var startHR = 0;
+    var endHR = 0;
+
+    endHR = _businessStartHour + (parseInt(idval) * _duration);
+    startHR = endHR - _duration;
+
     if (endHR.toString().indexOf(".5") > 0)
         endHR = endHR.toString().replace(".5", ":30");
     else
         endHR = endHR.toString() + ":00";
 
-    result = startHR + "-" + endHR;
+    result = endHR;
 
     return result;
 }
@@ -341,7 +377,8 @@ function GetTitleHour(idval) {
 //It draws the occupied cells deep grey color.
 function generateTimes() {
 
-    var title = "";
+    var startingHr = "";
+    var endingHr = "";
     var timeval;
     var index = 0;
     var urlVal = "";
@@ -349,6 +386,7 @@ function generateTimes() {
     var endHR = "";
 
     urlVal = "/Scheduler/GetTimeSlots";
+    $("#tblTime").html("<img alt= title= src=/Content/Images/ajax-loading.gif width='10%' />");
 
     var calDate = $("#datepicker").datepicker('getDate');
     if (calDate == null)
@@ -373,7 +411,7 @@ function generateTimes() {
                 //businessEndHour = 19;
 
                 //_duration = parseInt(data.Duration);
-                //_duration = 30;
+                _duration = 30;
                 _duration = (_duration / 60);
 
                 if (businessEndHour.toString().indexOf(".5") > 0) {
@@ -396,19 +434,21 @@ function generateTimes() {
 
                         startHR = parseInt(_businessStartHour) + parseInt(_duration);
                         endHR = parseInt(_businessStartHour) + parseInt(_duration) + 0;
-                        title = GetTitleHour(td);
+                        startingHr = GetStartingHour(td);
+                        endingHr = GetEndingHour(td);
 
                         if (td % 2 > 0) {
-                            html += '<td colspan="' + (_duration * 2) + '" title="' + title + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
+                            html += '<td starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
                         }
                         else {
-                            html += '<td colspan="' + (_duration * 2) + '" title="' + title + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
+                            html += '<td starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
                         }
                     }
                     html += '</tr>';
                 }
 
                 html += '</tbody>';
+                $("#tblTime").html("");
                 $("#tblTime").html(html);
 
                 var dateDiff = 86400000;
