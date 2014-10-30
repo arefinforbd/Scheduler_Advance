@@ -1,0 +1,55 @@
+﻿.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFFFFF;
+}
+
+.panel-heading{
+    font-size: 18px;
+    padding: 8px 10px;
+}
+
+.mandatory{
+    border-color: #FF3300;
+}
+
+.custinput{
+    height: 28px;
+    font-size: 12px;
+}
+
+.custDivColLeft {
+    padding-left: 0px;
+}
+
+.custDivColRight {
+    padding-right: 4px;
+}
+
+.cusDivLessBottomMargin{
+    margin-bottom: 6px;
+}
+
+.maxWidth{
+    max-width: 436px;
+}
+
+.submitClass {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.panelStyle {
+    border: 1px solid #eeeeee;
+    padding: 10px;
+}
+
+.panelBottom1 {
+    border-bottom: solid #fbdd8a;
+}
+
+.panelBottom2 {
+    border-bottom: solid #9ee1e8;
+}
+
+.panelBottom3 {
+    border-bottom: solid #99fbad;
+}
