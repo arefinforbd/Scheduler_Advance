@@ -3,7 +3,7 @@
 //It has dynamic interval multiplicable by 30 minutes.
 //Booked time slot cannot be set for another task.
 
-var listItem = $("#ulItems > :first-child");
+var _listItem = $("#ulItems > :first-child");
 
 var _minhours = "7:00";
 var _maxhours = "18:00";
@@ -36,8 +36,8 @@ $(function () {
         selectOtherMonths: true,
         altFormat: "yy-mm-dd",
         onSelect: function (date) {
-            $("#divContinueButton").hide();
             if (CheckDate()) {
+                $("#divContinueButton").hide();
                 $("#tblDate").show();
                 $("#tblTime").show();
                 $("#tblDesc").show();
@@ -61,20 +61,32 @@ function HideNavBar() {
     }
 }
 
+function Reset() {
+    $("#divDatePicker").show();
+    $("#datepicker").val("");
+    $("#tblDate").html("");
+    $("#tblTime").html("");
+    $("#tblDate").hide();
+    $("#tblTime").hide();
+    $("#tblDesc").hide();
+    $("#divContinueButton").hide();
+    $("#itemDescription").show();
+}
+
 $(document.body).on('click', '#ulItems li', function (event) {
     var $target = $(event.currentTarget);
     $("#ulItems > :first-child").show();
-    listItem.css("background-color", "#FFFFFF");
+    _listItem.css("background-color", "#FFFFFF");
     $("#datepicker").val("");
 
-    if (listItem != $(this)) {
-        listItem.show();
+    if (_listItem != $(this)) {
+        _listItem.show();
     }
 
     $(this).css("background-color", "#f9f9c0");
 
     if ($target.text() == $(this).text()) {
-        listItem = $(this);
+        _listItem = $(this);
     }
 
     $target.closest('.btn-group')
@@ -83,14 +95,9 @@ $(document.body).on('click', '#ulItems li', function (event) {
        .children('.dropdown-item').dropdown('toggle');
 
     if ($target.text() != "Select Item") {
-        $("#divDatePicker").show();
+        Reset();
         $("#hdnItemID").val($(this).attr("id"));
-        $("#tblDate").hide();
-        $("#tblTime").hide();
-        $("#tblDesc").hide();
-        $("#divContinueButton").hide();
-        $("#itemDescription").html($(this).attr("desc") + "-" + $(this).attr("duration"));
-        $("#itemDescription").show();
+        $("#itemDescription").html($(this).attr("desc"));
         $("#hdnDuration").val($(this).attr("duration"));
     }
     else {
@@ -149,40 +156,29 @@ function AddHour() {
 
 //Add button of popup
 $("#btnAddHour").click(function () {
-    var combid = "";
-    var combidend = "";
+    var combidend = $("#hdncombidend").val();
 
-    if (_combid == "")
-        combid = _combid = $("#hdncombid").val();
-    else
-        combid = _combid;
-
-    if (_duration.toString().indexOf("0.5") == 0) {
-        combid = parseInt(combid.replace("id", "")) + (_duration * 20);
-        combid = "id" + combid;
-        combidend = parseInt($("#hdncombidend").val().replace("id", "")) + (_duration * 20);
-    }
-    else {
-        combid = _combid.replace("id", "");
-        combid = parseInt(combid) + (_duration * 20);
-        combid = "id" + combid;
-        combidend = parseInt($("#hdncombidend").val().replace("id", "")) + (_duration * 20);
-    }
-
+    combidend = parseInt(combidend.replace("id", "")) + 10;
     combidend = "id" + combidend;
-    _combid = combidend;
-    $("#hdncombidend").val(combidend);
 
-    if (CheckAvailableTime(combid)) {
-        combidend = parseInt(combidend.replace("id", "")) - (_duration * 20);
-        _combid = "id" + combidend;
-        $("#hdncombidend").val(_combid);
+    if (CheckAvailableTime(combidend)) {
         alert("There is no available time. Please select another time.");
         return;
     }
     else {
-        $("#txtEndTime").val(AddHour());
-        _combid = combid;
+        var startindex = 0;
+        var endindex = 0;
+        var ttime = AddHour();
+
+        combidend = parseInt(combidend.replace("id", "")) - 10;
+        combidend = "id" + combidend;
+
+        if (ttime != $("#txtEndTime").val()) {
+            startindex = parseInt(combidend.replace("id", ""));
+            endindex = startindex + (parseInt($("#hdnDuration").val() / 30) * 10);
+            $("#txtEndTime").val(ttime);
+            $("#hdncombidend").val("id" + endindex);
+        }
     }
 });
 
@@ -198,7 +194,7 @@ $("#btnSave").click(function () {
         endindex = isNaN(endindex) ? startindex : endindex;
 
         for (var index = startindex; index <= endindex; index += 10) {
-            $("#tblTime").find('[combid="id' + index + '"]').css("background-color", "#808080")
+            $("#tblTime").find('[combid="id' + index + '"]').css("background-color", "#32e09b")
             $("#tblTime").find('[combid="id' + index + '"]').removeAttr("data-target");
             $("#tblTime").find('[combid="id' + index + '"]').removeAttr("data-toggle");
             $("#tblTime").find('[combid="id' + index + '"]').removeAttr("class");
@@ -425,8 +421,8 @@ function generateTimes() {
     var startHR = "";
     var endHR = "";
 
-    urlVal = "/Scheduler/GetTimeSlots";
-    $("#tblTime").html("<img alt= title= src=/Content/Images/ajax-loading.gif width='10%' />");
+    urlVal = $("#hdnSiteURL").val() + "/Scheduler/GetTimeSlots";
+    $("#tblTime").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
 
     var calDate = $("#datepicker").datepicker('getDate');
     if (calDate == null)
@@ -694,7 +690,7 @@ function generateDays(day) {
 
     /*$.ajaxSetup({ cache: false });
     $.ajax({
-        url: "/Scheduler/GetThresholdDay",
+        url: $("#hdnSiteURL").val() + "/Scheduler/GetThresholdDay",
         type: "GET",
         data: { },
         dataType: "JSON",
@@ -729,20 +725,23 @@ function generateDays(day) {
 
 $("#btnContinue").click(function () {
     $.ajax({
-        url: "/Scheduler/PostTimeSlot",
+        url: $("#hdnSiteURL").val() + "/Scheduler/PostTimeSlot",
         type: "POST",
         data: { timeSlots: JSON.stringify(_timeSlots), itemID: $("#hdnItemID").val().trim() },
         dataType: "JSON",
         success: function (data) {
             if (data != null && data == "successfull") {
-                alert("OK sent.");
-                window.location.href = "/Scheduler/CustomerInformation";
+                window.location.href = $("#hdnSiteURL").val() + "/Scheduler/CustomerInformation";
             }
         },
         error: function (request) {
             alert("Please try again. Something went wrong.");
         }
     });
+});
+
+$("#btnReset").click(function () {
+    Reset();
 });
 
 function FormatDate(datevalue) {

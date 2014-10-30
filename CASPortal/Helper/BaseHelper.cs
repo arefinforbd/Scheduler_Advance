@@ -12,6 +12,21 @@ namespace CASPortal.Helper
         public static string VersionNo = System.Configuration.ConfigurationManager.AppSettings["VersionNo"];
         public static bool AdvertisementStatus = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AdvertisementStatus"].ToLower());
 
+        public static string GetSiteUrl()
+        {
+            string strApp = HttpContext.Current.Request.ApplicationPath;
+            string strPath = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+            string strLastChar = strApp.Substring(strApp.Length - 1);
+
+            if (strLastChar == "/")
+            {
+                strApp = strApp.Substring(0, strApp.Length - 1);
+            }
+
+            strPath += strApp;
+            return strPath;
+        }
+
         public void SetSessions(string companyid, string companypassword, string customerid, string customerpassword, int level4id)
         {
             HttpContext.Current.Session["CompanyID"] = companyid;

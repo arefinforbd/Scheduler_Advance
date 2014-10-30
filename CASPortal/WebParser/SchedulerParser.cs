@@ -1,4 +1,5 @@
 ﻿using CASPortal.CASService;
+using CASPortal.Helper;
 using CASPortal.Models;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,12 @@ namespace CASPortal.WebParser
                 List<BusinessHour> businessHours = new List<BusinessHour>();
                 CASWebService cas = new CASWebService();
 
-                /*string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+                string companyID = HttpContext.Current.Session["CompanyID"].ToString();
                 string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
-                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();*/
+                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
 
-                ds = cas.GetBusinessTime("kevorkt", "", "1.000", 1);
-                //ds = cas.GetBusinessTime(companyID, companyPassword, customerPassword, 1);
+                //ds = cas.GetBusinessTime("kevorkt", "", "1.000", 1);
+                ds = cas.GetBusinessTime(companyID, companyPassword, customerPassword, 1);
 
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -77,13 +78,13 @@ namespace CASPortal.WebParser
             DataSet ds = new DataSet();
             CASWebService cas = new CASWebService();
 
-            /*string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
-            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();*/
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
 
             dateStart = dateStart.Substring(0, dateStart.IndexOf("GMT") - 1);
-            ds = cas.GetScheduledTime("kevorkt", "", "1.000", Convert.ToDateTime(dateStart));
-            //ds = cas.GetScheduledTime(companyID, companyPassword, customerPassword, Convert.ToDateTime(dateStart));
+            //ds = cas.GetScheduledTime("kevorkt", "", "1.000", Convert.ToDateTime(dateStart));
+            ds = cas.GetScheduledTime(companyID, companyPassword, customerPassword, Convert.ToDateTime(dateStart));
 
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -112,12 +113,7 @@ namespace CASPortal.WebParser
 
             item.TimeSlots = timeSlots;
 
-            /*item.ItemID = 2;
-            item.ItemName = "Item 2";
-            item.SpecialInstruction = "Description Description Description 2002";
-            item.Duration = 30;
-            item.Price = 150;
-
+            /*
             item.TimeSlots = new List<TimeSlot>(){
                 new TimeSlot
                 {
@@ -132,56 +128,6 @@ namespace CASPortal.WebParser
                     Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
                     StartTime = "14",
                     EndTime = "16"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("01/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "10",
-                    EndTime = "12"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("30/Oct/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "12.5",
-                    EndTime = "13.5"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("30/Oct/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "10",
-                    EndTime = "11.5"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("02/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "16.5",
-                    EndTime = "17.5"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("05/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "15",
-                    EndTime = "16"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("04/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "0",
-                    EndTime = "0",
-                    IsPublicHoliDay = true
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("31/Oct/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "0",
-                    EndTime = "0"
                 }
             };*/
 
@@ -195,13 +141,13 @@ namespace CASPortal.WebParser
             DataSet ds = new DataSet();
             CASWebService cas = new CASWebService();
 
-            /*string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
-            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());*/
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            ds = cas.GetCategoryProductService("kevorkt", "", "1.000", 1);
-            //ds = cas.GetCategoryProductService(companyID, companyPassword, customerPassword, level4ID);
+            //ds = cas.GetCategoryProductService("kevorkt", "", "1.000", 1);
+            ds = cas.GetCategoryProductService(companyID, companyPassword, customerPassword, level4ID);
 
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -222,6 +168,12 @@ namespace CASPortal.WebParser
             }
 
             return items;
+        }
+
+        public void SetLoginCredential(Guid customerid)
+        {
+            BaseHelper helper = new BaseHelper();
+            helper.SetSessions("kevorkt", "", "1.000", "1.000", 1);
         }
     }
 }

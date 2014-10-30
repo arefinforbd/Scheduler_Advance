@@ -23,17 +23,20 @@ namespace CASPortal.Controllers
         // GET: /Scheduler/
         public ActionResult Index()
         {
-            /*BaseHelper helper = new BaseHelper();
-            if (!helper.IsValidUser())
-                return RedirectToAction("Index", "Login");
-             
-             if(Request["customerid"] != null){
-             }
-             */
-
             List<Item> itemList = new List<Item>();
             SchedulerRepository repository = new SchedulerRepository();
             SchedulerParser parser = new SchedulerParser();
+
+            if (Request["customerid"] == null)
+            {
+                BaseHelper helper = new BaseHelper();
+                if (!helper.IsValidUser())
+                    return RedirectToAction("Index", "Login");             
+            }
+            else
+            {
+                parser.SetLoginCredential(new Guid(Request["customerid"]));
+            }
 
             StringBuilder sb = new StringBuilder("");
             sb.Append("<li style='cursor:pointer'><a>Select Item</a></li>");
@@ -58,9 +61,12 @@ namespace CASPortal.Controllers
         {
             try
             {
-                /*BaseHelper helper = new BaseHelper();
-                if (!helper.IsValidUser())
-                    return RedirectToAction("Index", "Login");*/
+                if (Request["customerid"] == null)
+                {
+                    BaseHelper helper = new BaseHelper();
+                    if (!helper.IsValidUser())
+                        return RedirectToAction("Index", "Login");
+                }
 
                 Item item = new Item();
                 SchedulerRepository repository = new SchedulerRepository();
@@ -79,9 +85,12 @@ namespace CASPortal.Controllers
         [HttpPost]
         public ActionResult PostTimeSlot(string itemID, string timeSlots)
         {
-            /*BaseHelper helper = new BaseHelper();
-            if (!helper.IsValidUser())
-                return RedirectToAction("Index", "Login");*/
+            if (Request["customerid"] == null)
+            {
+                BaseHelper helper = new BaseHelper();
+                if (!helper.IsValidUser())
+                    return RedirectToAction("Index", "Login");
+            }
 
             TempData["ItemID"] = itemID;
             var selectedItemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
@@ -92,21 +101,27 @@ namespace CASPortal.Controllers
 
         public ActionResult CustomerInformation()
         {
-            /*BaseHelper helper = new BaseHelper();
-            if (!helper.IsValidUser())
-                return RedirectToAction("Index", "Login");*/
+            if (Request["customerid"] == null)
+            {
+                BaseHelper helper = new BaseHelper();
+                if (!helper.IsValidUser())
+                    return RedirectToAction("Index", "Login");
+            }
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult SendCustomerInformation(string firstname, string lastname, string houseno, string streetname, string address, string city, string state, string postcode, string phoneno, string mobileno)
+        public ActionResult SendCustomerInformation(string firstname, string lastname, string email, string houseno, string streetname, string address, string city, string state, string postcode, string phoneno, string mobileno)
         {
             try
             {
-                /*BaseHelper helper = new BaseHelper();
-                if (!helper.IsValidUser())
-                    return RedirectToAction("Index", "Login");*/
+                if (Request["customerid"] == null)
+                {
+                    BaseHelper helper = new BaseHelper();
+                    if (!helper.IsValidUser())
+                        return RedirectToAction("Index", "Login");
+                }
 
                 List<TimeSlot> timeSlots;
                 string output = firstname;

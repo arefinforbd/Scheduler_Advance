@@ -7,6 +7,10 @@
     padding: 8px 10px;
 }
 
+.mandatory{
+    border-color: #FF3300;
+}
+
 .custinput{
     height: 28px;
     font-size: 12px;
@@ -23,6 +27,7 @@
 .cusDivLessBottomMargin{
     margin-bottom: 6px;
 }
+
 .maxWidth{
     max-width: 436px;
 }

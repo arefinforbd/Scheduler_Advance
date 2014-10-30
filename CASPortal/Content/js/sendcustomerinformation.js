@@ -6,6 +6,7 @@
 
             var firstName = $("#firstname").val().trim();
             var lastName = $("#lastname").val().trim();
+            var email = $("#email").val().trim();
             var houseNo = $("#houseno").val().trim();
             var streetName = $("#streetname").val().trim();
             var address = $("#address").val().trim();
@@ -17,14 +18,14 @@
 
             $.ajaxSetup({ cache: false });
             $.ajax({
-                url: "/Scheduler/SendCustomerInformation",
+                url: $("#hdnSiteURL").val() + "/Scheduler/SendCustomerInformation",
                 type: "POST",
-                data: { firstname: firstName, lastname: lastName, houseno: houseNo, streetname: streetName, address: address, city: city, state: state, postcode: postCode, phoneno: phoneNo, mobileno: mobileNo },
+                data: { firstname: firstName, lastname: lastName, email: email, houseno: houseNo, streetname: streetName, address: address, city: city, state: state, postcode: postCode, phoneno: phoneNo, mobileno: mobileNo },
                 dataType: "JSON",
                 success: function (data) {
                     if (data != null && data == "successfull") {
                         alert("Thank you. Your information has been sent.");
-                        window.location.href = "/Scheduler/";
+                        window.location.href = $("#hdnSiteURL").val() + "/Scheduler";
                     }
                     else
                         alert("Please try again. Something went wrong.");
@@ -51,6 +52,12 @@ function Validate() {
     if ($("#lastname").val().trim().length <= 0) {
         alert("Please enter Last Name.");
         $("#lastname").focus();
+        return false;
+    }
+
+    if ($("#email").val().trim().length <= 0) {
+        alert("Please enter Email.");
+        $("#email").focus();
         return false;
     }
 

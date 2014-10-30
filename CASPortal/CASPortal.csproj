@@ -259,6 +259,7 @@
     <Content Include="Views\Scheduler\Index.cshtml" />
     <Content Include="Views\Scheduler\DynamicInterval.cshtml" />
     <Content Include="Views\Scheduler\CustomerInformation.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web References\CASService\CASWebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -271,7 +272,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />

@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 function GetAdvertiseStatus() {
 
-    var urlVal = "/CAS/CustomerInformation/GetAdvertiseStatus";
+    var urlVal = $("#hdnSiteURL").val() + "/CustomerInformation/GetAdvertiseStatus";
 
     $.ajaxSetup({ cache: false });
     $.ajax({
@@ -123,7 +123,7 @@ function onFolderSelection(folderType) {
 
     hideSbtBtn();
 
-    urlVal = "/CAS/CustomerInformation/GetFolderFiles";
+    urlVal = $("#hdnSiteURL").val() + "/CustomerInformation/GetFolderFiles";
     var clientTimeZoneOffSet = (new Date().getTimezoneOffset()) * (-1);
 
     //private folder
