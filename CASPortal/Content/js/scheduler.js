@@ -520,7 +520,10 @@ function generateTimes() {
                     }
 
                     //If scheduler starts from the current date, starting time will be after current time.
-                    if (_thresholdDay == 0 && diff == 0) {
+                    if (new Date(FormatDateA(new Date())).getDate() == new Date(bsHour.Date).getDate()
+                        && new Date(FormatDateA(new Date())).getMonth() == new Date(bsHour.Date).getMonth()
+                        && new Date(FormatDateA(new Date())).getYear() == new Date(bsHour.Date).getYear()) {
+
                         var currentHour = new Date().getHours();
                         var currentMinute = new Date().getMinutes();
 
