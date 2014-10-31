@@ -51,7 +51,7 @@ namespace CASPortal.Repository
             }
         }
 
-        public Item GetItem(string dateStart)
+        public Item GetTimeSlots(string dateStart)
         {
             Item item = new Item();
             BusinessHour businessHour;

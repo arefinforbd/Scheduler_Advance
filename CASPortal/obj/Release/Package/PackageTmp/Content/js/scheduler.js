@@ -36,8 +36,8 @@ $(function () {
         selectOtherMonths: true,
         altFormat: "yy-mm-dd",
         onSelect: function (date) {
-            $("#divContinueButton").hide();
             if (CheckDate()) {
+                $("#divContinueButton").hide();
                 $("#tblDate").show();
                 $("#tblTime").show();
                 $("#tblDesc").show();
@@ -63,6 +63,7 @@ function HideNavBar() {
 
 function Reset() {
     $("#divDatePicker").show();
+    $("#datepicker").val("");
     $("#tblDate").html("");
     $("#tblTime").html("");
     $("#tblDate").hide();
@@ -215,7 +216,7 @@ $("#btnSave").click(function () {
             StartTime: $("#txtStartTime").val(),
             EndTime: $("#txtEndTime").val(),
             SpecialInstruction: $("#txtSpecialInstruction").val(),
-            IsPublicHoliDay: true
+            IsPublicHoliDay: false
         });
     }
     else {
@@ -421,7 +422,7 @@ function generateTimes() {
     var endHR = "";
 
     urlVal = $("#hdnSiteURL").val() + "/Scheduler/GetTimeSlots";
-    $("#tblTime").html("<img alt= title= src=/Content/Images/ajax-loading.gif width='10%' />");
+    $("#tblTime").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
 
     var calDate = $("#datepicker").datepicker('getDate');
     if (calDate == null)
@@ -519,7 +520,10 @@ function generateTimes() {
                     }
 
                     //If scheduler starts from the current date, starting time will be after current time.
-                    if (_thresholdDay == 0 && diff == 0) {
+                    if (new Date(FormatDateA(new Date())).getDate() == new Date(bsHour.Date).getDate()
+                        && new Date(FormatDateA(new Date())).getMonth() == new Date(bsHour.Date).getMonth()
+                        && new Date(FormatDateA(new Date())).getYear() == new Date(bsHour.Date).getYear()) {
+
                         var currentHour = new Date().getHours();
                         var currentMinute = new Date().getMinutes();
 
@@ -730,7 +734,7 @@ $("#btnContinue").click(function () {
         dataType: "JSON",
         success: function (data) {
             if (data != null && data == "successfull") {
-                window.location.href = "/Scheduler/CustomerInformation";
+                window.location.href = $("#hdnSiteURL").val() + "/Scheduler/CustomerInformation";
             }
         },
         error: function (request) {

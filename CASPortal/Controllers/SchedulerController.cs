@@ -72,7 +72,7 @@ namespace CASPortal.Controllers
                 SchedulerRepository repository = new SchedulerRepository();
 
                 TempData.Clear();
-                item = repository.GetItem(dateStartedFrom);
+                item = repository.GetTimeSlots(dateStartedFrom);
 
                 return Json(item, JsonRequestBehavior.AllowGet);
             }
@@ -92,9 +92,9 @@ namespace CASPortal.Controllers
                     return RedirectToAction("Index", "Login");
             }
 
-            TempData["ItemID"] = itemID;
             var selectedItemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
-            TempData["TimeSlots"] = selectedItemSlots;
+            var timeSlotList = selectedItemSlots.OrderBy(d => DateTime.Parse(d.Date)).ThenBy(t => Convert.ToInt32(t.StartTime.Replace(":", ""))).ToList();
+            TempData["TimeSlots"] = timeSlotList;
             
             return Json("successfull", JsonRequestBehavior.AllowGet);
         }
@@ -123,13 +123,15 @@ namespace CASPortal.Controllers
                         return RedirectToAction("Index", "Login");
                 }
 
-                List<TimeSlot> timeSlots;
                 string output = firstname;
 
-                if(TempData["TimeSlots"] != null)
-                    timeSlots = (List<TimeSlot>)TempData["TimeSlots"];
+                if (TempData["TimeSlots"] != null)
+                {
+                    var timeSlots = (List<TimeSlot>)TempData["TimeSlots"];
+                    return Json("successfull", JsonRequestBehavior.AllowGet);
+                }
 
-                return Json("successfull", JsonRequestBehavior.AllowGet);
+                return Json("error", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

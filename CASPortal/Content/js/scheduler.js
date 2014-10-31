@@ -216,7 +216,7 @@ $("#btnSave").click(function () {
             StartTime: $("#txtStartTime").val(),
             EndTime: $("#txtEndTime").val(),
             SpecialInstruction: $("#txtSpecialInstruction").val(),
-            IsPublicHoliDay: true
+            IsPublicHoliDay: false
         });
     }
     else {
