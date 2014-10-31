@@ -103,7 +103,7 @@ namespace CASPortal.WebParser
                     timeSlots.Add(
                         new TimeSlot()
                         {
-                            Date = scheduledDate.ToString("dd/MMM/yyyy"),
+                            Date = scheduledDate.ToString("MMM dd, yyyy"),
                             StartTime = startTime,
                             EndTime = endTime
                         }

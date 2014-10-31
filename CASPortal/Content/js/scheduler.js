@@ -766,9 +766,18 @@ function FormatDateA(datevalue) {
     var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+    var finalDate = "";
     var yyyy = datevalue.getFullYear().toString();
     var mm = monthNames[datevalue.getMonth()];
     var dd = datevalue.getDate().toString();
 
-    return (dd[1] ? dd : "0" + dd[0]) + "/" + mm + "/" + yyyy;
+    //IE 11 and below are being checked here
+    /*if ((!!navigator.userAgent.match(/Trident.*rv\:11\./)) || (/msie/.test(navigator.userAgent.toLowerCase())))
+        finalDate = mm + " " + dd + ", " + yyyy;
+    else
+        finalDate = (dd[1] ? dd : "0" + dd[0]) + "/" + mm + "/" + yyyy;*/
+
+    finalDate = mm + " " + dd + ", " + yyyy;
+
+    return finalDate;
 }
