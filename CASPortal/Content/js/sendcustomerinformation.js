@@ -1,6 +1,12 @@
 ﻿$(function () {
 
     HideForPublicSite();
+
+    if ($("#lastname").val().trim().length > 0) {
+        $("#firstname").removeClass("mandatory");
+        $("#mobileno").removeClass("mandatory")
+    }
+
     if ($("#firstname").val() != "")
         $("#firstname").attr("readonly", true);
     if ($("#lastname").val() != "")
@@ -81,7 +87,7 @@ $("#btnSubmit").click(function () {
 
 function Validate() {
 
-    if ($("#firstname").val().trim().length <= 0) {
+    if ($("#firstname").val().trim().length <= 0 && $("#lastname").prop("readonly") == false) {
         alert("Please enter First Name.");
         $("#firstname").focus();
         return false;
@@ -130,7 +136,7 @@ function Validate() {
         return false;
     }
 
-    if ($("#mobileno").val().trim().length <= 0) {
+    if ($("#mobileno").val().trim().length <= 0 && $("#lastname").prop("readonly") == false) {
         alert("Please enter Mobile No.");
         $("#mobileno").focus();
         return false;

@@ -6,8 +6,11 @@
     padding-left: 27px;
 }
 
+#divDatePicker{
+    margin-left: 15px;
+}
+
 #ddlItems,
-#divDatePicker,
 #divContinueButton {
     padding-left: 0px;
 }
@@ -74,7 +77,7 @@ table#tblTime td.td30:hover {
 }
 
 .modal.in .modal-dialog {
-    transform: translate3d(0px, 50px, 0px);
+    transform: translate3d(-630px, 50px, 0px);
 }
     
 .ui-widget {

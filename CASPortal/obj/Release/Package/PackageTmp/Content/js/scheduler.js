@@ -18,8 +18,8 @@ var _combid = "";
 //Populate Date and Time table
 $(function () {
 
-    HideNavBar();
     $("#ddlItems").hide();
+    HideForPublicSite();
     $("#divDatePicker").hide();
     $("#tblDate").hide();
     $("#tblTime").hide();
@@ -58,8 +58,10 @@ $(function () {
     });
 });
 
-function HideNavBar() {
+function HideForPublicSite() {
     if (location.href.indexOf("?customerid") > 0) {
+        $("#ddlSites").hide();
+        $("#ddlItems").show();
         $(".navbar-static-top").hide();
         $("#page-wrapper").css("margin", "20px");
         $("#page-wrapper").css("border", "1px solid #DDDDDD");
@@ -99,6 +101,8 @@ $(document.body).on('click', '#ulSites li', function (event) {
     var $target = $(event.currentTarget);
     $("#ulSites > :first-child").show();
     _listSite.css("background-color", "#FFFFFF");
+    _listSite.removeClass("selected");
+    $(this).addClass("selected");
     $("#ddlItems").show();
     $("#datepicker").val("");
 
@@ -538,6 +542,11 @@ function generateTimes() {
                 $("#tblTime").html("");
                 $("#tblTime").html(html);
 
+                if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#tblTime").css("margin-left", "20px");
+                    $("#tblTime td").css("height", "52px");
+                }
+
                 var dateDiff = 86400000;
                 var dayDiff = 0;
                 var startindex = 0;
@@ -778,14 +787,22 @@ function generateDays(day) {
 }
 
 $("#btnContinue").click(function () {
+
+    var customerid = "";
+    var siteID = $('#ulSites li.selected').attr('id');
+
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Scheduler/PostTimeSlot",
         type: "POST",
-        data: { timeSlots: JSON.stringify(_timeSlots), itemID: $("#hdnItemID").val().trim() },
+        data: { siteID: siteID, itemID: $("#hdnItemID").val().trim(), timeSlots: JSON.stringify(_timeSlots) },
         dataType: "JSON",
         success: function (data) {
             if (data != null && data == "successfull") {
-                window.location.href = $("#hdnSiteURL").val() + "/Scheduler/CustomerInformation";
+
+                if (location.href.indexOf("?customerid") > 0) {
+                    customerid = "/?customerid=" + window.location.href.slice(window.location.href.indexOf('=') + 1);
+                }
+                window.location.href = $("#hdnSiteURL").val() + "/Scheduler/CustomerInformation" + customerid;
             }
         },
         error: function (request) {

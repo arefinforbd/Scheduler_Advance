@@ -543,8 +543,8 @@ function generateTimes() {
                 $("#tblTime").html(html);
 
                 if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-                    $("#tblTime").css("margin-left", "20px");
-                    $("#tblTime td").css("height", "52px");
+                    $("#tblTime").css("margin-left", "19px");
+                    $("#tblTime td").css("height", "51.5px");
                 }
 
                 var dateDiff = 86400000;
