@@ -3,6 +3,7 @@ var listobjectpub = $("#pubfolder > :first-child");
 
 $(document).ready(function () {
     hideSbtBtn();
+    $("#logoutMenu").attr("href", $("#hdnSiteURL").val() + "/Login/Logout");
     $("#homeMenu").attr("href", $("#hdnSiteURL").val() + "/CustomerInformation/WelcomeMessage");
     $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
 
