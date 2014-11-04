@@ -480,6 +480,8 @@ function generateTimes() {
     $("#tblTime").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
 
     var calDate = $("#datepicker").datepicker('getDate');
+    calDate = new Date(calDate.setDate(calDate.getDate() + _thresholdDay));
+
     if (calDate == null)
         calDate = new Date();
 
@@ -557,8 +559,7 @@ function generateTimes() {
                 $.each(data.BusinessHours, function (i, bsHour) {
 
                     dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                    diff = dayDiff;
-                    dayDiff = dayDiff - _thresholdDay + 1;
+                    dayDiff = dayDiff + 1;
 
                     //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
@@ -614,7 +615,7 @@ function generateTimes() {
                 $.each(data.BusinessHours, function (i, bsHour) {
 
                     dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                    dayDiff = dayDiff - _thresholdDay + 1;
+                    dayDiff = dayDiff + 1;
 
                     //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
@@ -643,7 +644,7 @@ function generateTimes() {
                 $.each(data.TimeSlots, function (i, occupied) {
 
                     dayDiff = (new Date(occupied.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                    dayDiff = dayDiff - _thresholdDay + 1;
+                    dayDiff = dayDiff + 1;
 
                     //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
@@ -698,7 +699,7 @@ function generateTimes() {
                 $.each(data.BusinessHours, function (i, bsHour) {
 
                     dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
-                    dayDiff = dayDiff - _thresholdDay + 1;
+                    dayDiff = dayDiff + 1;
 
                     //Color will be set for next seven days
                     if (dayDiff >= 0 && dayDiff <= 7) {
