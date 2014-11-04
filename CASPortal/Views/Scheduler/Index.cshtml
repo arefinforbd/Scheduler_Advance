@@ -12,9 +12,23 @@
     <input type="hidden" id="hdnDuration" />
 
     <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites">
+            <label>Sites : </label>
+            <div class="btn-group">
+                <a class="btn btn-info dropdown-toggle dropdown-site" data-toggle="dropdown" href="#">
+                    <span data-bind="label"></span> <span class="caret"></span>
+                </a>
+                <ul id="ulSites" class="dropdown-menu scroll-menu">
+                    @Html.Raw(ViewBag.Sites)
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlItems">
             <label>Services : </label>
-            <div class="btn-group">
+            <div class="btn-group" id="divItem">
                 <a class="btn btn-info dropdown-toggle dropdown-item" data-toggle="dropdown" href="#">
                     <span data-bind="label"></span> <span class="caret"></span>
                 </a>
@@ -30,7 +44,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="divDatePicker">
             <label>Date : </label>
-            <div class="btn-group" style="margin-left:30px;">
+            <div class="btn-group">
                 <input class="form-control input-sm" id="datepicker" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
             </div>
         </div>

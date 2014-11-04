@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CASPortal_CASService_CASWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:55854/CASWebService.asmx</Value>
+      <Value Profile="(Default)">http://temisws2/caswebservice2/CASWebService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

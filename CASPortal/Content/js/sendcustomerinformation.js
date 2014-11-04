@@ -1,9 +1,44 @@
-﻿$("#btnSubmit").click(function () {
+﻿$(function () {
+
+    HideForPublicSite();
+    if ($("#firstname").val() != "")
+        $("#firstname").attr("readonly", true);
+    if ($("#lastname").val() != "")
+        $("#lastname").attr("readonly", true);
+    if ($("#email").val() != "")
+        $("#email").attr("readonly", true);
+    if ($("#houseno").val() != "")
+        $("#houseno").attr("readonly", true);
+    if ($("#streetname").val() != "")
+        $("#streetname").attr("readonly", true);
+    if ($("#address").val() != "")
+        $("#address").attr("readonly", true);
+    if ($("#city").val() != "")
+        $("#city").attr("readonly", true);
+    if ($("#state").val() != "")
+        $("#state").attr("readonly", true);
+    if ($("#postcode").val() != "")
+        $("#postcode").attr("readonly", true);
+    if ($("#phoneno").val() != "")
+        $("#phoneno").attr("readonly", true);
+    if ($("#mobileno").val() != "")
+        $("#mobileno").attr("readonly", true);
+});
+
+function HideForPublicSite() {
+    if (location.href.indexOf("?customerid") > 0) {
+        $(".navbar-static-top").hide();
+        $("#page-wrapper").css("margin", "20px");
+        $("#page-wrapper").css("border", "1px solid #DDDDDD");
+    }
+}
+
+$("#btnSubmit").click(function () {
 
     if (Validate()) {
 
         if (confirm("Are you sure to send your information?")) {
-
+            var customerid = "";
             var firstName = $("#firstname").val().trim();
             var lastName = $("#lastname").val().trim();
             var email = $("#email").val().trim();
@@ -25,7 +60,10 @@
                 success: function (data) {
                     if (data != null && data == "successfull") {
                         alert("Thank you. Your information has been sent.");
-                        window.location.href = $("#hdnSiteURL").val() + "/Scheduler";
+                        if (location.href.indexOf("?customerid") > 0) {
+                            customerid = "/?customerid=" + window.location.href.slice(window.location.href.indexOf('=') + 1);
+                        }
+                        window.location.href = $("#hdnSiteURL").val() + "/Scheduler" + customerid;
                     }
                     else
                         alert("Please try again. Something went wrong.");

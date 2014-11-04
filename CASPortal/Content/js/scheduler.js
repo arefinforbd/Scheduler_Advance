@@ -4,6 +4,7 @@
 //Booked time slot cannot be set for another task.
 
 var _listItem = $("#ulItems > :first-child");
+var _listSite = $("#ulSites > :first-child");
 
 var _minhours = "7:00";
 var _maxhours = "18:00";
@@ -17,12 +18,16 @@ var _combid = "";
 //Populate Date and Time table
 $(function () {
 
-    HideNavBar();
+    $("#ddlItems").hide();
+    HideForPublicSite();
     $("#divDatePicker").hide();
     $("#tblDate").hide();
     $("#tblTime").hide();
     $("#tblDesc").hide();
     $("#divContinueButton").hide();
+
+    var ulSite = $("#ulSites > :first-child").text();
+    $(".dropdown-site").find('[data-bind="label"]').text(ulSite);
 
     var ulItem = $("#ulItems > :first-child").text();
     $(".dropdown-item").find('[data-bind="label"]').text(ulItem);
@@ -53,12 +58,31 @@ $(function () {
     });
 });
 
-function HideNavBar() {
+function HideForPublicSite() {
     if (location.href.indexOf("?customerid") > 0) {
+        $("#ddlSites").hide();
+        $("#ddlItems").show();
         $(".navbar-static-top").hide();
         $("#page-wrapper").css("margin", "20px");
         $("#page-wrapper").css("border", "1px solid #DDDDDD");
     }
+}
+
+function ResetMain() {
+    Reset();
+
+    var ulSite = $("#ulSites li").eq(0).text();
+    $(".dropdown-site").find('[data-bind="label"]').text(ulSite);
+
+    var ulItem = $("#ulItems li").eq(0).text();
+    $(".dropdown-item").find('[data-bind="label"]').text(ulItem);
+
+    _listSite.css("background-color", "#FFFFFF");
+    _listItem.css("background-color", "#FFFFFF");
+
+    $("#itemDescription").html("");
+    $("#ddlItems").hide();
+    $("#divDatePicker").hide();
 }
 
 function Reset() {
@@ -72,6 +96,37 @@ function Reset() {
     $("#divContinueButton").hide();
     $("#itemDescription").show();
 }
+
+$(document.body).on('click', '#ulSites li', function (event) {
+    var $target = $(event.currentTarget);
+    $("#ulSites > :first-child").show();
+    _listSite.css("background-color", "#FFFFFF");
+    _listSite.removeClass("selected");
+    $(this).addClass("selected");
+    $("#ddlItems").show();
+    $("#datepicker").val("");
+
+    if (_listSite != $(this)) {
+        _listSite.show();
+    }
+
+    $(this).css("background-color", "#f9f9c0");
+
+    if ($target.text() == $(this).text()) {
+        _listSite = $(this);
+    }
+
+    $target.closest('.btn-group')
+       .find('[data-bind="label"]').text($target.text())
+          .end()
+       .children('.dropdown-site').dropdown('toggle');
+
+    if ($target.text() == "Select Site") {
+        ResetMain();
+    }
+
+    return false;
+});
 
 $(document.body).on('click', '#ulItems li', function (event) {
     var $target = $(event.currentTarget);
@@ -487,6 +542,11 @@ function generateTimes() {
                 $("#tblTime").html("");
                 $("#tblTime").html(html);
 
+                if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#tblTime").css("margin-left", "20px");
+                    $("#tblTime td").css("height", "52px");
+                }
+
                 var dateDiff = 86400000;
                 var dayDiff = 0;
                 var startindex = 0;
@@ -727,14 +787,22 @@ function generateDays(day) {
 }
 
 $("#btnContinue").click(function () {
+
+    var customerid = "";
+    var siteID = $('#ulSites li.selected').attr('id');
+
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Scheduler/PostTimeSlot",
         type: "POST",
-        data: { timeSlots: JSON.stringify(_timeSlots), itemID: $("#hdnItemID").val().trim() },
+        data: { siteID: siteID, itemID: $("#hdnItemID").val().trim(), timeSlots: JSON.stringify(_timeSlots) },
         dataType: "JSON",
         success: function (data) {
             if (data != null && data == "successfull") {
-                window.location.href = $("#hdnSiteURL").val() + "/Scheduler/CustomerInformation";
+
+                if (location.href.indexOf("?customerid") > 0) {
+                    customerid = "/?customerid=" + window.location.href.slice(window.location.href.indexOf('=') + 1);
+                }
+                window.location.href = $("#hdnSiteURL").val() + "/Scheduler/CustomerInformation" + customerid;
             }
         },
         error: function (request) {
@@ -744,7 +812,7 @@ $("#btnContinue").click(function () {
 });
 
 $("#btnReset").click(function () {
-    Reset();
+    ResetMain();
 });
 
 function FormatDate(datevalue) {

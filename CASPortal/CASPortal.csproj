@@ -130,6 +130,7 @@
     <Compile Include="Models\BusinessHour.cs" />
     <Compile Include="Models\Folder.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Site.cs" />
     <Compile Include="Models\TimeSlot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -260,6 +261,7 @@
     <Content Include="Views\Scheduler\DynamicInterval.cshtml" />
     <Content Include="Views\Scheduler\CustomerInformation.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Scheduler\ViewSample.cshtml" />
     <None Include="Web References\CASService\CASWebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -294,13 +296,16 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:55854/CASWebService.asmx">
+    <WebReferenceUrl Include="http://temisws2/caswebservice2/CASWebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\CASService\</RelPath>
-      <UpdateFromURL>http://localhost:55854/CASWebService.asmx</UpdateFromURL>
+      <UpdateFromURL>http://temisws2/caswebservice2/CASWebService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -308,9 +313,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CASPortal_CASService_CASWebService</CachedSettingsPropName>
     </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

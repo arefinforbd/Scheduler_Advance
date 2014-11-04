@@ -170,6 +170,51 @@ namespace CASPortal.WebParser
             return items;
         }
 
+        public List<Site> GetSites()
+        {
+            Site site;
+            List<Site> sites = new List<Site>();
+            DataSet ds = new DataSet();
+            CASWebService cas = new CASWebService();
+
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            string customerID = HttpContext.Current.Session["CustomerID"].ToString();
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+            ds = cas.GetCustomerSite(companyID, companyPassword, customerPassword, customerID, level4ID);
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    site = new Site();
+
+                    site.CompanyName = row["cs_company"].ToString();
+                    site.LastName = row["cs_lastname"].ToString();
+                    site.Address1 = row["cs_addr1"].ToString();
+                    site.Address2 = row["cs_addr2"].ToString();
+                    site.Address3 = row["cs_addr3"].ToString();
+                    site.Suburb = row["cs_suburb"].ToString();
+                    site.PostCode = row["cs_pcode"].ToString();
+                    site.State = row["cs_state"].ToString();
+                    site.PhoneNo = row["cs_phone"].ToString();
+                    site.MobileNo = row["cs_mobile"].ToString();
+                    site.Email = row["cs_email"].ToString();
+                    site.SiteNo = Convert.ToInt32(row["cs_siteno"].ToString());
+                    site.StreetNo = row["cs_streetno"].ToString();
+                    site.SiteCode = Convert.ToInt32(row["cs_sitecode"].ToString());
+                    site.Level4 = Convert.ToInt32(row["cs_lvl4_sequence"].ToString());
+
+                    sites.Add(site);
+                }
+            }
+
+            HttpContext.Current.Session.Add("Sites", sites);
+            return sites;
+        }
+
         public void SetLoginCredential(Guid customerid)
         {
             BaseHelper helper = new BaseHelper();

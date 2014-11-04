@@ -106,5 +106,16 @@ namespace CASPortal.Repository
             }
             return item;
         }
+
+        public List<Site> GetSites()
+        {
+            Site site = new Site();
+            List<Site> sites;
+            SchedulerParser parser = new SchedulerParser();
+
+            sites = parser.GetSites();
+
+            return sites;
+        }
     }
 }
