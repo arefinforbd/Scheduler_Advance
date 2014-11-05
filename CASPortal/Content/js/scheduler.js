@@ -14,6 +14,7 @@ var _businessStartHour = 0;
 var _thresholdDay = 0;
 var _timeSlots = [];
 var _combid = "";
+var _calenderDate = new Date("01/Jan/1990");
 
 //Populate Date and Time table
 $(function () {
@@ -41,6 +42,12 @@ $(function () {
         selectOtherMonths: true,
         altFormat: "yy-mm-dd",
         onSelect: function (date) {
+            if (new Date(FormatDateA(_calenderDate)).getDate() == new Date($("#datepicker").datepicker('getDate')).getDate()
+                && new Date(FormatDateA(_calenderDate)).getMonth() == new Date($("#datepicker").datepicker('getDate')).getMonth()
+                && new Date(FormatDateA(_calenderDate)).getYear() == new Date($("#datepicker").datepicker('getDate')).getYear())
+                return;
+
+            _calenderDate = $("#datepicker").datepicker('getDate');
             if (CheckDate()) {
                 $("#divContinueButton").hide();
                 $("#tblDate").show();
