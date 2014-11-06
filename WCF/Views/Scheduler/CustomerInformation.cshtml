@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Customer Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/css/sendcustomerinformation.css")" rel="stylesheet" type="text/css" />
+
+<div id="page-wrapper">
+    <br/>
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            @using (Html.BeginForm("SendCustomerInformation", "Scheduler", FormMethod.Post, new { @id="frmCustInfo" }))
+            {
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>Customer Information</label>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="panel panelStyle panelBottom1">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    First Name
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="firstname" class="form-control custinput mandatory" placeholder="First Name" name="firstname" type="text" required="" value="@ViewData["LastName"]">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Company Name/Last Name
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="lastname" class="form-control custinput mandatory" placeholder="Company Name/Last Name" name="lastname" type="text" required="" value="@ViewData["CompanyName"]">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Email
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="email" class="form-control custinput mandatory" placeholder="Email" name="email" type="email" required="" value="@ViewData["Email"]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panelStyle panelBottom2">
+                            Address
+                            <div class="row">
+                                <div class="col-lg-2 custDivColRight">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="houseno" class="form-control custinput mandatory" placeholder="House/Unit No" name="houseno" type="text" required="" value="@ViewData["StreetNo"]">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 ">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="streetname" class="form-control custinput mandatory" placeholder="Street name" name="streetname" type="text" required="" value="@ViewData["Address1"]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="address" class="form-control custinput maxWidth" placeholder="" name="address" type="text" value="@ViewData["Address2"] @ViewData["Address3"]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2 custDivColRight">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="city" class="form-control custinput mandatory" placeholder="City" name="city" type="text" value="@ViewData["Suburb"]" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 custDivColRight">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="state" class="form-control custinput mandatory" placeholder="State" name="state" type="text" value="@ViewData["State"]" required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="postcode" class="form-control custinput mandatory" placeholder="Post Code" name="postcode" type="number" value="@ViewData["PostCode"]" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panelStyle panelBottom3">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Phone No
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="phoneno" class="form-control custinput" placeholder="Phone No" name="phoneno" type="text" value="@ViewData["PhoneNo"]">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    Mobile No
+                                    <div class="form-group cusDivLessBottomMargin">
+                                        <input id="mobileno" class="form-control custinput mandatory" placeholder="Mobile No" name="mobileno" type="text" value="@ViewData["MobileNo"]" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <div id="div_btnContinue">
+                            <input id="btnSubmit" class="btn btn-info submitClass" value="Submit" type="button" name="submit">
+                        </div>
+                    </div>
+                    
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Content/js/sendcustomerinformation.js")"></script>
