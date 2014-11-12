@@ -86,15 +86,34 @@ function ResetMain() {
 
     _listSite.css("background-color", "#FFFFFF");
     _listItem.css("background-color", "#FFFFFF");
+    _listSite = $("#ulSites > :first-child");
+    _listItem = $("#ulItems > :first-child");
 
     $("#itemDescription").html("");
     $("#ddlItems").hide();
     $("#divDatePicker").hide();
 }
 
+function ResetForSite() {
+    Reset();
+
+    var ulItem = $("#ulItems li").eq(0).text();
+    $(".dropdown-item").find('[data-bind="label"]').text(ulItem);
+
+    _listItem.css("background-color", "#FFFFFF");
+    _listItem = $("#ulItems > :first-child");
+
+    $("#itemDescription").html("");
+
+    $("#ddlItems").show();
+    $("#divDatePicker").hide();
+    $("#hdnItemID").val($(this).attr("id"));
+    $("#itemDescription").html($(this).attr("desc"));
+    $("#hdnDuration").val($(this).attr("duration"));
+}
+
 function Reset() {
     $("#divDatePicker").show();
-    $("#datepicker").val("");
     $("#tblDate").html("");
     $("#tblTime").html("");
     $("#tblDate").hide();
@@ -102,6 +121,7 @@ function Reset() {
     $("#tblDesc").hide();
     $("#divContinueButton").hide();
     $("#itemDescription").show();
+    _calenderDate = new Date("01/Jan/1990");
 }
 
 $(document.body).on('click', '#ulSites li', function (event) {
@@ -111,7 +131,6 @@ $(document.body).on('click', '#ulSites li', function (event) {
     _listSite.removeClass("selected");
     $(this).addClass("selected");
     $("#ddlItems").show();
-    $("#datepicker").val("");
 
     if (_listSite != $(this)) {
         _listSite.show();
@@ -120,6 +139,9 @@ $(document.body).on('click', '#ulSites li', function (event) {
     $(this).css("background-color", "#f9f9c0");
 
     if ($target.text() == $(this).text()) {
+        if (_listSite.text() == $(this).text()) {
+            return;
+        }
         _listSite = $(this);
     }
 
@@ -128,8 +150,18 @@ $(document.body).on('click', '#ulSites li', function (event) {
           .end()
        .children('.dropdown-site').dropdown('toggle');
 
-    if ($target.text() == "Select Site") {
-        ResetMain();
+    if ($target.text() != "Select Site") {
+        if(_listItem != null)
+            ResetForSite();
+    }
+    else {
+        $("#divDatePicker").hide();
+        $("#tblDate").hide();
+        $("#tblTime").hide();
+        $("#tblDesc").hide();
+        $("#divContinueButton").hide();
+        $("#itemDescription").html("");
+        $("#itemDescription").hide();
     }
 
     return false;
@@ -139,7 +171,6 @@ $(document.body).on('click', '#ulItems li', function (event) {
     var $target = $(event.currentTarget);
     $("#ulItems > :first-child").show();
     _listItem.css("background-color", "#FFFFFF");
-    $("#datepicker").val("");
 
     if (_listItem != $(this)) {
         _listItem.show();
@@ -148,6 +179,9 @@ $(document.body).on('click', '#ulItems li', function (event) {
     $(this).css("background-color", "#f9f9c0");
 
     if ($target.text() == $(this).text()) {
+        if (_listItem.text() == $(this).text()) {
+            return;
+        }
         _listItem = $(this);
     }
 
@@ -158,6 +192,7 @@ $(document.body).on('click', '#ulItems li', function (event) {
 
     if ($target.text() != "Select Item") {
         Reset();
+        $("#datepicker").val("");
         $("#hdnItemID").val($(this).attr("id"));
         $("#itemDescription").html($(this).attr("desc"));
         $("#hdnDuration").val($(this).attr("duration"));
@@ -551,6 +586,7 @@ function generateTimes() {
                 $("#tblTime").html("");
                 $("#tblTime").html(html);
 
+                //If it's mobile or tablet
                 if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
                     $("#tblTime").css("margin-left", "19px");
                     $("#tblTime td").css("height", "51.5px");
