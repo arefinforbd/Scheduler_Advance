@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model" />
+  <xs:element name="LoginProcess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginProcessResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LoginProcessResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="lvl4id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCASDefaultData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCASDefaultDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetCASDefaultDataResult" nillable="true" type="q1:Welcome" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginMessageOfDay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginMessageOfDayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="LoginMessageOfDayResult" nillable="true" type="q2:ArrayOfWelcome" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrivateFolders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrivateFoldersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPrivateFoldersResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicFolders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicFoldersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPublicFoldersResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrivateFolderFiles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TimeZoneOffset" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrivateFolderFilesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetPrivateFolderFilesResult" nillable="true" type="q3:ArrayOfFolder" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicFolderFiles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TimeZoneOffset" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicFolderFilesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetPublicFolderFilesResult" nillable="true" type="q4:ArrayOfFolder" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrivateFileInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPrivateFileInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPrivateFileInfoResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicFileInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPublicFileInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetPublicFileInfoResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinessTime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBusinessTimeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetBusinessTimeResult" nillable="true" type="q5:ArrayOfDayHour" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetScheduledTime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetScheduledTimeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetScheduledTimeResult" nillable="true" type="q6:ArrayOfTimeSlot" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCategoryProductService">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerID" type="xs:decimal" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCategoryProductServiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetCategoryProductServiceResult" nillable="true" type="q7:SiteNItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomerSite">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomerSiteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetCustomerSiteResult" nillable="true" type="q8:ArrayOfSite" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

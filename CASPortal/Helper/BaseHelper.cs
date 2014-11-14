@@ -49,14 +49,6 @@ namespace CASPortal.Helper
 
         public void RemoveSessions()
         {
-            /*HttpContext.Current.Session.Remove("CompanyID");
-            HttpContext.Current.Session.Remove("CompanyPassword");
-            HttpContext.Current.Session.Remove("CustomerID");
-            HttpContext.Current.Session.Remove("CustomerPassword");
-            HttpContext.Current.Session.Remove("Level4ID");
-            HttpContext.Current.Session.Remove("CompanyLogo");
-            HttpContext.Current.Session.Remove("BusinessHours");
-            HttpContext.Current.Session.Remove("Sites");*/
             HttpContext.Current.Session.RemoveAll();
         }
     }

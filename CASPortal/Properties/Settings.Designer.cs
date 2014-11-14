@@ -22,15 +22,5 @@ namespace CASPortal.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://temisws2/caswebservice2/CASWebService.asmx")]
-        public string CASPortal_CASService_CASWebService {
-            get {
-                return ((string)(this["CASPortal_CASService_CASWebService"]));
-            }
-        }
     }
 }

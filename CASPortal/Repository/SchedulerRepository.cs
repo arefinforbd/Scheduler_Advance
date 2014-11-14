@@ -1,4 +1,4 @@
-﻿using CASPortal.CASService;
+﻿using CASPortal.CASWCFService;
 using CASPortal.Models;
 using CASPortal.WebParser;
 using System;
@@ -11,15 +11,14 @@ namespace CASPortal.Repository
 {
     public class SchedulerRepository
     {
-        public List<Item> GetAllItem()
+        public SiteNItem GetSiteNItems()
         {
-            Item item = new Item();
-            List<Item> itemList;
+            SiteNItem siteNitem;
             SchedulerParser parser = new SchedulerParser();
 
-            itemList = parser.GetItems();
+            siteNitem = parser.GetSiteNItems();
 
-            return itemList;
+            return siteNitem;
         }
 
         private BusinessHour GetBusinessTime(string dateStart)
@@ -27,7 +26,6 @@ namespace CASPortal.Repository
             try
             {
                 List<BusinessHour> businessHours = new List<BusinessHour>();
-                CASWebService cas = new CASWebService();
 
                 DateTime dtStart = Convert.ToDateTime(dateStart);
                 int dayOfWeek = (int)dtStart.DayOfWeek;
@@ -105,17 +103,6 @@ namespace CASPortal.Repository
                 item.BusinessHours = businessHours;
             }
             return item;
-        }
-
-        public List<Site> GetSites()
-        {
-            Site site = new Site();
-            List<Site> sites;
-            SchedulerParser parser = new SchedulerParser();
-
-            sites = parser.GetSites();
-
-            return sites;
         }
     }
 }

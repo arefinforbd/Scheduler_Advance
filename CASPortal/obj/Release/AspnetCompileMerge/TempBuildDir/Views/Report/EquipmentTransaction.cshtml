@@ -1,0 +1,326 @@
+﻿
+@{
+    ViewBag.Title = "EquipmentTransaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .ui-widget {
+        font-size: 1em;
+    }
+    #ddlSites {
+        padding-left: 45px;
+    }
+    #ddlConracts{
+        padding-left: 20px;
+    }
+
+    #divLocation {
+        margin-top: 15px;
+    }
+
+    #divPrintCheckboxes {
+        margin-top: 2px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div id="page-wrapper">
+    <br />
+    @using (Html.BeginForm("EquipmentTransaction", "Report"))
+    { 
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>Equipment Transaction Report</label>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites">
+                                <label>Sites : </label>
+                                <div class="btn-group">
+                                    <a class="btn btn-info dropdown-toggle dropdown-site" data-toggle="dropdown" href="#">
+                                        <span data-bind="label"></span> <span class="caret"></span>
+                                    </a>
+                                    <ul id="ulSites" class="dropdown-menu scroll-menu">
+                                        @Html.Raw(ViewBag.Sites)
+                                    </ul>
+                                </div>
+                                <input type="hidden" name="hdnSite" id="hdnSite" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts">
+                                <label>Contract : </label>
+                                <div class="btn-group" id="divContract">
+                                    <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
+                                        <span data-bind="label"></span> <span class="caret"></span>
+                                    </a>
+                                    <ul id="ulContracts" class="dropdown-menu">
+                                        @Html.Raw(ViewBag.Contracts)
+                                    </ul>
+                                </div>
+                                <input type="hidden" name="hdnContract" id="hdnContract" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 divDatePicker">
+                                <label>Date from : </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
+                                <label>Date to : </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="divLocation">
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Location" id="rdoLocation" checked="checked" name="rdoLocation">
+                                    <label for="rdoLocation">Location</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Section" id="rdoSection" name="rdoLocation">
+                                    <label for="rdoSection">Section</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Area" id="rdoArea" name="rdoLocation">
+                                    <label for="rdoArea">Area</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="DateTime" id="rdoDateTime" name="rdoLocation">
+                                    <label for="rdoDateTime">Date/Time</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Single Section" id="rdoSingleSection" name="rdoLocation">
+                                    <label for="rdoSingleSection">Single Section</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="divPrintCheckboxes">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" value="Print Details" id="chkPrintDetails" name="chkPrintDetails">
+                                    <label for="chkPrintDetails">Print Details</label>
+                                    <input type="hidden" id="hdnPrintDetails" name="hdnPrintDetails">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" value="PrintMaterials" id="chkPrintMaterials" name="chkPrintMaterials">
+                                    <label for="chkPrintMaterials">Print Materials</label>
+                                    <input type="hidden" id="hdnPrintMaterials" name="hdnPrintMaterials">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <label>Advanced Filtering</label>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="None" id="rdoNone" checked="checked" name="rdoAdvance">
+                                            <label for="rdoNone">None</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <label>Tech : </label>
+                                        <div class="btn-group" id="divContract">
+                                            <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
+                                                <span data-bind="label"></span> <span class="caret"></span>
+                                            </a>
+                                            <ul id="ulContracts1" class="dropdown-menu">
+                                                @Html.Raw(ViewBag.Contracts)
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" name="hdnTech" id="hdnTech" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="Scanned" id="rdoScanned" name="rdoAdvance">
+                                            <label for="rdoScanned">Scanned</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="UnScanned" id="rdoUnScanned" name="rdoAdvance">
+                                            <label for="rdoUnScanned">Un Scanned</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="New Item" id="rdoNewItem" name="rdoAdvance">
+                                            <label for="rdoNewItem">New Item</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" value="ShowActiveStations" id="chkShowActiveStations" name="chkShowActiveStations">
+                                            <label for="chkShowActiveStations">Show Active Stations</label>
+                                            <input type="hidden" id="hdnShowActiveStations" name="hdnShowActiveStations">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="Replaced" id="rdoReplaced" name="rdoAdvance">
+                                            <label for="rdoReplaced">Replaced</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" value="JobTimes" id="chkJobTimes" name="chkJobTimes">
+                                            <label for="chkJobTimes">Show Start/End Job Times</label>
+                                            <input type="hidden" id="hdnJobTimes" name="hdnJobTimes">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div id="div_btnContinue">
+                            <button class="btn btn-info" type="submit">Preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    var _listContract = $("#ulContracts > :first-child");
+    var _listSite = $("#ulSites > :first-child");
+
+    $(function () {
+        //$("#ddlItems").hide();
+
+        var ulSite = $("#ulSites > :first-child").text();
+        $(".dropdown-site").find('[data-bind="label"]').text(ulSite);
+
+        var ulContract = $("#ulContracts > :first-child").text();
+        $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
+
+        $("#dtpFrom").datepicker({
+            dateFormat: "dd MM, yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altFormat: "yy-mm-dd"
+        });
+
+        $("#dtpTo").datepicker({
+            dateFormat: "dd MM, yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altFormat: "yy-mm-dd"
+        });
+    });
+
+    $(document.body).on('click', '#ulSites li', function (event) {
+        var $target = $(event.currentTarget);
+        $("#ulSites > :first-child").show();
+        _listSite.css("background-color", "#FFFFFF");
+        _listSite.removeClass("selected");
+        $(this).addClass("selected");
+        //$("#ddlContracts").show();
+
+        if (_listSite != $(this)) {
+            _listSite.show();
+        }
+
+        $(this).css("background-color", "#f9f9c0");
+
+        if ($target.text() == $(this).text()) {
+            if (_listSite.text() == $(this).text()) {
+                return;
+            }
+            _listSite = $(this);
+        }
+
+        $target.closest('.btn-group')
+           .find('[data-bind="label"]').text($target.text())
+              .end()
+           .children('.dropdown-site').dropdown('toggle');
+
+        if ($target.text() != "Select Site") {
+            $("#hdnSite").val($(this).attr("id"));
+        }
+        else {
+        }
+
+        return false;
+    });
+
+    $(document.body).on('click', '#ulContracts li', function (event) {
+        var $target = $(event.currentTarget);
+        //$("#ulItems > :first-child").show();
+        _listContract.css("background-color", "#FFFFFF");
+
+        if (_listContract != $(this)) {
+            _listContract.show();
+        }
+
+        $(this).css("background-color", "#f9f9c0");
+
+        if ($target.text() == $(this).text()) {
+            if (_listContract.text() == $(this).text()) {
+                return;
+            }
+            _listContract = $(this);
+        }
+
+        $target.closest('.btn-group')
+           .find('[data-bind="label"]').text($target.text())
+              .end()
+           .children('.dropdown-Contract').dropdown('toggle');
+
+        if ($target.text() != "Select Contract") {
+            $("#hdnContract").val($(this).attr("id"));
+        }
+        else {
+        }
+
+        return false;
+    });
+
+    $("#chkPrintDetails").click(function(){
+        $("#hdnPrintDetails").val($(this).prop("checked"));
+    });
+
+    $("#chkPrintMaterials").click(function(){
+        $("#hdnPrintMaterials").val($(this).prop("checked"));
+    });
+
+    $("#chkShowActiveStations").click(function(){
+        $("#hdnShowActiveStations").val($(this).prop("checked"));
+    });
+
+    $("#chkJobTimes").click(function(){
+        $("#hdnJobTimes").val($(this).prop("checked"));
+    });
+</script>

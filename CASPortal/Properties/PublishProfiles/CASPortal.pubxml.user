@@ -13,13 +13,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/04/2014 16:50:53</publishTime>
+      <publishTime>11/14/2014 12:25:42</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/04/2014 16:50:53</publishTime>
+      <publishTime>11/14/2014 12:25:42</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>11/04/2014 16:50:42</publishTime>
+      <publishTime>11/14/2014 11:52:56</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
       <publishTime>11/04/2014 16:50:45</publishTime>
@@ -66,8 +66,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/css/bootstrap.min.css">
       <publishTime>06/26/2014 23:58:44</publishTime>
     </File>
+    <File Include="Content/css/build.css">
+      <publishTime>09/17/2014 17:14:04</publishTime>
+    </File>
     <File Include="Content/css/casportal.css">
-      <publishTime>11/04/2014 09:39:49</publishTime>
+      <publishTime>11/13/2014 17:17:30</publishTime>
     </File>
     <File Include="Content/css/plugins/dataTables.bootstrap.css">
       <publishTime>04/14/2014 14:55:52</publishTime>
@@ -253,7 +256,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 23:58:46</publishTime>
     </File>
     <File Include="Content/js/customerinformation.js">
-      <publishTime>11/04/2014 16:47:55</publishTime>
+      <publishTime>11/13/2014 16:00:33</publishTime>
     </File>
     <File Include="Content/js/jquery-1.11.0.js">
       <publishTime>06/09/2014 18:47:18</publishTime>
@@ -307,10 +310,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2014 17:47:48</publishTime>
     </File>
     <File Include="Content/js/scheduler.js">
-      <publishTime>11/04/2014 16:28:16</publishTime>
+      <publishTime>11/13/2014 11:00:45</publishTime>
     </File>
     <File Include="Content/js/sendcustomerinformation.js">
-      <publishTime>11/04/2014 13:30:50</publishTime>
+      <publishTime>11/05/2014 11:24:46</publishTime>
     </File>
     <File Include="Content/less/mixins.less">
       <publishTime>06/24/2014 20:45:16</publishTime>
@@ -323,6 +326,42 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/Site.css">
       <publishTime>10/03/2014 15:40:58</publishTime>
+    </File>
+    <File Include="Content/tree/jstree.js">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/jstree.min.js">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default-dark/32px.png">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default-dark/40px.png">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default-dark/style.css">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default-dark/style.min.css">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default-dark/throbber.gif">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default/32px.png">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default/40px.png">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default/style.css">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default/style.min.css">
+      <publishTime>10/23/2014 12:44:26</publishTime>
+    </File>
+    <File Include="Content/tree/themes/default/throbber.gif">
+      <publishTime>10/23/2014 12:44:26</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -343,7 +382,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/04/2014 16:50:48</publishTime>
+      <publishTime>11/14/2014 12:25:37</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -373,19 +412,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/27/2014 12:03:45</publishTime>
+      <publishTime>11/14/2014 11:52:43</publishTime>
     </File>
     <File Include="Service References/CASService/CASPortal.CASService.LoginProcessResponse.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
     </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.DayHour.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Folder.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Item.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.LoginProcessResponse.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Site.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.TimeSlot.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Welcome.datasource">
+      <publishTime>11/12/2014 17:11:31</publishTime>
+    </File>
     <File Include="Views/CustomerInformation/Index.cshtml">
-      <publishTime>10/10/2014 12:48:53</publishTime>
+      <publishTime>11/06/2014 15:05:12</publishTime>
     </File>
     <File Include="Views/CustomerInformation/LoadPrivateFolders.cshtml">
       <publishTime>10/03/2014 17:04:31</publishTime>
     </File>
     <File Include="Views/CustomerInformation/TextEditor.cshtml">
-      <publishTime>10/13/2014 12:07:53</publishTime>
+      <publishTime>11/05/2014 13:01:21</publishTime>
     </File>
     <File Include="Views/CustomerInformation/WelcomeMessage.cshtml">
       <publishTime>10/10/2014 13:25:37</publishTime>
@@ -401,6 +461,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Login/Index.cshtml">
       <publishTime>10/13/2014 13:06:47</publishTime>
+    </File>
+    <File Include="Views/Report/EquipmentTransaction.cshtml">
+      <publishTime>11/14/2014 12:24:46</publishTime>
+    </File>
+    <File Include="Views/Report/TrendAnalysis.cshtml">
+      <publishTime>11/13/2014 16:39:43</publishTime>
     </File>
     <File Include="Views/Scheduler/CustomerInformation.cshtml">
       <publishTime>11/04/2014 14:08:25</publishTime>
@@ -424,7 +490,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/10/2014 11:04:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/04/2014 16:47:26</publishTime>
+      <publishTime>11/13/2014 16:00:36</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -436,7 +502,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2014 13:47:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/03/2014 18:16:12</publishTime>
+      <publishTime>11/14/2014 11:52:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

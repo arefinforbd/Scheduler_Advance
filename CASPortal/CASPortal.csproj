@@ -122,16 +122,14 @@
     <Compile Include="Controllers\CustomerInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\BaseHelper.cs" />
     <Compile Include="Models\BusinessHour.cs" />
-    <Compile Include="Models\Folder.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Site.cs" />
-    <Compile Include="Models\TimeSlot.cs" />
+    <Compile Include="Models\PartialClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,10 +137,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repository\SchedulerRepository.cs" />
-    <Compile Include="Web References\CASService\Reference.cs">
+    <Compile Include="Service References\CASWCFService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="WebParser\SchedulerParser.cs" />
   </ItemGroup>
@@ -151,6 +149,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\build.css" />
     <Content Include="Content\css\casportal.css" />
     <Content Include="Content\css\plugins\dataTables.bootstrap.css" />
     <Content Include="Content\css\plugins\metisMenu\metisMenu.css" />
@@ -199,6 +198,18 @@
     <Content Include="Content\js\sb-admin-2.js" />
     <Content Include="Content\js\scheduler.js" />
     <Content Include="Content\js\sendcustomerinformation.js" />
+    <Content Include="Content\tree\jstree.js" />
+    <Content Include="Content\tree\jstree.min.js" />
+    <Content Include="Content\tree\themes\default-dark\32px.png" />
+    <Content Include="Content\tree\themes\default-dark\40px.png" />
+    <Content Include="Content\tree\themes\default-dark\style.css" />
+    <Content Include="Content\tree\themes\default-dark\style.min.css" />
+    <Content Include="Content\tree\themes\default-dark\throbber.gif" />
+    <Content Include="Content\tree\themes\default\32px.png" />
+    <Content Include="Content\tree\themes\default\40px.png" />
+    <Content Include="Content\tree\themes\default\style.css" />
+    <Content Include="Content\tree\themes\default\style.min.css" />
+    <Content Include="Content\tree\themes\default\throbber.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -254,6 +265,34 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.DayHour.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Folder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.LoginProcessResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Site.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.SiteNItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.TimeSlot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Welcome.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\CASWCFService\CASWCFService.disco" />
+    <None Include="Service References\CASWCFService\configuration91.svcinfo" />
+    <None Include="Service References\CASWCFService\configuration.svcinfo" />
+    <None Include="Service References\CASWCFService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Views\Shared\_HeaderLogo.cshtml" />
     <Content Include="Views\Shared\_Advertisements.cshtml" />
     <Content Include="Views\CustomerInformation\TextEditor.cshtml" />
@@ -262,7 +301,6 @@
     <Content Include="Views\Scheduler\CustomerInformation.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Scheduler\ViewSample.cshtml" />
-    <None Include="Web References\CASService\CASWebService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -282,11 +320,21 @@
     <Content Include="Views\CustomerInformation\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\CustomerInformation\WelcomeMessage.cshtml" />
-    <None Include="Web References\CASService\CASWebService.wsdl" />
-    <Content Include="Web References\CASService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Report\TrendAnalysis.cshtml" />
+    <Content Include="Views\Report\EquipmentTransaction.cshtml" />
+    <None Include="Service References\CASWCFService\CASWCFService.wsdl" />
+    <None Include="Service References\CASWCFService\CASWCFService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CASWCFService\CASWCFService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CASWCFService\CASWCFService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CASWCFService\CASWCFService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -299,20 +347,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://temisws2/caswebservice2/CASWebService.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\CASService\</RelPath>
-      <UpdateFromURL>http://temisws2/caswebservice2/CASWebService.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CASPortal_CASService_CASWebService</CachedSettingsPropName>
-    </WebReferenceUrl>
+    <WCFMetadataStorage Include="Service References\CASWCFService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

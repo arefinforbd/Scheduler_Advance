@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CASWCFService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model" />
+      <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICASWCFService_LoginProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginProcess" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_LoginProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginProcessResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetCASDefaultData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCASDefaultData" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetCASDefaultData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCASDefaultDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_LoginMessageOfDay_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginMessageOfDay" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_LoginMessageOfDay_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginMessageOfDayResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPrivateFolders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateFolders" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPrivateFolders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateFoldersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPublicFolders_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicFolders" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPublicFolders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicFoldersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPrivateFolderFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateFolderFiles" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPrivateFolderFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateFolderFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPublicFolderFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicFolderFiles" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPublicFolderFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicFolderFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPrivateFileInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateFileInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPrivateFileInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateFileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPublicFileInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicFileInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetPublicFileInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicFileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetBusinessTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinessTime" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetBusinessTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBusinessTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetScheduledTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScheduledTime" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetScheduledTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScheduledTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetCategoryProductService_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryProductService" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetCategoryProductService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryProductServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetCustomerSite_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerSite" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetCustomerSite_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerSiteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICASWCFService">
+    <wsdl:operation name="LoginProcess">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/LoginProcess" message="tns:ICASWCFService_LoginProcess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/LoginProcessResponse" message="tns:ICASWCFService_LoginProcess_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCASDefaultData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetCASDefaultData" message="tns:ICASWCFService_GetCASDefaultData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetCASDefaultDataResponse" message="tns:ICASWCFService_GetCASDefaultData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginMessageOfDay">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/LoginMessageOfDay" message="tns:ICASWCFService_LoginMessageOfDay_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/LoginMessageOfDayResponse" message="tns:ICASWCFService_LoginMessageOfDay_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolders">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetPrivateFolders" message="tns:ICASWCFService_GetPrivateFolders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetPrivateFoldersResponse" message="tns:ICASWCFService_GetPrivateFolders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolders">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetPublicFolders" message="tns:ICASWCFService_GetPublicFolders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetPublicFoldersResponse" message="tns:ICASWCFService_GetPublicFolders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolderFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetPrivateFolderFiles" message="tns:ICASWCFService_GetPrivateFolderFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetPrivateFolderFilesResponse" message="tns:ICASWCFService_GetPrivateFolderFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolderFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetPublicFolderFiles" message="tns:ICASWCFService_GetPublicFolderFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetPublicFolderFilesResponse" message="tns:ICASWCFService_GetPublicFolderFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFileInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetPrivateFileInfo" message="tns:ICASWCFService_GetPrivateFileInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetPrivateFileInfoResponse" message="tns:ICASWCFService_GetPrivateFileInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFileInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetPublicFileInfo" message="tns:ICASWCFService_GetPublicFileInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetPublicFileInfoResponse" message="tns:ICASWCFService_GetPublicFileInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetBusinessTime" message="tns:ICASWCFService_GetBusinessTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetBusinessTimeResponse" message="tns:ICASWCFService_GetBusinessTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScheduledTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetScheduledTime" message="tns:ICASWCFService_GetScheduledTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetScheduledTimeResponse" message="tns:ICASWCFService_GetScheduledTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryProductService">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetCategoryProductService" message="tns:ICASWCFService_GetCategoryProductService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetCategoryProductServiceResponse" message="tns:ICASWCFService_GetCategoryProductService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSite">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetCustomerSite" message="tns:ICASWCFService_GetCustomerSite_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetCustomerSiteResponse" message="tns:ICASWCFService_GetCustomerSite_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICASWCFService" type="tns:ICASWCFService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginProcess">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/LoginProcess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCASDefaultData">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetCASDefaultData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginMessageOfDay">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/LoginMessageOfDay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolders">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetPrivateFolders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolders">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetPublicFolders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolderFiles">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetPrivateFolderFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolderFiles">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetPublicFolderFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFileInfo">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetPrivateFileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFileInfo">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetPublicFileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessTime">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetBusinessTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScheduledTime">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetScheduledTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryProductService">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetCategoryProductService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSite">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetCustomerSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CASWCFService">
+    <wsdl:port name="BasicHttpBinding_ICASWCFService" binding="tns:BasicHttpBinding_ICASWCFService">
+      <soap:address location="http://localhost:50557/CASWCFService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

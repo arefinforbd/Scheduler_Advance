@@ -1,0 +1,604 @@
+﻿@{
+    ViewBag.Title = "Scheduler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .row {
+        margin-left: 0px;
+    }
+
+    #tblDate tr th {
+        text-align: right;
+        padding-right: 5px;
+    }
+
+    table#tblDate,
+    table#tblTime {
+        border: 1px solid #CCCCCC;
+    }
+
+    table#tblDate {
+        color: #3e92e2;
+        font-size: 12px;
+    }
+
+    tr.timeheader th {
+        height: 40px;
+        text-align: center;
+        background-color: #fcf6af;
+    }
+
+    table#tblTime td.tdTime {
+        width: 20px;
+        height: 50px;
+    }
+
+    table#tblDate th {
+        height: 50px;
+        width: 80px;
+    }
+
+        table#tblDate th#dateheader {
+            height: 40px;
+        }
+
+    table#tblTime td.td00 {
+        border-right: 1px dotted #FF0000;
+    }
+
+        table#tblTime td.td00:hover {
+            background-color: #ffd571;
+            cursor: pointer;
+        }
+
+    table#tblTime td.td30:hover {
+        background-color: #aad7fe;
+        cursor: pointer;
+    }
+
+    .col-lg-1,
+    .col-lg-11 {
+        padding: 0px;
+    }
+
+    .modal.in .modal-dialog {
+        transform: translate3d(-630px, 50px, 0px);
+    }
+
+    .ui-widget {
+        font-size: 1em;
+    }
+
+    #txtStartTime {
+        width: 135px;
+    }
+
+    #txtEndTime {
+        width: 140px;
+    }
+
+    .occupied {
+        width: 20px;
+        height: 50px;
+        color: #ffffff;
+        text-align: center;
+        font-weight: bold;
+        cursor: not-allowed;
+        font-size: 13px;
+    }
+
+    #btnAddHour {
+        margin-top: 45px;
+    }
+
+    @@media screen and (-webkit-min-device-pixel-ratio:0) {
+        #btnAddHour {
+            margin-top: 0px;
+        }
+    }
+</style>
+
+<h2>Index</h2>
+
+<div id="page-wrapper">
+    <br />
+    <p><label>Date : <input class="form-control input-sm" id="datepicker" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;"></label></p>
+
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+            <table border="1" id="tblDate"></table>
+        </div>
+
+        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+            <table border="1" id="tblTime" class="table-hover table"></table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <span style="color: #808080; font-size: 12px; float: left; margin-left: -15px;">Click on any available cell to set schedule.</span>
+        </div>
+    </div>
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" id="myModal" class="modal fade" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h4 id="myModalLabel" class="modal-title">Add Schedule</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Subject: <input class="form-control input-sm"></label><br />
+                    <label>Date: <input id="txtDate" class="form-control input-sm"></label>
+                    <br />
+                    <div class="row">
+                        <label>Time Start: <input id="txtStartTime" class="form-control input-sm hourtimes" readonly style="background-color: #FFFFFF;"></label>
+                        <label>Time End: <input id="txtEndTime" class="form-control input-sm hourtimes" readonly style="background-color: #FFFFFF;"></label>
+                        <button id="btnAddHour" class="btn btn-default btn-sm" type="button">Add Hour</button>
+                    </div>
+                    <br />
+                    <label>Special Instruction: <textarea class="form-control" rows="3" cols="50"></textarea></label>
+                    <input type="hidden" id="hdncombid" />
+                    <input type="hidden" id="hdncombidend" />
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" id="btnSave" class="btn btn-primary" type="button">Save Schedule</button>
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //This is a scheduler. This scheduler has starting and endind hour.
+    //No task can be assigned before the starting and after the ending hours.
+    //It has dynamic interval multiplicable by 30 minutes.
+    //Booked time slot cannot be set for another task.
+
+    var _hours = 0;
+    var _minhours = "7:00";
+    var _maxhours = "18:00";
+    var _interval = "30";
+    var _duration = 0;
+    var _businessStartHour = 0;
+
+    //Populate Date and Time table
+    $(function () {
+
+        var isMouseDown = false;
+
+        generateTimes();
+        generateDays(new Date());
+        $(document).tooltip();
+
+        $("#datepicker").val("");
+
+        $("#datepicker").datepicker({
+            dateFormat: "dd MM, yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altFormat: "yy-mm-dd",
+            onSelect: function (date) {
+                if (CheckDate()) {
+                    generateDays($(this).datepicker('getDate'));
+                    generateTimes();
+                }
+                else {
+                    alert("Back date cannot be selected.");
+                    $("#datepicker").val("");
+                }
+            }
+        });
+    });
+
+    function CheckDate() {
+        var dateDiff = 86400000;
+        var dayDiff = 0;
+        var calDate = $("#datepicker").datepicker('getDate')
+
+        dayDiff = (new Date(FormatDateA(calDate)) - new Date(FormatDateA(new Date()))) / dateDiff;
+
+        if (dayDiff < 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //This method generates hour in the popup based upon the interval
+    function AddHour() {
+        var chkHour = 0;
+        var hour = 0;
+        var ttime = $("#txtEndTime").val();
+
+        if (ttime.indexOf(":30") > 0) {
+            ttime = ttime.replace(":30", ":50");
+        }
+
+        ttime = parseInt(ttime.replace(":", "")) + (_duration * 100);
+
+        if (ttime > parseInt(_maxhours.replace(":", ""))) {
+            hour = _maxhours;
+            _hours -= 10;
+            ttime = ttime - (_duration * 100);
+            alert("Schedule cannot be set after " + (_maxhours.indexOf(":50") > 0 ? _maxhours.replace(":50", ":30") : _maxhours));
+        }
+
+        ttime = ttime.toString().substring(0, ttime.toString().length - 2) + ":" + ttime.toString().substring(ttime.toString().length - 2);
+
+        if (ttime.indexOf(":50") > 0) {
+            ttime = ttime.replace(":50", ":30");
+        }
+
+        return ttime;
+    }
+
+    //Add button of popup
+    $("#btnAddHour").click(function () {
+        var combid = $("#hdncombid").val();
+        _hours += 10;
+        combid = parseInt(combid.replace("id", "")) + _hours;
+        var combidend = "id" + combid;
+        $("#hdncombidend").val(combidend);
+        if ($("#tblTime").find('[combid="' + combidend + '"]').hasClass("occupied")) {
+            _hours = _hours - 10;
+            combidend = parseInt(combidend.replace("id", "")) - 10;
+            combidend = "id" + combidend;
+            $("#hdncombidend").val(combidend);
+            alert("Schedule cannot be set as this time is booked.");
+        }
+        else
+            $("#txtEndTime").val(AddHour());
+    });
+
+    //Save button selects and sets the occupied time slots
+    $("#btnSave").click(function () {
+        if (window.confirm("Are you sure to set schedule from " + $("#txtStartTime").val() + " to " + $("#txtEndTime").val() + "?")) {
+            var combid = $("#hdncombid").val();
+            var combidend = $("#hdncombidend").val();
+
+            var startindex = parseInt(combid.replace("id", ""));
+            var endindex = parseInt(combidend.replace("id", ""));
+
+            endindex = isNaN(endindex) ? startindex : endindex;
+
+            for (var index = startindex; index <= endindex; index += 10) {
+                $("#tblTime").find('[combid="id' + index + '"]').css("background-color", "#808080")
+                $("#tblTime").find('[combid="id' + index + '"]').removeAttr("data-target");
+                $("#tblTime").find('[combid="id' + index + '"]').removeAttr("data-toggle");
+                $("#tblTime").find('[combid="id' + index + '"]').removeAttr("class");
+                $("#tblTime").find('[combid="id' + index + '"]').html("N/A");
+                $("#tblTime").find('[combid="id' + index + '"]').addClass("occupied");
+                $("#tblTime").find('[combid="id' + index + '"]').css("vertical-align", "middle");
+                $("#tblTime").find('[combid="id' + index + '"]').css("padding", "0px");
+            }
+            _hours = 0;
+            $("#hdncombid").val("");
+            $("#hdncombidend").val("");
+        }
+        else {
+            return false;
+        }
+    });
+
+    function SelectedDate(row) {
+        var dateval;
+        var caldate = $("#datepicker").datepicker('getDate');
+        if (caldate == null)
+            caldate = new Date();
+
+        var dayparam = caldate;
+        var time = parseInt(row);
+
+        dateval = new Date(dayparam.setDate(caldate.getDate() + time))
+        return FormatDate(dateval);
+    }
+
+    //Yellow cell click event. Popup opens and set date, starting and ending time.
+    $(document.body).on('click', '#tblTime td.td00', function (event) {
+
+        _hours = 0;
+        $("#hdncombidend").val("");
+
+        var idval = $(this).attr("id");
+        var caldate = $("#datepicker").datepicker('getDate');
+        idval = idval.replace("id", "");
+
+        var startHRStr = "";
+        var endHRStr = "";
+        var startHR = 0;
+        var endHR = 0;
+        var hour = 0;
+
+        if (parseInt(idval) == 1) {
+            startHR = _businessStartHour;
+            endHR = _businessStartHour + _duration;
+        }
+        else {
+            endHR = _businessStartHour + (parseInt(idval) * _duration);
+            startHR = endHR - _duration;
+        }
+
+        if (startHR.toString().indexOf(".5") > 0)
+            startHR = startHR.toString().replace(".5", ":30");
+        else
+            startHR = startHR.toString() + ":00";
+
+        if (endHR.toString().indexOf(".5") > 0)
+            endHR = endHR.toString().replace(".5", ":30");
+        else
+            endHR = endHR.toString() + ":00";
+
+        $("#txtDate").val(SelectedDate($(this).attr("row")));
+        $("#txtStartTime").val(startHR);
+        $("#txtEndTime").val(endHR);
+        $("#hdncombid").val($(this).attr("combid"));
+    });
+
+    //Blue cell click event. Popup opens and set date, starting and ending time.
+    $(document.body).on('click', '#tblTime td.td30', function (event) {
+
+        var startHRStr = "";
+        var endHRStr = "";
+        var startHR = 0;
+        var endHR = 0;
+
+        _hours = 0;
+        $("#hdncombidend").val("");
+
+        var idval = $(this).attr("id");
+        idval = idval.replace("id", "");
+
+        endHR = _businessStartHour + (parseInt(idval) * _duration);
+        startHR = endHR - _duration;
+
+        if (startHR.toString().indexOf(".5") > 0)
+            startHR = startHR.toString().replace(".5", ":30");
+        else
+            startHR = startHR.toString() + ":00";
+
+        if (endHR.toString().indexOf(".5") > 0)
+            endHR = endHR.toString().replace(".5", ":30");
+        else
+            endHR = endHR.toString() + ":00";
+
+        $("#txtDate").val(SelectedDate($(this).attr("row")));
+        $("#txtStartTime").val(startHR);
+        $("#txtEndTime").val(endHR);
+        $("#hdncombid").val($(this).attr("combid"));
+    });
+
+    function GetTitleHour(idval) {
+
+        var result = "";
+        var startHR = 0;
+        var endHR = 0;
+
+        endHR = _businessStartHour + (parseInt(idval) * _duration);
+        startHR = endHR - _duration;
+
+        if (startHR.toString().indexOf(".5") > 0)
+            startHR = startHR.toString().replace(".5", ":30");
+        else
+            startHR = startHR.toString() + ":00";
+
+        if (endHR.toString().indexOf(".5") > 0)
+            endHR = endHR.toString().replace(".5", ":30");
+        else
+            endHR = endHR.toString() + ":00";
+
+        result = startHR + "-" + endHR;
+
+        return result;
+    }
+
+    //Method for populating Time. This method draws cells of timeslots.
+    //It draws the cells grey color which are before starting and after ending hours.
+    //It draws the occupied cells deep grey color.
+    function generateTimes() {
+
+        var title = "";
+        var timeval;
+        var index = 0;
+        var urlVal = "";
+        var startHR = "";
+        var endHR = "";
+
+        urlVal = "/Scheduler/GetTimeSlots";
+
+        var calDate = $("#datepicker").datepicker('getDate');
+        if (calDate == null)
+            calDate = new Date();
+
+        $.ajaxSetup({ cache: false });
+        $.ajax({
+            url: urlVal,
+            type: "GET",
+            data: { dateStartedFrom: calDate },
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    var html = "";
+                    var html_tbl_row = "";
+                    var hourHeader = "";
+
+                    _businessStartHour = parseInt(data.MinStartHour);
+                    var businessEndHour = parseInt(data.MaxEndHour);
+
+                    _businessStartHour = 6;
+                    businessEndHour = 19;
+
+                    _duration = parseInt(data.Duration);
+                    _duration = 30;
+                    _duration = (_duration / 60);
+
+                    if (businessEndHour.toString().indexOf(".5") > 0) {
+                        _maxhours = businessEndHour.toString().replace(".5", ":50");
+                    }
+                    else
+                        _maxhours = businessEndHour + ":00";
+
+                    html += '<thead><tr class="timeheader">';
+
+                    for (index = _businessStartHour; index < businessEndHour; index++) {
+                        hourHeader = index.toString().indexOf(".5") > 0 ? index.toString().replace(".5", ":30") : index + ":00";
+                        html += '<th colspan="2">' + hourHeader + '</th>';
+                    }
+
+                    //Generating cells for timeslots
+                    for (var tr = 1; tr <= 5; tr++) {
+                        html += '<tr>';
+                        for (var td = 1; td <= ((businessEndHour - _businessStartHour) / _duration) ; td++) {
+
+                            startHR = parseInt(_businessStartHour) + parseInt(_duration);
+                            endHR = parseInt(_businessStartHour) + parseInt(_duration) + 0;
+                            title = GetTitleHour(td);
+
+                            if (td % 2 > 0) {
+                                html += '<td colspan="' + (_duration * 2) + '" title="' + title + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
+                            }
+                            else {
+                                html += '<td colspan="' + (_duration * 2) + '" title="' + title + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
+                            }
+                        }
+                        html += '</tr>';
+                    }
+
+                    html += '</tbody>';
+                    $("#tblTime").html(html);
+
+                    var dateDiff = 86400000;
+                    var dayDiff = 0;
+                    var startindex = 0;
+                    var endindex = 0;
+
+                    //Setting color for the cells before starting hours of everyday
+                    $.each(data.BusinessHours, function (i, bsHour) {
+
+                        dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+
+                        if (dayDiff >= 0) {
+                            endindex = (parseInt(bsHour.BusinessStartHour) - parseInt(_businessStartHour)) * 2
+
+                            startindex = parseInt(1 + "" + dayDiff);
+                            endindex = parseInt(endindex + "" + dayDiff);
+
+                            for (var lIndex = startindex; lIndex <= endindex; lIndex += 10) {
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("background-color", "#CCCCCC")
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-target");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
+                            }
+                        }
+                    });
+
+                    //Setting color for the cells after ending hours of everyday
+                    $.each(data.BusinessHours, function (i, bsHour) {
+
+                        dayDiff = (new Date(bsHour.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+                        //dayDiff += 1;
+
+                        if (dayDiff >= 0) {
+                            startindex = (((parseInt(bsHour.BusinessEndHour) - parseInt(_businessStartHour)) * 2) + 1);
+                            endindex = ((businessEndHour - parseInt(_businessStartHour))) * 2;
+
+                            startindex = parseInt(startindex + "" + dayDiff);
+                            endindex = parseInt(endindex + "" + dayDiff);
+
+                            for (var lIndex = startindex; lIndex <= endindex; lIndex += 10) {
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("background-color", "#CCCCCC")
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-target");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
+                            }
+                        }
+                    });
+
+                    //Setting occupied/booked hours for days
+                    $.each(data.TimeSlots, function (i, occupied) {
+
+                        dayDiff = (new Date(occupied.Date) - new Date(FormatDateA(calDate))) / dateDiff;
+                        //dayDiff += 1;
+
+                        if (dayDiff >= 0) {
+                            startindex = (((parseInt(occupied.StartTime) - parseInt(_businessStartHour)) * 2) + 1);
+                            endindex = ((parseInt(occupied.EndTime) - parseInt(_businessStartHour)) * 2);
+
+                            startindex = parseInt(startindex + "" + dayDiff);
+                            endindex = parseInt(endindex + "" + dayDiff);
+
+                            for (var lIndex = startindex; lIndex <= endindex; lIndex += 10) {
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("background-color", "#808080")
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-target");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').html("N/A");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("occupied");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("vertical-align", "middle");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
+                            }
+                        }
+                    });
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("An error occurred while retrieving schedule information, please try again.");
+            },
+            complete: function (jqXHR, textStatus) {
+
+            }
+        });
+    }
+
+    //Method for populating Dates
+    function generateDays(day) {
+
+        var dateval;
+        var index = 0;
+        var dayparam = day;
+        var html = '<thead><tr class="timeheader"><th id="dateheader"></th></tr>';
+
+        for (index = 1; index <= 5; index++) {
+            dateval = new Date(dayparam.setDate(day.getDate() + 1))
+            html += '<tr><th>' + FormatDate(dateval) + '</th></tr>';
+        }
+        html += '</thead>';
+
+        $("#tblDate").html(html);
+    }
+
+    function FormatDate(datevalue) {
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        var yyyy = datevalue.getFullYear().toString();
+        var mm = monthNames[datevalue.getMonth()];
+        var dd = datevalue.getDate().toString();
+
+        //return (dd[1] ? dd : "0" + dd[0]) + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + yyyy;
+        return (dd[1] ? dd : "0" + dd[0]) + "-" + mm + "-" + yyyy;
+    }
+
+    function FormatDateA(datevalue) {
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        var yyyy = datevalue.getFullYear().toString();
+        var mm = monthNames[datevalue.getMonth()];
+        var dd = datevalue.getDate().toString();
+
+        //return (dd[1] ? dd : "0" + dd[0]) + "-" + (mm[1] ? mm : "0" + mm[0]) + "-" + yyyy;
+        return (dd[1] ? dd : "0" + dd[0]) + "/" + mm + "/" + yyyy;
+    }
+
+</script>

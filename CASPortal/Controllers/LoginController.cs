@@ -1,4 +1,4 @@
-﻿using CASPortal.CASService;
+﻿using CASPortal.CASWCFService;
 using CASPortal.Helper;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace CASPortal.Controllers
             try
             {
                 int level4id;
-                CASWebService cas = new CASWebService();
+                CASWCFServiceClient cas = new CASWCFServiceClient();
                 bool status = cas.LoginProcess(companyid, companypassword, customerid, customerpassword, out level4id);
 
                 if (status)

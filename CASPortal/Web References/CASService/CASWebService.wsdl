@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="LoginProcess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginProcessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginProcessResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="lvl4id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginMessageOfDay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginMessageOfDayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginMessageOfDayResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateFolders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateFoldersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrivateFoldersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicFolders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicFoldersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPublicFoldersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateFolderFiles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZoneOffset" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateFolderFilesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrivateFolderFilesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicFolderFiles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TimeZoneOffset" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicFolderFilesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPublicFolderFilesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateFileInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrivateFileInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrivateFileInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicFileInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicFileInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPublicFileInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBusinessTimeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetScheduledTime">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetScheduledTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetScheduledTimeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCategoryProductService">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCategoryProductServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoryProductServiceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomerSite">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Level4ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCustomerSiteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomerSiteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginProcessSoapIn">
+    <wsdl:part name="parameters" element="tns:LoginProcess" />
+  </wsdl:message>
+  <wsdl:message name="LoginProcessSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginProcessResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginMessageOfDaySoapIn">
+    <wsdl:part name="parameters" element="tns:LoginMessageOfDay" />
+  </wsdl:message>
+  <wsdl:message name="LoginMessageOfDaySoapOut">
+    <wsdl:part name="parameters" element="tns:LoginMessageOfDayResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateFoldersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrivateFolders" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateFoldersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrivateFoldersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicFoldersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublicFolders" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicFoldersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublicFoldersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateFolderFilesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrivateFolderFiles" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateFolderFilesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrivateFolderFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicFolderFilesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublicFolderFiles" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicFolderFilesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublicFolderFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateFileInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrivateFileInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPrivateFileInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrivateFileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicFileInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublicFileInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicFileInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublicFileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBusinessTime" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBusinessTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetScheduledTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetScheduledTime" />
+  </wsdl:message>
+  <wsdl:message name="GetScheduledTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetScheduledTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryProductServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategoryProductService" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoryProductServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoryProductServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerSiteSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerSite" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomerSiteSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerSiteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CASWebServiceSoap">
+    <wsdl:operation name="LoginProcess">
+      <wsdl:input message="tns:LoginProcessSoapIn" />
+      <wsdl:output message="tns:LoginProcessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginMessageOfDay">
+      <wsdl:input message="tns:LoginMessageOfDaySoapIn" />
+      <wsdl:output message="tns:LoginMessageOfDaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolders">
+      <wsdl:input message="tns:GetPrivateFoldersSoapIn" />
+      <wsdl:output message="tns:GetPrivateFoldersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolders">
+      <wsdl:input message="tns:GetPublicFoldersSoapIn" />
+      <wsdl:output message="tns:GetPublicFoldersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolderFiles">
+      <wsdl:input message="tns:GetPrivateFolderFilesSoapIn" />
+      <wsdl:output message="tns:GetPrivateFolderFilesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolderFiles">
+      <wsdl:input message="tns:GetPublicFolderFilesSoapIn" />
+      <wsdl:output message="tns:GetPublicFolderFilesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFileInfo">
+      <wsdl:input message="tns:GetPrivateFileInfoSoapIn" />
+      <wsdl:output message="tns:GetPrivateFileInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFileInfo">
+      <wsdl:input message="tns:GetPublicFileInfoSoapIn" />
+      <wsdl:output message="tns:GetPublicFileInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessTime">
+      <wsdl:input message="tns:GetBusinessTimeSoapIn" />
+      <wsdl:output message="tns:GetBusinessTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScheduledTime">
+      <wsdl:input message="tns:GetScheduledTimeSoapIn" />
+      <wsdl:output message="tns:GetScheduledTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryProductService">
+      <wsdl:input message="tns:GetCategoryProductServiceSoapIn" />
+      <wsdl:output message="tns:GetCategoryProductServiceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSite">
+      <wsdl:input message="tns:GetCustomerSiteSoapIn" />
+      <wsdl:output message="tns:GetCustomerSiteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CASWebServiceSoap" type="tns:CASWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginProcess">
+      <soap:operation soapAction="http://tempuri.org/LoginProcess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginMessageOfDay">
+      <soap:operation soapAction="http://tempuri.org/LoginMessageOfDay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolders">
+      <soap:operation soapAction="http://tempuri.org/GetPrivateFolders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolders">
+      <soap:operation soapAction="http://tempuri.org/GetPublicFolders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolderFiles">
+      <soap:operation soapAction="http://tempuri.org/GetPrivateFolderFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolderFiles">
+      <soap:operation soapAction="http://tempuri.org/GetPublicFolderFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFileInfo">
+      <soap:operation soapAction="http://tempuri.org/GetPrivateFileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFileInfo">
+      <soap:operation soapAction="http://tempuri.org/GetPublicFileInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessTime">
+      <soap:operation soapAction="http://tempuri.org/GetBusinessTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScheduledTime">
+      <soap:operation soapAction="http://tempuri.org/GetScheduledTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryProductService">
+      <soap:operation soapAction="http://tempuri.org/GetCategoryProductService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSite">
+      <soap:operation soapAction="http://tempuri.org/GetCustomerSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CASWebServiceSoap12" type="tns:CASWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoginProcess">
+      <soap12:operation soapAction="http://tempuri.org/LoginProcess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginMessageOfDay">
+      <soap12:operation soapAction="http://tempuri.org/LoginMessageOfDay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolders">
+      <soap12:operation soapAction="http://tempuri.org/GetPrivateFolders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolders">
+      <soap12:operation soapAction="http://tempuri.org/GetPublicFolders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFolderFiles">
+      <soap12:operation soapAction="http://tempuri.org/GetPrivateFolderFiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFolderFiles">
+      <soap12:operation soapAction="http://tempuri.org/GetPublicFolderFiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateFileInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetPrivateFileInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicFileInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetPublicFileInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessTime">
+      <soap12:operation soapAction="http://tempuri.org/GetBusinessTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScheduledTime">
+      <soap12:operation soapAction="http://tempuri.org/GetScheduledTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategoryProductService">
+      <soap12:operation soapAction="http://tempuri.org/GetCategoryProductService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerSite">
+      <soap12:operation soapAction="http://tempuri.org/GetCustomerSite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CASWebService">
+    <wsdl:port name="CASWebServiceSoap" binding="tns:CASWebServiceSoap">
+      <soap:address location="http://temisws2/caswebservice2/CASWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CASWebServiceSoap12" binding="tns:CASWebServiceSoap12">
+      <soap12:address location="http://temisws2/caswebservice2/CASWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

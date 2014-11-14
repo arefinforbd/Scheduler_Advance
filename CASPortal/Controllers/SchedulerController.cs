@@ -1,5 +1,5 @@
-﻿using CASPortal.Helper;
-using CASPortal.Models;
+﻿using CASPortal.CASWCFService;
+using CASPortal.Helper;
 using CASPortal.Repository;
 using CASPortal.WebParser;
 using System;
@@ -23,6 +23,7 @@ namespace CASPortal.Controllers
         // GET: /Scheduler/
         public ActionResult Index()
         {
+            SiteNItem siteNitem;
             List<Item> itemList = new List<Item>();
             List<Site> siteList = new List<Site>();
             SchedulerRepository repository = new SchedulerRepository();
@@ -35,20 +36,17 @@ namespace CASPortal.Controllers
                     return RedirectToAction("Index", "Login");             
             }
             else
-            {
                 parser.SetLoginCredential(new Guid(Request["customerid"]));
-            }
 
             StringBuilder sb = new StringBuilder("");
             sb.Append("<li style='cursor:pointer'><a>Select Item</a></li>");
 
             if (Session["BusinessHours"] == null)
-            {
                 parser.GetBusinessTime();
-            }
-            itemList = repository.GetAllItem();
 
-            foreach (var item in itemList)
+            siteNitem = repository.GetSiteNItems();
+
+            foreach (var item in siteNitem.items)
             {
                 sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
             }
@@ -60,9 +58,7 @@ namespace CASPortal.Controllers
                 sb = new StringBuilder("");
                 sb.Append("<li style='cursor:pointer'><a>Select Site</a></li>");
 
-                siteList = repository.GetSites();
-
-                foreach (var site in siteList)
+                foreach (var site in siteNitem.sites)
                 {
                     //siteFullName = new StringBuilder(site.StreetNo + ", " + site.Address1 + " " + site.Address2 + " " + site.Address3 + ", " + site.Suburb + "-" + site.PostCode + ", " + site.State);
                     siteFullName = new StringBuilder(site.StreetNo.Trim().Length > 0 ? site.StreetNo + ", " : "");

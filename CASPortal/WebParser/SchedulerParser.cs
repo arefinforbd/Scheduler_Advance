@@ -1,4 +1,4 @@
-﻿using CASPortal.CASService;
+﻿using CASPortal.CASWCFService;
 using CASPortal.Helper;
 using CASPortal.Models;
 using System;
@@ -11,35 +11,78 @@ namespace CASPortal.WebParser
 {
     public class SchedulerParser
     {
+
+        private DataTable GetBusinessHourTable(DayHour[] dayHourArr)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IsDay1WorkingDay", typeof(bool));
+            dt.Columns.Add("Day1StartHour", typeof(string));
+            dt.Columns.Add("Day1EndHour", typeof(string));
+
+            dt.Columns.Add("IsDay2WorkingDay", typeof(bool));
+            dt.Columns.Add("Day2StartHour", typeof(string));
+            dt.Columns.Add("Day2EndHour", typeof(string));
+
+            dt.Columns.Add("IsDay3WorkingDay", typeof(bool));
+            dt.Columns.Add("Day3StartHour", typeof(string));
+            dt.Columns.Add("Day3EndHour", typeof(string));
+
+            dt.Columns.Add("IsDay4WorkingDay", typeof(bool));
+            dt.Columns.Add("Day4StartHour", typeof(string));
+            dt.Columns.Add("Day4EndHour", typeof(string));
+
+            dt.Columns.Add("IsDay5WorkingDay", typeof(bool));
+            dt.Columns.Add("Day5StartHour", typeof(string));
+            dt.Columns.Add("Day5EndHour", typeof(string));
+
+            dt.Columns.Add("IsDay6WorkingDay", typeof(bool));
+            dt.Columns.Add("Day6StartHour", typeof(string));
+            dt.Columns.Add("Day6EndHour", typeof(string));
+
+            dt.Columns.Add("IsDay7WorkingDay", typeof(bool));
+            dt.Columns.Add("Day7StartHour", typeof(string));
+            dt.Columns.Add("Day7EndHour", typeof(string));
+
+            dt.Rows.Add(dayHourArr[0].IsDay1WorkingDay, dayHourArr[0].Day1StartHour, dayHourArr[0].Day1EndHour, 
+                dayHourArr[0].IsDay2WorkingDay, dayHourArr[0].Day2StartHour, dayHourArr[0].Day2EndHour, 
+                dayHourArr[0].IsDay3WorkingDay, dayHourArr[0].Day3StartHour, dayHourArr[0].Day3EndHour, 
+                dayHourArr[0].IsDay4WorkingDay, dayHourArr[0].Day4StartHour, dayHourArr[0].Day4EndHour, 
+                dayHourArr[0].IsDay5WorkingDay, dayHourArr[0].Day5StartHour, dayHourArr[0].Day5EndHour, 
+                dayHourArr[0].IsDay6WorkingDay, dayHourArr[0].Day6StartHour, dayHourArr[0].Day6EndHour, 
+                dayHourArr[0].IsDay7WorkingDay, dayHourArr[0].Day7StartHour, dayHourArr[0].Day7EndHour);
+
+            return dt;
+        }
+
         public void GetBusinessTime()
         {
-            DataSet ds = new DataSet();
-
             try
             {
                 int colIndex = 0;
                 BusinessHour businessHour;
+                DayHour[] dayHourArr = null;
                 List<BusinessHour> businessHours = new List<BusinessHour>();
-                CASWebService cas = new CASWebService();
+                CASWCFServiceClient cas = new CASWCFServiceClient();
 
                 string companyID = HttpContext.Current.Session["CompanyID"].ToString();
                 string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
                 string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
 
                 //ds = cas.GetBusinessTime("kevorkt", "", "1.000", 1);
-                ds = cas.GetBusinessTime(companyID, companyPassword, customerPassword, 1);
+                dayHourArr = cas.GetBusinessTime(companyID, companyPassword, customerPassword, 1);
 
-                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                if (dayHourArr != null && dayHourArr.Count() > 0)
                 {
+                    DataTable dtayHour = GetBusinessHourTable(dayHourArr);
                     for (int index = 0; index <= 6; index++)
                     {
                         colIndex = (index * 3);
                         businessHour = new BusinessHour();
 
-                        string startHour = Convert.ToString(ds.Tables[0].Rows[0][colIndex + 2]);
+                        string startHour = Convert.ToString(dtayHour.Rows[0][colIndex + 1]);
                         startHour = startHour.IndexOf("30") > 0 ? startHour.Replace("30", "50") : startHour;
 
-                        string endHour = Convert.ToString(ds.Tables[0].Rows[0][colIndex + 3]);
+                        string endHour = Convert.ToString(dtayHour.Rows[0][colIndex + 2]);
                         endHour = endHour.IndexOf("30") > 0 ? endHour.Replace("30", "50") : endHour;
 
                         float startHr = Convert.ToSingle(startHour);
@@ -48,7 +91,7 @@ namespace CASPortal.WebParser
                         float endHr = Convert.ToSingle(endHour);
                         endHr = endHr / 100;
 
-                        businessHour.IsWorkingDay = Convert.ToBoolean(ds.Tables[0].Rows[0][colIndex + 1]);
+                        businessHour.IsWorkingDay = Convert.ToBoolean(dtayHour.Rows[0][colIndex]);
                         businessHour.BusinessStartHour = startHr;
                         businessHour.BusinessEndHour = endHr;
                         businessHour.NoOfDay = index;
@@ -74,9 +117,9 @@ namespace CASPortal.WebParser
             string startTime = string.Empty;
             string endTime = string.Empty;
             Item item = new Item();
+            TimeSlot[] timeSlotArr = null;
             List<TimeSlot> timeSlots = new List<TimeSlot>();
-            DataSet ds = new DataSet();
-            CASWebService cas = new CASWebService();
+            CASWCFServiceClient cas = new CASWCFServiceClient();
 
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
@@ -84,15 +127,15 @@ namespace CASPortal.WebParser
 
             dateStart = dateStart.Substring(0, dateStart.IndexOf("GMT") - 1);
             //ds = cas.GetScheduledTime("kevorkt", "", "1.000", Convert.ToDateTime(dateStart));
-            ds = cas.GetScheduledTime(companyID, companyPassword, customerPassword, Convert.ToDateTime(dateStart));
+            timeSlotArr = cas.GetScheduledTime(companyID, companyPassword, customerPassword, Convert.ToDateTime(dateStart));
 
-            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            if (timeSlotArr != null && timeSlotArr.Count() > 0)
             {
-                foreach (DataRow row in ds.Tables[0].Rows)
+                foreach (TimeSlot timeSlotItem in timeSlotArr)
                 {
-                    scheduledDate = Convert.ToDateTime(row["tt_ts_date"].ToString());
-                    startTime = row["tt_ts_start_time"].ToString();
-                    endTime = row["tt_ts_end_time"].ToString();
+                    scheduledDate = Convert.ToDateTime(timeSlotItem.Date);
+                    startTime = timeSlotItem.StartTime;
+                    endTime = timeSlotItem.EndTime;
 
                     startTime = (Convert.ToSingle(startTime) / 100).ToString();
                     endTime = (Convert.ToSingle(endTime) / 100).ToString();
@@ -134,48 +177,37 @@ namespace CASPortal.WebParser
             return item;
         }
 
-        public List<Item> GetItems()
+        public SiteNItem GetSiteNItems()
         {
-            Item item;
+            SiteNItem siteNitem;
             List<Item> items = new List<Item>();
             DataSet ds = new DataSet();
-            CASWebService cas = new CASWebService();
+            CASWCFServiceClient cas = new CASWCFServiceClient();
 
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
             int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            //ds = cas.GetCategoryProductService("kevorkt", "", "1.000", 1);
-            ds = cas.GetCategoryProductService(companyID, companyPassword, customerPassword, level4ID);
+            //itemArr = cas.GetCategoryProductService(companyID, companyPassword, customerPassword, level4ID);
+            siteNitem = cas.GetCategoryProductService(companyID, companyPassword, customerID, customerPassword, level4ID);
 
-            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            if (siteNitem != null && siteNitem.sites.Count() > 0 && siteNitem.items.Count() > 0)
             {
-                foreach (DataRow row in ds.Tables[0].Rows)
-                {
-                    item = new Item();
-
-                    item.CategoryName = row["pd_category"].ToString();
-                    item.ProductName = row["pd_code"].ToString();
-                    item.ItemName = row["pdl_prcode"].ToString();
-                    item.ItemID = Convert.ToInt32(row["pdl_lineno"].ToString());
-                    item.Description = row["pdl_desc"].ToString();
-                    item.Price = Convert.ToDouble(row["pdl_price"].ToString());
-                    item.Duration = Convert.ToInt32(row["pdl_duration"].ToString());
-
-                    items.Add(item);
-                }
+                return siteNitem;
             }
 
-            return items;
+            return null;
         }
 
         public List<Site> GetSites()
         {
             Site site;
+            Site[] siteArr = null;
             List<Site> sites = new List<Site>();
             DataSet ds = new DataSet();
-            CASWebService cas = new CASWebService();
+            CASWCFServiceClient cas = new CASWCFServiceClient();
 
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
@@ -183,29 +215,29 @@ namespace CASPortal.WebParser
             string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
             int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            ds = cas.GetCustomerSite(companyID, companyPassword, customerPassword, customerID, level4ID);
+            siteArr = cas.GetCustomerSite(companyID, companyPassword, customerPassword, customerID, level4ID);
 
-            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            if (siteArr != null && siteArr.Count() > 0)
             {
-                foreach (DataRow row in ds.Tables[0].Rows)
+                foreach (Site siteItem in siteArr)
                 {
                     site = new Site();
 
-                    site.CompanyName = row["cs_company"].ToString();
-                    site.LastName = row["cs_lastname"].ToString();
-                    site.Address1 = row["cs_addr1"].ToString();
-                    site.Address2 = row["cs_addr2"].ToString();
-                    site.Address3 = row["cs_addr3"].ToString();
-                    site.Suburb = row["cs_suburb"].ToString();
-                    site.PostCode = row["cs_pcode"].ToString();
-                    site.State = row["cs_state"].ToString();
-                    site.PhoneNo = row["cs_phone"].ToString();
-                    site.MobileNo = row["cs_mobile"].ToString();
-                    site.Email = row["cs_email"].ToString();
-                    site.SiteNo = Convert.ToInt32(row["cs_siteno"].ToString());
-                    site.StreetNo = row["cs_streetno"].ToString();
-                    site.SiteCode = Convert.ToInt32(row["cs_sitecode"].ToString());
-                    site.Level4 = Convert.ToInt32(row["cs_lvl4_sequence"].ToString());
+                    site.CompanyName = siteItem.CompanyName;
+                    site.LastName = siteItem.LastName;
+                    site.Address1 = siteItem.Address1;
+                    site.Address2 = siteItem.Address2;
+                    site.Address3 = siteItem.Address3;
+                    site.Suburb = siteItem.Suburb;
+                    site.PostCode = siteItem.PostCode;
+                    site.State = siteItem.State;
+                    site.PhoneNo = siteItem.PhoneNo;
+                    site.MobileNo = siteItem.MobileNo;
+                    site.Email = siteItem.Email;
+                    site.SiteNo = siteItem.SiteNo;
+                    site.StreetNo = siteItem.StreetNo;
+                    site.SiteCode = siteItem.SiteCode;
+                    site.Level4 = siteItem.Level4;
 
                     sites.Add(site);
                 }

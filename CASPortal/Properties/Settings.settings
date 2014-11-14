@@ -1,9 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CASPortal.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="CASPortal_CASService_CASWebService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://temisws2/caswebservice2/CASWebService.asmx</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

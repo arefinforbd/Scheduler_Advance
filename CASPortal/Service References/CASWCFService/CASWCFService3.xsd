@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CASWCFService.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="Welcome">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyLogo" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogoFileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MessageOfTheDay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrivateFolders" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicFolders" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Welcome" nillable="true" type="tns:Welcome" />
+  <xs:complexType name="ArrayOfWelcome">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Welcome" nillable="true" type="tns:Welcome" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWelcome" nillable="true" type="tns:ArrayOfWelcome" />
+  <xs:complexType name="ArrayOfFolder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Folder" nillable="true" type="tns:Folder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFolder" nillable="true" type="tns:ArrayOfFolder" />
+  <xs:complexType name="Folder">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PrivateFolders" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PublicFolders" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="fileDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fileUploadedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fileUploadedDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="lvl4sequence" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Folder" nillable="true" type="tns:Folder" />
+  <xs:complexType name="ArrayOfDayHour">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DayHour" nillable="true" type="tns:DayHour" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDayHour" nillable="true" type="tns:ArrayOfDayHour" />
+  <xs:complexType name="DayHour">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Day1EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day1StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day2EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day2StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day3EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day3StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day4EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day4StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day5EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day5StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day6EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day6StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day7EndHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Day7StartHour" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDay1WorkingDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDay2WorkingDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDay3WorkingDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDay4WorkingDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDay5WorkingDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDay6WorkingDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDay7WorkingDay" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DayHour" nillable="true" type="tns:DayHour" />
+  <xs:complexType name="ArrayOfTimeSlot">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TimeSlot" nillable="true" type="tns:TimeSlot" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTimeSlot" nillable="true" type="tns:ArrayOfTimeSlot" />
+  <xs:complexType name="TimeSlot">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPublicHoliDay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItemID" type="xs:int" />
+      <xs:element minOccurs="0" name="SpecialInstruction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeSlot" nillable="true" type="tns:TimeSlot" />
+  <xs:complexType name="SiteNItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="items" nillable="true" type="tns:ArrayOfItem" />
+      <xs:element minOccurs="0" name="sites" nillable="true" type="tns:ArrayOfSite" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SiteNItem" nillable="true" type="tns:SiteNItem" />
+  <xs:complexType name="ArrayOfItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="tns:Item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItem" nillable="true" type="tns:ArrayOfItem" />
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryID" type="xs:int" />
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Duration" type="xs:int" />
+      <xs:element minOccurs="0" name="ItemID" type="xs:int" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaxEndHour" type="xs:float" />
+      <xs:element minOccurs="0" name="MinStartHour" type="xs:float" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Item" nillable="true" type="tns:Item" />
+  <xs:complexType name="ArrayOfSite">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Site" nillable="true" type="tns:Site" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSite" nillable="true" type="tns:ArrayOfSite" />
+  <xs:complexType name="Site">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Level4" type="xs:int" />
+      <xs:element minOccurs="0" name="MobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteCode" type="xs:int" />
+      <xs:element minOccurs="0" name="SiteNo" type="xs:int" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StreetNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Suburb" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Site" nillable="true" type="tns:Site" />
+</xs:schema>

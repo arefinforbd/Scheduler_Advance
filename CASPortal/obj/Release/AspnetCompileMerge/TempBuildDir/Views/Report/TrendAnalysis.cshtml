@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "TrendAnalysis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/tree/themes/default/style.min.css")" rel="stylesheet" type="text/css" />
+
+<h2>TrendAnalysis</h2>
+
+<div id="page-wrapper">
+    <br />
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <label>Trend Analysis Report</label>
+        </div>
+        <div class="panel-body">
+            <div id="jstree">
+                @Html.Raw(@ViewBag.TreeNodes)
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div id="div_btnContinue">
+                <input id="btnPreview" class="btn btn-info submitClass" value="Preview" type="button" name="submit">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        $('#jstree').jstree({
+            "checkbox": {
+                "keep_selected_style": false
+            },
+            "plugins": ["checkbox"]
+        });
+
+        $('#jstree').on('changed.jstree', function (e, data) {
+              var i, j, r = [];
+              for (i = 0, j = data.selected.length; i < j; i++) {
+                  r.push(data.instance.get_node(data.selected[i]).text);
+              }
+              alert('Selected: ' + r.join(', '));
+          })
+          .jstree();
+
+
+    });
+</script>

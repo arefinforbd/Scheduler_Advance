@@ -6,6 +6,8 @@ $(document).ready(function () {
     $("#logoutMenu").attr("href", $("#hdnSiteURL").val() + "/Login/Logout");
     $("#homeMenu").attr("href", $("#hdnSiteURL").val() + "/CustomerInformation/WelcomeMessage");
     $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
+    $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysis");
+    $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
 
     var pvtfirstval = $("#pvtfolder > :first-child").text();
     var pubfirstval = $("#pubfolder > :first-child").text();
