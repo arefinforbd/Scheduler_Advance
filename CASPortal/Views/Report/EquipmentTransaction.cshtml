@@ -228,11 +228,15 @@
 
         if($("a.dropdown-Site span[data-bind='label']").text() == "Select Site"){
             alert("Please select Site.");
+            $("a.dropdown-Site").fadeOut();
+            $("a.dropdown-Site").fadeIn();
             return false;
         }
 
         if($("a.dropdown-Contract span[data-bind='label']").text() == "Select Contract"){
             alert("Please select Contract.");
+            $("a.dropdown-Contract").fadeOut();
+            $("a.dropdown-Contract").fadeIn();
             return false;
         }
 

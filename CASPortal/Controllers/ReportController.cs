@@ -19,6 +19,55 @@ namespace CASPortal.Controllers
             return View();
         }
 
+        public ActionResult GetBarData()
+        {
+            List<BarData> charts = new List<BarData>()
+            {
+                new BarData(){y = "2010", a = 85, b = 100},
+                new BarData(){y = "2011", a = 90, b = 80},
+                new BarData(){y = "2012", a = 50, b = 70},
+                new BarData(){y = "2013", a = 60, b = 95},
+                new BarData(){y = "2014", a = 95, b = 30}
+            };
+
+            return Json(charts, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetLineData()
+        {
+            List<LineData> charts = new List<LineData>()
+            {
+                new LineData(){x = "01/Jan/2014", y = 0},
+                new LineData(){x = "08/Jan/2014", y = 0},
+                new LineData(){x = "15/Jan/2014", y = 0.5},
+                new LineData(){x = "22/Jan/2014", y = 0},
+                new LineData(){x = "29/Jan/2014", y = .5},
+                new LineData(){x = "05/Feb/2014", y = 1.5},
+                new LineData(){x = "12/Feb/2014", y = 1.5},
+                new LineData(){x = "19/Feb/2014", y = 1.0},
+                new LineData(){x = "26/Feb/2014", y = 1.0},
+                new LineData(){x = "05/Mar/2014", y = 2.0},
+                new LineData(){x = "12/Mar/2014", y = 2.5},
+                new LineData(){x = "19/Mar/2014", y = 1.0}
+            };
+
+            return Json(charts, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetPieData()
+        {
+            List<PieData> charts = new List<PieData>()
+            {
+                new PieData(){label = "Series 0", data = 15},
+                new PieData(){label = "Series 1", data = 5},
+                new PieData(){label = "Series 2", data = 2},
+                new PieData(){label = "Series 3", data = 3}
+            };
+
+            return Json(charts, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult TrendAnalysis()
         {
             StringBuilder sb = new StringBuilder();
@@ -124,4 +173,23 @@ namespace CASPortal.Controllers
             }
         }
 	}
+
+    class BarData
+    {
+        public string y { get; set; }
+        public int a { get; set; }
+        public int b { get; set; }
+    }
+
+    class LineData
+    {
+        public string x { get; set; }
+        public double y { get; set; }
+    }
+
+    class PieData
+    {
+        public string label { get; set; }
+        public int data { get; set; }
+    }
 }
