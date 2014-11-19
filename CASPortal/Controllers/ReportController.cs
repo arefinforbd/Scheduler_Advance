@@ -38,18 +38,57 @@ namespace CASPortal.Controllers
         {
             List<LineData> charts = new List<LineData>()
             {
-                new LineData(){x = "01/Jan/2014", y = 0},
-                new LineData(){x = "08/Jan/2014", y = 0},
-                new LineData(){x = "15/Jan/2014", y = 0.5},
-                new LineData(){x = "22/Jan/2014", y = 0},
-                new LineData(){x = "29/Jan/2014", y = .5},
-                new LineData(){x = "05/Feb/2014", y = 1.5},
-                new LineData(){x = "12/Feb/2014", y = 1.5},
-                new LineData(){x = "19/Feb/2014", y = 1.0},
-                new LineData(){x = "26/Feb/2014", y = 1.0},
-                new LineData(){x = "05/Mar/2014", y = 2.0},
-                new LineData(){x = "12/Mar/2014", y = 2.5},
-                new LineData(){x = "19/Mar/2014", y = 1.0}
+                new LineData(){x = "01/012014", y = 0, label="EXTERN (MOUSE)"},
+                new LineData(){x = "08/01/2014", y = 0, label="EXTERN (MOUSE)"},
+                new LineData(){x = "15/01/2014", y = 0.5, label="EXTERN (MOUSE)"},
+                new LineData(){x = "22/01/2014", y = 0, label="EXTERN (MOUSE)"},
+                new LineData(){x = "29/01/2014", y = .5, label="EXTERN (MOUSE)"},
+                new LineData(){x = "05/02/2014", y = 1.5, label="EXTERN (MOUSE)"},
+                new LineData(){x = "12/02/2014", y = 1.5, label="EXTERN (MOUSE)"},
+                new LineData(){x = "19/02/2014", y = 1.0, label="EXTERN (MOUSE)"},
+                new LineData(){x = "26/02/2014", y = 1.0, label="EXTERN (MOUSE)"},
+                new LineData(){x = "05/03/2014", y = 2.0, label="EXTERN (MOUSE)"},
+                new LineData(){x = "12/03/2014", y = 2.5, label="EXTERN (MOUSE)"},
+                new LineData(){x = "19/03/2014", y = 1.0, label="EXTERN (MOUSE)"},
+
+                new LineData(){x = "01/012014", y = 1, label="EXTERN (RAT)"},
+                new LineData(){x = "08/01/2014", y = 2, label="EXTERN (RAT)"},
+                new LineData(){x = "15/01/2014", y = 0.5, label="EXTERN (RAT)"},
+                new LineData(){x = "22/01/2014", y = 0, label="EXTERN (RAT)"},
+                new LineData(){x = "29/01/2014", y = 1.5, label="EXTERN (RAT)"},
+                new LineData(){x = "05/02/2014", y = 2.5, label="EXTERN (RAT)"},
+                new LineData(){x = "12/02/2014", y = 0.5, label="EXTERN (RAT)"},
+                new LineData(){x = "19/02/2014", y = 1.5, label="EXTERN (RAT)"},
+                new LineData(){x = "26/02/2014", y = 0, label="EXTERN (RAT)"},
+                new LineData(){x = "05/03/2014", y = 0, label="EXTERN (RAT)"},
+                new LineData(){x = "12/03/2014", y = 0.5, label="EXTERN (RAT)"},
+                new LineData(){x = "19/03/2014", y = 2.0, label="EXTERN (RAT)"},
+
+                new LineData(){x = "01/012014", y = 0.5, label="INTERN (EFK)"},
+                new LineData(){x = "08/01/2014", y = 1.5, label="INTERN (EFK)"},
+                new LineData(){x = "15/01/2014", y = 0.5, label="INTERN (EFK)"},
+                new LineData(){x = "22/01/2014", y = 1, label="INTERN (EFK)"},
+                new LineData(){x = "29/01/2014", y = 0.5, label="INTERN (EFK)"},
+                new LineData(){x = "05/02/2014", y = 1.5, label="INTERN (EFK)"},
+                new LineData(){x = "12/02/2014", y = 1.5, label="INTERN (EFK)"},
+                new LineData(){x = "19/02/2014", y = 0.5, label="INTERN (EFK)"},
+                new LineData(){x = "26/02/2014", y = 2, label="INTERN (EFK)"},
+                new LineData(){x = "05/03/2014", y = 1, label="INTERN (EFK)"},
+                new LineData(){x = "12/03/2014", y = 0.5, label="INTERN (EFK)"},
+                new LineData(){x = "19/03/2014", y = 0, label="INTERN (EFK)"},
+
+                new LineData(){x = "01/01/2014", y = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "08/01/2014", y = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "15/01/2014", y = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "22/01/2014", y = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "29/01/2014", y = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "05/02/2014", y = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "12/02/2014", y = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "19/02/2014", y = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "26/02/2014", y = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "05/03/2014", y = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "12/03/2014", y = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){x = "19/03/2014", y = 3.0, label="INTERN (MOUSE)"}
             };
 
             return Json(charts, JsonRequestBehavior.AllowGet);
@@ -185,6 +224,7 @@ namespace CASPortal.Controllers
     {
         public string x { get; set; }
         public double y { get; set; }
+        public string label { get; set; }
     }
 
     class PieData
