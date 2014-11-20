@@ -1,0 +1,30 @@
+public List<DataRow> RowToColumn(List<LineData> lineData)
+        {
+            DataRow row;
+            int count = lineData.Count / 12;
+            DataTable dtTable = new DataTable();
+
+            dtTable.Columns.Add("Dates", typeof(string));
+            for (int index = 0; index < count; index++)
+            {
+                dtTable.Columns.Add(lineData[index * 12].label, typeof(string));
+            }
+
+            for (int index = 0; index < 12; index++)
+            {
+                int rowIndex = 1;
+                row = dtTable.NewRow();
+
+                row[0] = lineData[index].x;
+                for (int innerIndex = index; innerIndex < lineData.Count; innerIndex += 12)
+                {
+                    row[rowIndex] = lineData[innerIndex].lineValue;
+                    rowIndex++;
+                }
+                dtTable.Rows.Add(row);
+            }
+
+            List<DataRow> rowToList = dtTable.AsEnumerable().ToList();
+
+            return rowToList;
+        }
