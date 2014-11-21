@@ -3,10 +3,12 @@ using CASPortal.Repository;
 using CASPortal.WebParser;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace CASPortal.Controllers
 {
@@ -19,18 +21,126 @@ namespace CASPortal.Controllers
             return View();
         }
 
+        public DataTable RowToColumn(List<BarData> lineData)
+        {
+            DataRow row;
+            int count = lineData.Count / 12;
+            DataTable dtTable = new DataTable();
+
+            dtTable.Columns.Add("DateLabel", typeof(string));
+            for (int index = 0; index < count; index++)
+            {
+                dtTable.Columns.Add(lineData[index * 12].label, typeof(string));
+            }
+
+            for (int index = 0; index < 12; index++)
+            {
+                int rowIndex = 1;
+                row = dtTable.NewRow();
+
+                row[0] = lineData[index].DateLabel;
+                for (int innerIndex = index; innerIndex < lineData.Count; innerIndex += 12)
+                {
+                    row[rowIndex] = lineData[innerIndex].lineValue;
+                    rowIndex++;
+                }
+                dtTable.Rows.Add(row);
+            }
+
+            List<DataRow> rowToList = dtTable.AsEnumerable().ToList();
+
+            return dtTable;
+        }
+
         public ActionResult GetBarData()
         {
+            DataTable dtTable = null;
             List<BarData> charts = new List<BarData>()
+            {
+                new BarData(){DateLabel = "01/01/2014", lineValue = 0, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "08/01/2014", lineValue = 1, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "15/01/2014", lineValue = 0, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "22/01/2014", lineValue = 1, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "29/01/2014", lineValue = 0, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "05/02/2014", lineValue = 1, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "12/02/2014", lineValue = 0, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "19/02/2014", lineValue = 1, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "26/02/2014", lineValue = 0, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "05/03/2014", lineValue = 1, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "12/03/2014", lineValue = 0, label="EXTERN__MOUSE_"},
+                new BarData(){DateLabel = "19/03/2014", lineValue = 1, label="EXTERN__MOUSE_"},
+
+                new BarData(){DateLabel = "01/01/2014", lineValue = 5, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "08/01/2014", lineValue = 1, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "15/01/2014", lineValue = 5, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "22/01/2014", lineValue = 1, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "29/01/2014", lineValue = 5, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "05/02/2014", lineValue = 1, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "12/02/2014", lineValue = 5, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "19/02/2014", lineValue = 1, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "26/02/2014", lineValue = 5, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "05/03/2014", lineValue = 1, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "12/03/2014", lineValue = 5, label="EXTERN__RAT_"},
+                new BarData(){DateLabel = "19/03/2014", lineValue = 1, label="EXTERN__RAT_"},
+
+                new BarData(){DateLabel = "01/01/2014", lineValue = 1, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "08/01/2014", lineValue = 2, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "15/01/2014", lineValue = 1, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "22/01/2014", lineValue = 2, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "29/01/2014", lineValue = 1, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "05/02/2014", lineValue = 2, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "12/02/2014", lineValue = 1, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "19/02/2014", lineValue = 2, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "26/02/2014", lineValue = 1, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "05/03/2014", lineValue = 2, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "12/03/2014", lineValue = 1, label="INTERN__EFK_"},
+                new BarData(){DateLabel = "19/03/2014", lineValue = 2, label="INTERN__EFK_"},
+
+                new BarData(){DateLabel = "01/01/2014", lineValue = 1, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "08/01/2014", lineValue = 2, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "15/01/2014", lineValue = 1, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "22/01/2014", lineValue = 2, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "29/01/2014", lineValue = 1, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "05/02/2014", lineValue = 2, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "12/02/2014", lineValue = 1, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "19/02/2014", lineValue = 2, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "26/02/2014", lineValue = 1, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "05/03/2014", lineValue = 2, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "12/03/2014", lineValue = 1, label="INTERN__MOUSE_"},
+                new BarData(){DateLabel = "19/03/2014", lineValue = 2, label="INTERN__MOUSE_"}
+            };
+
+            if (charts.Count >= 12)
+            {
+                dtTable = RowToColumn(charts);
+
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+                Dictionary<string, object> row;
+                foreach (DataRow dr in dtTable.Rows)
+                {
+                    row = new Dictionary<string, object>();
+                    foreach (DataColumn col in dtTable.Columns)
+                    {
+                        row.Add(col.ColumnName, dr[col]);
+                    }
+                    rows.Add(row);
+                }
+
+                return Json(serializer.Serialize(rows), JsonRequestBehavior.AllowGet);
+            }
+            else
+                return null;
+
+            /*List<BarData> charts2 = new List<BarData>()
             {
                 new BarData(){y = "2010", a = 85, b = 100},
                 new BarData(){y = "2011", a = 90, b = 80},
                 new BarData(){y = "2012", a = 50, b = 70},
                 new BarData(){y = "2013", a = 60, b = 95},
                 new BarData(){y = "2014", a = 95, b = 30}
-            };
+            };*/
 
-            return Json(charts, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -38,57 +148,57 @@ namespace CASPortal.Controllers
         {
             List<LineData> charts = new List<LineData>()
             {
-                new LineData(){x = "01/012014", y = 0, label="EXTERN (MOUSE)"},
-                new LineData(){x = "08/01/2014", y = 0, label="EXTERN (MOUSE)"},
-                new LineData(){x = "15/01/2014", y = 0.5, label="EXTERN (MOUSE)"},
-                new LineData(){x = "22/01/2014", y = 0, label="EXTERN (MOUSE)"},
-                new LineData(){x = "29/01/2014", y = .5, label="EXTERN (MOUSE)"},
-                new LineData(){x = "05/02/2014", y = 1.5, label="EXTERN (MOUSE)"},
-                new LineData(){x = "12/02/2014", y = 1.5, label="EXTERN (MOUSE)"},
-                new LineData(){x = "19/02/2014", y = 1.0, label="EXTERN (MOUSE)"},
-                new LineData(){x = "26/02/2014", y = 1.0, label="EXTERN (MOUSE)"},
-                new LineData(){x = "05/03/2014", y = 2.0, label="EXTERN (MOUSE)"},
-                new LineData(){x = "12/03/2014", y = 2.5, label="EXTERN (MOUSE)"},
-                new LineData(){x = "19/03/2014", y = 1.0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "01/012014", lineValue = 0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 1, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 1, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 1, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 1, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 1, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 0, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 1, label="EXTERN (MOUSE)"},
 
-                new LineData(){x = "01/012014", y = 1, label="EXTERN (RAT)"},
-                new LineData(){x = "08/01/2014", y = 2, label="EXTERN (RAT)"},
-                new LineData(){x = "15/01/2014", y = 0.5, label="EXTERN (RAT)"},
-                new LineData(){x = "22/01/2014", y = 0, label="EXTERN (RAT)"},
-                new LineData(){x = "29/01/2014", y = 1.5, label="EXTERN (RAT)"},
-                new LineData(){x = "05/02/2014", y = 2.5, label="EXTERN (RAT)"},
-                new LineData(){x = "12/02/2014", y = 0.5, label="EXTERN (RAT)"},
-                new LineData(){x = "19/02/2014", y = 1.5, label="EXTERN (RAT)"},
-                new LineData(){x = "26/02/2014", y = 0, label="EXTERN (RAT)"},
-                new LineData(){x = "05/03/2014", y = 0, label="EXTERN (RAT)"},
-                new LineData(){x = "12/03/2014", y = 0.5, label="EXTERN (RAT)"},
-                new LineData(){x = "19/03/2014", y = 2.0, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "01/012014", lineValue = 0.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 1.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 0.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 1.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 0.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 1.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 0.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 1.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 0.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 1.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 0.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 1.5, label="EXTERN (RAT)"},
 
-                new LineData(){x = "01/012014", y = 0.5, label="INTERN (EFK)"},
-                new LineData(){x = "08/01/2014", y = 1.5, label="INTERN (EFK)"},
-                new LineData(){x = "15/01/2014", y = 0.5, label="INTERN (EFK)"},
-                new LineData(){x = "22/01/2014", y = 1, label="INTERN (EFK)"},
-                new LineData(){x = "29/01/2014", y = 0.5, label="INTERN (EFK)"},
-                new LineData(){x = "05/02/2014", y = 1.5, label="INTERN (EFK)"},
-                new LineData(){x = "12/02/2014", y = 1.5, label="INTERN (EFK)"},
-                new LineData(){x = "19/02/2014", y = 0.5, label="INTERN (EFK)"},
-                new LineData(){x = "26/02/2014", y = 2, label="INTERN (EFK)"},
-                new LineData(){x = "05/03/2014", y = 1, label="INTERN (EFK)"},
-                new LineData(){x = "12/03/2014", y = 0.5, label="INTERN (EFK)"},
-                new LineData(){x = "19/03/2014", y = 0, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "01/012014", lineValue = 1, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 2, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 1, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 2, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 1, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 2, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 1, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 2, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 1, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 2, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 1, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 2, label="INTERN (EFK)"},
 
-                new LineData(){x = "01/01/2014", y = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "08/01/2014", y = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "15/01/2014", y = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "22/01/2014", y = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "29/01/2014", y = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "05/02/2014", y = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "12/02/2014", y = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "19/02/2014", y = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "26/02/2014", y = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "05/03/2014", y = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "12/03/2014", y = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){x = "19/03/2014", y = 3.0, label="INTERN (MOUSE)"}
+                new LineData(){DateLabel = "01/01/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 2.5, label="INTERN (MOUSE)"}
             };
 
             return Json(charts, JsonRequestBehavior.AllowGet);
@@ -132,7 +242,7 @@ namespace CASPortal.Controllers
 
             StringBuilder sb = new StringBuilder("");
             sb.Append("<li style='cursor:pointer'><a>Select Contract</a></li>");
-            
+
             siteNitem = repository.GetSiteNItems();
 
             foreach (var item in siteNitem.items)
@@ -211,19 +321,19 @@ namespace CASPortal.Controllers
                 return File(new byte[2], "application/octet", "file-name");
             }
         }
-	}
-
-    class BarData
-    {
-        public string y { get; set; }
-        public int a { get; set; }
-        public int b { get; set; }
     }
 
-    class LineData
+    public class BarData
     {
-        public string x { get; set; }
-        public double y { get; set; }
+        public string DateLabel { get; set; }
+        public double lineValue { get; set; }
+        public string label { get; set; }
+    }
+
+    public class LineData
+    {
+        public string DateLabel { get; set; }
+        public double lineValue { get; set; }
         public string label { get; set; }
     }
 

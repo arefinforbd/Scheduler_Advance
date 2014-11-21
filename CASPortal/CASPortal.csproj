@@ -182,6 +182,7 @@
     <Content Include="Content\js\jquery-1.11.0.js" />
     <Content Include="Content\js\jquery.jclock.js" />
     <Content Include="Content\js\plugins\Chart.js" />
+    <Content Include="Content\js\plugins\Chart.Line-Data.js" />
     <Content Include="Content\js\plugins\Chart.min.js" />
     <Content Include="Content\js\plugins\dataTables\dataTables.bootstrap.js" />
     <Content Include="Content\js\plugins\dataTables\jquery.dataTables.js" />
