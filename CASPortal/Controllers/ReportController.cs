@@ -21,25 +21,25 @@ namespace CASPortal.Controllers
             return View();
         }
 
-        public DataTable RowToColumn(List<BarData> lineData)
+        public DataTable RowToColumn(List<BarData> lineData, int weeksCount)
         {
             DataRow row;
-            int count = lineData.Count / 12;
+            int count = lineData.Count / weeksCount;
             DataTable dtTable = new DataTable();
 
             dtTable.Columns.Add("DateLabel", typeof(string));
             for (int index = 0; index < count; index++)
             {
-                dtTable.Columns.Add(lineData[index * 12].label, typeof(string));
+                dtTable.Columns.Add(lineData[index * weeksCount].label, typeof(string));
             }
 
-            for (int index = 0; index < 12; index++)
+            for (int index = 0; index < weeksCount; index++)
             {
                 int rowIndex = 1;
                 row = dtTable.NewRow();
 
                 row[0] = lineData[index].DateLabel;
-                for (int innerIndex = index; innerIndex < lineData.Count; innerIndex += 12)
+                for (int innerIndex = index; innerIndex < lineData.Count; innerIndex += weeksCount)
                 {
                     row[rowIndex] = lineData[innerIndex].lineValue;
                     rowIndex++;
@@ -110,9 +110,17 @@ namespace CASPortal.Controllers
                 new BarData(){DateLabel = "19/03/2014", lineValue = 2, label="INTERN__MOUSE_"}
             };
 
-            if (charts.Count >= 12)
+            var count = charts.GroupBy(i => new { Date = i.label })
+                 .Select(group => new
+                 {
+                     Label = group.First().label
+                 }).ToList().Count;
+
+            int weeksCount = charts.Count / count;
+
+            if (charts.Count >= weeksCount)
             {
-                dtTable = RowToColumn(charts);
+                dtTable = RowToColumn(charts, weeksCount);
 
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
@@ -131,74 +139,72 @@ namespace CASPortal.Controllers
             }
             else
                 return null;
-
-            /*List<BarData> charts2 = new List<BarData>()
-            {
-                new BarData(){y = "2010", a = 85, b = 100},
-                new BarData(){y = "2011", a = 90, b = 80},
-                new BarData(){y = "2012", a = 50, b = 70},
-                new BarData(){y = "2013", a = 60, b = 95},
-                new BarData(){y = "2014", a = 95, b = 30}
-            };*/
-
         }
 
         [HttpGet]
         public ActionResult GetLineData()
         {
+            /*
+             * Get number of columns and rows.
+             * Substract 1 from number of columns.
+             * Divid number of rows by number of columns.
+             * 
+             */
+            int weeksCount = 12;
+
             List<LineData> charts = new List<LineData>()
             {
-                new LineData(){DateLabel = "01/012014", lineValue = 0, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "08/01/2014", lineValue = 1, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "15/01/2014", lineValue = 0, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "22/01/2014", lineValue = 1, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "29/01/2014", lineValue = 0, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "05/02/2014", lineValue = 1, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "12/02/2014", lineValue = 0, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "19/02/2014", lineValue = 1, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "26/02/2014", lineValue = 0, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "05/03/2014", lineValue = 1, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "12/03/2014", lineValue = 0, label="EXTERN (MOUSE)"},
-                new LineData(){DateLabel = "19/03/2014", lineValue = 1, label="EXTERN (MOUSE)"},
+                new LineData(){DateLabel = "01/012014", lineValue = 0, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 1, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 0, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 1, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 0, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 1, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 0, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 1, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 0, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 1, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 0, label="EXTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 1, label="EXTERN (MOUSE)", Count = weeksCount},
 
-                new LineData(){DateLabel = "01/012014", lineValue = 0.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "08/01/2014", lineValue = 1.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "15/01/2014", lineValue = 0.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "22/01/2014", lineValue = 1.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "29/01/2014", lineValue = 0.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "05/02/2014", lineValue = 1.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "12/02/2014", lineValue = 0.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "19/02/2014", lineValue = 1.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "26/02/2014", lineValue = 0.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "05/03/2014", lineValue = 1.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "12/03/2014", lineValue = 0.5, label="EXTERN (RAT)"},
-                new LineData(){DateLabel = "19/03/2014", lineValue = 1.5, label="EXTERN (RAT)"},
+                new LineData(){DateLabel = "01/012014", lineValue = 0.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 1.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 0.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 1.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 0.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 1.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 0.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 1.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 0.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 1.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 0.5, label="EXTERN (RAT)", Count = weeksCount},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 1.5, label="EXTERN (RAT)", Count = weeksCount},
 
-                new LineData(){DateLabel = "01/012014", lineValue = 1, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "08/01/2014", lineValue = 2, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "15/01/2014", lineValue = 1, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "22/01/2014", lineValue = 2, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "29/01/2014", lineValue = 1, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "05/02/2014", lineValue = 2, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "12/02/2014", lineValue = 1, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "19/02/2014", lineValue = 2, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "26/02/2014", lineValue = 1, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "05/03/2014", lineValue = 2, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "12/03/2014", lineValue = 1, label="INTERN (EFK)"},
-                new LineData(){DateLabel = "19/03/2014", lineValue = 2, label="INTERN (EFK)"},
+                new LineData(){DateLabel = "01/012014", lineValue = 1, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 2, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 1, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 2, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 1, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 2, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 1, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 2, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 1, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 2, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 1, label="INTERN (EFK)", Count = weeksCount},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 2, label="INTERN (EFK)", Count = weeksCount},
 
-                new LineData(){DateLabel = "01/01/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "08/01/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "15/01/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "22/01/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "29/01/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "05/02/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "12/02/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "19/02/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "26/02/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "05/03/2014", lineValue = 2.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "12/03/2014", lineValue = 1.5, label="INTERN (MOUSE)"},
-                new LineData(){DateLabel = "19/03/2014", lineValue = 2.5, label="INTERN (MOUSE)"}
+                new LineData(){DateLabel = "01/01/2014", lineValue = 1.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "08/01/2014", lineValue = 2.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "15/01/2014", lineValue = 1.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "22/01/2014", lineValue = 2.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "29/01/2014", lineValue = 1.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "05/02/2014", lineValue = 2.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "12/02/2014", lineValue = 1.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "19/02/2014", lineValue = 2.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "26/02/2014", lineValue = 1.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "05/03/2014", lineValue = 2.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "12/03/2014", lineValue = 1.5, label="INTERN (MOUSE)", Count = weeksCount},
+                new LineData(){DateLabel = "19/03/2014", lineValue = 2.5, label="INTERN (MOUSE)", Count = weeksCount}
             };
 
             return Json(charts, JsonRequestBehavior.AllowGet);
@@ -335,6 +341,7 @@ namespace CASPortal.Controllers
         public string DateLabel { get; set; }
         public double lineValue { get; set; }
         public string label { get; set; }
+        public int Count { get; set; }
     }
 
     class PieData

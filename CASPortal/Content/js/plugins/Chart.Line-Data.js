@@ -38,7 +38,7 @@ $(function () {
     .done(function (result) {
         var html = "";
         for (var index = 0; index < result.length; index++) {
-            if (index % 12 == 0 && index > 0) {
+            if (index % result[0].Count == 0 && index > 0) {
                 LineColor();
                 dataset.push({
                     fillColor: "rgba(255,255,255,0)",
@@ -47,6 +47,7 @@ $(function () {
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(" + lineColor + ",1)",
+                    label: result[index - 1].label,
                     data: yaxisvalues
                 });
                 yaxisvalues = [];
@@ -65,6 +66,7 @@ $(function () {
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(" + lineColor + ",1)",
+            label: result[index - 1].label,
             data: yaxisvalues
         });
 
@@ -72,7 +74,7 @@ $(function () {
         html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + result[index-1].label + '</div>';
         $("#divLineLegend").html(html);
 
-        for (var index = 0; index < 12; index++) {
+        for (var index = 0; index < result[0].Count; index++) {
             labels.push([result[index].DateLabel]);
         }
 
