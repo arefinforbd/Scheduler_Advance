@@ -259,17 +259,18 @@ namespace CASPortal.Controllers
 
                         foreach (TreeNodeLevel3 t3 in trNode.listLeve3.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID))
                         {
-                            sb.Append("<li>");
+                            string nodeID = t1.SectionID + "-" + t1.SectionCaption + "-" + t2.QuestionID + "-" + t2.QuestionCaption + "-" + t3.AnswerID + "-" + t3.AnswerCaption + ",";
+                            sb.Append("<li id='" + nodeID + "'>");
                             sb.Append(t3.AnswerCaption);
-                            sb.Append("<ul>");
+                            //sb.Append("<ul>");
 
-                            foreach (TreeNodeLevel4 t4 in trNode.listLeve4.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID && t.AnswerID == t3.AnswerID))
-                            {
-                                sb.Append("<li>");
-                                sb.Append(t4.AdditionalAnswerCaption);
-                                sb.Append("</li>");
-                            }
-                            sb.Append("</ul>");
+                            //foreach (TreeNodeLevel4 t4 in trNode.listLeve4.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID && t.AnswerID == t3.AnswerID))
+                            //{
+                            //    sb.Append("<li>");
+                            //    sb.Append(t4.AdditionalAnswerCaption);
+                            //    sb.Append("</li>");
+                            //}
+                            //sb.Append("</ul>");
                             sb.Append("</li>");
                         }
                         sb.Append("</ul>");
@@ -328,22 +329,20 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult TrendAnalysis(FormCollection elements)
+        public ActionResult TrendAnalysis(string selectedNodes)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<ul>");
-            sb.Append("<li>Root node 1");
-            sb.Append("<ul>");
-            sb.Append("<li id='child_node_1'>Child node 1</li>");
-            sb.Append("<li>Child node 2</li>");
-            sb.Append("</ul>");
-            sb.Append("</li>");
-            sb.Append("<li>Root node 2</li>");
-            sb.Append("</ul>");
+            selectedNodes = selectedNodes.Replace("[\"", "");
+            selectedNodes = selectedNodes.Replace("\"]", "");
+            selectedNodes = selectedNodes.Replace("\"", "");
+            selectedNodes = selectedNodes.Replace(",,", ",");
 
-            ViewBag.TreeNodes = sb.ToString();
+            string[] arr2 = selectedNodes.Split(',');
+            string[] arr2Dis = arr2.Distinct().ToArray();
 
-            return View();
+            string[] arr = selectedNodes.Split('-');
+            string[] arrDis = arr.Distinct().ToArray();
+
+            return Json("successfull", JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult EquipmentTransaction()

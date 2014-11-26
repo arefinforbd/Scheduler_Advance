@@ -1,5 +1,4 @@
-﻿var teeNodes = [];
-var labels = [];
+﻿var labels = [];
 var yaxisvalues = [];
 var dataset = [];
 var lineColor = "";
@@ -12,27 +11,6 @@ function LineColor() {
 $(function () {
 
     //$("div#divLineLegend").css("-moz-transform", "rotate(-90deg)")
-
-    $('#jstree').jstree({
-        "checkbox": {
-            "keep_selected_style": false
-        },
-        "plugins": ["checkbox"]
-    });
-    //$('#jstree').jstree('open_all');
-
-    //data.instance.get_node(data.selected[i]).parents[1]
-    //data.instance.get_node(data.selected[i]).parents.length
-
-    $('#jstree').on('changed.jstree', function (e, data) {
-        var i, j, r = [];
-        for (i = 0, j = data.selected.length; i < j; i++) {
-            r.push(data.instance.get_node(data.selected[i]).text);
-        }
-        alert('Selected: ' + r.join(', '));
-        alert(data.node.id + " " + data.node.text);
-    })
-      .jstree();
 
     $.ajax({
         type: "GET",
