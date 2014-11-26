@@ -1,4 +1,5 @@
-﻿var labels = [];
+﻿var teeNodes = [];
+var labels = [];
 var yaxisvalues = [];
 var dataset = [];
 var lineColor = "";
@@ -18,6 +19,10 @@ $(function () {
         },
         "plugins": ["checkbox"]
     });
+    //$('#jstree').jstree('open_all');
+
+    //data.instance.get_node(data.selected[i]).parents[1]
+    //data.instance.get_node(data.selected[i]).parents.length
 
     $('#jstree').on('changed.jstree', function (e, data) {
         var i, j, r = [];

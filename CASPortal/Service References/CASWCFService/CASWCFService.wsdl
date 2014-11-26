@@ -86,6 +86,12 @@
   <wsdl:message name="ICASWCFService_GetCustomerSite_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomerSiteResponse" />
   </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetTrendAnalysisTreeNodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendAnalysisTreeNodes" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetTrendAnalysisTreeNodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendAnalysisTreeNodesResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICASWCFService">
     <wsdl:operation name="LoginProcess">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/LoginProcess" message="tns:ICASWCFService_LoginProcess_InputMessage" />
@@ -138,6 +144,10 @@
     <wsdl:operation name="GetCustomerSite">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetCustomerSite" message="tns:ICASWCFService_GetCustomerSite_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetCustomerSiteResponse" message="tns:ICASWCFService_GetCustomerSite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrendAnalysisTreeNodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes" message="tns:ICASWCFService_GetTrendAnalysisTreeNodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse" message="tns:ICASWCFService_GetTrendAnalysisTreeNodes_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICASWCFService" type="tns:ICASWCFService">
@@ -252,6 +262,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCustomerSite">
       <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetCustomerSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrendAnalysisTreeNodes">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

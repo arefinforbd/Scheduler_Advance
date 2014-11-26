@@ -136,12 +136,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\SchedulerRepository.cs" />
     <Compile Include="Service References\CASWCFService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="WebParser\ReportParser.cs" />
     <Compile Include="WebParser\SchedulerParser.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +296,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.TimeSlot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.TreeNode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Welcome.datasource">

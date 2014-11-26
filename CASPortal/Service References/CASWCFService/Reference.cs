@@ -1304,6 +1304,455 @@ namespace CASPortal.CASWCFService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNode", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    [System.SerializableAttribute()]
+    public partial class TreeNode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CASPortal.CASWCFService.TreeNodeLevel1[] listLeve1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CASPortal.CASWCFService.TreeNodeLevel2[] listLeve2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CASPortal.CASWCFService.TreeNodeLevel3[] listLeve3Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CASPortal.CASWCFService.TreeNodeLevel4[] listLeve4Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CASPortal.CASWCFService.TreeNodeLevel1[] listLeve1 {
+            get {
+                return this.listLeve1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listLeve1Field, value) != true)) {
+                    this.listLeve1Field = value;
+                    this.RaisePropertyChanged("listLeve1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CASPortal.CASWCFService.TreeNodeLevel2[] listLeve2 {
+            get {
+                return this.listLeve2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listLeve2Field, value) != true)) {
+                    this.listLeve2Field = value;
+                    this.RaisePropertyChanged("listLeve2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CASPortal.CASWCFService.TreeNodeLevel3[] listLeve3 {
+            get {
+                return this.listLeve3Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listLeve3Field, value) != true)) {
+                    this.listLeve3Field = value;
+                    this.RaisePropertyChanged("listLeve3");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CASPortal.CASWCFService.TreeNodeLevel4[] listLeve4 {
+            get {
+                return this.listLeve4Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listLeve4Field, value) != true)) {
+                    this.listLeve4Field = value;
+                    this.RaisePropertyChanged("listLeve4");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel1", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    [System.SerializableAttribute()]
+    public partial class TreeNodeLevel1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RootCaptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SectionCaptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SectionIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RootCaption {
+            get {
+                return this.RootCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RootCaptionField, value) != true)) {
+                    this.RootCaptionField = value;
+                    this.RaisePropertyChanged("RootCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SectionCaption {
+            get {
+                return this.SectionCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SectionCaptionField, value) != true)) {
+                    this.SectionCaptionField = value;
+                    this.RaisePropertyChanged("SectionCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SectionID {
+            get {
+                return this.SectionIDField;
+            }
+            set {
+                if ((this.SectionIDField.Equals(value) != true)) {
+                    this.SectionIDField = value;
+                    this.RaisePropertyChanged("SectionID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel2", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    [System.SerializableAttribute()]
+    public partial class TreeNodeLevel2 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string QuestionCaptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuestionIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SectionIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string QuestionCaption {
+            get {
+                return this.QuestionCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.QuestionCaptionField, value) != true)) {
+                    this.QuestionCaptionField = value;
+                    this.RaisePropertyChanged("QuestionCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int QuestionID {
+            get {
+                return this.QuestionIDField;
+            }
+            set {
+                if ((this.QuestionIDField.Equals(value) != true)) {
+                    this.QuestionIDField = value;
+                    this.RaisePropertyChanged("QuestionID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SectionID {
+            get {
+                return this.SectionIDField;
+            }
+            set {
+                if ((this.SectionIDField.Equals(value) != true)) {
+                    this.SectionIDField = value;
+                    this.RaisePropertyChanged("SectionID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel3", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    [System.SerializableAttribute()]
+    public partial class TreeNodeLevel3 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AnswerCaptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AnswerIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuestionIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SectionIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AnswerCaption {
+            get {
+                return this.AnswerCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AnswerCaptionField, value) != true)) {
+                    this.AnswerCaptionField = value;
+                    this.RaisePropertyChanged("AnswerCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AnswerID {
+            get {
+                return this.AnswerIDField;
+            }
+            set {
+                if ((this.AnswerIDField.Equals(value) != true)) {
+                    this.AnswerIDField = value;
+                    this.RaisePropertyChanged("AnswerID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int QuestionID {
+            get {
+                return this.QuestionIDField;
+            }
+            set {
+                if ((this.QuestionIDField.Equals(value) != true)) {
+                    this.QuestionIDField = value;
+                    this.RaisePropertyChanged("QuestionID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SectionID {
+            get {
+                return this.SectionIDField;
+            }
+            set {
+                if ((this.SectionIDField.Equals(value) != true)) {
+                    this.SectionIDField = value;
+                    this.RaisePropertyChanged("SectionID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel4", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    [System.SerializableAttribute()]
+    public partial class TreeNodeLevel4 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AdditionalAnswerCaptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AdditionalAnswerIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AnswerIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuestionIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SectionIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AdditionalAnswerCaption {
+            get {
+                return this.AdditionalAnswerCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AdditionalAnswerCaptionField, value) != true)) {
+                    this.AdditionalAnswerCaptionField = value;
+                    this.RaisePropertyChanged("AdditionalAnswerCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AdditionalAnswerID {
+            get {
+                return this.AdditionalAnswerIDField;
+            }
+            set {
+                if ((this.AdditionalAnswerIDField.Equals(value) != true)) {
+                    this.AdditionalAnswerIDField = value;
+                    this.RaisePropertyChanged("AdditionalAnswerID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AnswerID {
+            get {
+                return this.AnswerIDField;
+            }
+            set {
+                if ((this.AnswerIDField.Equals(value) != true)) {
+                    this.AnswerIDField = value;
+                    this.RaisePropertyChanged("AnswerID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int QuestionID {
+            get {
+                return this.QuestionIDField;
+            }
+            set {
+                if ((this.QuestionIDField.Equals(value) != true)) {
+                    this.QuestionIDField = value;
+                    this.RaisePropertyChanged("QuestionID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SectionID {
+            get {
+                return this.SectionIDField;
+            }
+            set {
+                if ((this.SectionIDField.Equals(value) != true)) {
+                    this.SectionIDField = value;
+                    this.RaisePropertyChanged("SectionID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CASWCFService.ICASWCFService")]
     public interface ICASWCFService {
@@ -1386,6 +1835,12 @@ namespace CASPortal.CASWCFService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCustomerSite", ReplyAction="http://tempuri.org/ICASWCFService/GetCustomerSiteResponse")]
         System.Threading.Tasks.Task<CASPortal.CASWCFService.Site[]> GetCustomerSiteAsync(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
+        CASPortal.CASWCFService.TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.TreeNode> GetTrendAnalysisTreeNodesAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1577,6 +2032,14 @@ namespace CASPortal.CASWCFService {
         
         public System.Threading.Tasks.Task<CASPortal.CASWCFService.Site[]> GetCustomerSiteAsync(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID) {
             return base.Channel.GetCustomerSiteAsync(CompanyID, CompanyPassword, CustomerPassword, CustomerID, Level4ID);
+        }
+        
+        public CASPortal.CASWCFService.TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
+            return base.Channel.GetTrendAnalysisTreeNodes(CompanyID, CompanyPassword, CustomerID, CustomerPassword, Level4ID);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.TreeNode> GetTrendAnalysisTreeNodesAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
+            return base.Channel.GetTrendAnalysisTreeNodesAsync(CompanyID, CompanyPassword, CustomerID, CustomerPassword, Level4ID);
         }
     }
 }

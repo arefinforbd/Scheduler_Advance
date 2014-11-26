@@ -140,4 +140,72 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Site" nillable="true" type="tns:Site" />
+  <xs:complexType name="TreeNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listLeve1" nillable="true" type="tns:ArrayOfTreeNodeLevel1" />
+      <xs:element minOccurs="0" name="listLeve2" nillable="true" type="tns:ArrayOfTreeNodeLevel2" />
+      <xs:element minOccurs="0" name="listLeve3" nillable="true" type="tns:ArrayOfTreeNodeLevel3" />
+      <xs:element minOccurs="0" name="listLeve4" nillable="true" type="tns:ArrayOfTreeNodeLevel4" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TreeNode" nillable="true" type="tns:TreeNode" />
+  <xs:complexType name="ArrayOfTreeNodeLevel1">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TreeNodeLevel1" nillable="true" type="tns:TreeNodeLevel1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTreeNodeLevel1" nillable="true" type="tns:ArrayOfTreeNodeLevel1" />
+  <xs:complexType name="TreeNodeLevel1">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RootCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TreeNodeLevel1" nillable="true" type="tns:TreeNodeLevel1" />
+  <xs:complexType name="ArrayOfTreeNodeLevel2">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TreeNodeLevel2" nillable="true" type="tns:TreeNodeLevel2" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTreeNodeLevel2" nillable="true" type="tns:ArrayOfTreeNodeLevel2" />
+  <xs:complexType name="TreeNodeLevel2">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="QuestionCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuestionID" type="xs:int" />
+      <xs:element minOccurs="0" name="SectionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TreeNodeLevel2" nillable="true" type="tns:TreeNodeLevel2" />
+  <xs:complexType name="ArrayOfTreeNodeLevel3">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TreeNodeLevel3" nillable="true" type="tns:TreeNodeLevel3" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTreeNodeLevel3" nillable="true" type="tns:ArrayOfTreeNodeLevel3" />
+  <xs:complexType name="TreeNodeLevel3">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AnswerCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AnswerID" type="xs:int" />
+      <xs:element minOccurs="0" name="QuestionID" type="xs:int" />
+      <xs:element minOccurs="0" name="SectionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TreeNodeLevel3" nillable="true" type="tns:TreeNodeLevel3" />
+  <xs:complexType name="ArrayOfTreeNodeLevel4">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TreeNodeLevel4" nillable="true" type="tns:TreeNodeLevel4" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTreeNodeLevel4" nillable="true" type="tns:ArrayOfTreeNodeLevel4" />
+  <xs:complexType name="TreeNodeLevel4">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AdditionalAnswerCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AdditionalAnswerID" type="xs:int" />
+      <xs:element minOccurs="0" name="AnswerID" type="xs:int" />
+      <xs:element minOccurs="0" name="QuestionID" type="xs:int" />
+      <xs:element minOccurs="0" name="SectionID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TreeNodeLevel4" nillable="true" type="tns:TreeNodeLevel4" />
 </xs:schema>

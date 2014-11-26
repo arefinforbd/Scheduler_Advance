@@ -238,4 +238,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTrendAnalysisTreeNodes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerID" type="xs:decimal" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTrendAnalysisTreeNodesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetTrendAnalysisTreeNodesResult" nillable="true" type="q9:TreeNode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

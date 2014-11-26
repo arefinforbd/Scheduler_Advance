@@ -1,4 +1,5 @@
 ﻿using CASPortal.CASWCFService;
+using CASPortal.Helper;
 using CASPortal.Repository;
 using CASPortal.WebParser;
 using System;
@@ -225,6 +226,110 @@ namespace CASPortal.Controllers
 
         public ActionResult TrendAnalysis()
         {
+            BaseHelper helper = new BaseHelper();
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");
+
+            ReportRepository repository = new ReportRepository();
+            StringBuilder sb = new StringBuilder("");
+            //List<TreeNodeLevel1> level1List = new List<TreeNodeLevel1>();
+            //List<TreeNodeLevel2> level2List = new List<TreeNodeLevel2>();
+            //List<TreeNodeLevel3> level3List = new List<TreeNodeLevel3>();
+            //List<TreeNodeLevel4> level4List = new List<TreeNodeLevel4>();
+
+            TreeNode trNode = repository.GetTrendAnalysisTreeNodes();
+
+            if (trNode != null && trNode.listLeve1.Count() > 0)
+            {
+                sb.Append("<ul>");
+                sb.Append("<li>");
+                sb.Append(trNode.listLeve1[0].RootCaption);
+                sb.Append("<ul>");
+                foreach (TreeNodeLevel1 t1 in trNode.listLeve1)
+                {
+                    sb.Append("<li>");
+                    sb.Append(t1.SectionCaption);
+                    sb.Append("<ul>");
+
+                    foreach (TreeNodeLevel2 t2 in trNode.listLeve2.Where(t => t.SectionID == t1.SectionID))
+                    {
+                        sb.Append("<li>");
+                        sb.Append(t2.QuestionCaption);
+                        sb.Append("<ul>");
+
+                        foreach (TreeNodeLevel3 t3 in trNode.listLeve3.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID))
+                        {
+                            sb.Append("<li>");
+                            sb.Append(t3.AnswerCaption);
+                            sb.Append("<ul>");
+
+                            foreach (TreeNodeLevel4 t4 in trNode.listLeve4.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID && t.AnswerID == t3.AnswerID))
+                            {
+                                sb.Append("<li>");
+                                sb.Append(t4.AdditionalAnswerCaption);
+                                sb.Append("</li>");
+                            }
+                            sb.Append("</ul>");
+                            sb.Append("</li>");
+                        }
+                        sb.Append("</ul>");
+                        sb.Append("</li>");
+                    }
+                    sb.Append("</ul>");
+                    sb.Append("</li>");
+                }
+                sb.Append("</ul>");
+                sb.Append("</li>");
+                sb.Append("</ul>");
+            }
+
+            #region list
+            //sb.Append("<ul>");
+            //    sb.Append("<li>INTERNAL");
+            //        sb.Append("<ul>");
+            //            sb.Append("<li>RAT");
+            //                sb.Append("<ul>");
+            //                    sb.Append("<li>ACTIVITY</li>");
+            //                sb.Append("</ul>");
+            //            sb.Append("</li>");
+            //            sb.Append("<li>MOUSE");
+            //                sb.Append("<ul>");
+            //                    sb.Append("<li>ACTIVITY</li>");
+            //                sb.Append("</ul>");
+            //            sb.Append("</li>");
+            //            sb.Append("<li>EFK");
+            //                sb.Append("<ul>");
+            //                    sb.Append("<li>ACTIVITY</li>");
+            //                sb.Append("</ul>");
+            //            sb.Append("</li>");
+            //        sb.Append("</ul>");
+            //    sb.Append("</li>");
+
+            //    sb.Append("<li>EXTERNAL");
+            //        sb.Append("<ul>");
+            //            sb.Append("<li>RAT STATION");
+            //                sb.Append("<ul>");
+            //                    sb.Append("<li>ACTIVITY</li>");
+            //                sb.Append("</ul>");
+            //            sb.Append("</li>");
+            //            sb.Append("<li>MOUSE STATION");
+            //                sb.Append("<ul>");
+            //                    sb.Append("<li>ACTIVITY</li>");
+            //                sb.Append("</ul>");
+            //            sb.Append("</li>");
+            //        sb.Append("</ul>");
+            //    sb.Append("</li>");
+            //sb.Append("</ul>");
+            #endregion
+
+            ViewBag.TreeNodes = sb.ToString();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TrendAnalysis(FormCollection elements)
+        {
             StringBuilder sb = new StringBuilder();
             sb.Append("<ul>");
             sb.Append("<li>Root node 1");
@@ -243,6 +348,10 @@ namespace CASPortal.Controllers
 
         public ActionResult EquipmentTransaction()
         {
+            BaseHelper helper = new BaseHelper();
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");
+
             SiteNItem siteNitem;
             SchedulerRepository repository = new SchedulerRepository();
 
