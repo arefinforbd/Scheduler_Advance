@@ -1,5 +1,4 @@
 ﻿using CASPortal.CASWCFService;
-using CASPortal.Models;
 using CASPortal.WebParser;
 using System;
 using System.Collections.Generic;
@@ -49,9 +48,9 @@ namespace CASPortal.Repository
             }
         }
 
-        public Item GetTimeSlots(string dateStart)
+        public Service GetTimeSlots(string dateStart)
         {
-            Item item = new Item();
+            Service service = new Service();
             BusinessHour businessHour;
             List<TimeSlot> timeSlots = new List<TimeSlot>();
             List<BusinessHour> businessHours = new List<BusinessHour>();
@@ -61,7 +60,7 @@ namespace CASPortal.Repository
             if (HttpContext.Current.Session["BusinessHours"] != null)
             {
                 fixedBusinessHours = (List<BusinessHour>)HttpContext.Current.Session["BusinessHours"];
-                item = parser.GetBookedDays(dateStart);
+                service = parser.GetBookedDays(dateStart);
 
                 var listMaxHour = fixedBusinessHours.GroupBy(i => new { BusinessEndHour = i.BusinessEndHour })
                      .Select(group => new
@@ -70,7 +69,7 @@ namespace CASPortal.Repository
                      })
                      .OrderByDescending(i => i.BusinessEndHour).ToList();
 
-                item.MaxEndHour = listMaxHour[0].BusinessEndHour;
+                service.MaxEndHour = listMaxHour[0].BusinessEndHour;
 
                 var listMinHour = fixedBusinessHours.GroupBy(i => new { BusinessStartHour = i.BusinessStartHour })
                      .Select(group => new
@@ -79,9 +78,9 @@ namespace CASPortal.Repository
                      })
                      .OrderBy(i => i.BusinessStartHour).ToList();
 
-                item.MinStartHour = listMinHour[0].BusinessStartHour;
+                service.MinStartHour = listMinHour[0].BusinessStartHour;
 
-                var list = item.TimeSlots.GroupBy(i => new { Date = i.Date })
+                var list = service.TimeSlots.GroupBy(i => new { Date = i.Date })
                      .Select(group => new
                      {
                          Date = group.First().Date
@@ -100,9 +99,9 @@ namespace CASPortal.Repository
                     businessHours.Add(businessHour);
                 }
 
-                item.BusinessHours = businessHours;
+                service.BusinessHours = businessHours.ToArray();
             }
-            return item;
+            return service;
         }
     }
 }

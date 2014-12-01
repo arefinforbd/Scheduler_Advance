@@ -9,1838 +9,132 @@
 //------------------------------------------------------------------------------
 
 namespace CASPortal.CASWCFService {
-    using System.Runtime.Serialization;
-    using System;
+    using System.Data;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Welcome", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class Welcome : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] CompanyLogoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CompanyNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LogoFileNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageOfTheDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PrivateFoldersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PublicFoldersField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] CompanyLogo {
-            get {
-                return this.CompanyLogoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompanyLogoField, value) != true)) {
-                    this.CompanyLogoField = value;
-                    this.RaisePropertyChanged("CompanyLogo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CompanyName {
-            get {
-                return this.CompanyNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompanyNameField, value) != true)) {
-                    this.CompanyNameField = value;
-                    this.RaisePropertyChanged("CompanyName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LogoFileName {
-            get {
-                return this.LogoFileNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LogoFileNameField, value) != true)) {
-                    this.LogoFileNameField = value;
-                    this.RaisePropertyChanged("LogoFileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MessageOfTheDay {
-            get {
-                return this.MessageOfTheDayField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageOfTheDayField, value) != true)) {
-                    this.MessageOfTheDayField = value;
-                    this.RaisePropertyChanged("MessageOfTheDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PrivateFolders {
-            get {
-                return this.PrivateFoldersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PrivateFoldersField, value) != true)) {
-                    this.PrivateFoldersField = value;
-                    this.RaisePropertyChanged("PrivateFolders");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PublicFolders {
-            get {
-                return this.PublicFoldersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PublicFoldersField, value) != true)) {
-                    this.PublicFoldersField = value;
-                    this.RaisePropertyChanged("PublicFolders");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Folder", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class Folder : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] PrivateFoldersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] PublicFoldersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string fileDescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string fileNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string fileUploadedByField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string fileUploadedDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int lvl4sequenceField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] PrivateFolders {
-            get {
-                return this.PrivateFoldersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PrivateFoldersField, value) != true)) {
-                    this.PrivateFoldersField = value;
-                    this.RaisePropertyChanged("PrivateFolders");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] PublicFolders {
-            get {
-                return this.PublicFoldersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PublicFoldersField, value) != true)) {
-                    this.PublicFoldersField = value;
-                    this.RaisePropertyChanged("PublicFolders");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string fileDescription {
-            get {
-                return this.fileDescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.fileDescriptionField, value) != true)) {
-                    this.fileDescriptionField = value;
-                    this.RaisePropertyChanged("fileDescription");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string fileName {
-            get {
-                return this.fileNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.fileNameField, value) != true)) {
-                    this.fileNameField = value;
-                    this.RaisePropertyChanged("fileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string fileUploadedBy {
-            get {
-                return this.fileUploadedByField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.fileUploadedByField, value) != true)) {
-                    this.fileUploadedByField = value;
-                    this.RaisePropertyChanged("fileUploadedBy");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string fileUploadedDate {
-            get {
-                return this.fileUploadedDateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.fileUploadedDateField, value) != true)) {
-                    this.fileUploadedDateField = value;
-                    this.RaisePropertyChanged("fileUploadedDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int lvl4sequence {
-            get {
-                return this.lvl4sequenceField;
-            }
-            set {
-                if ((this.lvl4sequenceField.Equals(value) != true)) {
-                    this.lvl4sequenceField = value;
-                    this.RaisePropertyChanged("lvl4sequence");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DayHour", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class DayHour : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day1EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day1StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day2EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day2StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day3EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day3StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day4EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day4StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day5EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day5StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day6EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day6StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day7EndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Day7StartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay1WorkingDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay2WorkingDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay3WorkingDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay4WorkingDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay5WorkingDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay6WorkingDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsDay7WorkingDayField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day1EndHour {
-            get {
-                return this.Day1EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day1EndHourField, value) != true)) {
-                    this.Day1EndHourField = value;
-                    this.RaisePropertyChanged("Day1EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day1StartHour {
-            get {
-                return this.Day1StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day1StartHourField, value) != true)) {
-                    this.Day1StartHourField = value;
-                    this.RaisePropertyChanged("Day1StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day2EndHour {
-            get {
-                return this.Day2EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day2EndHourField, value) != true)) {
-                    this.Day2EndHourField = value;
-                    this.RaisePropertyChanged("Day2EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day2StartHour {
-            get {
-                return this.Day2StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day2StartHourField, value) != true)) {
-                    this.Day2StartHourField = value;
-                    this.RaisePropertyChanged("Day2StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day3EndHour {
-            get {
-                return this.Day3EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day3EndHourField, value) != true)) {
-                    this.Day3EndHourField = value;
-                    this.RaisePropertyChanged("Day3EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day3StartHour {
-            get {
-                return this.Day3StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day3StartHourField, value) != true)) {
-                    this.Day3StartHourField = value;
-                    this.RaisePropertyChanged("Day3StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day4EndHour {
-            get {
-                return this.Day4EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day4EndHourField, value) != true)) {
-                    this.Day4EndHourField = value;
-                    this.RaisePropertyChanged("Day4EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day4StartHour {
-            get {
-                return this.Day4StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day4StartHourField, value) != true)) {
-                    this.Day4StartHourField = value;
-                    this.RaisePropertyChanged("Day4StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day5EndHour {
-            get {
-                return this.Day5EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day5EndHourField, value) != true)) {
-                    this.Day5EndHourField = value;
-                    this.RaisePropertyChanged("Day5EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day5StartHour {
-            get {
-                return this.Day5StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day5StartHourField, value) != true)) {
-                    this.Day5StartHourField = value;
-                    this.RaisePropertyChanged("Day5StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day6EndHour {
-            get {
-                return this.Day6EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day6EndHourField, value) != true)) {
-                    this.Day6EndHourField = value;
-                    this.RaisePropertyChanged("Day6EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day6StartHour {
-            get {
-                return this.Day6StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day6StartHourField, value) != true)) {
-                    this.Day6StartHourField = value;
-                    this.RaisePropertyChanged("Day6StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day7EndHour {
-            get {
-                return this.Day7EndHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day7EndHourField, value) != true)) {
-                    this.Day7EndHourField = value;
-                    this.RaisePropertyChanged("Day7EndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Day7StartHour {
-            get {
-                return this.Day7StartHourField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Day7StartHourField, value) != true)) {
-                    this.Day7StartHourField = value;
-                    this.RaisePropertyChanged("Day7StartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay1WorkingDay {
-            get {
-                return this.IsDay1WorkingDayField;
-            }
-            set {
-                if ((this.IsDay1WorkingDayField.Equals(value) != true)) {
-                    this.IsDay1WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay1WorkingDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay2WorkingDay {
-            get {
-                return this.IsDay2WorkingDayField;
-            }
-            set {
-                if ((this.IsDay2WorkingDayField.Equals(value) != true)) {
-                    this.IsDay2WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay2WorkingDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay3WorkingDay {
-            get {
-                return this.IsDay3WorkingDayField;
-            }
-            set {
-                if ((this.IsDay3WorkingDayField.Equals(value) != true)) {
-                    this.IsDay3WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay3WorkingDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay4WorkingDay {
-            get {
-                return this.IsDay4WorkingDayField;
-            }
-            set {
-                if ((this.IsDay4WorkingDayField.Equals(value) != true)) {
-                    this.IsDay4WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay4WorkingDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay5WorkingDay {
-            get {
-                return this.IsDay5WorkingDayField;
-            }
-            set {
-                if ((this.IsDay5WorkingDayField.Equals(value) != true)) {
-                    this.IsDay5WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay5WorkingDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay6WorkingDay {
-            get {
-                return this.IsDay6WorkingDayField;
-            }
-            set {
-                if ((this.IsDay6WorkingDayField.Equals(value) != true)) {
-                    this.IsDay6WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay6WorkingDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsDay7WorkingDay {
-            get {
-                return this.IsDay7WorkingDayField;
-            }
-            set {
-                if ((this.IsDay7WorkingDayField.Equals(value) != true)) {
-                    this.IsDay7WorkingDayField = value;
-                    this.RaisePropertyChanged("IsDay7WorkingDay");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TimeSlot", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class TimeSlot : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EndTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsPublicHoliDayField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ItemIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SpecialInstructionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StartTimeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Date {
-            get {
-                return this.DateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DateField, value) != true)) {
-                    this.DateField = value;
-                    this.RaisePropertyChanged("Date");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EndTime {
-            get {
-                return this.EndTimeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EndTimeField, value) != true)) {
-                    this.EndTimeField = value;
-                    this.RaisePropertyChanged("EndTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPublicHoliDay {
-            get {
-                return this.IsPublicHoliDayField;
-            }
-            set {
-                if ((this.IsPublicHoliDayField.Equals(value) != true)) {
-                    this.IsPublicHoliDayField = value;
-                    this.RaisePropertyChanged("IsPublicHoliDay");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ItemID {
-            get {
-                return this.ItemIDField;
-            }
-            set {
-                if ((this.ItemIDField.Equals(value) != true)) {
-                    this.ItemIDField = value;
-                    this.RaisePropertyChanged("ItemID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SpecialInstruction {
-            get {
-                return this.SpecialInstructionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SpecialInstructionField, value) != true)) {
-                    this.SpecialInstructionField = value;
-                    this.RaisePropertyChanged("SpecialInstruction");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StartTime {
-            get {
-                return this.StartTimeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StartTimeField, value) != true)) {
-                    this.StartTimeField = value;
-                    this.RaisePropertyChanged("StartTime");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SiteNItem", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class SiteNItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CASPortal.CASWCFService.Item[] itemsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CASPortal.CASWCFService.Site[] sitesField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CASPortal.CASWCFService.Item[] items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.itemsField, value) != true)) {
-                    this.itemsField = value;
-                    this.RaisePropertyChanged("items");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CASPortal.CASWCFService.Site[] sites {
-            get {
-                return this.sitesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.sitesField, value) != true)) {
-                    this.sitesField = value;
-                    this.RaisePropertyChanged("sites");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Item", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class Item : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CategoryIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CategoryNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int DurationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ItemIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ItemNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private float MaxEndHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private float MinStartHourField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double PriceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ProductIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ProductNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CategoryID {
-            get {
-                return this.CategoryIDField;
-            }
-            set {
-                if ((this.CategoryIDField.Equals(value) != true)) {
-                    this.CategoryIDField = value;
-                    this.RaisePropertyChanged("CategoryID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CategoryName {
-            get {
-                return this.CategoryNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CategoryNameField, value) != true)) {
-                    this.CategoryNameField = value;
-                    this.RaisePropertyChanged("CategoryName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
-                return this.DescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Duration {
-            get {
-                return this.DurationField;
-            }
-            set {
-                if ((this.DurationField.Equals(value) != true)) {
-                    this.DurationField = value;
-                    this.RaisePropertyChanged("Duration");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ItemID {
-            get {
-                return this.ItemIDField;
-            }
-            set {
-                if ((this.ItemIDField.Equals(value) != true)) {
-                    this.ItemIDField = value;
-                    this.RaisePropertyChanged("ItemID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ItemName {
-            get {
-                return this.ItemNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ItemNameField, value) != true)) {
-                    this.ItemNameField = value;
-                    this.RaisePropertyChanged("ItemName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public float MaxEndHour {
-            get {
-                return this.MaxEndHourField;
-            }
-            set {
-                if ((this.MaxEndHourField.Equals(value) != true)) {
-                    this.MaxEndHourField = value;
-                    this.RaisePropertyChanged("MaxEndHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public float MinStartHour {
-            get {
-                return this.MinStartHourField;
-            }
-            set {
-                if ((this.MinStartHourField.Equals(value) != true)) {
-                    this.MinStartHourField = value;
-                    this.RaisePropertyChanged("MinStartHour");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Price {
-            get {
-                return this.PriceField;
-            }
-            set {
-                if ((this.PriceField.Equals(value) != true)) {
-                    this.PriceField = value;
-                    this.RaisePropertyChanged("Price");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProductID {
-            get {
-                return this.ProductIDField;
-            }
-            set {
-                if ((this.ProductIDField.Equals(value) != true)) {
-                    this.ProductIDField = value;
-                    this.RaisePropertyChanged("ProductID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ProductName {
-            get {
-                return this.ProductNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProductNameField, value) != true)) {
-                    this.ProductNameField = value;
-                    this.RaisePropertyChanged("ProductName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Site", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class Site : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Address1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Address2Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Address3Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CompanyNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LastNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int Level4Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MobileNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PhoneNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PostCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SiteCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SiteNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StreetNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SuburbField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Address1 {
-            get {
-                return this.Address1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Address1Field, value) != true)) {
-                    this.Address1Field = value;
-                    this.RaisePropertyChanged("Address1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Address2 {
-            get {
-                return this.Address2Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Address2Field, value) != true)) {
-                    this.Address2Field = value;
-                    this.RaisePropertyChanged("Address2");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Address3 {
-            get {
-                return this.Address3Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Address3Field, value) != true)) {
-                    this.Address3Field = value;
-                    this.RaisePropertyChanged("Address3");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CompanyName {
-            get {
-                return this.CompanyNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompanyNameField, value) != true)) {
-                    this.CompanyNameField = value;
-                    this.RaisePropertyChanged("CompanyName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LastName {
-            get {
-                return this.LastNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
-                    this.LastNameField = value;
-                    this.RaisePropertyChanged("LastName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Level4 {
-            get {
-                return this.Level4Field;
-            }
-            set {
-                if ((this.Level4Field.Equals(value) != true)) {
-                    this.Level4Field = value;
-                    this.RaisePropertyChanged("Level4");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string MobileNo {
-            get {
-                return this.MobileNoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MobileNoField, value) != true)) {
-                    this.MobileNoField = value;
-                    this.RaisePropertyChanged("MobileNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhoneNo {
-            get {
-                return this.PhoneNoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhoneNoField, value) != true)) {
-                    this.PhoneNoField = value;
-                    this.RaisePropertyChanged("PhoneNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PostCode {
-            get {
-                return this.PostCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PostCodeField, value) != true)) {
-                    this.PostCodeField = value;
-                    this.RaisePropertyChanged("PostCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SiteCode {
-            get {
-                return this.SiteCodeField;
-            }
-            set {
-                if ((this.SiteCodeField.Equals(value) != true)) {
-                    this.SiteCodeField = value;
-                    this.RaisePropertyChanged("SiteCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SiteNo {
-            get {
-                return this.SiteNoField;
-            }
-            set {
-                if ((this.SiteNoField.Equals(value) != true)) {
-                    this.SiteNoField = value;
-                    this.RaisePropertyChanged("SiteNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string State {
-            get {
-                return this.StateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StateField, value) != true)) {
-                    this.StateField = value;
-                    this.RaisePropertyChanged("State");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StreetNo {
-            get {
-                return this.StreetNoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StreetNoField, value) != true)) {
-                    this.StreetNoField = value;
-                    this.RaisePropertyChanged("StreetNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Suburb {
-            get {
-                return this.SuburbField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SuburbField, value) != true)) {
-                    this.SuburbField = value;
-                    this.RaisePropertyChanged("Suburb");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNode", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class TreeNode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CASPortal.CASWCFService.TreeNodeLevel1[] listLeve1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CASPortal.CASWCFService.TreeNodeLevel2[] listLeve2Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CASPortal.CASWCFService.TreeNodeLevel3[] listLeve3Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CASPortal.CASWCFService.TreeNodeLevel4[] listLeve4Field;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CASPortal.CASWCFService.TreeNodeLevel1[] listLeve1 {
-            get {
-                return this.listLeve1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.listLeve1Field, value) != true)) {
-                    this.listLeve1Field = value;
-                    this.RaisePropertyChanged("listLeve1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CASPortal.CASWCFService.TreeNodeLevel2[] listLeve2 {
-            get {
-                return this.listLeve2Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.listLeve2Field, value) != true)) {
-                    this.listLeve2Field = value;
-                    this.RaisePropertyChanged("listLeve2");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CASPortal.CASWCFService.TreeNodeLevel3[] listLeve3 {
-            get {
-                return this.listLeve3Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.listLeve3Field, value) != true)) {
-                    this.listLeve3Field = value;
-                    this.RaisePropertyChanged("listLeve3");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CASPortal.CASWCFService.TreeNodeLevel4[] listLeve4 {
-            get {
-                return this.listLeve4Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.listLeve4Field, value) != true)) {
-                    this.listLeve4Field = value;
-                    this.RaisePropertyChanged("listLeve4");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel1", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class TreeNodeLevel1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RootCaptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SectionCaptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SectionIDField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RootCaption {
-            get {
-                return this.RootCaptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RootCaptionField, value) != true)) {
-                    this.RootCaptionField = value;
-                    this.RaisePropertyChanged("RootCaption");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SectionCaption {
-            get {
-                return this.SectionCaptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SectionCaptionField, value) != true)) {
-                    this.SectionCaptionField = value;
-                    this.RaisePropertyChanged("SectionCaption");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SectionID {
-            get {
-                return this.SectionIDField;
-            }
-            set {
-                if ((this.SectionIDField.Equals(value) != true)) {
-                    this.SectionIDField = value;
-                    this.RaisePropertyChanged("SectionID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel2", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class TreeNodeLevel2 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string QuestionCaptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int QuestionIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SectionIDField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string QuestionCaption {
-            get {
-                return this.QuestionCaptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.QuestionCaptionField, value) != true)) {
-                    this.QuestionCaptionField = value;
-                    this.RaisePropertyChanged("QuestionCaption");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int QuestionID {
-            get {
-                return this.QuestionIDField;
-            }
-            set {
-                if ((this.QuestionIDField.Equals(value) != true)) {
-                    this.QuestionIDField = value;
-                    this.RaisePropertyChanged("QuestionID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SectionID {
-            get {
-                return this.SectionIDField;
-            }
-            set {
-                if ((this.SectionIDField.Equals(value) != true)) {
-                    this.SectionIDField = value;
-                    this.RaisePropertyChanged("SectionID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel3", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class TreeNodeLevel3 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AnswerCaptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AnswerIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int QuestionIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SectionIDField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AnswerCaption {
-            get {
-                return this.AnswerCaptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AnswerCaptionField, value) != true)) {
-                    this.AnswerCaptionField = value;
-                    this.RaisePropertyChanged("AnswerCaption");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AnswerID {
-            get {
-                return this.AnswerIDField;
-            }
-            set {
-                if ((this.AnswerIDField.Equals(value) != true)) {
-                    this.AnswerIDField = value;
-                    this.RaisePropertyChanged("AnswerID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int QuestionID {
-            get {
-                return this.QuestionIDField;
-            }
-            set {
-                if ((this.QuestionIDField.Equals(value) != true)) {
-                    this.QuestionIDField = value;
-                    this.RaisePropertyChanged("QuestionID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SectionID {
-            get {
-                return this.SectionIDField;
-            }
-            set {
-                if ((this.SectionIDField.Equals(value) != true)) {
-                    this.SectionIDField = value;
-                    this.RaisePropertyChanged("SectionID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TreeNodeLevel4", Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-    [System.SerializableAttribute()]
-    public partial class TreeNodeLevel4 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AdditionalAnswerCaptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AdditionalAnswerIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AnswerIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int QuestionIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SectionIDField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AdditionalAnswerCaption {
-            get {
-                return this.AdditionalAnswerCaptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AdditionalAnswerCaptionField, value) != true)) {
-                    this.AdditionalAnswerCaptionField = value;
-                    this.RaisePropertyChanged("AdditionalAnswerCaption");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AdditionalAnswerID {
-            get {
-                return this.AdditionalAnswerIDField;
-            }
-            set {
-                if ((this.AdditionalAnswerIDField.Equals(value) != true)) {
-                    this.AdditionalAnswerIDField = value;
-                    this.RaisePropertyChanged("AdditionalAnswerID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AnswerID {
-            get {
-                return this.AnswerIDField;
-            }
-            set {
-                if ((this.AnswerIDField.Equals(value) != true)) {
-                    this.AnswerIDField = value;
-                    this.RaisePropertyChanged("AnswerID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int QuestionID {
-            get {
-                return this.QuestionIDField;
-            }
-            set {
-                if ((this.QuestionIDField.Equals(value) != true)) {
-                    this.QuestionIDField = value;
-                    this.RaisePropertyChanged("QuestionID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SectionID {
-            get {
-                return this.SectionIDField;
-            }
-            set {
-                if ((this.SectionIDField.Equals(value) != true)) {
-                    this.SectionIDField = value;
-                    this.RaisePropertyChanged("SectionID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CASWCFService.ICASWCFService")]
     public interface ICASWCFService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/LoginProcess", ReplyAction="http://tempuri.org/ICASWCFService/LoginProcessResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CASPortal.CASWCFService.LoginProcessResponse LoginProcess(CASPortal.CASWCFService.LoginProcessRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/LoginProcess", ReplyAction="http://tempuri.org/ICASWCFService/LoginProcessResponse")]
         System.Threading.Tasks.Task<CASPortal.CASWCFService.LoginProcessResponse> LoginProcessAsync(CASPortal.CASWCFService.LoginProcessRequest request);
         
+        // CODEGEN: Parameter 'GetCASDefaultDataResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCASDefaultData", ReplyAction="http://tempuri.org/ICASWCFService/GetCASDefaultDataResponse")]
-        CASPortal.CASWCFService.Welcome GetCASDefaultData(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID);
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetCASDefaultDataResponse GetCASDefaultData(CASPortal.CASWCFService.GetCASDefaultDataRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCASDefaultData", ReplyAction="http://tempuri.org/ICASWCFService/GetCASDefaultDataResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.Welcome> GetCASDefaultDataAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCASDefaultDataResponse> GetCASDefaultDataAsync(CASPortal.CASWCFService.GetCASDefaultDataRequest request);
+        
+        // CODEGEN: Parameter 'LoginMessageOfDayResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/LoginMessageOfDay", ReplyAction="http://tempuri.org/ICASWCFService/LoginMessageOfDayResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.LoginMessageOfDayResponse LoginMessageOfDay(CASPortal.CASWCFService.LoginMessageOfDayRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/LoginMessageOfDay", ReplyAction="http://tempuri.org/ICASWCFService/LoginMessageOfDayResponse")]
-        CASPortal.CASWCFService.Welcome[] LoginMessageOfDay(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.LoginMessageOfDayResponse> LoginMessageOfDayAsync(CASPortal.CASWCFService.LoginMessageOfDayRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/LoginMessageOfDay", ReplyAction="http://tempuri.org/ICASWCFService/LoginMessageOfDayResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.Welcome[]> LoginMessageOfDayAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID);
+        // CODEGEN: Parameter 'GetPrivateFoldersResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFolders", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFoldersResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetPrivateFoldersResponse GetPrivateFolders(CASPortal.CASWCFService.GetPrivateFoldersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFolders", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFoldersResponse")]
-        string GetPrivateFolders(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFoldersResponse> GetPrivateFoldersAsync(CASPortal.CASWCFService.GetPrivateFoldersRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFolders", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFoldersResponse")]
-        System.Threading.Tasks.Task<string> GetPrivateFoldersAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID);
+        // CODEGEN: Parameter 'GetPublicFoldersResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFolders", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFoldersResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetPublicFoldersResponse GetPublicFolders(CASPortal.CASWCFService.GetPublicFoldersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFolders", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFoldersResponse")]
-        string GetPublicFolders(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFoldersResponse> GetPublicFoldersAsync(CASPortal.CASWCFService.GetPublicFoldersRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFolders", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFoldersResponse")]
-        System.Threading.Tasks.Task<string> GetPublicFoldersAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID);
+        // CODEGEN: Parameter 'GetPrivateFolderFilesResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFolderFiles", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFolderFilesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetPrivateFolderFilesResponse GetPrivateFolderFiles(CASPortal.CASWCFService.GetPrivateFolderFilesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFolderFiles", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFolderFilesResponse")]
-        CASPortal.CASWCFService.Folder[] GetPrivateFolderFiles(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string TimeZoneOffset);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFolderFilesResponse> GetPrivateFolderFilesAsync(CASPortal.CASWCFService.GetPrivateFolderFilesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFolderFiles", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFolderFilesResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.Folder[]> GetPrivateFolderFilesAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string TimeZoneOffset);
+        // CODEGEN: Parameter 'GetPublicFolderFilesResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFolderFiles", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFolderFilesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetPublicFolderFilesResponse GetPublicFolderFiles(CASPortal.CASWCFService.GetPublicFolderFilesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFolderFiles", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFolderFilesResponse")]
-        CASPortal.CASWCFService.Folder[] GetPublicFolderFiles(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string TimeZoneOffset);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFolderFilesResponse> GetPublicFolderFilesAsync(CASPortal.CASWCFService.GetPublicFolderFilesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFolderFiles", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFolderFilesResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.Folder[]> GetPublicFolderFilesAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string TimeZoneOffset);
+        // CODEGEN: Parameter 'GetPrivateFileInfoResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFileInfo", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFileInfoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetPrivateFileInfoResponse GetPrivateFileInfo(CASPortal.CASWCFService.GetPrivateFileInfoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFileInfo", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFileInfoResponse")]
-        byte[] GetPrivateFileInfo(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string FileName);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFileInfoResponse> GetPrivateFileInfoAsync(CASPortal.CASWCFService.GetPrivateFileInfoRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPrivateFileInfo", ReplyAction="http://tempuri.org/ICASWCFService/GetPrivateFileInfoResponse")]
-        System.Threading.Tasks.Task<byte[]> GetPrivateFileInfoAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string FileName);
+        // CODEGEN: Parameter 'GetPublicFileInfoResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFileInfo", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFileInfoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetPublicFileInfoResponse GetPublicFileInfo(CASPortal.CASWCFService.GetPublicFileInfoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFileInfo", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFileInfoResponse")]
-        byte[] GetPublicFileInfo(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string FileName);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFileInfoResponse> GetPublicFileInfoAsync(CASPortal.CASWCFService.GetPublicFileInfoRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetPublicFileInfo", ReplyAction="http://tempuri.org/ICASWCFService/GetPublicFileInfoResponse")]
-        System.Threading.Tasks.Task<byte[]> GetPublicFileInfoAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string FileName);
+        // CODEGEN: Parameter 'GetBusinessTimeResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetBusinessTime", ReplyAction="http://tempuri.org/ICASWCFService/GetBusinessTimeResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetBusinessTimeResponse GetBusinessTime(CASPortal.CASWCFService.GetBusinessTimeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetBusinessTime", ReplyAction="http://tempuri.org/ICASWCFService/GetBusinessTimeResponse")]
-        CASPortal.CASWCFService.DayHour[] GetBusinessTime(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetBusinessTimeResponse> GetBusinessTimeAsync(CASPortal.CASWCFService.GetBusinessTimeRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetBusinessTime", ReplyAction="http://tempuri.org/ICASWCFService/GetBusinessTimeResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.DayHour[]> GetBusinessTimeAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID);
+        // CODEGEN: Parameter 'GetScheduledTimeResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetScheduledTime", ReplyAction="http://tempuri.org/ICASWCFService/GetScheduledTimeResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetScheduledTimeResponse GetScheduledTime(CASPortal.CASWCFService.GetScheduledTimeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetScheduledTime", ReplyAction="http://tempuri.org/ICASWCFService/GetScheduledTimeResponse")]
-        CASPortal.CASWCFService.TimeSlot[] GetScheduledTime(string CompanyID, string CompanyPassword, string CustomerPassword, System.DateTime startDate);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetScheduledTimeResponse> GetScheduledTimeAsync(CASPortal.CASWCFService.GetScheduledTimeRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetScheduledTime", ReplyAction="http://tempuri.org/ICASWCFService/GetScheduledTimeResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.TimeSlot[]> GetScheduledTimeAsync(string CompanyID, string CompanyPassword, string CustomerPassword, System.DateTime startDate);
+        // CODEGEN: Parameter 'GetCategoryProductServiceResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCategoryProductService", ReplyAction="http://tempuri.org/ICASWCFService/GetCategoryProductServiceResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetCategoryProductServiceResponse GetCategoryProductService(CASPortal.CASWCFService.GetCategoryProductServiceRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCategoryProductService", ReplyAction="http://tempuri.org/ICASWCFService/GetCategoryProductServiceResponse")]
-        CASPortal.CASWCFService.SiteNItem GetCategoryProductService(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCategoryProductServiceResponse> GetCategoryProductServiceAsync(CASPortal.CASWCFService.GetCategoryProductServiceRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCategoryProductService", ReplyAction="http://tempuri.org/ICASWCFService/GetCategoryProductServiceResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.SiteNItem> GetCategoryProductServiceAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+        // CODEGEN: Parameter 'GetCustomerSiteResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCustomerSite", ReplyAction="http://tempuri.org/ICASWCFService/GetCustomerSiteResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetCustomerSiteResponse GetCustomerSite(CASPortal.CASWCFService.GetCustomerSiteRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCustomerSite", ReplyAction="http://tempuri.org/ICASWCFService/GetCustomerSiteResponse")]
-        CASPortal.CASWCFService.Site[] GetCustomerSite(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCustomerSiteResponse> GetCustomerSiteAsync(CASPortal.CASWCFService.GetCustomerSiteRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetCustomerSite", ReplyAction="http://tempuri.org/ICASWCFService/GetCustomerSiteResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.Site[]> GetCustomerSiteAsync(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID);
+        // CODEGEN: Parameter 'GetTrendAnalysisTreeNodesResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse GetTrendAnalysisTreeNodes(CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
-        CASPortal.CASWCFService.TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse> GetTrendAnalysisTreeNodesAsync(CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.TreeNode> GetTrendAnalysisTreeNodesAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+        // CODEGEN: Parameter 'PostTrendAnalysisReportDataResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData", ReplyAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse PostTrendAnalysisReportData(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData", ReplyAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1849,15 +143,19 @@ namespace CASPortal.CASWCFService {
     public partial class LoginProcessRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string CompanyID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string CompanyPassword;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string CustomerID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string CustomerPassword;
         
         public LoginProcessRequest() {
@@ -1888,6 +186,2858 @@ namespace CASPortal.CASWCFService {
         public LoginProcessResponse(bool LoginProcessResult, int lvl4id) {
             this.LoginProcessResult = LoginProcessResult;
             this.lvl4id = lvl4id;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class Welcome : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private byte[] companyLogoField;
+        
+        private string companyNameField;
+        
+        private string logoFileNameField;
+        
+        private string messageOfTheDayField;
+        
+        private string privateFoldersField;
+        
+        private string publicFoldersField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true, Order=0)]
+        public byte[] CompanyLogo {
+            get {
+                return this.companyLogoField;
+            }
+            set {
+                this.companyLogoField = value;
+                this.RaisePropertyChanged("CompanyLogo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
+        public string CompanyName {
+            get {
+                return this.companyNameField;
+            }
+            set {
+                this.companyNameField = value;
+                this.RaisePropertyChanged("CompanyName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string LogoFileName {
+            get {
+                return this.logoFileNameField;
+            }
+            set {
+                this.logoFileNameField = value;
+                this.RaisePropertyChanged("LogoFileName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public string MessageOfTheDay {
+            get {
+                return this.messageOfTheDayField;
+            }
+            set {
+                this.messageOfTheDayField = value;
+                this.RaisePropertyChanged("MessageOfTheDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
+        public string PrivateFolders {
+            get {
+                return this.privateFoldersField;
+            }
+            set {
+                this.privateFoldersField = value;
+                this.RaisePropertyChanged("PrivateFolders");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
+        public string PublicFolders {
+            get {
+                return this.publicFoldersField;
+            }
+            set {
+                this.publicFoldersField = value;
+                this.RaisePropertyChanged("PublicFolders");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class TreeNodeLevel4 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string additionalAnswerCaptionField;
+        
+        private int additionalAnswerIDField;
+        
+        private bool additionalAnswerIDFieldSpecified;
+        
+        private int answerIDField;
+        
+        private bool answerIDFieldSpecified;
+        
+        private int questionIDField;
+        
+        private bool questionIDFieldSpecified;
+        
+        private int sectionIDField;
+        
+        private bool sectionIDFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string AdditionalAnswerCaption {
+            get {
+                return this.additionalAnswerCaptionField;
+            }
+            set {
+                this.additionalAnswerCaptionField = value;
+                this.RaisePropertyChanged("AdditionalAnswerCaption");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int AdditionalAnswerID {
+            get {
+                return this.additionalAnswerIDField;
+            }
+            set {
+                this.additionalAnswerIDField = value;
+                this.RaisePropertyChanged("AdditionalAnswerID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AdditionalAnswerIDSpecified {
+            get {
+                return this.additionalAnswerIDFieldSpecified;
+            }
+            set {
+                this.additionalAnswerIDFieldSpecified = value;
+                this.RaisePropertyChanged("AdditionalAnswerIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public int AnswerID {
+            get {
+                return this.answerIDField;
+            }
+            set {
+                this.answerIDField = value;
+                this.RaisePropertyChanged("AnswerID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AnswerIDSpecified {
+            get {
+                return this.answerIDFieldSpecified;
+            }
+            set {
+                this.answerIDFieldSpecified = value;
+                this.RaisePropertyChanged("AnswerIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public int QuestionID {
+            get {
+                return this.questionIDField;
+            }
+            set {
+                this.questionIDField = value;
+                this.RaisePropertyChanged("QuestionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QuestionIDSpecified {
+            get {
+                return this.questionIDFieldSpecified;
+            }
+            set {
+                this.questionIDFieldSpecified = value;
+                this.RaisePropertyChanged("QuestionIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public int SectionID {
+            get {
+                return this.sectionIDField;
+            }
+            set {
+                this.sectionIDField = value;
+                this.RaisePropertyChanged("SectionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SectionIDSpecified {
+            get {
+                return this.sectionIDFieldSpecified;
+            }
+            set {
+                this.sectionIDFieldSpecified = value;
+                this.RaisePropertyChanged("SectionIDSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class TreeNodeLevel3 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string answerCaptionField;
+        
+        private int answerIDField;
+        
+        private bool answerIDFieldSpecified;
+        
+        private int questionIDField;
+        
+        private bool questionIDFieldSpecified;
+        
+        private int sectionIDField;
+        
+        private bool sectionIDFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string AnswerCaption {
+            get {
+                return this.answerCaptionField;
+            }
+            set {
+                this.answerCaptionField = value;
+                this.RaisePropertyChanged("AnswerCaption");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int AnswerID {
+            get {
+                return this.answerIDField;
+            }
+            set {
+                this.answerIDField = value;
+                this.RaisePropertyChanged("AnswerID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AnswerIDSpecified {
+            get {
+                return this.answerIDFieldSpecified;
+            }
+            set {
+                this.answerIDFieldSpecified = value;
+                this.RaisePropertyChanged("AnswerIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public int QuestionID {
+            get {
+                return this.questionIDField;
+            }
+            set {
+                this.questionIDField = value;
+                this.RaisePropertyChanged("QuestionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QuestionIDSpecified {
+            get {
+                return this.questionIDFieldSpecified;
+            }
+            set {
+                this.questionIDFieldSpecified = value;
+                this.RaisePropertyChanged("QuestionIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public int SectionID {
+            get {
+                return this.sectionIDField;
+            }
+            set {
+                this.sectionIDField = value;
+                this.RaisePropertyChanged("SectionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SectionIDSpecified {
+            get {
+                return this.sectionIDFieldSpecified;
+            }
+            set {
+                this.sectionIDFieldSpecified = value;
+                this.RaisePropertyChanged("SectionIDSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class TreeNodeLevel2 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string questionCaptionField;
+        
+        private int questionIDField;
+        
+        private bool questionIDFieldSpecified;
+        
+        private int sectionIDField;
+        
+        private bool sectionIDFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string QuestionCaption {
+            get {
+                return this.questionCaptionField;
+            }
+            set {
+                this.questionCaptionField = value;
+                this.RaisePropertyChanged("QuestionCaption");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int QuestionID {
+            get {
+                return this.questionIDField;
+            }
+            set {
+                this.questionIDField = value;
+                this.RaisePropertyChanged("QuestionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QuestionIDSpecified {
+            get {
+                return this.questionIDFieldSpecified;
+            }
+            set {
+                this.questionIDFieldSpecified = value;
+                this.RaisePropertyChanged("QuestionIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public int SectionID {
+            get {
+                return this.sectionIDField;
+            }
+            set {
+                this.sectionIDField = value;
+                this.RaisePropertyChanged("SectionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SectionIDSpecified {
+            get {
+                return this.sectionIDFieldSpecified;
+            }
+            set {
+                this.sectionIDFieldSpecified = value;
+                this.RaisePropertyChanged("SectionIDSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class TreeNodeLevel1 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string rootCaptionField;
+        
+        private string sectionCaptionField;
+        
+        private int sectionIDField;
+        
+        private bool sectionIDFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string RootCaption {
+            get {
+                return this.rootCaptionField;
+            }
+            set {
+                this.rootCaptionField = value;
+                this.RaisePropertyChanged("RootCaption");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
+        public string SectionCaption {
+            get {
+                return this.sectionCaptionField;
+            }
+            set {
+                this.sectionCaptionField = value;
+                this.RaisePropertyChanged("SectionCaption");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public int SectionID {
+            get {
+                return this.sectionIDField;
+            }
+            set {
+                this.sectionIDField = value;
+                this.RaisePropertyChanged("SectionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SectionIDSpecified {
+            get {
+                return this.sectionIDFieldSpecified;
+            }
+            set {
+                this.sectionIDFieldSpecified = value;
+                this.RaisePropertyChanged("SectionIDSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class TreeNode : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string[] listAreaNameField;
+        
+        private TreeNodeLevel1[] listLeve1Field;
+        
+        private TreeNodeLevel2[] listLeve2Field;
+        
+        private TreeNodeLevel3[] listLeve3Field;
+        
+        private TreeNodeLevel4[] listLeve4Field;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")]
+        public string[] listAreaName {
+            get {
+                return this.listAreaNameField;
+            }
+            set {
+                this.listAreaNameField = value;
+                this.RaisePropertyChanged("listAreaName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=1)]
+        public TreeNodeLevel1[] listLeve1 {
+            get {
+                return this.listLeve1Field;
+            }
+            set {
+                this.listLeve1Field = value;
+                this.RaisePropertyChanged("listLeve1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=2)]
+        public TreeNodeLevel2[] listLeve2 {
+            get {
+                return this.listLeve2Field;
+            }
+            set {
+                this.listLeve2Field = value;
+                this.RaisePropertyChanged("listLeve2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=3)]
+        public TreeNodeLevel3[] listLeve3 {
+            get {
+                return this.listLeve3Field;
+            }
+            set {
+                this.listLeve3Field = value;
+                this.RaisePropertyChanged("listLeve3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=4)]
+        public TreeNodeLevel4[] listLeve4 {
+            get {
+                return this.listLeve4Field;
+            }
+            set {
+                this.listLeve4Field = value;
+                this.RaisePropertyChanged("listLeve4");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class Site : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string address1Field;
+        
+        private string address2Field;
+        
+        private string address3Field;
+        
+        private string companyNameField;
+        
+        private string emailField;
+        
+        private string lastNameField;
+        
+        private int level4Field;
+        
+        private bool level4FieldSpecified;
+        
+        private string mobileNoField;
+        
+        private string phoneNoField;
+        
+        private string postCodeField;
+        
+        private int siteCodeField;
+        
+        private bool siteCodeFieldSpecified;
+        
+        private int siteNoField;
+        
+        private bool siteNoFieldSpecified;
+        
+        private string stateField;
+        
+        private string streetNoField;
+        
+        private string suburbField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string Address1 {
+            get {
+                return this.address1Field;
+            }
+            set {
+                this.address1Field = value;
+                this.RaisePropertyChanged("Address1");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
+        public string Address2 {
+            get {
+                return this.address2Field;
+            }
+            set {
+                this.address2Field = value;
+                this.RaisePropertyChanged("Address2");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string Address3 {
+            get {
+                return this.address3Field;
+            }
+            set {
+                this.address3Field = value;
+                this.RaisePropertyChanged("Address3");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public string CompanyName {
+            get {
+                return this.companyNameField;
+            }
+            set {
+                this.companyNameField = value;
+                this.RaisePropertyChanged("CompanyName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+                this.RaisePropertyChanged("Email");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
+        public string LastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+                this.RaisePropertyChanged("LastName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public int Level4 {
+            get {
+                return this.level4Field;
+            }
+            set {
+                this.level4Field = value;
+                this.RaisePropertyChanged("Level4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Level4Specified {
+            get {
+                return this.level4FieldSpecified;
+            }
+            set {
+                this.level4FieldSpecified = value;
+                this.RaisePropertyChanged("Level4Specified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=7)]
+        public string MobileNo {
+            get {
+                return this.mobileNoField;
+            }
+            set {
+                this.mobileNoField = value;
+                this.RaisePropertyChanged("MobileNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=8)]
+        public string PhoneNo {
+            get {
+                return this.phoneNoField;
+            }
+            set {
+                this.phoneNoField = value;
+                this.RaisePropertyChanged("PhoneNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=9)]
+        public string PostCode {
+            get {
+                return this.postCodeField;
+            }
+            set {
+                this.postCodeField = value;
+                this.RaisePropertyChanged("PostCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public int SiteCode {
+            get {
+                return this.siteCodeField;
+            }
+            set {
+                this.siteCodeField = value;
+                this.RaisePropertyChanged("SiteCode");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SiteCodeSpecified {
+            get {
+                return this.siteCodeFieldSpecified;
+            }
+            set {
+                this.siteCodeFieldSpecified = value;
+                this.RaisePropertyChanged("SiteCodeSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public int SiteNo {
+            get {
+                return this.siteNoField;
+            }
+            set {
+                this.siteNoField = value;
+                this.RaisePropertyChanged("SiteNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SiteNoSpecified {
+            get {
+                return this.siteNoFieldSpecified;
+            }
+            set {
+                this.siteNoFieldSpecified = value;
+                this.RaisePropertyChanged("SiteNoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=12)]
+        public string State {
+            get {
+                return this.stateField;
+            }
+            set {
+                this.stateField = value;
+                this.RaisePropertyChanged("State");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=13)]
+        public string StreetNo {
+            get {
+                return this.streetNoField;
+            }
+            set {
+                this.streetNoField = value;
+                this.RaisePropertyChanged("StreetNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=14)]
+        public string Suburb {
+            get {
+                return this.suburbField;
+            }
+            set {
+                this.suburbField = value;
+                this.RaisePropertyChanged("Suburb");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class BusinessHour : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private float businessEndHourField;
+        
+        private bool businessEndHourFieldSpecified;
+        
+        private float businessStartHourField;
+        
+        private bool businessStartHourFieldSpecified;
+        
+        private string dateField;
+        
+        private bool isWorkingDayField;
+        
+        private bool isWorkingDayFieldSpecified;
+        
+        private int noOfDayField;
+        
+        private bool noOfDayFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public float BusinessEndHour {
+            get {
+                return this.businessEndHourField;
+            }
+            set {
+                this.businessEndHourField = value;
+                this.RaisePropertyChanged("BusinessEndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BusinessEndHourSpecified {
+            get {
+                return this.businessEndHourFieldSpecified;
+            }
+            set {
+                this.businessEndHourFieldSpecified = value;
+                this.RaisePropertyChanged("BusinessEndHourSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public float BusinessStartHour {
+            get {
+                return this.businessStartHourField;
+            }
+            set {
+                this.businessStartHourField = value;
+                this.RaisePropertyChanged("BusinessStartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BusinessStartHourSpecified {
+            get {
+                return this.businessStartHourFieldSpecified;
+            }
+            set {
+                this.businessStartHourFieldSpecified = value;
+                this.RaisePropertyChanged("BusinessStartHourSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string Date {
+            get {
+                return this.dateField;
+            }
+            set {
+                this.dateField = value;
+                this.RaisePropertyChanged("Date");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public bool IsWorkingDay {
+            get {
+                return this.isWorkingDayField;
+            }
+            set {
+                this.isWorkingDayField = value;
+                this.RaisePropertyChanged("IsWorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsWorkingDaySpecified {
+            get {
+                return this.isWorkingDayFieldSpecified;
+            }
+            set {
+                this.isWorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsWorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public int NoOfDay {
+            get {
+                return this.noOfDayField;
+            }
+            set {
+                this.noOfDayField = value;
+                this.RaisePropertyChanged("NoOfDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NoOfDaySpecified {
+            get {
+                return this.noOfDayFieldSpecified;
+            }
+            set {
+                this.noOfDayFieldSpecified = value;
+                this.RaisePropertyChanged("NoOfDaySpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class Service : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private BusinessHour[] businessHoursField;
+        
+        private int categoryIDField;
+        
+        private bool categoryIDFieldSpecified;
+        
+        private string categoryNameField;
+        
+        private string descriptionField;
+        
+        private int durationField;
+        
+        private bool durationFieldSpecified;
+        
+        private int itemIDField;
+        
+        private bool itemIDFieldSpecified;
+        
+        private string itemNameField;
+        
+        private float maxEndHourField;
+        
+        private bool maxEndHourFieldSpecified;
+        
+        private float minStartHourField;
+        
+        private bool minStartHourFieldSpecified;
+        
+        private double priceField;
+        
+        private bool priceFieldSpecified;
+        
+        private int productIDField;
+        
+        private bool productIDFieldSpecified;
+        
+        private string productNameField;
+        
+        private TimeSlot[] timeSlotsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=0)]
+        public BusinessHour[] BusinessHours {
+            get {
+                return this.businessHoursField;
+            }
+            set {
+                this.businessHoursField = value;
+                this.RaisePropertyChanged("BusinessHours");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int CategoryID {
+            get {
+                return this.categoryIDField;
+            }
+            set {
+                this.categoryIDField = value;
+                this.RaisePropertyChanged("CategoryID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CategoryIDSpecified {
+            get {
+                return this.categoryIDFieldSpecified;
+            }
+            set {
+                this.categoryIDFieldSpecified = value;
+                this.RaisePropertyChanged("CategoryIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string CategoryName {
+            get {
+                return this.categoryNameField;
+            }
+            set {
+                this.categoryNameField = value;
+                this.RaisePropertyChanged("CategoryName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("Description");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public int Duration {
+            get {
+                return this.durationField;
+            }
+            set {
+                this.durationField = value;
+                this.RaisePropertyChanged("Duration");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DurationSpecified {
+            get {
+                return this.durationFieldSpecified;
+            }
+            set {
+                this.durationFieldSpecified = value;
+                this.RaisePropertyChanged("DurationSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public int ItemID {
+            get {
+                return this.itemIDField;
+            }
+            set {
+                this.itemIDField = value;
+                this.RaisePropertyChanged("ItemID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ItemIDSpecified {
+            get {
+                return this.itemIDFieldSpecified;
+            }
+            set {
+                this.itemIDFieldSpecified = value;
+                this.RaisePropertyChanged("ItemIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=6)]
+        public string ItemName {
+            get {
+                return this.itemNameField;
+            }
+            set {
+                this.itemNameField = value;
+                this.RaisePropertyChanged("ItemName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public float MaxEndHour {
+            get {
+                return this.maxEndHourField;
+            }
+            set {
+                this.maxEndHourField = value;
+                this.RaisePropertyChanged("MaxEndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool MaxEndHourSpecified {
+            get {
+                return this.maxEndHourFieldSpecified;
+            }
+            set {
+                this.maxEndHourFieldSpecified = value;
+                this.RaisePropertyChanged("MaxEndHourSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public float MinStartHour {
+            get {
+                return this.minStartHourField;
+            }
+            set {
+                this.minStartHourField = value;
+                this.RaisePropertyChanged("MinStartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool MinStartHourSpecified {
+            get {
+                return this.minStartHourFieldSpecified;
+            }
+            set {
+                this.minStartHourFieldSpecified = value;
+                this.RaisePropertyChanged("MinStartHourSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public double Price {
+            get {
+                return this.priceField;
+            }
+            set {
+                this.priceField = value;
+                this.RaisePropertyChanged("Price");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PriceSpecified {
+            get {
+                return this.priceFieldSpecified;
+            }
+            set {
+                this.priceFieldSpecified = value;
+                this.RaisePropertyChanged("PriceSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public int ProductID {
+            get {
+                return this.productIDField;
+            }
+            set {
+                this.productIDField = value;
+                this.RaisePropertyChanged("ProductID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ProductIDSpecified {
+            get {
+                return this.productIDFieldSpecified;
+            }
+            set {
+                this.productIDFieldSpecified = value;
+                this.RaisePropertyChanged("ProductIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=11)]
+        public string ProductName {
+            get {
+                return this.productNameField;
+            }
+            set {
+                this.productNameField = value;
+                this.RaisePropertyChanged("ProductName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=12)]
+        public TimeSlot[] TimeSlots {
+            get {
+                return this.timeSlotsField;
+            }
+            set {
+                this.timeSlotsField = value;
+                this.RaisePropertyChanged("TimeSlots");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class TimeSlot : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string dateField;
+        
+        private string endTimeField;
+        
+        private bool isPublicHoliDayField;
+        
+        private bool isPublicHoliDayFieldSpecified;
+        
+        private int itemIDField;
+        
+        private bool itemIDFieldSpecified;
+        
+        private string specialInstructionField;
+        
+        private string startTimeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string Date {
+            get {
+                return this.dateField;
+            }
+            set {
+                this.dateField = value;
+                this.RaisePropertyChanged("Date");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
+        public string EndTime {
+            get {
+                return this.endTimeField;
+            }
+            set {
+                this.endTimeField = value;
+                this.RaisePropertyChanged("EndTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public bool IsPublicHoliDay {
+            get {
+                return this.isPublicHoliDayField;
+            }
+            set {
+                this.isPublicHoliDayField = value;
+                this.RaisePropertyChanged("IsPublicHoliDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsPublicHoliDaySpecified {
+            get {
+                return this.isPublicHoliDayFieldSpecified;
+            }
+            set {
+                this.isPublicHoliDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsPublicHoliDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public int ItemID {
+            get {
+                return this.itemIDField;
+            }
+            set {
+                this.itemIDField = value;
+                this.RaisePropertyChanged("ItemID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ItemIDSpecified {
+            get {
+                return this.itemIDFieldSpecified;
+            }
+            set {
+                this.itemIDFieldSpecified = value;
+                this.RaisePropertyChanged("ItemIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
+        public string SpecialInstruction {
+            get {
+                return this.specialInstructionField;
+            }
+            set {
+                this.specialInstructionField = value;
+                this.RaisePropertyChanged("SpecialInstruction");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
+        public string StartTime {
+            get {
+                return this.startTimeField;
+            }
+            set {
+                this.startTimeField = value;
+                this.RaisePropertyChanged("StartTime");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class SiteNItem : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Service[] listOfItemsField;
+        
+        private Site[] sitesField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=0)]
+        public Service[] listOfItems {
+            get {
+                return this.listOfItemsField;
+            }
+            set {
+                this.listOfItemsField = value;
+                this.RaisePropertyChanged("listOfItems");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=1)]
+        public Site[] sites {
+            get {
+                return this.sitesField;
+            }
+            set {
+                this.sitesField = value;
+                this.RaisePropertyChanged("sites");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class DayHour : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string day1EndHourField;
+        
+        private string day1StartHourField;
+        
+        private string day2EndHourField;
+        
+        private string day2StartHourField;
+        
+        private string day3EndHourField;
+        
+        private string day3StartHourField;
+        
+        private string day4EndHourField;
+        
+        private string day4StartHourField;
+        
+        private string day5EndHourField;
+        
+        private string day5StartHourField;
+        
+        private string day6EndHourField;
+        
+        private string day6StartHourField;
+        
+        private string day7EndHourField;
+        
+        private string day7StartHourField;
+        
+        private bool isDay1WorkingDayField;
+        
+        private bool isDay1WorkingDayFieldSpecified;
+        
+        private bool isDay2WorkingDayField;
+        
+        private bool isDay2WorkingDayFieldSpecified;
+        
+        private bool isDay3WorkingDayField;
+        
+        private bool isDay3WorkingDayFieldSpecified;
+        
+        private bool isDay4WorkingDayField;
+        
+        private bool isDay4WorkingDayFieldSpecified;
+        
+        private bool isDay5WorkingDayField;
+        
+        private bool isDay5WorkingDayFieldSpecified;
+        
+        private bool isDay6WorkingDayField;
+        
+        private bool isDay6WorkingDayFieldSpecified;
+        
+        private bool isDay7WorkingDayField;
+        
+        private bool isDay7WorkingDayFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string Day1EndHour {
+            get {
+                return this.day1EndHourField;
+            }
+            set {
+                this.day1EndHourField = value;
+                this.RaisePropertyChanged("Day1EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
+        public string Day1StartHour {
+            get {
+                return this.day1StartHourField;
+            }
+            set {
+                this.day1StartHourField = value;
+                this.RaisePropertyChanged("Day1StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string Day2EndHour {
+            get {
+                return this.day2EndHourField;
+            }
+            set {
+                this.day2EndHourField = value;
+                this.RaisePropertyChanged("Day2EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public string Day2StartHour {
+            get {
+                return this.day2StartHourField;
+            }
+            set {
+                this.day2StartHourField = value;
+                this.RaisePropertyChanged("Day2StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
+        public string Day3EndHour {
+            get {
+                return this.day3EndHourField;
+            }
+            set {
+                this.day3EndHourField = value;
+                this.RaisePropertyChanged("Day3EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
+        public string Day3StartHour {
+            get {
+                return this.day3StartHourField;
+            }
+            set {
+                this.day3StartHourField = value;
+                this.RaisePropertyChanged("Day3StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=6)]
+        public string Day4EndHour {
+            get {
+                return this.day4EndHourField;
+            }
+            set {
+                this.day4EndHourField = value;
+                this.RaisePropertyChanged("Day4EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=7)]
+        public string Day4StartHour {
+            get {
+                return this.day4StartHourField;
+            }
+            set {
+                this.day4StartHourField = value;
+                this.RaisePropertyChanged("Day4StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=8)]
+        public string Day5EndHour {
+            get {
+                return this.day5EndHourField;
+            }
+            set {
+                this.day5EndHourField = value;
+                this.RaisePropertyChanged("Day5EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=9)]
+        public string Day5StartHour {
+            get {
+                return this.day5StartHourField;
+            }
+            set {
+                this.day5StartHourField = value;
+                this.RaisePropertyChanged("Day5StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=10)]
+        public string Day6EndHour {
+            get {
+                return this.day6EndHourField;
+            }
+            set {
+                this.day6EndHourField = value;
+                this.RaisePropertyChanged("Day6EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=11)]
+        public string Day6StartHour {
+            get {
+                return this.day6StartHourField;
+            }
+            set {
+                this.day6StartHourField = value;
+                this.RaisePropertyChanged("Day6StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=12)]
+        public string Day7EndHour {
+            get {
+                return this.day7EndHourField;
+            }
+            set {
+                this.day7EndHourField = value;
+                this.RaisePropertyChanged("Day7EndHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=13)]
+        public string Day7StartHour {
+            get {
+                return this.day7StartHourField;
+            }
+            set {
+                this.day7StartHourField = value;
+                this.RaisePropertyChanged("Day7StartHour");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public bool IsDay1WorkingDay {
+            get {
+                return this.isDay1WorkingDayField;
+            }
+            set {
+                this.isDay1WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay1WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay1WorkingDaySpecified {
+            get {
+                return this.isDay1WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay1WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay1WorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public bool IsDay2WorkingDay {
+            get {
+                return this.isDay2WorkingDayField;
+            }
+            set {
+                this.isDay2WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay2WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay2WorkingDaySpecified {
+            get {
+                return this.isDay2WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay2WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay2WorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public bool IsDay3WorkingDay {
+            get {
+                return this.isDay3WorkingDayField;
+            }
+            set {
+                this.isDay3WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay3WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay3WorkingDaySpecified {
+            get {
+                return this.isDay3WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay3WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay3WorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=17)]
+        public bool IsDay4WorkingDay {
+            get {
+                return this.isDay4WorkingDayField;
+            }
+            set {
+                this.isDay4WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay4WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay4WorkingDaySpecified {
+            get {
+                return this.isDay4WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay4WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay4WorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public bool IsDay5WorkingDay {
+            get {
+                return this.isDay5WorkingDayField;
+            }
+            set {
+                this.isDay5WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay5WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay5WorkingDaySpecified {
+            get {
+                return this.isDay5WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay5WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay5WorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=19)]
+        public bool IsDay6WorkingDay {
+            get {
+                return this.isDay6WorkingDayField;
+            }
+            set {
+                this.isDay6WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay6WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay6WorkingDaySpecified {
+            get {
+                return this.isDay6WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay6WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay6WorkingDaySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=20)]
+        public bool IsDay7WorkingDay {
+            get {
+                return this.isDay7WorkingDayField;
+            }
+            set {
+                this.isDay7WorkingDayField = value;
+                this.RaisePropertyChanged("IsDay7WorkingDay");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsDay7WorkingDaySpecified {
+            get {
+                return this.isDay7WorkingDayFieldSpecified;
+            }
+            set {
+                this.isDay7WorkingDayFieldSpecified = value;
+                this.RaisePropertyChanged("IsDay7WorkingDaySpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class Folder : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string[] privateFoldersField;
+        
+        private string[] publicFoldersField;
+        
+        private string fileDescriptionField;
+        
+        private string fileNameField;
+        
+        private string fileUploadedByField;
+        
+        private string fileUploadedDateField;
+        
+        private int lvl4sequenceField;
+        
+        private bool lvl4sequenceFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")]
+        public string[] PrivateFolders {
+            get {
+                return this.privateFoldersField;
+            }
+            set {
+                this.privateFoldersField = value;
+                this.RaisePropertyChanged("PrivateFolders");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true, Order=1)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")]
+        public string[] PublicFolders {
+            get {
+                return this.publicFoldersField;
+            }
+            set {
+                this.publicFoldersField = value;
+                this.RaisePropertyChanged("PublicFolders");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string fileDescription {
+            get {
+                return this.fileDescriptionField;
+            }
+            set {
+                this.fileDescriptionField = value;
+                this.RaisePropertyChanged("fileDescription");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+                this.RaisePropertyChanged("fileName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
+        public string fileUploadedBy {
+            get {
+                return this.fileUploadedByField;
+            }
+            set {
+                this.fileUploadedByField = value;
+                this.RaisePropertyChanged("fileUploadedBy");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=5)]
+        public string fileUploadedDate {
+            get {
+                return this.fileUploadedDateField;
+            }
+            set {
+                this.fileUploadedDateField = value;
+                this.RaisePropertyChanged("fileUploadedDate");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public int lvl4sequence {
+            get {
+                return this.lvl4sequenceField;
+            }
+            set {
+                this.lvl4sequenceField = value;
+                this.RaisePropertyChanged("lvl4sequence");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool lvl4sequenceSpecified {
+            get {
+                return this.lvl4sequenceFieldSpecified;
+            }
+            set {
+                this.lvl4sequenceFieldSpecified = value;
+                this.RaisePropertyChanged("lvl4sequenceSpecified");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCASDefaultData", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetCASDefaultDataRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerID;
+        
+        public GetCASDefaultDataRequest() {
+        }
+        
+        public GetCASDefaultDataRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.CustomerID = CustomerID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCASDefaultDataResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetCASDefaultDataResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public CASPortal.CASWCFService.Welcome GetCASDefaultDataResult;
+        
+        public GetCASDefaultDataResponse() {
+        }
+        
+        public GetCASDefaultDataResponse(CASPortal.CASWCFService.Welcome GetCASDefaultDataResult) {
+            this.GetCASDefaultDataResult = GetCASDefaultDataResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="LoginMessageOfDay", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class LoginMessageOfDayRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerID;
+        
+        public LoginMessageOfDayRequest() {
+        }
+        
+        public LoginMessageOfDayRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.CustomerID = CustomerID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="LoginMessageOfDayResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class LoginMessageOfDayResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.Welcome[] LoginMessageOfDayResult;
+        
+        public LoginMessageOfDayResponse() {
+        }
+        
+        public LoginMessageOfDayResponse(CASPortal.CASWCFService.Welcome[] LoginMessageOfDayResult) {
+            this.LoginMessageOfDayResult = LoginMessageOfDayResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPrivateFolders", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPrivateFoldersRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerID;
+        
+        public GetPrivateFoldersRequest() {
+        }
+        
+        public GetPrivateFoldersRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.CustomerID = CustomerID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPrivateFoldersResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPrivateFoldersResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string GetPrivateFoldersResult;
+        
+        public GetPrivateFoldersResponse() {
+        }
+        
+        public GetPrivateFoldersResponse(string GetPrivateFoldersResult) {
+            this.GetPrivateFoldersResult = GetPrivateFoldersResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPublicFolders", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPublicFoldersRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        public GetPublicFoldersRequest() {
+        }
+        
+        public GetPublicFoldersRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPublicFoldersResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPublicFoldersResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string GetPublicFoldersResult;
+        
+        public GetPublicFoldersResponse() {
+        }
+        
+        public GetPublicFoldersResponse(string GetPublicFoldersResult) {
+            this.GetPublicFoldersResult = GetPublicFoldersResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPrivateFolderFiles", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPrivateFolderFilesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FolderName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TimeZoneOffset;
+        
+        public GetPrivateFolderFilesRequest() {
+        }
+        
+        public GetPrivateFolderFilesRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string TimeZoneOffset) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.CustomerID = CustomerID;
+            this.FolderName = FolderName;
+            this.TimeZoneOffset = TimeZoneOffset;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPrivateFolderFilesResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPrivateFolderFilesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.Folder[] GetPrivateFolderFilesResult;
+        
+        public GetPrivateFolderFilesResponse() {
+        }
+        
+        public GetPrivateFolderFilesResponse(CASPortal.CASWCFService.Folder[] GetPrivateFolderFilesResult) {
+            this.GetPrivateFolderFilesResult = GetPrivateFolderFilesResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPublicFolderFiles", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPublicFolderFilesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FolderName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string TimeZoneOffset;
+        
+        public GetPublicFolderFilesRequest() {
+        }
+        
+        public GetPublicFolderFilesRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string TimeZoneOffset) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.FolderName = FolderName;
+            this.TimeZoneOffset = TimeZoneOffset;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPublicFolderFilesResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPublicFolderFilesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.Folder[] GetPublicFolderFilesResult;
+        
+        public GetPublicFolderFilesResponse() {
+        }
+        
+        public GetPublicFolderFilesResponse(CASPortal.CASWCFService.Folder[] GetPublicFolderFilesResult) {
+            this.GetPublicFolderFilesResult = GetPublicFolderFilesResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPrivateFileInfo", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPrivateFileInfoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FolderName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FileName;
+        
+        public GetPrivateFileInfoRequest() {
+        }
+        
+        public GetPrivateFileInfoRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string FileName) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.CustomerID = CustomerID;
+            this.FolderName = FolderName;
+            this.FileName = FileName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPrivateFileInfoResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPrivateFileInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
+        public byte[] GetPrivateFileInfoResult;
+        
+        public GetPrivateFileInfoResponse() {
+        }
+        
+        public GetPrivateFileInfoResponse(byte[] GetPrivateFileInfoResult) {
+            this.GetPrivateFileInfoResult = GetPrivateFileInfoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPublicFileInfo", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPublicFileInfoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FolderName;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string FileName;
+        
+        public GetPublicFileInfoRequest() {
+        }
+        
+        public GetPublicFileInfoRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string FileName) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.FolderName = FolderName;
+            this.FileName = FileName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetPublicFileInfoResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetPublicFileInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
+        public byte[] GetPublicFileInfoResult;
+        
+        public GetPublicFileInfoResponse() {
+        }
+        
+        public GetPublicFileInfoResponse(byte[] GetPublicFileInfoResult) {
+            this.GetPublicFileInfoResult = GetPublicFileInfoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetBusinessTime", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetBusinessTimeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        public GetBusinessTimeRequest() {
+        }
+        
+        public GetBusinessTimeRequest(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetBusinessTimeResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetBusinessTimeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.DayHour[] GetBusinessTimeResult;
+        
+        public GetBusinessTimeResponse() {
+        }
+        
+        public GetBusinessTimeResponse(CASPortal.CASWCFService.DayHour[] GetBusinessTimeResult) {
+            this.GetBusinessTimeResult = GetBusinessTimeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetScheduledTime", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetScheduledTimeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public System.DateTime startDate;
+        
+        public GetScheduledTimeRequest() {
+        }
+        
+        public GetScheduledTimeRequest(string CompanyID, string CompanyPassword, string CustomerPassword, System.DateTime startDate) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.startDate = startDate;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetScheduledTimeResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetScheduledTimeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.TimeSlot[] GetScheduledTimeResult;
+        
+        public GetScheduledTimeResponse() {
+        }
+        
+        public GetScheduledTimeResponse(CASPortal.CASWCFService.TimeSlot[] GetScheduledTimeResult) {
+            this.GetScheduledTimeResult = GetScheduledTimeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCategoryProductService", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetCategoryProductServiceRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public decimal CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public int Level4ID;
+        
+        public GetCategoryProductServiceRequest() {
+        }
+        
+        public GetCategoryProductServiceRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerID = CustomerID;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCategoryProductServiceResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetCategoryProductServiceResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public CASPortal.CASWCFService.SiteNItem GetCategoryProductServiceResult;
+        
+        public GetCategoryProductServiceResponse() {
+        }
+        
+        public GetCategoryProductServiceResponse(CASPortal.CASWCFService.SiteNItem GetCategoryProductServiceResult) {
+            this.GetCategoryProductServiceResult = GetCategoryProductServiceResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCustomerSite", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetCustomerSiteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public int Level4ID;
+        
+        public GetCustomerSiteRequest() {
+        }
+        
+        public GetCustomerSiteRequest(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.CustomerID = CustomerID;
+            this.Level4ID = Level4ID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetCustomerSiteResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetCustomerSiteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.Site[] GetCustomerSiteResult;
+        
+        public GetCustomerSiteResponse() {
+        }
+        
+        public GetCustomerSiteResponse(CASPortal.CASWCFService.Site[] GetCustomerSiteResult) {
+            this.GetCustomerSiteResult = GetCustomerSiteResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTrendAnalysisTreeNodes", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTrendAnalysisTreeNodesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public decimal CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public int Level4ID;
+        
+        public GetTrendAnalysisTreeNodesRequest() {
+        }
+        
+        public GetTrendAnalysisTreeNodesRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerID = CustomerID;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTrendAnalysisTreeNodesResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTrendAnalysisTreeNodesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public CASPortal.CASWCFService.TreeNode GetTrendAnalysisTreeNodesResult;
+        
+        public GetTrendAnalysisTreeNodesResponse() {
+        }
+        
+        public GetTrendAnalysisTreeNodesResponse(CASPortal.CASWCFService.TreeNode GetTrendAnalysisTreeNodesResult) {
+            this.GetTrendAnalysisTreeNodesResult = GetTrendAnalysisTreeNodesResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PostTrendAnalysisReportData", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class PostTrendAnalysisReportDataRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public decimal CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public int ContractNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public decimal CmCode;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=7)]
+        public System.DateTime FromDate;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
+        public System.DateTime ToDate;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Data.DataTable answers;
+        
+        public PostTrendAnalysisReportDataRequest() {
+        }
+        
+        public PostTrendAnalysisReportDataRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, System.DateTime FromDate, System.DateTime ToDate, System.Data.DataTable answers) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerID = CustomerID;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.ContractNo = ContractNo;
+            this.CmCode = CmCode;
+            this.FromDate = FromDate;
+            this.ToDate = ToDate;
+            this.answers = answers;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PostTrendAnalysisReportDataResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class PostTrendAnalysisReportDataResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string PostTrendAnalysisReportDataResult;
+        
+        public PostTrendAnalysisReportDataResponse() {
+        }
+        
+        public PostTrendAnalysisReportDataResponse(string PostTrendAnalysisReportDataResult) {
+            this.PostTrendAnalysisReportDataResult = PostTrendAnalysisReportDataResult;
         }
     }
     
@@ -1938,108 +3088,454 @@ namespace CASPortal.CASWCFService {
             return base.Channel.LoginProcessAsync(request);
         }
         
-        public CASPortal.CASWCFService.Welcome GetCASDefaultData(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
-            return base.Channel.GetCASDefaultData(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetCASDefaultDataResponse CASPortal.CASWCFService.ICASWCFService.GetCASDefaultData(CASPortal.CASWCFService.GetCASDefaultDataRequest request) {
+            return base.Channel.GetCASDefaultData(request);
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.Welcome> GetCASDefaultDataAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
-            return base.Channel.GetCASDefaultDataAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID);
+        public CASPortal.CASWCFService.Welcome GetCASDefaultData(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            CASPortal.CASWCFService.GetCASDefaultDataRequest inValue = new CASPortal.CASWCFService.GetCASDefaultDataRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            CASPortal.CASWCFService.GetCASDefaultDataResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetCASDefaultData(inValue);
+            return retVal.GetCASDefaultDataResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCASDefaultDataResponse> CASPortal.CASWCFService.ICASWCFService.GetCASDefaultDataAsync(CASPortal.CASWCFService.GetCASDefaultDataRequest request) {
+            return base.Channel.GetCASDefaultDataAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCASDefaultDataResponse> GetCASDefaultDataAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            CASPortal.CASWCFService.GetCASDefaultDataRequest inValue = new CASPortal.CASWCFService.GetCASDefaultDataRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetCASDefaultDataAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.LoginMessageOfDayResponse CASPortal.CASWCFService.ICASWCFService.LoginMessageOfDay(CASPortal.CASWCFService.LoginMessageOfDayRequest request) {
+            return base.Channel.LoginMessageOfDay(request);
         }
         
         public CASPortal.CASWCFService.Welcome[] LoginMessageOfDay(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
-            return base.Channel.LoginMessageOfDay(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID);
+            CASPortal.CASWCFService.LoginMessageOfDayRequest inValue = new CASPortal.CASWCFService.LoginMessageOfDayRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            CASPortal.CASWCFService.LoginMessageOfDayResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).LoginMessageOfDay(inValue);
+            return retVal.LoginMessageOfDayResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.Welcome[]> LoginMessageOfDayAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
-            return base.Channel.LoginMessageOfDayAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.LoginMessageOfDayResponse> CASPortal.CASWCFService.ICASWCFService.LoginMessageOfDayAsync(CASPortal.CASWCFService.LoginMessageOfDayRequest request) {
+            return base.Channel.LoginMessageOfDayAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.LoginMessageOfDayResponse> LoginMessageOfDayAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            CASPortal.CASWCFService.LoginMessageOfDayRequest inValue = new CASPortal.CASWCFService.LoginMessageOfDayRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).LoginMessageOfDayAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetPrivateFoldersResponse CASPortal.CASWCFService.ICASWCFService.GetPrivateFolders(CASPortal.CASWCFService.GetPrivateFoldersRequest request) {
+            return base.Channel.GetPrivateFolders(request);
         }
         
         public string GetPrivateFolders(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
-            return base.Channel.GetPrivateFolders(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID);
+            CASPortal.CASWCFService.GetPrivateFoldersRequest inValue = new CASPortal.CASWCFService.GetPrivateFoldersRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            CASPortal.CASWCFService.GetPrivateFoldersResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPrivateFolders(inValue);
+            return retVal.GetPrivateFoldersResult;
         }
         
-        public System.Threading.Tasks.Task<string> GetPrivateFoldersAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
-            return base.Channel.GetPrivateFoldersAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFoldersResponse> CASPortal.CASWCFService.ICASWCFService.GetPrivateFoldersAsync(CASPortal.CASWCFService.GetPrivateFoldersRequest request) {
+            return base.Channel.GetPrivateFoldersAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFoldersResponse> GetPrivateFoldersAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID) {
+            CASPortal.CASWCFService.GetPrivateFoldersRequest inValue = new CASPortal.CASWCFService.GetPrivateFoldersRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPrivateFoldersAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetPublicFoldersResponse CASPortal.CASWCFService.ICASWCFService.GetPublicFolders(CASPortal.CASWCFService.GetPublicFoldersRequest request) {
+            return base.Channel.GetPublicFolders(request);
         }
         
         public string GetPublicFolders(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetPublicFolders(CompanyID, CompanyPassword, CustomerPassword, Level4ID);
+            CASPortal.CASWCFService.GetPublicFoldersRequest inValue = new CASPortal.CASWCFService.GetPublicFoldersRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            CASPortal.CASWCFService.GetPublicFoldersResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPublicFolders(inValue);
+            return retVal.GetPublicFoldersResult;
         }
         
-        public System.Threading.Tasks.Task<string> GetPublicFoldersAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetPublicFoldersAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFoldersResponse> CASPortal.CASWCFService.ICASWCFService.GetPublicFoldersAsync(CASPortal.CASWCFService.GetPublicFoldersRequest request) {
+            return base.Channel.GetPublicFoldersAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFoldersResponse> GetPublicFoldersAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
+            CASPortal.CASWCFService.GetPublicFoldersRequest inValue = new CASPortal.CASWCFService.GetPublicFoldersRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPublicFoldersAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetPrivateFolderFilesResponse CASPortal.CASWCFService.ICASWCFService.GetPrivateFolderFiles(CASPortal.CASWCFService.GetPrivateFolderFilesRequest request) {
+            return base.Channel.GetPrivateFolderFiles(request);
         }
         
         public CASPortal.CASWCFService.Folder[] GetPrivateFolderFiles(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string TimeZoneOffset) {
-            return base.Channel.GetPrivateFolderFiles(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID, FolderName, TimeZoneOffset);
+            CASPortal.CASWCFService.GetPrivateFolderFilesRequest inValue = new CASPortal.CASWCFService.GetPrivateFolderFilesRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            inValue.FolderName = FolderName;
+            inValue.TimeZoneOffset = TimeZoneOffset;
+            CASPortal.CASWCFService.GetPrivateFolderFilesResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPrivateFolderFiles(inValue);
+            return retVal.GetPrivateFolderFilesResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.Folder[]> GetPrivateFolderFilesAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string TimeZoneOffset) {
-            return base.Channel.GetPrivateFolderFilesAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID, FolderName, TimeZoneOffset);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFolderFilesResponse> CASPortal.CASWCFService.ICASWCFService.GetPrivateFolderFilesAsync(CASPortal.CASWCFService.GetPrivateFolderFilesRequest request) {
+            return base.Channel.GetPrivateFolderFilesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFolderFilesResponse> GetPrivateFolderFilesAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string TimeZoneOffset) {
+            CASPortal.CASWCFService.GetPrivateFolderFilesRequest inValue = new CASPortal.CASWCFService.GetPrivateFolderFilesRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            inValue.FolderName = FolderName;
+            inValue.TimeZoneOffset = TimeZoneOffset;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPrivateFolderFilesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetPublicFolderFilesResponse CASPortal.CASWCFService.ICASWCFService.GetPublicFolderFiles(CASPortal.CASWCFService.GetPublicFolderFilesRequest request) {
+            return base.Channel.GetPublicFolderFiles(request);
         }
         
         public CASPortal.CASWCFService.Folder[] GetPublicFolderFiles(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string TimeZoneOffset) {
-            return base.Channel.GetPublicFolderFiles(CompanyID, CompanyPassword, CustomerPassword, Level4ID, FolderName, TimeZoneOffset);
+            CASPortal.CASWCFService.GetPublicFolderFilesRequest inValue = new CASPortal.CASWCFService.GetPublicFolderFilesRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.FolderName = FolderName;
+            inValue.TimeZoneOffset = TimeZoneOffset;
+            CASPortal.CASWCFService.GetPublicFolderFilesResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPublicFolderFiles(inValue);
+            return retVal.GetPublicFolderFilesResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.Folder[]> GetPublicFolderFilesAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string TimeZoneOffset) {
-            return base.Channel.GetPublicFolderFilesAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, FolderName, TimeZoneOffset);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFolderFilesResponse> CASPortal.CASWCFService.ICASWCFService.GetPublicFolderFilesAsync(CASPortal.CASWCFService.GetPublicFolderFilesRequest request) {
+            return base.Channel.GetPublicFolderFilesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFolderFilesResponse> GetPublicFolderFilesAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string TimeZoneOffset) {
+            CASPortal.CASWCFService.GetPublicFolderFilesRequest inValue = new CASPortal.CASWCFService.GetPublicFolderFilesRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.FolderName = FolderName;
+            inValue.TimeZoneOffset = TimeZoneOffset;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPublicFolderFilesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetPrivateFileInfoResponse CASPortal.CASWCFService.ICASWCFService.GetPrivateFileInfo(CASPortal.CASWCFService.GetPrivateFileInfoRequest request) {
+            return base.Channel.GetPrivateFileInfo(request);
         }
         
         public byte[] GetPrivateFileInfo(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string FileName) {
-            return base.Channel.GetPrivateFileInfo(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID, FolderName, FileName);
+            CASPortal.CASWCFService.GetPrivateFileInfoRequest inValue = new CASPortal.CASWCFService.GetPrivateFileInfoRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            inValue.FolderName = FolderName;
+            inValue.FileName = FileName;
+            CASPortal.CASWCFService.GetPrivateFileInfoResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPrivateFileInfo(inValue);
+            return retVal.GetPrivateFileInfoResult;
         }
         
-        public System.Threading.Tasks.Task<byte[]> GetPrivateFileInfoAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string FileName) {
-            return base.Channel.GetPrivateFileInfoAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, CustomerID, FolderName, FileName);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFileInfoResponse> CASPortal.CASWCFService.ICASWCFService.GetPrivateFileInfoAsync(CASPortal.CASWCFService.GetPrivateFileInfoRequest request) {
+            return base.Channel.GetPrivateFileInfoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPrivateFileInfoResponse> GetPrivateFileInfoAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string CustomerID, string FolderName, string FileName) {
+            CASPortal.CASWCFService.GetPrivateFileInfoRequest inValue = new CASPortal.CASWCFService.GetPrivateFileInfoRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerID = CustomerID;
+            inValue.FolderName = FolderName;
+            inValue.FileName = FileName;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPrivateFileInfoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetPublicFileInfoResponse CASPortal.CASWCFService.ICASWCFService.GetPublicFileInfo(CASPortal.CASWCFService.GetPublicFileInfoRequest request) {
+            return base.Channel.GetPublicFileInfo(request);
         }
         
         public byte[] GetPublicFileInfo(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string FileName) {
-            return base.Channel.GetPublicFileInfo(CompanyID, CompanyPassword, CustomerPassword, Level4ID, FolderName, FileName);
+            CASPortal.CASWCFService.GetPublicFileInfoRequest inValue = new CASPortal.CASWCFService.GetPublicFileInfoRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.FolderName = FolderName;
+            inValue.FileName = FileName;
+            CASPortal.CASWCFService.GetPublicFileInfoResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPublicFileInfo(inValue);
+            return retVal.GetPublicFileInfoResult;
         }
         
-        public System.Threading.Tasks.Task<byte[]> GetPublicFileInfoAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string FileName) {
-            return base.Channel.GetPublicFileInfoAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID, FolderName, FileName);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFileInfoResponse> CASPortal.CASWCFService.ICASWCFService.GetPublicFileInfoAsync(CASPortal.CASWCFService.GetPublicFileInfoRequest request) {
+            return base.Channel.GetPublicFileInfoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetPublicFileInfoResponse> GetPublicFileInfoAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, string FolderName, string FileName) {
+            CASPortal.CASWCFService.GetPublicFileInfoRequest inValue = new CASPortal.CASWCFService.GetPublicFileInfoRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.FolderName = FolderName;
+            inValue.FileName = FileName;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetPublicFileInfoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetBusinessTimeResponse CASPortal.CASWCFService.ICASWCFService.GetBusinessTime(CASPortal.CASWCFService.GetBusinessTimeRequest request) {
+            return base.Channel.GetBusinessTime(request);
         }
         
         public CASPortal.CASWCFService.DayHour[] GetBusinessTime(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetBusinessTime(CompanyID, CompanyPassword, CustomerPassword, Level4ID);
+            CASPortal.CASWCFService.GetBusinessTimeRequest inValue = new CASPortal.CASWCFService.GetBusinessTimeRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            CASPortal.CASWCFService.GetBusinessTimeResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetBusinessTime(inValue);
+            return retVal.GetBusinessTimeResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.DayHour[]> GetBusinessTimeAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetBusinessTimeAsync(CompanyID, CompanyPassword, CustomerPassword, Level4ID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetBusinessTimeResponse> CASPortal.CASWCFService.ICASWCFService.GetBusinessTimeAsync(CASPortal.CASWCFService.GetBusinessTimeRequest request) {
+            return base.Channel.GetBusinessTimeAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetBusinessTimeResponse> GetBusinessTimeAsync(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID) {
+            CASPortal.CASWCFService.GetBusinessTimeRequest inValue = new CASPortal.CASWCFService.GetBusinessTimeRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetBusinessTimeAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetScheduledTimeResponse CASPortal.CASWCFService.ICASWCFService.GetScheduledTime(CASPortal.CASWCFService.GetScheduledTimeRequest request) {
+            return base.Channel.GetScheduledTime(request);
         }
         
         public CASPortal.CASWCFService.TimeSlot[] GetScheduledTime(string CompanyID, string CompanyPassword, string CustomerPassword, System.DateTime startDate) {
-            return base.Channel.GetScheduledTime(CompanyID, CompanyPassword, CustomerPassword, startDate);
+            CASPortal.CASWCFService.GetScheduledTimeRequest inValue = new CASPortal.CASWCFService.GetScheduledTimeRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.startDate = startDate;
+            CASPortal.CASWCFService.GetScheduledTimeResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetScheduledTime(inValue);
+            return retVal.GetScheduledTimeResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.TimeSlot[]> GetScheduledTimeAsync(string CompanyID, string CompanyPassword, string CustomerPassword, System.DateTime startDate) {
-            return base.Channel.GetScheduledTimeAsync(CompanyID, CompanyPassword, CustomerPassword, startDate);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetScheduledTimeResponse> CASPortal.CASWCFService.ICASWCFService.GetScheduledTimeAsync(CASPortal.CASWCFService.GetScheduledTimeRequest request) {
+            return base.Channel.GetScheduledTimeAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetScheduledTimeResponse> GetScheduledTimeAsync(string CompanyID, string CompanyPassword, string CustomerPassword, System.DateTime startDate) {
+            CASPortal.CASWCFService.GetScheduledTimeRequest inValue = new CASPortal.CASWCFService.GetScheduledTimeRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.startDate = startDate;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetScheduledTimeAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetCategoryProductServiceResponse CASPortal.CASWCFService.ICASWCFService.GetCategoryProductService(CASPortal.CASWCFService.GetCategoryProductServiceRequest request) {
+            return base.Channel.GetCategoryProductService(request);
         }
         
         public CASPortal.CASWCFService.SiteNItem GetCategoryProductService(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetCategoryProductService(CompanyID, CompanyPassword, CustomerID, CustomerPassword, Level4ID);
+            CASPortal.CASWCFService.GetCategoryProductServiceRequest inValue = new CASPortal.CASWCFService.GetCategoryProductServiceRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            CASPortal.CASWCFService.GetCategoryProductServiceResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetCategoryProductService(inValue);
+            return retVal.GetCategoryProductServiceResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.SiteNItem> GetCategoryProductServiceAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetCategoryProductServiceAsync(CompanyID, CompanyPassword, CustomerID, CustomerPassword, Level4ID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCategoryProductServiceResponse> CASPortal.CASWCFService.ICASWCFService.GetCategoryProductServiceAsync(CASPortal.CASWCFService.GetCategoryProductServiceRequest request) {
+            return base.Channel.GetCategoryProductServiceAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCategoryProductServiceResponse> GetCategoryProductServiceAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
+            CASPortal.CASWCFService.GetCategoryProductServiceRequest inValue = new CASPortal.CASWCFService.GetCategoryProductServiceRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetCategoryProductServiceAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetCustomerSiteResponse CASPortal.CASWCFService.ICASWCFService.GetCustomerSite(CASPortal.CASWCFService.GetCustomerSiteRequest request) {
+            return base.Channel.GetCustomerSite(request);
         }
         
         public CASPortal.CASWCFService.Site[] GetCustomerSite(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID) {
-            return base.Channel.GetCustomerSite(CompanyID, CompanyPassword, CustomerPassword, CustomerID, Level4ID);
+            CASPortal.CASWCFService.GetCustomerSiteRequest inValue = new CASPortal.CASWCFService.GetCustomerSiteRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.Level4ID = Level4ID;
+            CASPortal.CASWCFService.GetCustomerSiteResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetCustomerSite(inValue);
+            return retVal.GetCustomerSiteResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.Site[]> GetCustomerSiteAsync(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID) {
-            return base.Channel.GetCustomerSiteAsync(CompanyID, CompanyPassword, CustomerPassword, CustomerID, Level4ID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCustomerSiteResponse> CASPortal.CASWCFService.ICASWCFService.GetCustomerSiteAsync(CASPortal.CASWCFService.GetCustomerSiteRequest request) {
+            return base.Channel.GetCustomerSiteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetCustomerSiteResponse> GetCustomerSiteAsync(string CompanyID, string CompanyPassword, string CustomerPassword, string CustomerID, int Level4ID) {
+            CASPortal.CASWCFService.GetCustomerSiteRequest inValue = new CASPortal.CASWCFService.GetCustomerSiteRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.Level4ID = Level4ID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetCustomerSiteAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse CASPortal.CASWCFService.ICASWCFService.GetTrendAnalysisTreeNodes(CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest request) {
+            return base.Channel.GetTrendAnalysisTreeNodes(request);
         }
         
         public CASPortal.CASWCFService.TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetTrendAnalysisTreeNodes(CompanyID, CompanyPassword, CustomerID, CustomerPassword, Level4ID);
+            CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest inValue = new CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetTrendAnalysisTreeNodes(inValue);
+            return retVal.GetTrendAnalysisTreeNodesResult;
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.TreeNode> GetTrendAnalysisTreeNodesAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
-            return base.Channel.GetTrendAnalysisTreeNodesAsync(CompanyID, CompanyPassword, CustomerID, CustomerPassword, Level4ID);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse> CASPortal.CASWCFService.ICASWCFService.GetTrendAnalysisTreeNodesAsync(CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest request) {
+            return base.Channel.GetTrendAnalysisTreeNodesAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse> GetTrendAnalysisTreeNodesAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID) {
+            CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest inValue = new CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetTrendAnalysisTreeNodesAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse CASPortal.CASWCFService.ICASWCFService.PostTrendAnalysisReportData(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request) {
+            return base.Channel.PostTrendAnalysisReportData(request);
+        }
+        
+        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, System.DateTime FromDate, System.DateTime ToDate, System.Data.DataTable answers) {
+            CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.ContractNo = ContractNo;
+            inValue.CmCode = CmCode;
+            inValue.FromDate = FromDate;
+            inValue.ToDate = ToDate;
+            inValue.answers = answers;
+            CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportData(inValue);
+            return retVal.PostTrendAnalysisReportDataResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> CASPortal.CASWCFService.ICASWCFService.PostTrendAnalysisReportDataAsync(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request) {
+            return base.Channel.PostTrendAnalysisReportDataAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, System.DateTime FromDate, System.DateTime ToDate, System.Data.DataTable answers) {
+            CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.ContractNo = ContractNo;
+            inValue.CmCode = CmCode;
+            inValue.FromDate = FromDate;
+            inValue.ToDate = ToDate;
+            inValue.answers = answers;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportDataAsync(inValue);
         }
     }
 }

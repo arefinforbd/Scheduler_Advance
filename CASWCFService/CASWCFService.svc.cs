@@ -522,11 +522,11 @@ namespace CASWCFService
 
         public SiteNItem GetCategoryProductService(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID)
         {
-            DataSet dsItems;
+            DataSet dsServices;
             DataSet dsSites;
-            Item item;
+            Service item;
             Site site;
-            List<Item> items = new List<Item>();
+            List<Service> serviceList = new List<Service>();
             List<Site> sites = new List<Site>();
             SiteNItem siteNitem = new SiteNItem();
             StrongTypesNS.ds_catproditemDataSet services;
@@ -538,7 +538,7 @@ namespace CASWCFService
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
                 cus.p_webgetcatprod(Level4ID, CustomerID, out services, out master);
-                dsItems = (DataSet)services;
+                dsServices = (DataSet)services;
                 dsSites = (DataSet)master;
 
                 if (dsSites != null && dsSites.Tables[0].Rows.Count > 0)
@@ -569,11 +569,11 @@ namespace CASWCFService
                 else
                     return null;
 
-                if (dsItems != null && dsItems.Tables[0].Rows.Count > 0)
+                if (dsServices != null && dsServices.Tables[0].Rows.Count > 0)
                 {
-                    foreach (DataRow row in dsItems.Tables[0].Rows)
+                    foreach (DataRow row in dsServices.Tables[0].Rows)
                     {
-                        item = new Item();
+                        item = new Service();
 
                         item.CategoryName = row["pd_category"].ToString();
                         item.ProductName = row["pd_code"].ToString();
@@ -583,14 +583,14 @@ namespace CASWCFService
                         item.Price = Convert.ToDouble(row["pdl_price"]);
                         item.Duration = Convert.ToInt32(row["pdl_duration"]);
 
-                        items.Add(item);
+                        serviceList.Add(item);
                     }
                 }
                 else
                     return null;
 
                 siteNitem.sites = sites;
-                siteNitem.items = items;
+                siteNitem.listOfItems = serviceList;
 
                 return siteNitem;
             }
@@ -657,6 +657,7 @@ namespace CASWCFService
             DataSet dsLevel2;
             DataSet dsLevel3;
             DataSet dsLevel4;
+            DataSet dsArea;
             TreeNodeLevel1 trLevel1;
             TreeNodeLevel2 trLevel2;
             TreeNodeLevel3 trLevel3;
@@ -666,17 +667,19 @@ namespace CASWCFService
             StrongTypesNS.ds_rsddetDataSet level2;
             StrongTypesNS.ds_rsadetDataSet level3;
             StrongTypesNS.ds_rsmdetDataSet level4;
+            StrongTypesNS.ds_areaDataSet area;
 
             try
             {
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                cus.ldbardet(Level4ID, out level1, out level2, out level3, out level4);
+                cus.ws_ldbardet(Level4ID, out level1, out level2, out level3, out level4, out area);
                 dsLevel1 = (DataSet)level1;
                 dsLevel2 = (DataSet)level2;
                 dsLevel3 = (DataSet)level3;
                 dsLevel4 = (DataSet)level4;
+                dsArea = (DataSet)area;
 
                 //dsLevel1.WriteXml("C:\\Arefin\\level1.xml");
                 //dsLevel2.WriteXml("C:\\Arefin\\level2.xml");
@@ -766,11 +769,52 @@ namespace CASWCFService
                 else
                     return null;
 
+                if (dsArea != null && dsArea.Tables[0].Rows.Count > 0)
+                {
+                    treeNodes.listAreaName = new List<string>();
+
+                    foreach (DataRow row in dsArea.Tables[0].Rows)
+                    {
+                        treeNodes.listAreaName.Add(row["tta_area"].ToString());
+                    }
+                }
+                else
+                    return null;
+
                 return treeNodes;
             }
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, DateTime FromDate, DateTime ToDate, DataTable answers)
+        {
+            string responseMessage;
+            string message = "";
+            StrongTypesNS.tt_answersDataTable dtAnswers = new StrongTypesNS.tt_answersDataTable();
+
+            try
+            {
+                foreach (DataRow row in answers.Rows)
+                {
+                    dtAnswers.Addtt_answersRow(row["RootNode"].ToString(), Convert.ToDecimal(row["SectionID"]), 
+                        Convert.ToDecimal(row["QuestionID"]), "", Convert.ToInt32(row["AnswerID"]), row["SectionDesc"].ToString(), 
+                        row["QuestionDesc"].ToString(), row["AnswerDesc"].ToString(), row["SectionCaption"].ToString(), 
+                        row["QuestionCaption"].ToString());
+                }
+
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                message = cus.ws_bartrdbyque(Level4ID, ContractNo, CmCode, FromDate, ToDate, dtAnswers, out responseMessage);
+
+                return responseMessage;
+            }
+            catch (Exception ex)
+            {
+                return "error";
             }
         }
 

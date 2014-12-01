@@ -20,5 +20,8 @@ namespace CASWCFService.Model
 
         [DataMember]
         public List<TreeNodeLevel4> listLeve4 { get; set; }
+
+        [DataMember]
+        public List<string> listAreaName { get; set; }
     }
 }

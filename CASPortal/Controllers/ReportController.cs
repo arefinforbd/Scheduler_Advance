@@ -1,5 +1,6 @@
 ﻿using CASPortal.CASWCFService;
 using CASPortal.Helper;
+using CASPortal.Models;
 using CASPortal.Repository;
 using CASPortal.WebParser;
 using System;
@@ -232,15 +233,13 @@ namespace CASPortal.Controllers
 
             ReportRepository repository = new ReportRepository();
             StringBuilder sb = new StringBuilder("");
-            //List<TreeNodeLevel1> level1List = new List<TreeNodeLevel1>();
-            //List<TreeNodeLevel2> level2List = new List<TreeNodeLevel2>();
-            //List<TreeNodeLevel3> level3List = new List<TreeNodeLevel3>();
-            //List<TreeNodeLevel4> level4List = new List<TreeNodeLevel4>();
+            StringBuilder sbArea = new StringBuilder("");
 
             TreeNode trNode = repository.GetTrendAnalysisTreeNodes();
 
             if (trNode != null && trNode.listLeve1.Count() > 0)
             {
+                TempData["RootNode"] = trNode.listLeve1[0].RootCaption;
                 sb.Append("<ul>");
                 sb.Append("<li>");
                 sb.Append(trNode.listLeve1[0].RootCaption);
@@ -259,7 +258,7 @@ namespace CASPortal.Controllers
 
                         foreach (TreeNodeLevel3 t3 in trNode.listLeve3.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID))
                         {
-                            string nodeID = t1.SectionID + "-" + t1.SectionCaption + "-" + t2.QuestionID + "-" + t2.QuestionCaption + "-" + t3.AnswerID + "-" + t3.AnswerCaption + ",";
+                            string nodeID = t1.SectionID + "#" + t1.SectionCaption + "#" + t2.QuestionID + "#" + t2.QuestionCaption + "#" + t3.AnswerID + "#" + t3.AnswerCaption;
                             sb.Append("<li id='" + nodeID + "'>");
                             sb.Append(t3.AnswerCaption);
                             //sb.Append("<ul>");
@@ -282,48 +281,16 @@ namespace CASPortal.Controllers
                 sb.Append("</ul>");
                 sb.Append("</li>");
                 sb.Append("</ul>");
+
+                sbArea.Append("<li style='cursor:pointer'><a>[ALL]</a></li>");
+                foreach (string area in trNode.listAreaName)
+                {
+                    sbArea.Append("<li style='cursor:pointer'><a>" + area + "</a></li>");
+                }
             }
 
-            #region list
-            //sb.Append("<ul>");
-            //    sb.Append("<li>INTERNAL");
-            //        sb.Append("<ul>");
-            //            sb.Append("<li>RAT");
-            //                sb.Append("<ul>");
-            //                    sb.Append("<li>ACTIVITY</li>");
-            //                sb.Append("</ul>");
-            //            sb.Append("</li>");
-            //            sb.Append("<li>MOUSE");
-            //                sb.Append("<ul>");
-            //                    sb.Append("<li>ACTIVITY</li>");
-            //                sb.Append("</ul>");
-            //            sb.Append("</li>");
-            //            sb.Append("<li>EFK");
-            //                sb.Append("<ul>");
-            //                    sb.Append("<li>ACTIVITY</li>");
-            //                sb.Append("</ul>");
-            //            sb.Append("</li>");
-            //        sb.Append("</ul>");
-            //    sb.Append("</li>");
-
-            //    sb.Append("<li>EXTERNAL");
-            //        sb.Append("<ul>");
-            //            sb.Append("<li>RAT STATION");
-            //                sb.Append("<ul>");
-            //                    sb.Append("<li>ACTIVITY</li>");
-            //                sb.Append("</ul>");
-            //            sb.Append("</li>");
-            //            sb.Append("<li>MOUSE STATION");
-            //                sb.Append("<ul>");
-            //                    sb.Append("<li>ACTIVITY</li>");
-            //                sb.Append("</ul>");
-            //            sb.Append("</li>");
-            //        sb.Append("</ul>");
-            //    sb.Append("</li>");
-            //sb.Append("</ul>");
-            #endregion
-
             ViewBag.TreeNodes = sb.ToString();
+            ViewBag.Areas = sbArea.ToString();
 
             return View();
         }
@@ -331,18 +298,67 @@ namespace CASPortal.Controllers
         [HttpPost]
         public ActionResult TrendAnalysis(string selectedNodes)
         {
+            DataTable dtAnswers = new DataTable();
+
             selectedNodes = selectedNodes.Replace("[\"", "");
             selectedNodes = selectedNodes.Replace("\"]", "");
             selectedNodes = selectedNodes.Replace("\"", "");
-            selectedNodes = selectedNodes.Replace(",,", ",");
 
-            string[] arr2 = selectedNodes.Split(',');
-            string[] arr2Dis = arr2.Distinct().ToArray();
-
-            string[] arr = selectedNodes.Split('-');
+            string[] arr = selectedNodes.Split(',');
             string[] arrDis = arr.Distinct().ToArray();
 
-            return Json("successfull", JsonRequestBehavior.AllowGet);
+            dtAnswers.TableName = "TreeAnswers";
+            dtAnswers.Columns.Add("RootNode");
+            dtAnswers.Columns.Add("SectionID");
+            dtAnswers.Columns.Add("SectionDesc");
+            dtAnswers.Columns.Add("QuestionID");
+            dtAnswers.Columns.Add("QuestionDesc");
+            dtAnswers.Columns.Add("AnswerID");
+            dtAnswers.Columns.Add("AnswerDesc");
+            dtAnswers.Columns.Add("SectionCaption");
+            dtAnswers.Columns.Add("QuestionCaption");
+
+            foreach (string node in arrDis)
+            {
+                if (node.Length > 8 && node.IndexOf("#") > 0)
+                {
+                    string[] nodeArr = node.Split('#');
+
+                    DataRow row = dtAnswers.NewRow();
+
+                    row["RootNode"] = TempData["RootNode"] == null ? "Barcode" : TempData["RootNode"].ToString();
+                    row["SectionID"] = Convert.ToInt32(nodeArr[0]);
+                    row["SectionDesc"] = nodeArr[1];
+                    row["QuestionID"] = Convert.ToInt32(nodeArr[2]);
+                    row["QuestionDesc"] = nodeArr[3];
+                    row["AnswerID"] = Convert.ToInt32(nodeArr[4]);
+                    row["AnswerDesc"] = nodeArr[5];
+                    row["SectionCaption"] = nodeArr[1];
+                    row["QuestionCaption"] = nodeArr[3];
+
+                    dtAnswers.Rows.Add(row);
+                }
+            }
+
+            if (dtAnswers.Rows.Count > 0)
+            {
+                DataView dv = dtAnswers.DefaultView;
+                dv.Sort = "AnswerID";
+                dtAnswers = dv.ToTable();
+
+                dv = dtAnswers.DefaultView;
+                dv.Sort = "QuestionID";
+                dtAnswers = dv.ToTable();
+
+                dv = dtAnswers.DefaultView;
+                dv.Sort = "SectionID";
+                dtAnswers = dv.ToTable();
+            }
+
+            ReportRepository repository = new ReportRepository();
+            string resposeMessage = repository.PostTrendAnalysisReportData(dtAnswers);
+
+            return Json(resposeMessage, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult EquipmentTransaction()
@@ -359,7 +375,7 @@ namespace CASPortal.Controllers
 
             siteNitem = repository.GetSiteNItems();
 
-            foreach (var item in siteNitem.items)
+            foreach (var item in siteNitem.listOfItems)
             {
                 sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
             }
@@ -435,26 +451,5 @@ namespace CASPortal.Controllers
                 return File(new byte[2], "application/octet", "file-name");
             }
         }
-    }
-
-    public class BarData
-    {
-        public string DateLabel { get; set; }
-        public double lineValue { get; set; }
-        public string label { get; set; }
-    }
-
-    public class LineData
-    {
-        public string DateLabel { get; set; }
-        public double lineValue { get; set; }
-        public string label { get; set; }
-        public int Count { get; set; }
-    }
-
-    class PieData
-    {
-        public string label { get; set; }
-        public int data { get; set; }
     }
 }

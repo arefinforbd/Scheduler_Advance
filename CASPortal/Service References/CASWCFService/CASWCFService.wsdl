@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model" />
       <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:50557/CASWCFService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICASWCFService_LoginProcess_InputMessage">
@@ -92,6 +93,12 @@
   <wsdl:message name="ICASWCFService_GetTrendAnalysisTreeNodes_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTrendAnalysisTreeNodesResponse" />
   </wsdl:message>
+  <wsdl:message name="ICASWCFService_PostTrendAnalysisReportData_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostTrendAnalysisReportData" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_PostTrendAnalysisReportData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostTrendAnalysisReportDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICASWCFService">
     <wsdl:operation name="LoginProcess">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/LoginProcess" message="tns:ICASWCFService_LoginProcess_InputMessage" />
@@ -148,6 +155,10 @@
     <wsdl:operation name="GetTrendAnalysisTreeNodes">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes" message="tns:ICASWCFService_GetTrendAnalysisTreeNodes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse" message="tns:ICASWCFService_GetTrendAnalysisTreeNodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostTrendAnalysisReportData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData" message="tns:ICASWCFService_PostTrendAnalysisReportData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse" message="tns:ICASWCFService_PostTrendAnalysisReportData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICASWCFService" type="tns:ICASWCFService">
@@ -271,6 +282,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetTrendAnalysisTreeNodes">
       <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostTrendAnalysisReportData">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

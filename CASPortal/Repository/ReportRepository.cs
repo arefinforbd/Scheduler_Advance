@@ -1,5 +1,4 @@
 ﻿using CASPortal.CASWCFService;
-using CASPortal.Models;
 using CASPortal.WebParser;
 using System;
 using System.Collections.Generic;
@@ -19,6 +18,15 @@ namespace CASPortal.Repository
             treeNode = parser.GetTrendAnalysisTreeNodes();
 
             return treeNode;
+        }
+
+        public string PostTrendAnalysisReportData(DataTable answers)
+        {
+            ReportParser parser = new ReportParser();
+
+            string responseMessage = parser.PostTrendAnalysisReportData(answers);
+
+            return responseMessage;
         }
     }
 }

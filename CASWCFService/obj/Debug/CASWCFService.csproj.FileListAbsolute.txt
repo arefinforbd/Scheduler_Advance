@@ -7,4 +7,3 @@ C:\Arefin\VS2013\CASWCFService\CASWCFService\bin\Progress.o4glrt.dll
 C:\Arefin\VS2013\CASWCFService\CASWCFService\bin\Progress.ssl.dll
 C:\Arefin\VS2013\CASWCFService\CASWCFService\obj\Debug\CASWCFService.dll
 C:\Arefin\VS2013\CASWCFService\CASWCFService\obj\Debug\CASWCFService.pdb
-C:\Arefin\VS2013\CASWCFService\CASWCFService\obj\Debug\CASWCFService.csprojResolveAssemblyReference.cache

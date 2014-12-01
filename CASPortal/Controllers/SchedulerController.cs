@@ -24,7 +24,7 @@ namespace CASPortal.Controllers
         public ActionResult Index()
         {
             SiteNItem siteNitem;
-            List<Item> itemList = new List<Item>();
+            List<Service> itemList = new List<Service>();
             List<Site> siteList = new List<Site>();
             SchedulerRepository repository = new SchedulerRepository();
             SchedulerParser parser = new SchedulerParser();
@@ -46,7 +46,7 @@ namespace CASPortal.Controllers
 
             siteNitem = repository.GetSiteNItems();
 
-            foreach (var item in siteNitem.items)
+            foreach (var item in siteNitem.listOfItems)
             {
                 sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
             }
@@ -88,7 +88,7 @@ namespace CASPortal.Controllers
                         return RedirectToAction("Index", "Login");
                 }
 
-                Item item = new Item();
+                Service item = new Service();
                 SchedulerRepository repository = new SchedulerRepository();
 
                 TempData.Clear();

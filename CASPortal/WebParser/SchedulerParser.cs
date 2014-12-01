@@ -1,6 +1,5 @@
 ﻿using CASPortal.CASWCFService;
 using CASPortal.Helper;
-using CASPortal.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -111,12 +110,12 @@ namespace CASPortal.WebParser
             }
         }
 
-        public Item GetBookedDays(string dateStart)
+        public Service GetBookedDays(string dateStart)
         {
             DateTime scheduledDate;
             string startTime = string.Empty;
             string endTime = string.Empty;
-            Item item = new Item();
+            Service item = new Service();
             TimeSlot[] timeSlotArr = null;
             List<TimeSlot> timeSlots = new List<TimeSlot>();
             CASWCFServiceClient cas = new CASWCFServiceClient();
@@ -154,7 +153,7 @@ namespace CASPortal.WebParser
                 }
             }
 
-            item.TimeSlots = timeSlots;
+            item.TimeSlots = timeSlots.ToArray();
 
             /*
             item.TimeSlots = new List<TimeSlot>(){
@@ -180,7 +179,7 @@ namespace CASPortal.WebParser
         public SiteNItem GetSiteNItems()
         {
             SiteNItem siteNitem;
-            List<Item> items = new List<Item>();
+            List<Service> items = new List<Service>();
             DataSet ds = new DataSet();
             CASWCFServiceClient cas = new CASWCFServiceClient();
 
@@ -193,7 +192,7 @@ namespace CASPortal.WebParser
             //itemArr = cas.GetCategoryProductService(companyID, companyPassword, customerPassword, level4ID);
             siteNitem = cas.GetCategoryProductService(companyID, companyPassword, customerID, customerPassword, level4ID);
 
-            if (siteNitem != null && siteNitem.sites.Count() > 0 && siteNitem.items.Count() > 0)
+            if (siteNitem != null && siteNitem.sites.Count() > 0 && siteNitem.listOfItems.Count() > 0)
             {
                 return siteNitem;
             }

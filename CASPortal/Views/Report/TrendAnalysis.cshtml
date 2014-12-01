@@ -13,16 +13,52 @@
             <label>Trend Analysis Report</label>
         </div>
         <div class="panel-body">
-            <div id="jstree">
-                @Html.Raw(@ViewBag.TreeNodes)
+            <div class="row">
+                <div class="col-lg-4" style="border-right: 1px solid #CCCCCC;">
+                    <div id="jstree">
+                        @Html.Raw(@ViewBag.TreeNodes)
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div id="ddlArea" style="margin-left:35px;">
+                        <label>Area : </label>
+                        <div class="btn-group">
+                            <a class="btn btn-info dropdown-toggle dropdown-Area" data-toggle="dropdown" href="#">
+                                <span data-bind="label"></span> <span class="caret"></span>
+                            </a>
+                            <ul id="ulArea" class="dropdown-menu scroll-menu">
+                                @Html.Raw(ViewBag.Areas)
+                            </ul>
+                        </div>
+                        <input type="hidden" name="hdnArea" id="hdnArea" />
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <label>Date from : </label>
+                            <div class="btn-group">
+                                <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <label>Date to : </label>
+                            <div class="btn-group">
+                                <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel-footer">
             <div id="div_btnContinue">
-                <input id="btnPreview" class="btn btn-info submitClass" value="Preview" type="button" name="submit">
+                <input id="btnPreview" class="btn btn-success submitClass" value="Preview" type="button" name="submit">
+                <input id="btnReset" class="btn btn-info" type="button" value="Reset" style="margin-left:10px;width:83px;">
             </div>
         </div>
     </div>
+    <div id="divLoading"></div>
     <br />
     <div class="row">
         <div class="col-lg-12">
@@ -70,3 +106,5 @@
         </div>
     </div>
 </div>
+
+<script src="@Url.Content("~/Content/js/trendanalysisreport.js")"></script>

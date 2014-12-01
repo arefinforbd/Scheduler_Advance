@@ -56,5 +56,8 @@ namespace CASWCFService
 
         [OperationContract]
         TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+
+        [OperationContract]
+        string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, DateTime FromDate, DateTime ToDate, DataTable answers);
     }
 }

@@ -12,6 +12,6 @@ namespace CASWCFService.Model
         [DataMember]
         public List<Site> sites { get; set; }
         [DataMember]
-        public List<Item> items { get; set; }
+        public List<Service> listOfItems { get; set; }
     }
 }
