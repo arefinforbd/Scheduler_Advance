@@ -13,13 +13,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/14/2014 12:25:42</publishTime>
+      <publishTime>12/02/2014 12:49:49</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/14/2014 12:25:42</publishTime>
+      <publishTime>12/02/2014 12:49:49</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>11/14/2014 11:52:56</publishTime>
+      <publishTime>12/02/2014 12:49:37</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
       <publishTime>11/04/2014 16:50:45</publishTime>
@@ -256,13 +256,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2014 23:58:46</publishTime>
     </File>
     <File Include="Content/js/customerinformation.js">
-      <publishTime>11/13/2014 16:00:33</publishTime>
+      <publishTime>12/02/2014 11:22:49</publishTime>
     </File>
     <File Include="Content/js/jquery-1.11.0.js">
       <publishTime>06/09/2014 18:47:18</publishTime>
     </File>
     <File Include="Content/js/jquery.jclock.js">
       <publishTime>04/27/2012 13:26:03</publishTime>
+    </File>
+    <File Include="Content/js/plugins/Chart.js">
+      <publishTime>11/24/2014 15:41:22</publishTime>
+    </File>
+    <File Include="Content/js/plugins/Chart.Line-Data.js">
+      <publishTime>12/02/2014 09:46:36</publishTime>
+    </File>
+    <File Include="Content/js/plugins/Chart.min.js">
+      <publishTime>09/17/2014 06:04:30</publishTime>
     </File>
     <File Include="Content/js/plugins/dataTables/dataTables.bootstrap.js">
       <publishTime>09/30/2014 12:51:36</publishTime>
@@ -274,7 +283,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2014 14:55:52</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/flot-data.js">
-      <publishTime>04/14/2014 14:55:52</publishTime>
+      <publishTime>12/02/2014 09:46:36</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.axislabels.js">
+      <publishTime>11/18/2014 09:50:41</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/jquery.flot.js">
       <publishTime>04/14/2014 14:55:52</publishTime>
@@ -285,8 +297,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/js/plugins/flot/jquery.flot.resize.js">
       <publishTime>04/14/2014 14:55:52</publishTime>
     </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.time.js">
+      <publishTime>11/18/2014 09:50:10</publishTime>
+    </File>
     <File Include="Content/js/plugins/flot/jquery.flot.tooltip.min.js">
       <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/gulpfile.js">
+      <publishTime>09/17/2014 06:04:30</publishTime>
     </File>
     <File Include="Content/js/plugins/metisMenu/metisMenu.js">
       <publishTime>06/24/2014 19:47:26</publishTime>
@@ -295,7 +313,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2014 19:47:26</publishTime>
     </File>
     <File Include="Content/js/plugins/morris/morris-data.js">
-      <publishTime>06/24/2014 19:32:26</publishTime>
+      <publishTime>12/02/2014 09:46:36</publishTime>
     </File>
     <File Include="Content/js/plugins/morris/morris.js">
       <publishTime>06/17/2014 23:31:06</publishTime>
@@ -306,6 +324,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/js/plugins/morris/raphael.min.js">
       <publishTime>06/17/2014 23:33:08</publishTime>
     </File>
+    <File Include="Content/js/plugins/src/Chart.Bar.js">
+      <publishTime>09/17/2014 06:04:30</publishTime>
+    </File>
+    <File Include="Content/js/plugins/src/Chart.Core.js">
+      <publishTime>11/24/2014 13:25:18</publishTime>
+    </File>
+    <File Include="Content/js/plugins/src/Chart.Doughnut.js">
+      <publishTime>09/17/2014 06:04:30</publishTime>
+    </File>
+    <File Include="Content/js/plugins/src/Chart.Line.js">
+      <publishTime>11/24/2014 13:24:48</publishTime>
+    </File>
+    <File Include="Content/js/plugins/src/Chart.PolarArea.js">
+      <publishTime>09/17/2014 06:04:30</publishTime>
+    </File>
+    <File Include="Content/js/plugins/src/Chart.Radar.js">
+      <publishTime>09/17/2014 06:04:30</publishTime>
+    </File>
     <File Include="Content/js/sb-admin-2.js">
       <publishTime>06/25/2014 17:47:48</publishTime>
     </File>
@@ -314,6 +350,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/js/sendcustomerinformation.js">
       <publishTime>11/05/2014 11:24:46</publishTime>
+    </File>
+    <File Include="Content/js/trendanalysisreport.js">
+      <publishTime>12/02/2014 12:27:08</publishTime>
     </File>
     <File Include="Content/less/mixins.less">
       <publishTime>06/24/2014 20:45:16</publishTime>
@@ -379,10 +418,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:03</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>10/03/2014 15:41:08</publishTime>
+      <publishTime>11/21/2014 15:49:49</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/14/2014 12:25:37</publishTime>
+      <publishTime>12/02/2014 12:49:43</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -412,31 +451,79 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>11/14/2014 11:52:43</publishTime>
+      <publishTime>11/26/2014 16:08:42</publishTime>
     </File>
     <File Include="Service References/CASService/CASPortal.CASService.LoginProcessResponse.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.DayHour.datasource">
-      <publishTime>11/12/2014 17:11:31</publishTime>
+      <publishTime>12/02/2014 11:31:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Folder.datasource">
-      <publishTime>11/12/2014 17:11:31</publishTime>
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetBusinessTimeResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetCASDefaultDataResponse.datasource">
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetCategoryProductServiceResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetCustomerSiteResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPrivateFileInfoResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPrivateFolderFilesResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPrivateFoldersResponse.datasource">
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPublicFileInfoResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPublicFolderFilesResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPublicFoldersResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetScheduledTimeResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Item.datasource">
       <publishTime>11/12/2014 17:11:31</publishTime>
     </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.LoginMessageOfDayResponse.datasource">
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.LoginProcessResponse.datasource">
-      <publishTime>11/12/2014 17:11:31</publishTime>
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse.datasource">
+      <publishTime>12/02/2014 11:32:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Site.datasource">
-      <publishTime>11/12/2014 17:11:31</publishTime>
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.SiteNItem.datasource">
+      <publishTime>12/02/2014 11:31:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.TimeSlot.datasource">
-      <publishTime>11/12/2014 17:11:31</publishTime>
+      <publishTime>12/02/2014 11:31:59</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.TreeNode.datasource">
+      <publishTime>12/02/2014 11:31:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Welcome.datasource">
-      <publishTime>11/12/2014 17:11:31</publishTime>
+      <publishTime>12/02/2014 11:31:59</publishTime>
     </File>
     <File Include="Views/CustomerInformation/Index.cshtml">
       <publishTime>11/06/2014 15:05:12</publishTime>
@@ -463,10 +550,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/13/2014 13:06:47</publishTime>
     </File>
     <File Include="Views/Report/EquipmentTransaction.cshtml">
-      <publishTime>11/14/2014 12:24:46</publishTime>
+      <publishTime>11/28/2014 15:20:33</publishTime>
     </File>
     <File Include="Views/Report/TrendAnalysis.cshtml">
-      <publishTime>11/13/2014 16:39:43</publishTime>
+      <publishTime>12/02/2014 12:00:24</publishTime>
     </File>
     <File Include="Views/Scheduler/CustomerInformation.cshtml">
       <publishTime>11/04/2014 14:08:25</publishTime>
@@ -490,7 +577,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/10/2014 11:04:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/13/2014 16:00:36</publishTime>
+      <publishTime>12/02/2014 10:45:37</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -502,7 +589,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2014 13:47:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/14/2014 11:52:02</publishTime>
+      <publishTime>12/02/2014 12:49:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

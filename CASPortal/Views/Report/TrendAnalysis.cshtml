@@ -8,24 +8,54 @@
 
 <div id="page-wrapper">
     <br />
-    <div class="panel panel-info">
+    <div class="panel panel-info" style="margin-left:-20px; width:105%;">
         <div class="panel-heading">
             <label>Trend Analysis Report</label>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="divTrendReportFields">
             <div class="row">
-                <div class="col-lg-4" style="border-right: 1px solid #CCCCCC;">
+                <div class="col-lg-5" style="border-right: 1px solid #CCCCCC;">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites" style="margin-left: 25px;">
+                            <label>Sites : </label>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle dropdown-Site" data-toggle="dropdown" href="#">
+                                    <span data-bind="label" style="font-size:12px;"></span> <span class="caret"></span>
+                                </a>
+                                <ul id="ulSites" class="dropdown-menu scroll-menu" style="font-size: 12px;">
+                                    @Html.Raw(ViewBag.Sites)
+                                </ul>
+                            </div>
+                            <input type="hidden" name="hdnSite" id="hdnSite" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts">
+                            <label>Contract : </label>
+                            <div class="btn-group" id="divContract">
+                                <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
+                                    <span data-bind="label"></span> <span class="caret"></span>
+                                </a>
+                                <ul id="ulContracts" class="dropdown-menu">
+                                    @Html.Raw(ViewBag.Contracts)
+                                </ul>
+                            </div>
+                            <input type="hidden" name="hdnContract" id="hdnContract" />
+                        </div>
+                    </div>
+                    <br />
                     <div id="jstree">
                         @Html.Raw(@ViewBag.TreeNodes)
                     </div>
+                    <br />
                 </div>
-
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div id="ddlArea" style="margin-left:35px;">
                         <label>Area : </label>
                         <div class="btn-group">
                             <a class="btn btn-info dropdown-toggle dropdown-Area" data-toggle="dropdown" href="#">
-                                <span data-bind="label"></span> <span class="caret"></span>
+                                <span id="spanArea" data-bind="label"></span> <span class="caret"></span>
                             </a>
                             <ul id="ulArea" class="dropdown-menu scroll-menu">
                                 @Html.Raw(ViewBag.Areas)
@@ -33,18 +63,54 @@
                         </div>
                         <input type="hidden" name="hdnArea" id="hdnArea" />
                     </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <label>Date from : </label>
-                            <div class="btn-group">
-                                <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
+                    <br />
+                    <div class="row" id="divFrequency">
+                        <div class="col-lg-3" style="margin-left: 10px; margin-right: -73px; margin-top: -2px;">
+                            <div style="margin-top: 10px;">
+                                <label>Trend By : </label>
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-2">
+                            <div class="radio radio-success">
+                                <input type="radio" value="Weeks" id="rdoWeeks" name="rdoDate" checked="checked">
+                                <label for="rdoWeeks">Weeks</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="radio radio-success">
+                                <input type="radio" value="Section" id="rdoMonths" name="rdoDate">
+                                <label for="rdoMonths">Months</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="radio radio-success">
+                                <input type="radio" value="Job Date" id="rdoJobDate" name="rdoDate">
+                                <label for="rdoJobDate">Job Date</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hdnFrequency" id="hdnFrequency" />
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-5 col-xs-5">
+                            <label>Date from : </label>
+                            <div class="btn-group">
+                                <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer; width: 130px;">
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-xs-5">
                             <label>Date to : </label>
                             <div class="btn-group">
-                                <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
+                                <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer; width: 130px;">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <label id="lblGroup">Group by No of Weeks: </label>
+                            <div class="btn-group">
+                                <input class="form-control input-sm" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
                             </div>
                         </div>
                     </div>
@@ -62,7 +128,7 @@
     <br />
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%;">
                 <div class="panel-heading">
                     Line Chart
                 </div>
@@ -78,7 +144,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%;">
                 <div class="panel-heading">
                     Pie Chart
                 </div>
@@ -94,7 +160,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%;">
                 <div class="panel-heading">
                     Bar Chart
                 </div>

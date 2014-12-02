@@ -20,11 +20,11 @@ namespace CASPortal.Repository
             return treeNode;
         }
 
-        public string PostTrendAnalysisReportData(DataTable answers)
+        public string PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
         {
             ReportParser parser = new ReportParser();
 
-            string responseMessage = parser.PostTrendAnalysisReportData(answers);
+            string responseMessage = parser.PostTrendAnalysisReportData(siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
 
             return responseMessage;
         }

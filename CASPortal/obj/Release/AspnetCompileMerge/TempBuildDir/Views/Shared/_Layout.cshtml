@@ -10,6 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/plugins/morris.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/plugins/metisMenu/metisMenu.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/plugins/timeline.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/sb-admin-2.css")" rel="stylesheet" type="text/css" />
@@ -50,6 +51,7 @@
 </head>
 <body>
     <input type="hidden" id="hdnSiteURL" value="@BaseHelper.GetSiteUrl()" />
+    <input type="hidden" id="hdnOnlyCAS" value="@BaseHelper.OnlyCAS" />
 
     <div id="wrapper">
         <!-- Navigation -->
@@ -188,5 +190,20 @@
     <script src="@Url.Content("~/Content/js/customerinformation.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery-ui-1.11.1/jquery-ui.js")"></script>
     <script src="@Url.Content("~/Content/tree/jstree.min.js")"></script>
+
+    <!-- Flot Charts JavaScript -->
+    <script src="@Url.Content("~/Content/js/plugins/flot/jquery.flot.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/flot/jquery.flot.pie.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/flot/flot-data.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/flot/jquery.flot.time.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/flot/jquery.flot.axislabels.js")"></script>
+    
+    <!-- Morris Charts JavaScript -->
+    <script src="@Url.Content("~/Content/js/plugins/morris/raphael.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/morris/morris.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/morris/morris-data.js")"></script>
+
+    <script src="@Url.Content("~/Content/js/plugins/Chart.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/Chart.Line-Data.js")"></script>
 </body>
 </html>

@@ -2991,35 +2991,48 @@ namespace CASPortal.CASWCFService {
         public int Level4ID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
-        public int ContractNo;
+        public int SiteNo;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
-        public decimal CmCode;
+        public int ContractNo;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=7)]
-        public System.DateTime FromDate;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
-        public System.DateTime ToDate;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public System.Data.DataTable answers;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Area;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
+        public int Frequency;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=10)]
+        public System.DateTime FromDate;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=11)]
+        public System.DateTime ToDate;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=12)]
+        public int GroupBy;
         
         public PostTrendAnalysisReportDataRequest() {
         }
         
-        public PostTrendAnalysisReportDataRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, System.DateTime FromDate, System.DateTime ToDate, System.Data.DataTable answers) {
+        public PostTrendAnalysisReportDataRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
             this.CompanyID = CompanyID;
             this.CompanyPassword = CompanyPassword;
             this.CustomerID = CustomerID;
             this.CustomerPassword = CustomerPassword;
             this.Level4ID = Level4ID;
+            this.SiteNo = SiteNo;
             this.ContractNo = ContractNo;
-            this.CmCode = CmCode;
+            this.answers = answers;
+            this.Area = Area;
+            this.Frequency = Frequency;
             this.FromDate = FromDate;
             this.ToDate = ToDate;
-            this.answers = answers;
+            this.GroupBy = GroupBy;
         }
     }
     
@@ -3502,18 +3515,21 @@ namespace CASPortal.CASWCFService {
             return base.Channel.PostTrendAnalysisReportData(request);
         }
         
-        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, System.DateTime FromDate, System.DateTime ToDate, System.Data.DataTable answers) {
+        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
             CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
             inValue.CompanyID = CompanyID;
             inValue.CompanyPassword = CompanyPassword;
             inValue.CustomerID = CustomerID;
             inValue.CustomerPassword = CustomerPassword;
             inValue.Level4ID = Level4ID;
+            inValue.SiteNo = SiteNo;
             inValue.ContractNo = ContractNo;
-            inValue.CmCode = CmCode;
+            inValue.answers = answers;
+            inValue.Area = Area;
+            inValue.Frequency = Frequency;
             inValue.FromDate = FromDate;
             inValue.ToDate = ToDate;
-            inValue.answers = answers;
+            inValue.GroupBy = GroupBy;
             CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportData(inValue);
             return retVal.PostTrendAnalysisReportDataResult;
         }
@@ -3523,18 +3539,21 @@ namespace CASPortal.CASWCFService {
             return base.Channel.PostTrendAnalysisReportDataAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, System.DateTime FromDate, System.DateTime ToDate, System.Data.DataTable answers) {
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
             CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
             inValue.CompanyID = CompanyID;
             inValue.CompanyPassword = CompanyPassword;
             inValue.CustomerID = CustomerID;
             inValue.CustomerPassword = CustomerPassword;
             inValue.Level4ID = Level4ID;
+            inValue.SiteNo = SiteNo;
             inValue.ContractNo = ContractNo;
-            inValue.CmCode = CmCode;
+            inValue.answers = answers;
+            inValue.Area = Area;
+            inValue.Frequency = Frequency;
             inValue.FromDate = FromDate;
             inValue.ToDate = ToDate;
-            inValue.answers = answers;
+            inValue.GroupBy = GroupBy;
             return ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportDataAsync(inValue);
         }
     }

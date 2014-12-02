@@ -15,7 +15,7 @@ $(function () {
     $.ajax({
         type: "GET",
         datatype: "json",
-        url: "/Report/GetLineData",
+        url: $("#hdnSiteURL").val() + "/Report/GetLineData",
         data: {}
     })
     .done(function (result) {

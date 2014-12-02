@@ -5,10 +5,17 @@ $(document).ready(function () {
     hideSbtBtn();
     $("#logoutMenu").attr("href", $("#hdnSiteURL").val() + "/Login/Logout");
     $("#homeMenu").attr("href", $("#hdnSiteURL").val() + "/CustomerInformation/WelcomeMessage");
-    $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
-    $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysis");
-    $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
-
+    if ($("#hdnOnlyCAS").val() == "false") {
+        $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
+        $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysis");
+        $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
+    }
+    else
+    {
+        $("#schedulerMenu").attr("href", "#");
+        $("#report101").attr("href", "#");
+        $("#report102").attr("href", "#");
+    }
     var pvtfirstval = $("#pvtfolder > :first-child").text();
     var pubfirstval = $("#pubfolder > :first-child").text();
     $("#pvtfolder > :first-child").hide();

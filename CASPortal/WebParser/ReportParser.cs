@@ -32,7 +32,7 @@ namespace CASPortal.WebParser
             return null;
         }
 
-        public string PostTrendAnalysisReportData(DataTable answers)
+        public string PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                string responseMessage = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, 1029, 0, DateTime.Now, DateTime.Now, answers);
+                string responseMessage = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
 
                 return responseMessage;
             }

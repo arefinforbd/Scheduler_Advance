@@ -9,7 +9,7 @@ $(function () {
     $.ajax({
         type: "GET",
         dataType: 'json',
-        url: "/Report/GetBarData",
+        url: $("#hdnSiteURL").val() + "/Report/GetBarData",
         data: {}
     })
     .done(function (data) {

@@ -264,10 +264,8 @@
         <xs:element minOccurs="0" name="CustomerID" type="xs:decimal" />
         <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="SiteNo" type="xs:int" />
         <xs:element minOccurs="0" name="ContractNo" type="xs:int" />
-        <xs:element minOccurs="0" name="CmCode" type="xs:decimal" />
-        <xs:element minOccurs="0" name="FromDate" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="ToDate" type="xs:dateTime" />
         <xs:element minOccurs="0" name="answers" nillable="true">
           <xs:complexType>
             <xs:annotation>
@@ -281,6 +279,11 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Frequency" type="xs:int" />
+        <xs:element minOccurs="0" name="FromDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="ToDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="GroupBy" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -789,17 +789,17 @@ namespace CASWCFService
             }
         }
 
-        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, decimal CmCode, DateTime FromDate, DateTime ToDate, DataTable answers)
+        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy)
         {
             string responseMessage;
             string message = "";
-            StrongTypesNS.tt_answersDataTable dtAnswers = new StrongTypesNS.tt_answersDataTable();
+            StrongTypesNS.ds_answersDataSet dsAnswers = new StrongTypesNS.ds_answersDataSet();
 
             try
             {
                 foreach (DataRow row in answers.Rows)
                 {
-                    dtAnswers.Addtt_answersRow(row["RootNode"].ToString(), Convert.ToDecimal(row["SectionID"]), 
+                    dsAnswers.Tables[0].Rows.Add(row["RootNode"].ToString(), Convert.ToDecimal(row["SectionID"]), 
                         Convert.ToDecimal(row["QuestionID"]), "", Convert.ToInt32(row["AnswerID"]), row["SectionDesc"].ToString(), 
                         row["QuestionDesc"].ToString(), row["AnswerDesc"].ToString(), row["SectionCaption"].ToString(), 
                         row["QuestionCaption"].ToString());
@@ -808,7 +808,7 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                message = cus.ws_bartrdbyque(Level4ID, ContractNo, CmCode, FromDate, ToDate, dtAnswers, out responseMessage);
+                message = cus.ws_bartrdbyque(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Area, Frequency, FromDate, ToDate, GroupBy, out responseMessage);
 
                 return responseMessage;
             }

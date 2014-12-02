@@ -235,6 +235,37 @@ namespace CASPortal.Controllers
             StringBuilder sb = new StringBuilder("");
             StringBuilder sbArea = new StringBuilder("");
 
+            SiteNItem siteNitem;
+            SchedulerRepository schRepository = new SchedulerRepository();
+
+            sb.Append("<li style='cursor:pointer'><a>Select Contract</a></li>");
+
+            siteNitem = schRepository.GetSiteNItems();
+
+            foreach (var item in siteNitem.listOfItems)
+            {
+                sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
+            }
+            ViewBag.Contracts = sb;
+            sb = new StringBuilder("");
+
+            StringBuilder siteFullName = new StringBuilder("");
+            sb.Append("<li style='cursor:pointer'><a>Select Site</a></li>");
+
+            foreach (var site in siteNitem.sites)
+            {
+                siteFullName = new StringBuilder(site.StreetNo.Trim().Length > 0 ? site.StreetNo + ", " : "");
+                siteFullName.Append(site.Address1.Trim().Length > 0 ? site.Address1 + " " : "");
+                siteFullName.Append(site.Address2.Trim().Length > 0 ? site.Address2 + " " : "");
+                siteFullName.Append(site.Address3.Trim().Length > 0 ? site.Address3 + ", " : "");
+                siteFullName.Append(site.Suburb.Trim().Length > 0 ? site.Suburb + ", " : "");
+                siteFullName.Append(site.State.Trim().Length > 0 ? site.State + "-" : "");
+                siteFullName.Append(site.PostCode.Trim().Length > 0 ? site.PostCode : "");
+
+                sb.Append("<li id=" + site.SiteCode + " style='cursor:pointer'><a>" + siteFullName.ToString() + "</a></li>");
+            }
+            ViewBag.Sites = sb;
+            sb = new StringBuilder("");
             TreeNode trNode = repository.GetTrendAnalysisTreeNodes();
 
             if (trNode != null && trNode.listLeve1.Count() > 0)
@@ -296,7 +327,7 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult TrendAnalysis(string selectedNodes)
+        public ActionResult TrendAnalysis(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy)
         {
             DataTable dtAnswers = new DataTable();
 
@@ -356,7 +387,9 @@ namespace CASPortal.Controllers
             }
 
             ReportRepository repository = new ReportRepository();
-            string resposeMessage = repository.PostTrendAnalysisReportData(dtAnswers);
+            DateTime dtFrom = Convert.ToDateTime(fromDate);
+            DateTime dtTo = Convert.ToDateTime(toDate);
+            string resposeMessage = repository.PostTrendAnalysisReportData(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy);
 
             return Json(resposeMessage, JsonRequestBehavior.AllowGet);
         }

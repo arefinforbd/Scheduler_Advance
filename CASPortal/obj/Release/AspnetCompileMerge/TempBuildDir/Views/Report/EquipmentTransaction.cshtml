@@ -1,17 +1,24 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EquipmentTransaction";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
+    ul.scroll-menu {
+        overflow-x: auto;
+        width: auto;
+        max-height: 320px;
+    }
+
     .ui-widget {
         font-size: 1em;
     }
+
     #ddlSites {
         padding-left: 45px;
     }
-    #ddlConracts{
+
+    #ddlConracts {
         padding-left: 20px;
     }
 
@@ -28,7 +35,7 @@
 <div id="page-wrapper">
     <br />
     @using (Html.BeginForm("EquipmentTransaction", "Report"))
-    { 
+    {
         <div class="row">
             <div class="col-lg-10">
                 <div class="panel panel-info">
@@ -40,7 +47,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites">
                                 <label>Sites : </label>
                                 <div class="btn-group">
-                                    <a class="btn btn-info dropdown-toggle dropdown-site" data-toggle="dropdown" href="#">
+                                    <a class="btn btn-info dropdown-toggle dropdown-Site" data-toggle="dropdown" href="#">
                                         <span data-bind="label"></span> <span class="caret"></span>
                                     </a>
                                     <ul id="ulSites" class="dropdown-menu scroll-menu">
@@ -67,7 +74,7 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 divDatePicker">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
                                 <label>Date from : </label>
                                 <div class="btn-group">
                                     <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
@@ -113,14 +120,14 @@
                             </div>
                         </div>
                         <div class="row" id="divPrintCheckboxes">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
                                 <div class="checkbox checkbox-success">
                                     <input type="checkbox" value="Print Details" id="chkPrintDetails" name="chkPrintDetails">
                                     <label for="chkPrintDetails">Print Details</label>
                                     <input type="hidden" id="hdnPrintDetails" name="hdnPrintDetails">
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                                 <div class="checkbox checkbox-success">
                                     <input type="checkbox" value="PrintMaterials" id="chkPrintMaterials" name="chkPrintMaterials">
                                     <label for="chkPrintMaterials">Print Materials</label>
@@ -143,7 +150,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <label>Tech : </label>
                                         <div class="btn-group" id="divContract">
-                                            <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
+                                            <a class="btn btn-info dropdown-toggle dropdown-Tech" data-toggle="dropdown" href="#">
                                                 <span data-bind="label"></span> <span class="caret"></span>
                                             </a>
                                             <ul id="ulContracts1" class="dropdown-menu">
@@ -204,7 +211,7 @@
                     </div>
                     <div class="panel-footer">
                         <div id="div_btnContinue">
-                            <button class="btn btn-info" type="submit">Preview</button>
+                            <button class="btn btn-info" type="submit" onclick="return Validate()">Preview</button>
                         </div>
                     </div>
                 </div>
@@ -217,11 +224,49 @@
     var _listContract = $("#ulContracts > :first-child");
     var _listSite = $("#ulSites > :first-child");
 
+    function Validate(){
+
+        if($("a.dropdown-Site span[data-bind='label']").text() == "Select Site"){
+            alert("Please select Site.");
+            $("a.dropdown-Site").fadeOut();
+            $("a.dropdown-Site").fadeIn();
+            return false;
+        }
+
+        if($("a.dropdown-Contract span[data-bind='label']").text() == "Select Contract"){
+            alert("Please select Contract.");
+            $("a.dropdown-Contract").fadeOut();
+            $("a.dropdown-Contract").fadeIn();
+            return false;
+        }
+
+        if ($("#dtpFrom").val().trim().length <= 0) {
+            alert("Please enter From Date.");
+            $("#dtpFrom").focus();
+            return false;
+        }
+
+        if ($("#dtpTo").val().trim().length <= 0) {
+            alert("Please enter To Date.");
+            $("#dtpTo").focus();
+            return false;
+        }
+
+        var dayDiff = 0;
+        dayDiff = new Date($("#dtpTo").datepicker('getDate')) - new Date($("#dtpFrom").datepicker('getDate'));
+
+        if(dayDiff < 0){
+            alert("To date cannot be smaller than From date.");
+            return false;
+        }
+
+        return true;
+    }
+
     $(function () {
-        //$("#ddlItems").hide();
 
         var ulSite = $("#ulSites > :first-child").text();
-        $(".dropdown-site").find('[data-bind="label"]').text(ulSite);
+        $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
 
         var ulContract = $("#ulContracts > :first-child").text();
         $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
@@ -230,14 +275,36 @@
             dateFormat: "dd MM, yy",
             showOtherMonths: true,
             selectOtherMonths: true,
-            altFormat: "yy-mm-dd"
+            altFormat: "yy-mm-dd",
+            onSelect: function(date) {
+                var dayDiff = 0;
+                if($("#dtpTo").val().trim().length > 0){
+                    dayDiff = new Date($("#dtpTo").datepicker('getDate')) - new Date($("#dtpFrom").datepicker('getDate'));
+
+                    if(dayDiff < 0){
+                        alert("From date cannot be bigger than To date.");
+                        $("#dtpFrom").val("");
+                        return;
+                    }
+                }
+            }
         });
 
         $("#dtpTo").datepicker({
             dateFormat: "dd MM, yy",
             showOtherMonths: true,
             selectOtherMonths: true,
-            altFormat: "yy-mm-dd"
+            altFormat: "yy-mm-dd",
+            onSelect: function(date) {
+                var dayDiff = 0;
+                dayDiff = new Date($("#dtpTo").datepicker('getDate')) - new Date($("#dtpFrom").datepicker('getDate'));
+
+                if(dayDiff < 0){
+                    alert("To date cannot be smaller than From date.");
+                    $("#dtpTo").val("");
+                    return;
+                }
+            }
         });
     });
 
@@ -247,7 +314,6 @@
         _listSite.css("background-color", "#FFFFFF");
         _listSite.removeClass("selected");
         $(this).addClass("selected");
-        //$("#ddlContracts").show();
 
         if (_listSite != $(this)) {
             _listSite.show();
@@ -265,7 +331,7 @@
         $target.closest('.btn-group')
            .find('[data-bind="label"]').text($target.text())
               .end()
-           .children('.dropdown-site').dropdown('toggle');
+           .children('.dropdown-Site').dropdown('toggle');
 
         if ($target.text() != "Select Site") {
             $("#hdnSite").val($(this).attr("id"));
@@ -278,7 +344,6 @@
 
     $(document.body).on('click', '#ulContracts li', function (event) {
         var $target = $(event.currentTarget);
-        //$("#ulItems > :first-child").show();
         _listContract.css("background-color", "#FFFFFF");
 
         if (_listContract != $(this)) {
