@@ -2,6 +2,7 @@
 var _listSite = $("#ulSites > :first-child");
 var _listContract = $("#ulContracts > :first-child");
 var _listArea = $("#ulArea > :first-child");
+var _listChartType = $("#ulChartType > :first-child");
 
 var labels = [];
 var yaxisvalues = [];
@@ -74,15 +75,25 @@ $(function () {
     var ulArea = $("#ulArea > :first-child").text();
     $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
 
+    var ulChartType = $("#ulChartType > :first-child").text();
+    $(".dropdown-ChartType").find('[data-bind="label"]').text(ulChartType);
+
     $("#ddlConracts").hide();
     $("#jstree").hide();
     $("#divRightSide").hide();
+
+    $("#divLinePanel").hide();
+    $("#divPiePanel").hide();
+    $("#divBarPanel").hide();
 
     $("#dtpFrom").datepicker({
         dateFormat: "dd MM, yy",
         showOtherMonths: true,
         selectOtherMonths: true,
         altFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
         onSelect: function (date) {
             var dayDiff = 0;
             if ($("#dtpTo").val().trim().length > 0) {
@@ -102,6 +113,9 @@ $(function () {
         showOtherMonths: true,
         selectOtherMonths: true,
         altFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
         onSelect: function (date) {
             var dayDiff = 0;
             dayDiff = new Date($("#dtpTo").datepicker('getDate')) - new Date($("#dtpFrom").datepicker('getDate'));
@@ -268,6 +282,40 @@ $(function () {
 
         return false;
     });
+
+    $(document.body).on('click', '#ulChartType li', function (event) {
+        var $target = $(event.currentTarget);
+        $("#ulChartType > :first-child").show();
+        _listChartType.css("background-color", "#FFFFFF");
+        _listChartType.removeClass("selected");
+        $(this).addClass("selected");
+
+        if (_listChartType != $(this)) {
+            _listChartType.show();
+        }
+
+        $(this).css("background-color", "#f9f9c0");
+
+        if ($target.text() == $(this).text()) {
+            if (_listChartType.text() == $(this).text()) {
+                return;
+            }
+            _listChartType = $(this);
+        }
+
+        $target.closest('.btn-group')
+           .find('[data-bind="label"]').text($target.text())
+              .end()
+           .children('.dropdown-ChartType').dropdown('toggle');
+
+        if ($target.text() != "All Charts") {
+            $("#hdnChartType").val($(this).attr("id"));
+        }
+        else {
+        }
+
+        return false;
+    });
 });
 
 function Loading() {
@@ -275,7 +323,7 @@ function Loading() {
     $("#divTrendReportFields").css("background-color", "#EEEEEE");
     $("#dtpFrom").css("background-color", "#EEEEEE");
     $("#dtpTo").css("background-color", "#EEEEEE");
-    //$("#btnPreview").attr("disabled", "disabled");
+    $("#btnPreview").attr("disabled", "disabled");
     $("#btnReset").attr("disabled", "disabled");
 }
 
@@ -292,9 +340,14 @@ $("#btnPreview").click(function () {
 
     var yKeys = [];
     var labels = [];
+    var strChartType = "All Charts";
 
     if (Validate() == false)
         return;
+
+    $("#divLinePanel").hide();
+    $("#divPiePanel").hide();
+    $("#divBarPanel").hide();
 
     Loading();
     $.ajax({
@@ -306,129 +359,154 @@ $("#btnPreview").click(function () {
             if (data != null) {
                 //$('#jstree').jstree("deselect_all");
 
-                //BAR Chart
                 var html = "";
                 yKeys = [];
                 labels = [];
                 yaxisvalues = [];
                 dataset = [];
 
-                var parsedData = data.Bars;
-
-                $.each(parsedData[0], function (colName, value) {
-                    if (colName != "DateLabel") {
-                        yKeys.push(colName);
-                        colName = colName.replace("__", " (");
-                        colName = colName.replace("_", ")");
-                        labels.push(colName);
-                    }
-                });
-
-                $("#morris-bar-chart").html("");
-                var chart = Morris.Bar({
-                    element: 'morris-bar-chart',
-                    data: [0, 0],
-                    xkey: 'DateLabel',
-                    ykeys: yKeys,
-                    labels: labels,
-                    hideHover: 'auto',
-                    resize: true,
-                    xLabelAngle: 50
-                });
-
-                chart.setData(parsedData);
-                chart.options.labels.forEach(function (label, i) {
-                    html += '<div style="background-color: ' + chart.options.barColors[i] + ';width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
-                    html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + label + '</div>';
-                })
-                $("#divBarLegend").html(html);
-                $("#morris-bar-chart svg").css("height", "375px");
-
                 //LINE Chart
-                labels = [];
-                dataset = [];
-                html = "";
-                for (var index = 0; index < data.Lines.length; index++) {
-                    if (index % data.Lines[0].Count == 0 && index > 0) {
-                        LineColor();
-                        dataset.push({
-                            fillColor: "rgba(255,255,255,0)",
-                            strokeColor: "rgba(" + lineColor + ",0.6)",
-                            pointColor: "rgba(" + lineColor + ",0.6)",
-                            pointStrokeColor: "#fff",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgba(" + lineColor + ",1)",
-                            //label: data.Lines[index - 1].label,
-                            data: yaxisvalues
-                        });
-                        yaxisvalues = [];
+                if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "LINE")) {
+                    labels = [];
+                    dataset = [];
+                    html = "";
+                    for (var index = 0; index < data.Lines.length; index++) {
+                        if (index % data.Lines[0].Count == 0 && index > 0) {
+                            LineColor();
+                            dataset.push({
+                                fillColor: "rgba(255,255,255,0)",
+                                strokeColor: "rgba(" + lineColor + ",0.6)",
+                                pointColor: "rgba(" + lineColor + ",0.6)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(" + lineColor + ",1)",
+                                //label: data.Lines[index - 1].label,
+                                data: yaxisvalues
+                            });
+                            yaxisvalues = [];
 
-                        html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
-                        html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
+                            html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
+                            html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
+                        }
+                        yaxisvalues.push([data.Lines[index].lineValue]);
                     }
-                    yaxisvalues.push([data.Lines[index].lineValue]);
+
+                    LineColor();
+                    dataset.push({
+                        fillColor: "rgba(255,255,255,0)",
+                        strokeColor: "rgba(" + lineColor + ",0.6)",
+                        pointColor: "rgba(" + lineColor + ",0.6)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(" + lineColor + ",1)",
+                        //label: data.Lines[index - 1].label,
+                        data: yaxisvalues
+                    });
+
+                    html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
+                    html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
+                    $("#divLineLegend").html(html);
+
+                    for (var index = 0; index < data.Lines[0].Count; index++) {
+                        labels.push([data.Lines[index].DateLabel]);
+                    }
+
+                    var lineChartData = {
+                        labels: labels,
+                        datasets: dataset
+                    }
+
+                    $("#divLinePanel").show();
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive: false
+                    });
+                    $("#canvas").height($("#divLinePanel").height() - 80);                    
                 }
 
-                LineColor();
-                dataset.push({
-                    fillColor: "rgba(255,255,255,0)",
-                    strokeColor: "rgba(" + lineColor + ",0.6)",
-                    pointColor: "rgba(" + lineColor + ",0.6)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(" + lineColor + ",1)",
-                    //label: data.Lines[index - 1].label,
-                    data: yaxisvalues
-                });
-
-                html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
-                html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
-                $("#divLineLegend").html(html);
-
-                for (var index = 0; index < data.Lines[0].Count; index++) {
-                    labels.push([data.Lines[index].DateLabel]);
-                }
-
-                var lineChartData = {
-                    labels: labels,
-                    datasets: dataset
-                }
-
-                var ctx = document.getElementById("canvas").getContext("2d");
-                window.myLine = new Chart(ctx).Line(lineChartData, {
-                    responsive: false
-                });
-                $("#canvas").height($("#divLinePanel").height() - 80);
+                html = "";
+                yKeys = [];
+                labels = [];
+                yaxisvalues = [];
+                dataset = [];
 
                 //PIE Chart
-                var options = {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 0.9
-                        }
-                    },
-                    legend: {
-                        show: false
-                    },
-                    grid: {
-                        hoverable: true
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
-                        shifts: {
-                            x: 20,
-                            y: 0
+                if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "PIE")) {
+                    var options = {
+                        series: {
+                            pie: {
+                                show: true,
+                                radius: 0.9
+                            }
                         },
-                        defaultTheme: false
-                    }
-                };
+                        legend: {
+                            show: false
+                        },
+                        grid: {
+                            hoverable: true
+                        },
+                        tooltip: true,
+                        tooltipOpts: {
+                            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                            shifts: {
+                                x: 20,
+                                y: 0
+                            },
+                            defaultTheme: false
+                        }
+                    };
 
-                $.plot($("#flot-pie-chart"), data.Pies, options);
+                    $("#divPiePanel").show();
+                    $.plot($("#flot-pie-chart"), data.Pies, options);
+                    
+                }
+
+                html = "";
+                yKeys = [];
+                labels = [];
+                yaxisvalues = [];
+                dataset = [];
+
+                //BAR Chart
+                if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "BAR")) {
+                    var parsedData = data.Bars;
+                    $.each(parsedData[0], function (colName, value) {
+                        if (colName != "DateLabel") {
+                            yKeys.push(colName);
+                            colName = colName.replace("__", " (");
+                            colName = colName.replace("_", ")");
+                            labels.push(colName);
+                        }
+                    });
+
+                    $("#morris-bar-chart").html("");
+                    $("#divBarPanel").show();
+                    var chart = Morris.Bar({
+                        element: 'morris-bar-chart',
+                        data: [0, 0],
+                        xkey: 'DateLabel',
+                        ykeys: yKeys,
+                        labels: labels,
+                        hideHover: 'auto',
+                        resize: true,
+                        xLabelAngle: 50
+                    });
+
+                    chart.setData(parsedData);
+                    chart.options.labels.forEach(function (label, i) {
+                        html += '<div style="background-color: ' + chart.options.barColors[i] + ';width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
+                        html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + label + '</div>';
+                    })
+                    $("#divBarLegend").html(html);
+                    $("#morris-bar-chart svg").css("height", "375px");
+                }
 
                 LoadingComplete();
                 //alert(data);
+            }
+            else {
+                LoadingComplete();
+                alert("There is no data to show.");
             }
         },
         error: function (request) {
@@ -455,6 +533,9 @@ $("#btnReset").click(function () {
     $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
     _listArea.css("background-color", "#FFFFFF");
 
+    $("#divLinePanel").hide();
+    $("#divPiePanel").hide();
+    $("#divBarPanel").hide();
 
     $("#rdoWeeks").prop("checked", true);
     $("#lblGroup").html("Group By No of Weeks: ");

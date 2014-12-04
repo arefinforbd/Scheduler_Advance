@@ -437,9 +437,13 @@ namespace CASPortal.Controllers
 
                 if (chartType.Equals("PIE") || chartType.Equals("ALL"))
                     chartTypeObj.Pies = GetPieData(charts);
-            }
 
-            return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(null, JsonRequestBehavior.AllowGet);
+
+            
         }
 
         public ActionResult EquipmentTransaction()

@@ -119,7 +119,21 @@
         </div>
         <div class="panel-footer">
             <div id="div_btnContinue">
-                <input id="btnPreview" class="btn btn-success submitClass" value="Preview" type="button" name="submit">
+                <div id="ddlChartType" style="float: left">
+                    <div class="btn-group">
+                        <a class="btn btn-default dropdown-toggle dropdown-ChartType" data-toggle="dropdown" href="#">
+                            <span id="spanChartType" data-bind="label"></span> <span class="caret"></span>
+                        </a>
+                        <ul id="ulChartType" class="dropdown-menu scroll-menu">
+                            <li style='cursor:pointer'><a>All Charts</a></li>
+                            <li style='cursor:pointer'><a>LINE</a></li>
+                            <li style='cursor:pointer'><a>PIE</a></li>
+                            <li style='cursor:pointer'><a>BAR</a></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="hdnChartType" id="hdnChartType" />
+                </div>
+                <input id="btnPreview" class="btn btn-success submitClass" value="Preview" type="button" name="submit" style="margin-left:10px;">
                 <input id="btnReset" class="btn btn-info" type="button" value="Reset" style="margin-left:10px;width:83px;">
             </div>
         </div>
@@ -142,13 +156,13 @@
         </div>
     </div>
 
-    <!--<div class="row">
+    <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default" style="margin-left:-20px; width:105%;">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divPiePanel">
                 <div class="panel-heading">
                     Pie Chart
                 </div>
-                
+
                 <div class="panel-body">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-pie-chart"></div>
@@ -156,11 +170,11 @@
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%" id="divBarPanel">
                 <div class="panel-heading">
                     Bar Chart
                 </div>

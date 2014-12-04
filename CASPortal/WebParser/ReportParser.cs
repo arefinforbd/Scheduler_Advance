@@ -46,7 +46,7 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                chartArr = cas.PostTrendAnalysisReportData (companyID, companyPassword, 124092, customerPassword, level4ID, siteNo, 1029, answers, area, frequency, dtFrom, dtTo, groupBy);
+                chartArr = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, 1029, answers, area, frequency, dtFrom, dtTo, groupBy);
 
                 if (chartArr != null)
                 {
