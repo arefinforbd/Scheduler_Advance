@@ -8,6 +8,7 @@ namespace CASPortal.Helper
 {
     public class BaseHelper
     {
+        public static string AppName = System.Configuration.ConfigurationManager.AppSettings["AppName"];
         public static string LogoUrl = System.Configuration.ConfigurationManager.AppSettings["AppLogo"];
         public static string VersionNo = System.Configuration.ConfigurationManager.AppSettings["VersionNo"];
         public static bool AdvertisementStatus = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AdvertisementStatus"].ToLower());

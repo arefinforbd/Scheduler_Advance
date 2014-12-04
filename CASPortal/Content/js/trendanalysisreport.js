@@ -3,6 +3,16 @@ var _listSite = $("#ulSites > :first-child");
 var _listContract = $("#ulContracts > :first-child");
 var _listArea = $("#ulArea > :first-child");
 
+var labels = [];
+var yaxisvalues = [];
+var dataset = [];
+var lineColor = "";
+var randomColorFactor = function () { return Math.round(Math.random() * 250) };
+
+function LineColor() {
+    lineColor = randomColorFactor() + "," + randomColorFactor() + "," + randomColorFactor();
+}
+
 function Validate() {
 
     if ($("a.dropdown-Site span[data-bind='label']").text() == "Select Site") {
@@ -63,6 +73,10 @@ $(function () {
 
     var ulArea = $("#ulArea > :first-child").text();
     $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
+
+    $("#ddlConracts").hide();
+    $("#jstree").hide();
+    $("#divRightSide").hide();
 
     $("#dtpFrom").datepicker({
         dateFormat: "dd MM, yy",
@@ -158,8 +172,12 @@ $(function () {
 
         if ($target.text() != "Select Site") {
             $("#hdnSite").val($(this).attr("id"));
+            $("#ddlConracts").show();
         }
         else {
+            $("#ddlConracts").hide();
+            $("#jstree").hide();
+            $("#divRightSide").hide();
         }
 
         return false;
@@ -189,8 +207,13 @@ $(function () {
 
         if ($target.text() != "Select Contract") {
             $("#hdnContract").val($(this).attr("id"));
+            $("#jstree").show();
+            $("#divRightSide").show();
+            $("#divLeftSide").css("border-right", "1px solid #CCCCCC");
         }
         else {
+            $("#jstree").hide();
+            $("#divRightSide").hide();
         }
 
         return false;
@@ -252,7 +275,7 @@ function Loading() {
     $("#divTrendReportFields").css("background-color", "#EEEEEE");
     $("#dtpFrom").css("background-color", "#EEEEEE");
     $("#dtpTo").css("background-color", "#EEEEEE");
-    $("#btnPreview").attr("disabled", "disabled");
+    //$("#btnPreview").attr("disabled", "disabled");
     $("#btnReset").attr("disabled", "disabled");
 }
 
@@ -267,6 +290,9 @@ function LoadingComplete() {
 
 $("#btnPreview").click(function () {
 
+    var yKeys = [];
+    var labels = [];
+
     if (Validate() == false)
         return;
 
@@ -274,13 +300,135 @@ $("#btnPreview").click(function () {
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Report/TrendAnalysis",
         type: "POST",
-        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val() },
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), chartType: "ALL" },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
-                $('#jstree').jstree("deselect_all");
+                //$('#jstree').jstree("deselect_all");
+
+                //BAR Chart
+                var html = "";
+                yKeys = [];
+                labels = [];
+                yaxisvalues = [];
+                dataset = [];
+
+                var parsedData = data.Bars;
+
+                $.each(parsedData[0], function (colName, value) {
+                    if (colName != "DateLabel") {
+                        yKeys.push(colName);
+                        colName = colName.replace("__", " (");
+                        colName = colName.replace("_", ")");
+                        labels.push(colName);
+                    }
+                });
+
+                $("#morris-bar-chart").html("");
+                var chart = Morris.Bar({
+                    element: 'morris-bar-chart',
+                    data: [0, 0],
+                    xkey: 'DateLabel',
+                    ykeys: yKeys,
+                    labels: labels,
+                    hideHover: 'auto',
+                    resize: true,
+                    xLabelAngle: 50
+                });
+
+                chart.setData(parsedData);
+                chart.options.labels.forEach(function (label, i) {
+                    html += '<div style="background-color: ' + chart.options.barColors[i] + ';width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
+                    html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + label + '</div>';
+                })
+                $("#divBarLegend").html(html);
+                $("#morris-bar-chart svg").css("height", "375px");
+
+                //LINE Chart
+                labels = [];
+                dataset = [];
+                html = "";
+                for (var index = 0; index < data.Lines.length; index++) {
+                    if (index % data.Lines[0].Count == 0 && index > 0) {
+                        LineColor();
+                        dataset.push({
+                            fillColor: "rgba(255,255,255,0)",
+                            strokeColor: "rgba(" + lineColor + ",0.6)",
+                            pointColor: "rgba(" + lineColor + ",0.6)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(" + lineColor + ",1)",
+                            //label: data.Lines[index - 1].label,
+                            data: yaxisvalues
+                        });
+                        yaxisvalues = [];
+
+                        html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
+                        html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
+                    }
+                    yaxisvalues.push([data.Lines[index].lineValue]);
+                }
+
+                LineColor();
+                dataset.push({
+                    fillColor: "rgba(255,255,255,0)",
+                    strokeColor: "rgba(" + lineColor + ",0.6)",
+                    pointColor: "rgba(" + lineColor + ",0.6)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(" + lineColor + ",1)",
+                    //label: data.Lines[index - 1].label,
+                    data: yaxisvalues
+                });
+
+                html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
+                html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
+                $("#divLineLegend").html(html);
+
+                for (var index = 0; index < data.Lines[0].Count; index++) {
+                    labels.push([data.Lines[index].DateLabel]);
+                }
+
+                var lineChartData = {
+                    labels: labels,
+                    datasets: dataset
+                }
+
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myLine = new Chart(ctx).Line(lineChartData, {
+                    responsive: false
+                });
+                $("#canvas").height($("#divLinePanel").height() - 80);
+
+                //PIE Chart
+                var options = {
+                    series: {
+                        pie: {
+                            show: true,
+                            radius: 0.9
+                        }
+                    },
+                    legend: {
+                        show: false
+                    },
+                    grid: {
+                        hoverable: true
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                        shifts: {
+                            x: 20,
+                            y: 0
+                        },
+                        defaultTheme: false
+                    }
+                };
+
+                $.plot($("#flot-pie-chart"), data.Pies, options);
+
                 LoadingComplete();
-                alert(data);
+                //alert(data);
             }
         },
         error: function (request) {
@@ -314,5 +462,9 @@ $("#btnReset").click(function () {
     $("#txtGroup").css("background-color", "#FFFFFF");
     $("#txtGroup").val("1");
     $("#hdnFrequency").val("1");
+
+    $("#ddlConracts").hide();
+    $("#jstree").hide();
+    $("#divRightSide").hide();
 
 });

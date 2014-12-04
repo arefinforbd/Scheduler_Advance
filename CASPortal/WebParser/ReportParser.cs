@@ -32,10 +32,12 @@ namespace CASPortal.WebParser
             return null;
         }
 
-        public string PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
+        public List<ChartData> PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
         {
             try
             {
+                ChartData[] chartArr = null;
+                List<ChartData> charts = new List<ChartData>();
                 CASWCFServiceClient cas = new CASWCFServiceClient();
 
                 string companyID = HttpContext.Current.Session["CompanyID"].ToString();
@@ -44,13 +46,21 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                string responseMessage = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
+                chartArr = cas.PostTrendAnalysisReportData (companyID, companyPassword, 124092, customerPassword, level4ID, siteNo, 1029, answers, area, frequency, dtFrom, dtTo, groupBy);
 
-                return responseMessage;
+                if (chartArr != null)
+                {
+                    foreach (ChartData chart in chartArr)
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, Section = chart.Section, Question = chart.Question, Point = chart.Point });
+
+                    return charts;
+                }
+                else
+                    return null;
             }
             catch (Exception ex)
             {
-                return "";
+                return null;
             }
         }
     }

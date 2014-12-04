@@ -8,6 +8,6 @@ namespace CASPortal.Models
     public class PieData
     {
         public string label { get; set; }
-        public int data { get; set; }
+        public double data { get; set; }
     }
 }

@@ -20,13 +20,14 @@ namespace CASPortal.Repository
             return treeNode;
         }
 
-        public string PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
+        public List<ChartData> PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
         {
             ReportParser parser = new ReportParser();
+            List<ChartData> charts = new List<ChartData>();
 
-            string responseMessage = parser.PostTrendAnalysisReportData(siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
+            charts = parser.PostTrendAnalysisReportData(siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
 
-            return responseMessage;
+            return charts;
         }
     }
 }

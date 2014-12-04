@@ -128,7 +128,7 @@ namespace CASPortal.CASWCFService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
         System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse> GetTrendAnalysisTreeNodesAsync(CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest request);
         
-        // CODEGEN: Parameter 'PostTrendAnalysisReportDataResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        // CODEGEN: Parameter 'PostTrendAnalysisReportDataResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData", ReplyAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse PostTrendAnalysisReportData(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request);
@@ -278,6 +278,94 @@ namespace CASPortal.CASWCFService {
             set {
                 this.publicFoldersField = value;
                 this.RaisePropertyChanged("PublicFolders");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class ChartData : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string dateLabelField;
+        
+        private double pointField;
+        
+        private bool pointFieldSpecified;
+        
+        private string questionField;
+        
+        private string sectionField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string DateLabel {
+            get {
+                return this.dateLabelField;
+            }
+            set {
+                this.dateLabelField = value;
+                this.RaisePropertyChanged("DateLabel");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public double Point {
+            get {
+                return this.pointField;
+            }
+            set {
+                this.pointField = value;
+                this.RaisePropertyChanged("Point");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PointSpecified {
+            get {
+                return this.pointFieldSpecified;
+            }
+            set {
+                this.pointFieldSpecified = value;
+                this.RaisePropertyChanged("PointSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string Question {
+            get {
+                return this.questionField;
+            }
+            set {
+                this.questionField = value;
+                this.RaisePropertyChanged("Question");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=3)]
+        public string Section {
+            get {
+                return this.sectionField;
+            }
+            set {
+                this.sectionField = value;
+                this.RaisePropertyChanged("Section");
             }
         }
         
@@ -3043,13 +3131,14 @@ namespace CASPortal.CASWCFService {
     public partial class PostTrendAnalysisReportDataResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string PostTrendAnalysisReportDataResult;
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.ChartData[] PostTrendAnalysisReportDataResult;
         
         public PostTrendAnalysisReportDataResponse() {
         }
         
-        public PostTrendAnalysisReportDataResponse(string PostTrendAnalysisReportDataResult) {
+        public PostTrendAnalysisReportDataResponse(CASPortal.CASWCFService.ChartData[] PostTrendAnalysisReportDataResult) {
             this.PostTrendAnalysisReportDataResult = PostTrendAnalysisReportDataResult;
         }
     }
@@ -3515,7 +3604,7 @@ namespace CASPortal.CASWCFService {
             return base.Channel.PostTrendAnalysisReportData(request);
         }
         
-        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
+        public CASPortal.CASWCFService.ChartData[] PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
             CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
             inValue.CompanyID = CompanyID;
             inValue.CompanyPassword = CompanyPassword;

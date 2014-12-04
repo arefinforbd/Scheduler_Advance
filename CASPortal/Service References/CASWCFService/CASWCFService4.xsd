@@ -227,4 +227,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TreeNodeLevel4" nillable="true" type="tns:TreeNodeLevel4" />
+  <xs:complexType name="ArrayOfChartData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ChartData" nillable="true" type="tns:ChartData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfChartData" nillable="true" type="tns:ArrayOfChartData" />
+  <xs:complexType name="ChartData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateLabel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Point" type="xs:double" />
+      <xs:element minOccurs="0" name="Question" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Section" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChartData" nillable="true" type="tns:ChartData" />
 </xs:schema>

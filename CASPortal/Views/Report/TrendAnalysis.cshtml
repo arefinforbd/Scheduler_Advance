@@ -14,7 +14,7 @@
         </div>
         <div class="panel-body" id="divTrendReportFields">
             <div class="row">
-                <div class="col-lg-5" style="border-right: 1px solid #CCCCCC;">
+                <div class="col-lg-5" id="divLeftSide">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites" style="margin-left: 25px;">
                             <label>Sites : </label>
@@ -50,7 +50,7 @@
                     </div>
                     <br />
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-7" id="divRightSide">
                     <div id="ddlArea" style="margin-left:35px;">
                         <label>Area : </label>
                         <div class="btn-group">
@@ -65,8 +65,8 @@
                     </div>
                     <br />
                     <div class="row" id="divFrequency">
-                        <div class="col-lg-3" style="margin-left: 10px; margin-right: -73px; margin-top: -2px;">
-                            <div style="margin-top: 10px;">
+                        <div class="col-lg-3" style="margin: 8px -73px 0 7px;">
+                            <div>
                                 <label>Trend By : </label>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                 <label for="rdoJobDate">Job Date</label>
                             </div>
                         </div>
-                        <input type="hidden" name="hdnFrequency" id="hdnFrequency" />
+                        <input type="hidden" name="hdnFrequency" id="hdnFrequency" value="1" />
                     </div>
                     <br />
                     <div class="row">
@@ -128,14 +128,14 @@
     <br />
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default" style="margin-left:-20px; width:105%;">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divLinePanel">
                 <div class="panel-heading">
                     Line Chart
                 </div>
                 <div class="panel-body">
                     <div id="divLineLegend"></div>
                     <div class="flot-chart">
-                        <canvas id="canvas" height="120"></canvas>
+                        <canvas id="canvas" height="380" width="900"></canvas>
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                 <div class="panel-heading">
                     Pie Chart
                 </div>
-                <!-- /.panel-heading -->
+                
                 <div class="panel-body">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-pie-chart"></div>
@@ -160,7 +160,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default" style="margin-left:-20px; width:105%;">
+            <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%">
                 <div class="panel-heading">
                     Bar Chart
                 </div>

@@ -23,15 +23,15 @@ $(function () {
             defaultTheme: false
         }
     };
-
+    //[\"j1_31\",\"3#INTERNAL#3#EFK#10#ACTIVITY\"]
     $.ajax({
-        type: "GET",
-        dataType: 'json',
-        url: $("#hdnSiteURL").val() + "/Report/GetPieData",
-        data: {}
+        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysis",
+        type: "POST",
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), chartType: "PIE" },
+        dataType: "JSON",
     })
     .done(function (result) {
-        $.plot($("#flot-pie-chart"), result, options);
+        $.plot($("#flot-pie-chart"), result.Pies, options);
     })
     .fail(function () {
         alert("error occured");

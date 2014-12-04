@@ -290,7 +290,7 @@
   <xs:element name="PostTrendAnalysisReportDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="PostTrendAnalysisReportDataResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="PostTrendAnalysisReportDataResult" nillable="true" type="q10:ArrayOfChartData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Helper\BaseHelper.cs" />
     <Compile Include="Models\BarData.cs" />
+    <Compile Include="Models\ChartType.cs" />
     <Compile Include="Models\LineData.cs" />
     <Compile Include="Models\PieData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,7 +184,9 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\customerinformation.js" />
     <Content Include="Content\js\jquery-1.11.0.js" />
+    <Content Include="Content\js\jquery-migrate-1.2.1.js" />
     <Content Include="Content\js\jquery.jclock.js" />
+    <Content Include="Content\js\jquery.mobile-1.4.5.js" />
     <Content Include="Content\js\plugins\Chart.js" />
     <Content Include="Content\js\plugins\Chart.Line-Data.js" />
     <Content Include="Content\js\plugins\Chart.min.js" />
@@ -282,6 +285,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.ChartData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.DayHour.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
