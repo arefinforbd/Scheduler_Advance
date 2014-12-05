@@ -789,10 +789,14 @@ namespace CASWCFService
             }
         }
 
-        public string PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy)
+        public List<ChartData> PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy)
         {
             string responseMessage;
             string message = "";
+            DataSet dsChart;
+            ChartData chart;
+            List<ChartData> charts = new List<ChartData>();
+            StrongTypesNS.ds_chart_barDataSet chartDataset;
             StrongTypesNS.ds_answersDataSet dsAnswers = new StrongTypesNS.ds_answersDataSet();
 
             try
@@ -808,13 +812,31 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                message = cus.ws_bartrdbyque(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Area, Frequency, FromDate, ToDate, GroupBy, out responseMessage);
+                message = cus.ws_bartrdbyque(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Area, Frequency, FromDate, ToDate, GroupBy, out chartDataset, out responseMessage);
+                dsChart = (DataSet)chartDataset;
 
-                return responseMessage;
+                if (dsChart != null && dsChart.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsChart.Tables[0].Rows)
+                    {
+                        chart = new ChartData();
+
+                        chart.Section = row["ttcb_section"].ToString();
+                        chart.Question = row["ttcb_question"].ToString();
+                        chart.DateLabel = Convert.ToDateTime(row["ttcb_date"]).ToString("dd/MM/yyyy");
+                        chart.Point = Convert.ToDouble(row["ttcb_points"]);
+
+                        charts.Add(chart);
+                    }
+                }
+                else
+                    return null;
+
+                return charts;
             }
             catch (Exception ex)
             {
-                return "error";
+                return null;
             }
         }
 

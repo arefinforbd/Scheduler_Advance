@@ -21,6 +21,5 @@ C:\Arefin\VS2013\CASPortal\CASPortal\bin\System.Web.WebPages.Deployment.xml
 C:\Arefin\VS2013\CASPortal\CASPortal\bin\System.Web.WebPages.Razor.xml
 C:\Arefin\VS2013\CASPortal\CASPortal\bin\Newtonsoft.Json.xml
 C:\Arefin\VS2013\CASPortal\CASPortal\bin\Antlr3.Runtime.pdb
-C:\Arefin\VS2013\CASPortal\CASPortal\obj\Debug\CASPortal.csprojResolveAssemblyReference.cache
 C:\Arefin\VS2013\CASPortal\CASPortal\obj\Debug\CASPortal.dll
 C:\Arefin\VS2013\CASPortal\CASPortal\obj\Debug\CASPortal.pdb

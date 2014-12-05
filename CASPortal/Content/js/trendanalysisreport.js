@@ -30,7 +30,7 @@ function Validate() {
         return false;
     }
 
-    if ($("#j1_1_anchor").find(".jstree-checkbox").hasClass("jstree-undetermined") == false) {
+    if ($("#j1_1_anchor").find(".jstree-checkbox").hasClass("jstree-undetermined") == false && $("#j1_1_anchor").hasClass("jstree-clicked") == false) {
         alert("Please select any item.");
         return false;
     }
@@ -316,6 +316,10 @@ $(function () {
 
         return false;
     });
+
+    $("#canvas").mouseover(function (e) {
+        e.preventDefault();
+    })
 });
 
 function Loading() {
