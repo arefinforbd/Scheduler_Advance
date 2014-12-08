@@ -153,11 +153,12 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divLinePanel">
                 <div class="panel-heading">
                     Line Chart
+                    <input id="btnLineDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="divPanelBodyLine">
                     <div id="divLineLegend"></div>
-                    <div class="flot-chart">
-                        <canvas id="canvas" height="380" width="900"></canvas>
+                    <div class="flot-chart" style="height: 120%;">
+                        <canvas id="canvas" height="400" width="900"></canvas>
                     </div>
                 </div>
             </div>
@@ -169,9 +170,10 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divPiePanel">
                 <div class="panel-heading">
                     Pie Chart
+                    <input id="btnPieDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body" id="divPanelBodyPie">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-pie-chart"></div>
                     </div>
@@ -185,8 +187,9 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%" id="divBarPanel">
                 <div class="panel-heading">
                     Bar Chart
+                    <input id="btnBarDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="divPanelBodyBar">
                     <div id="divBarLegend"></div>
                     <div id="morris-bar-chart"></div>
                 </div>

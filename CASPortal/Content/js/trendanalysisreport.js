@@ -8,6 +8,7 @@ var labels = [];
 var yaxisvalues = [];
 var dataset = [];
 var lineColor = "";
+var chartPIE = null;
 var randomColorFactor = function () { return Math.round(Math.random() * 250) };
 
 function LineColor() {
@@ -440,7 +441,10 @@ $("#btnPreview").click(function () {
                         series: {
                             pie: {
                                 show: true,
-                                radius: 0.9
+                                radius: 0.7,
+                                combine: {
+                                    color: '#999'
+                                }
                             }
                         },
                         legend: {
@@ -461,7 +465,7 @@ $("#btnPreview").click(function () {
                     };
 
                     $("#divPiePanel").show();
-                    $.plot($("#flot-pie-chart"), data.Pies, options);
+                    chartPIE = $.plot($("#flot-pie-chart"), data.Pies, options);
                     
                 }
 
@@ -551,5 +555,29 @@ $("#btnReset").click(function () {
     $("#ddlConracts").hide();
     $("#jstree").hide();
     $("#divRightSide").hide();
+});
 
+$("#btnLineDownload").click(function () {
+    $('#divPanelBodyLine').html2canvas({
+        onrendered: function (canvas) {
+            document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        }
+    });
+});
+
+$("#btnPieDownload").click(function () {
+    //document.location.href = chartPIE.getCanvas().toDataURL().replace("image/png", "image/octet-stream");
+    $('#divPanelBodyPie').html2canvas({
+        onrendered: function (canvas) {
+            document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        }
+    });
+});
+
+$("#btnBarDownload").click(function () {
+    $('#divPanelBodyBar').html2canvas({
+        onrendered: function (canvas) {
+            document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        }
+    });
 });
