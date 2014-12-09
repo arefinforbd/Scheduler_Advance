@@ -8,7 +8,6 @@ var labels = [];
 var yaxisvalues = [];
 var dataset = [];
 var lineColor = "";
-var chartPIE = null;
 var randomColorFactor = function () { return Math.round(Math.random() * 250) };
 
 function LineColor() {
@@ -86,6 +85,10 @@ $(function () {
     $("#divLinePanel").hide();
     $("#divPiePanel").hide();
     $("#divBarPanel").hide();
+
+    $("#divLineCompanyInfo").hide();
+    $("#divPieCompanyInfo").hide();
+    $("#divBarCompanyInfo").hide();
 
     $("#dtpFrom").datepicker({
         dateFormat: "dd MM, yy",
@@ -328,7 +331,7 @@ function Loading() {
     $("#divTrendReportFields").css("background-color", "#EEEEEE");
     $("#dtpFrom").css("background-color", "#EEEEEE");
     $("#dtpTo").css("background-color", "#EEEEEE");
-    $("#btnPreview").attr("disabled", "disabled");
+    //$("#btnPreview").attr("disabled", "disabled");
     $("#btnReset").attr("disabled", "disabled");
 }
 
@@ -422,11 +425,11 @@ $("#btnPreview").click(function () {
                     }
 
                     $("#divLinePanel").show();
-                    var ctx = document.getElementById("canvas").getContext("2d");
+                    var ctx = document.getElementById("flot-line-chart").getContext("2d");
                     window.myLine = new Chart(ctx).Line(lineChartData, {
                         responsive: false
                     });
-                    $("#canvas").height($("#divLinePanel").height() - 80);                    
+                    $("#flot-line-chart").height($("#divLinePanel").height() - 80);
                 }
 
                 html = "";
@@ -465,7 +468,7 @@ $("#btnPreview").click(function () {
                     };
 
                     $("#divPiePanel").show();
-                    chartPIE = $.plot($("#flot-pie-chart"), data.Pies, options);
+                    $.plot($("#flot-pie-chart"), data.Pies, options);
                     
                 }
 
@@ -477,40 +480,69 @@ $("#btnPreview").click(function () {
 
                 //BAR Chart
                 if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "BAR")) {
+
+                    var innerindex = 0;
+                    var xvalues = [];
                     var parsedData = data.Bars;
+                    var colCount = 0;
+
+                    for (var loopindex = 0; loopindex < data.Bars.length; loopindex++) {
+                        $.each(parsedData[loopindex], function (colName, value) {
+                            if (colName == "DateLabel") {
+                                xvalues.push([loopindex, value]);
+                            }
+                        });
+                    }
+
                     $.each(parsedData[0], function (colName, value) {
-                        if (colName != "DateLabel") {
-                            yKeys.push(colName);
-                            colName = colName.replace("__", " (");
-                            colName = colName.replace("_", ")");
-                            labels.push(colName);
+                        if (colName == "DateLabel") {
+                            innerindex++;
+                            colCount++;
                         }
                     });
 
-                    $("#morris-bar-chart").html("");
-                    $("#divBarPanel").show();
-                    var chart = Morris.Bar({
-                        element: 'morris-bar-chart',
-                        data: [0, 0],
-                        xkey: 'DateLabel',
-                        ykeys: yKeys,
-                        labels: labels,
-                        hideHover: 'auto',
-                        resize: true,
-                        xLabelAngle: 50
-                    });
+                    innerindex = 0;
+                    for (var loopindex = 0; loopindex < colCount; loopindex++) {
+                        $.each(data.Bars[loopindex], function (colName, value) {
+                            if (colName != "DateLabel") {
 
-                    chart.setData(parsedData);
-                    chart.options.labels.forEach(function (label, i) {
-                        html += '<div style="background-color: ' + chart.options.barColors[i] + ';width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
-                        html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + label + '</div>';
-                    })
-                    $("#divBarLegend").html(html);
-                    $("#morris-bar-chart svg").css("height", "375px");
+                                for (var index = 0; index < data.Bars.length; index++) {
+                                    yaxisvalues.push([index, data.Bars[index][colName]]);
+                                }
+
+                                dataset.push({
+                                    label: colName,
+                                    bars: { order: innerindex },
+                                    data: yaxisvalues
+                                });
+                                yaxisvalues = [];
+                                innerindex++;
+                            }
+                        });
+                    }
+
+                    $("#divBarPanel").show();
+                    $.plot($("#flot-bar-chart"), dataset, {
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.13,
+                                align: 'center'
+                            }
+                        },
+                        grid: {
+                            hoverable: true
+                        },
+                        valueLabels: {
+                            show: true
+                        },
+                        xaxis: {
+                            ticks: xvalues
+                        }
+                    });
                 }
 
                 LoadingComplete();
-                //alert(data);
             }
             else {
                 LoadingComplete();
@@ -558,26 +590,31 @@ $("#btnReset").click(function () {
 });
 
 $("#btnLineDownload").click(function () {
+    $("#divLineCompanyInfo").show();
     $('#divPanelBodyLine').html2canvas({
         onrendered: function (canvas) {
             document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#divLineCompanyInfo").hide();
         }
     });
 });
 
 $("#btnPieDownload").click(function () {
-    //document.location.href = chartPIE.getCanvas().toDataURL().replace("image/png", "image/octet-stream");
+    $("#divPieCompanyInfo").show();
     $('#divPanelBodyPie').html2canvas({
         onrendered: function (canvas) {
             document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#divPieCompanyInfo").hide();
         }
     });
 });
 
 $("#btnBarDownload").click(function () {
+    $("#divBarCompanyInfo").show();
     $('#divPanelBodyBar').html2canvas({
         onrendered: function (canvas) {
             document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#divBarCompanyInfo").hide();
         }
     });
 });

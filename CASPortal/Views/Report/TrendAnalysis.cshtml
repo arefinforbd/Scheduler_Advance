@@ -118,7 +118,7 @@
                         <div class="col-lg-8">
                             <label id="lblGroup">Group by No of Weeks: </label>
                             <div class="btn-group">
-                                <input class="form-control input-sm" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
+                                <input class="form-control input-sm text-center" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
                             </div>
                         </div>
                     </div>
@@ -156,9 +156,15 @@
                     <input id="btnLineDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
                 </div>
                 <div class="panel-body" id="divPanelBodyLine">
+                    <div id="divLineCompanyInfo" class="text-center text-success">
+                        <b>Trend Analysis Chart</b><br />
+                        TemiSoft Pty Ltd<br />
+                        www.temisoft.com.au<br />
+                        (02) 9450 8888<br /><br />
+                    </div>
                     <div id="divLineLegend"></div>
                     <div class="flot-chart" style="height: 120%;">
-                        <canvas id="canvas" height="400" width="900"></canvas>
+                        <canvas id="flot-line-chart" height="400" width="900"></canvas>
                     </div>
                 </div>
             </div>
@@ -174,6 +180,12 @@
                 </div>
 
                 <div class="panel-body" id="divPanelBodyPie">
+                    <div id="divPieCompanyInfo" class="text-center text-success">
+                        <b>Trend Analysis Chart</b><br />
+                        TemiSoft Pty Ltd<br />
+                        www.temisoft.com.au<br />
+                        (02) 9450 8888<br /><br />
+                    </div>
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-pie-chart"></div>
                     </div>
@@ -189,9 +201,17 @@
                     Bar Chart
                     <input id="btnBarDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
                 </div>
+
                 <div class="panel-body" id="divPanelBodyBar">
-                    <div id="divBarLegend"></div>
-                    <div id="morris-bar-chart"></div>
+                    <div id="divBarCompanyInfo" class="text-center text-success">
+                        <b>Trend Analysis Chart</b><br />
+                        TemiSoft Pty Ltd<br />
+                        www.temisoft.com.au<br />
+                        (02) 9450 8888<br /><br />
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-bar-chart"></div>
+                    </div>
                 </div>
             </div>
         </div>

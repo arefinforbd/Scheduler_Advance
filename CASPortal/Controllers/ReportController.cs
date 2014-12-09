@@ -60,7 +60,7 @@ namespace CASPortal.Controllers
             List<BarData> bars = new List<BarData>();
             foreach (ChartData chart in charts)
             {
-                bars.Add(new BarData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.Section + "__" + chart.Question + "_" });
+                bars.Add(new BarData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.Section + " (" + chart.Question + ")" });
             }
 
 

@@ -196,6 +196,7 @@
     <Content Include="Content\js\plugins\flot\flot-data.js" />
     <Content Include="Content\js\plugins\flot\jquery.flot.axislabels.js" />
     <Content Include="Content\js\plugins\flot\jquery.flot.js" />
+    <Content Include="Content\js\plugins\flot\jquery.flot.orderBars.js" />
     <Content Include="Content\js\plugins\flot\jquery.flot.pie.js" />
     <Content Include="Content\js\plugins\flot\jquery.flot.resize.js" />
     <Content Include="Content\js\plugins\flot\jquery.flot.time.js" />
