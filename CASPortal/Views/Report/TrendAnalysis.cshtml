@@ -12,6 +12,10 @@
         font-size: 0.9em;
         font-weight: normal;
     }
+    .btn-download-chart {
+        margin-left: 10px;
+        width: 123px;
+    }
 </style>
 
 <div id="page-wrapper">
@@ -148,12 +152,18 @@
     </div>
     <div id="divLoading"></div>
     <br />
+
+    <form id="frmDownloadChart" method="post">
+        <input type="hidden" id="base64Data" name="base64Data" />
+        <input type="hidden" id="chartType" name="chartType" />
+    </form> 
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divLinePanel">
                 <div class="panel-heading">
                     Line Chart
-                    <input id="btnLineDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
+                    <input id="btnLineDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart" >
                 </div>
                 <div class="panel-body" id="divPanelBodyLine">
                     <div id="divLineCompanyInfo" class="text-center text-success">
@@ -176,7 +186,7 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divPiePanel">
                 <div class="panel-heading">
                     Pie Chart
-                    <input id="btnPieDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
+                    <input id="btnPieDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart" >
                 </div>
 
                 <div class="panel-body" id="divPanelBodyPie">
@@ -199,7 +209,7 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%" id="divBarPanel">
                 <div class="panel-heading">
                     Bar Chart
-                    <input id="btnBarDownload" class="btn btn-warning" type="button" value="Download Chart" style="margin-left:10px;width:113px;">
+                    <input id="btnBarDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart" >
                 </div>
 
                 <div class="panel-body" id="divPanelBodyBar">

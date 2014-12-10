@@ -8,9 +8,10 @@ var labels = [];
 var yaxisvalues = [];
 var dataset = [];
 var lineColor = "";
-var randomColorFactor = function () { return Math.round(Math.random() * 250) };
+var randomColorFactor = function () { return Math.round(Math.random() * 275) };
 
 function LineColor() {
+    var r = 
     lineColor = randomColorFactor() + "," + randomColorFactor() + "," + randomColorFactor();
 }
 
@@ -65,6 +66,11 @@ function Validate() {
 }
 
 $(function () {
+
+    //if ((!!navigator.userAgent.match(/Trident.*rv\:11\./)) || (/msie/.test(navigator.userAgent.toLowerCase())))
+    //    alert("IE");
+    //else
+    //    alert("NOT IE");
 
     var ulSite = $("#ulSites > :first-child").text();
     $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
@@ -394,9 +400,21 @@ function LoadLineChart(data) {
 
     $("#divLinePanel").show();
     var ctx = document.getElementById("flot-line-chart").getContext("2d");
-    window.myLine = new Chart(ctx).Line(lineChartData, {
-        responsive: false
-    });
+
+    //If mobile or tablet
+    if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+        $("#flot-line-chart").removeAttr("height");
+        $("#flot-line-chart").removeAttr("width");
+        window.myLine = new Chart(ctx).Line(lineChartData, {
+            responsive: true
+        });
+    }
+    else
+    {
+        window.myLine = new Chart(ctx).Line(lineChartData, {
+            responsive: false
+        });
+    }
     $("#flot-line-chart").height($("#divLinePanel").height() - 80);
 }
 
@@ -529,7 +547,7 @@ $("#btnPreview").click(function () {
 
                 //PIE Chart
                 if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "PIE")) {
-                    LoadPieChart(data);                    
+                    LoadPieChart(data);
                 }
 
                 //BAR Chart
@@ -585,11 +603,26 @@ $("#btnReset").click(function () {
     $("#divLeftSide").css("border-right", "");
 });
 
+function DownloadChart(canvas) {
+    //if ((!!navigator.userAgent.match(/Trident.*rv\:11\./)) || (/msie/.test(navigator.userAgent.toLowerCase()))) {
+        var postURL = $("#hdnSiteURL").val() + "/Report/DownloadChartImage";
+
+        $("#frmDownloadChart").attr("action", postURL);
+        $("#base64Data").val(canvas.toDataURL("image/png").replace("data:image/png;base64,", ""));
+        $("#frmDownloadChart").submit();
+        $("#base64Data").val("");
+    //}
+    //else {
+        //document.location.href = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+    //}
+}
+
 $("#btnLineDownload").click(function () {
     $("#divLineCompanyInfo").show();
     $('#divPanelBodyLine').html2canvas({
         onrendered: function (canvas) {
-            document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#chartType").val("Line");
+            DownloadChart(canvas);            
             $("#divLineCompanyInfo").hide();
         }
     });
@@ -599,7 +632,8 @@ $("#btnPieDownload").click(function () {
     $("#divPieCompanyInfo").show();
     $('#divPanelBodyPie').html2canvas({
         onrendered: function (canvas) {
-            document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#chartType").val("Pie");
+            DownloadChart(canvas);
             $("#divPieCompanyInfo").hide();
         }
     });
@@ -609,7 +643,8 @@ $("#btnBarDownload").click(function () {
     $("#divBarCompanyInfo").show();
     $('#divPanelBodyBar').html2canvas({
         onrendered: function (canvas) {
-            document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#chartType").val("Bar");
+            DownloadChart(canvas);
             $("#divBarCompanyInfo").hide();
         }
     });

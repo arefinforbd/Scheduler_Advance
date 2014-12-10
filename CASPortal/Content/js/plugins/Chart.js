@@ -96,7 +96,7 @@
                         maintainAspectRatio: true,
 
 			// Boolean - Determines whether to draw tooltips on the canvas or not - attaches events to touchmove & mousemove
-			showTooltips: true,
+			showTooltips: false,
 
 			// Array - Array of string names to attach tooltip events
 			tooltipEvents: ["mousemove", "touchstart", "touchmove", "mouseout"],

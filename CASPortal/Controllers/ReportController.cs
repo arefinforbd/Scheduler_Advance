@@ -446,6 +446,15 @@ namespace CASPortal.Controllers
             
         }
 
+        public ActionResult DownloadChartImage(string base64Data, string chartType)
+        {
+            byte[] fileInfo = null;
+
+            fileInfo = Convert.FromBase64String(base64Data);
+
+            return File(fileInfo, "application/octet", chartType + "_" + DateTime.Now.Ticks + ".png");
+        }
+
         public ActionResult EquipmentTransaction()
         {
             BaseHelper helper = new BaseHelper();

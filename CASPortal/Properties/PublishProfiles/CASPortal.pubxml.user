@@ -13,13 +13,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>12/04/2014 15:41:14</publishTime>
+      <publishTime>12/11/2014 10:28:02</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>12/04/2014 15:41:14</publishTime>
+      <publishTime>12/11/2014 10:28:02</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>12/04/2014 14:50:30</publishTime>
+      <publishTime>12/11/2014 10:27:52</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
       <publishTime>11/04/2014 16:50:45</publishTime>
@@ -271,7 +271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2014 13:07:15</publishTime>
     </File>
     <File Include="Content/js/plugins/Chart.js">
-      <publishTime>11/24/2014 15:41:22</publishTime>
+      <publishTime>12/10/2014 13:27:25</publishTime>
     </File>
     <File Include="Content/js/plugins/Chart.Line-Data.js">
       <publishTime>12/02/2014 09:46:36</publishTime>
@@ -289,13 +289,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/14/2014 14:55:52</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/flot-data.js">
-      <publishTime>12/04/2014 10:15:16</publishTime>
+      <publishTime>12/04/2014 15:59:59</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/jquery.flot.axislabels.js">
       <publishTime>11/18/2014 09:50:41</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/jquery.flot.js">
       <publishTime>04/14/2014 14:55:52</publishTime>
+    </File>
+    <File Include="Content/js/plugins/flot/jquery.flot.orderBars.js">
+      <publishTime>12/09/2014 12:01:02</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/jquery.flot.pie.js">
       <publishTime>12/04/2014 12:19:48</publishTime>
@@ -307,10 +310,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/18/2014 09:50:10</publishTime>
     </File>
     <File Include="Content/js/plugins/flot/jquery.flot.tooltip.min.js">
-      <publishTime>04/14/2014 14:55:52</publishTime>
+      <publishTime>12/09/2014 17:17:21</publishTime>
     </File>
     <File Include="Content/js/plugins/gulpfile.js">
       <publishTime>09/17/2014 06:04:30</publishTime>
+    </File>
+    <File Include="Content/js/plugins/html2canvas/html2canvas.js">
+      <publishTime>12/10/2014 14:18:49</publishTime>
+    </File>
+    <File Include="Content/js/plugins/html2canvas/html2canvas.svg.min.js">
+      <publishTime>12/10/2014 14:15:55</publishTime>
+    </File>
+    <File Include="Content/js/plugins/html2canvas/jquery.plugin.html2canvas.js">
+      <publishTime>12/08/2014 11:41:01</publishTime>
     </File>
     <File Include="Content/js/plugins/metisMenu/metisMenu.js">
       <publishTime>06/24/2014 19:47:26</publishTime>
@@ -352,13 +364,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2014 17:47:48</publishTime>
     </File>
     <File Include="Content/js/scheduler.js">
-      <publishTime>11/13/2014 11:00:45</publishTime>
+      <publishTime>12/10/2014 16:06:19</publishTime>
     </File>
     <File Include="Content/js/sendcustomerinformation.js">
       <publishTime>11/05/2014 11:24:46</publishTime>
     </File>
     <File Include="Content/js/trendanalysisreport.js">
-      <publishTime>12/04/2014 15:13:56</publishTime>
+      <publishTime>12/11/2014 10:26:56</publishTime>
     </File>
     <File Include="Content/less/mixins.less">
       <publishTime>06/24/2014 20:45:16</publishTime>
@@ -427,7 +439,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2014 15:49:49</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>12/04/2014 15:41:08</publishTime>
+      <publishTime>12/11/2014 10:27:56</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -457,7 +469,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>12/04/2014 12:35:04</publishTime>
+      <publishTime>12/10/2014 14:16:13</publishTime>
     </File>
     <File Include="Service References/CASService/CASPortal.CASService.LoginProcessResponse.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -544,7 +556,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/05/2014 13:01:21</publishTime>
     </File>
     <File Include="Views/CustomerInformation/WelcomeMessage.cshtml">
-      <publishTime>10/10/2014 13:25:37</publishTime>
+      <publishTime>12/10/2014 09:54:49</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -562,7 +574,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/02/2014 15:20:34</publishTime>
     </File>
     <File Include="Views/Report/TrendAnalysis.cshtml">
-      <publishTime>12/04/2014 15:05:37</publishTime>
+      <publishTime>12/11/2014 10:22:47</publishTime>
     </File>
     <File Include="Views/Scheduler/CustomerInformation.cshtml">
       <publishTime>11/04/2014 14:08:25</publishTime>
@@ -586,7 +598,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/10/2014 11:04:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/04/2014 12:39:14</publishTime>
+      <publishTime>12/09/2014 12:06:22</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -598,7 +610,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2014 13:47:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/03/2014 17:27:18</publishTime>
+      <publishTime>12/11/2014 10:27:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

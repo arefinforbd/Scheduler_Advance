@@ -12,6 +12,10 @@
         font-size: 0.9em;
         font-weight: normal;
     }
+    .btn-download-chart {
+        margin-left: 10px;
+        width: 123px;
+    }
 </style>
 
 <div id="page-wrapper">
@@ -118,7 +122,7 @@
                         <div class="col-lg-8">
                             <label id="lblGroup">Group by No of Weeks: </label>
                             <div class="btn-group">
-                                <input class="form-control input-sm" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
+                                <input class="form-control input-sm text-center" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
                             </div>
                         </div>
                     </div>
@@ -148,16 +152,29 @@
     </div>
     <div id="divLoading"></div>
     <br />
+
+    <form id="frmDownloadChart" method="post">
+        <input type="hidden" id="base64Data" name="base64Data" />
+        <input type="hidden" id="chartType" name="chartType" />
+    </form> 
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divLinePanel">
                 <div class="panel-heading">
                     Line Chart
+                    <input id="btnLineDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart" >
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" id="divPanelBodyLine">
+                    <div id="divLineCompanyInfo" class="text-center text-success">
+                        <b>Trend Analysis Chart</b><br />
+                        TemiSoft Pty Ltd<br />
+                        www.temisoft.com.au<br />
+                        (02) 9450 8888<br /><br />
+                    </div>
                     <div id="divLineLegend"></div>
-                    <div class="flot-chart">
-                        <canvas id="canvas" height="380" width="900"></canvas>
+                    <div class="flot-chart" style="height: 120%;">
+                        <canvas id="flot-line-chart" height="400" width="900"></canvas>
                     </div>
                 </div>
             </div>
@@ -169,9 +186,16 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divPiePanel">
                 <div class="panel-heading">
                     Pie Chart
+                    <input id="btnPieDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart" >
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body" id="divPanelBodyPie">
+                    <div id="divPieCompanyInfo" class="text-center text-success">
+                        <b>Trend Analysis Chart</b><br />
+                        TemiSoft Pty Ltd<br />
+                        www.temisoft.com.au<br />
+                        (02) 9450 8888<br /><br />
+                    </div>
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-pie-chart"></div>
                     </div>
@@ -185,10 +209,19 @@
             <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%" id="divBarPanel">
                 <div class="panel-heading">
                     Bar Chart
+                    <input id="btnBarDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart" >
                 </div>
-                <div class="panel-body">
-                    <div id="divBarLegend"></div>
-                    <div id="morris-bar-chart"></div>
+
+                <div class="panel-body" id="divPanelBodyBar">
+                    <div id="divBarCompanyInfo" class="text-center text-success">
+                        <b>Trend Analysis Chart</b><br />
+                        TemiSoft Pty Ltd<br />
+                        www.temisoft.com.au<br />
+                        (02) 9450 8888<br /><br />
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-bar-chart"></div>
+                    </div>
                 </div>
             </div>
         </div>

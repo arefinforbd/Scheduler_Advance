@@ -883,7 +883,7 @@ function FormatDateA(datevalue) {
     var mm = monthNames[datevalue.getMonth()];
     var dd = datevalue.getDate().toString();
 
-    //IE 11 and below are being checked here
+    //If IE 11 and below are being checked here
     /*if ((!!navigator.userAgent.match(/Trident.*rv\:11\./)) || (/msie/.test(navigator.userAgent.toLowerCase())))
         finalDate = mm + " " + dd + ", " + yyyy;
     else
