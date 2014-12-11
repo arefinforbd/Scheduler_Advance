@@ -333,7 +333,7 @@ function Loading() {
     $("#divTrendReportFields").css("background-color", "#EEEEEE");
     $("#dtpFrom").css("background-color", "#EEEEEE");
     $("#dtpTo").css("background-color", "#EEEEEE");
-    //$("#btnPreview").attr("disabled", "disabled");
+    $("#btnPreview").attr("disabled", "disabled");
     $("#btnReset").attr("disabled", "disabled");
 }
 
@@ -555,6 +555,12 @@ $("#btnPreview").click(function () {
                     LoadBarChart(data);
                 }
 
+                if (/iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())) {
+                    $("#btnLineDownload").hide();
+                    $("#btnPieDownload").hide();
+                    $("#btnBarDownload").hide();
+                }
+
                 LoadingComplete();
             }
             else {
@@ -605,12 +611,12 @@ $("#btnReset").click(function () {
 
 function DownloadChart(canvas) {
     //if ((!!navigator.userAgent.match(/Trident.*rv\:11\./)) || (/msie/.test(navigator.userAgent.toLowerCase()))) {
-        var postURL = $("#hdnSiteURL").val() + "/Report/DownloadChartImage";
+    var postURL = $("#hdnSiteURL").val() + "/Report/DownloadChartImage";
 
-        $("#frmDownloadChart").attr("action", postURL);
-        $("#base64Data").val(canvas.toDataURL("image/png").replace("data:image/png;base64,", ""));
-        $("#frmDownloadChart").submit();
-        $("#base64Data").val("");
+    $("#frmDownloadChart").attr("action", postURL);
+    $("#base64Data").val(canvas.toDataURL("image/png").replace("data:image/png;base64,", ""));
+    $("#frmDownloadChart").submit();
+    $("#base64Data").val("");
     //}
     //else {
         //document.location.href = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
