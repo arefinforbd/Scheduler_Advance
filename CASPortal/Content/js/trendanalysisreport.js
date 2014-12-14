@@ -10,9 +10,15 @@ var dataset = [];
 var lineColor = "";
 var randomColorFactor = function () { return Math.round(Math.random() * 275) };
 
-function LineColor() {
-    var r = 
-    lineColor = randomColorFactor() + "," + randomColorFactor() + "," + randomColorFactor();
+function LineColor(colourIndex) {
+
+    var colours = ["89,201,52", "221,30,188", "23,227,217", "238,13,47", "235,181,16", "111,124,140", "128,64,128", "64,128,128", "0,64,128", "39,73,233"];
+
+    if (colourIndex > 9)
+        lineColor = randomColorFactor() + "," + randomColorFactor() + "," + randomColorFactor();
+    else
+        lineColor = colours[colourIndex];
+
 }
 
 function Validate() {
@@ -350,12 +356,13 @@ function LoadLineChart(data) {
 
     var html = "";
     var labels = [];
+    var colourIndex = 0;
     dataset = [];
     yaxisvalues = [];
 
     for (var index = 0; index < data.Lines.length; index++) {
         if (index % data.Lines[0].Count == 0 && index > 0) {
-            LineColor();
+            LineColor(colourIndex);
             dataset.push({
                 fillColor: "rgba(255,255,255,0)",
                 strokeColor: "rgba(" + lineColor + ",0.6)",
@@ -369,11 +376,12 @@ function LoadLineChart(data) {
 
             html += '<div style="background-color: rgba(' + lineColor + ',0.8);width: 12px; height: 12px; float: left; margin-top: 2px;"></div>';
             html += '<div style="font-size: 12px; margin-left: 5px; float: left; margin-right: 5px;">' + data.Lines[index - 1].label + '</div>';
+            colourIndex++;
         }
         yaxisvalues.push([data.Lines[index].lineValue]);
     }
 
-    LineColor();
+    LineColor(colourIndex);
     dataset.push({
         fillColor: "rgba(255,255,255,0)",
         strokeColor: "rgba(" + lineColor + ",0.6)",
