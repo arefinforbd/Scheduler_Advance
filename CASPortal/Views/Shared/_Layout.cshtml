@@ -35,6 +35,7 @@
                     $("#ddlprivatefolder").addClass("col-lg-4");
                     $("#ddlpublicfolder").removeClass("col-lg-6");
                     $("#ddlpublicfolder").addClass("col-lg-8");
+                    $("#rightLogo").height($("#leftLogo").height());
                 });
             </script>
             <style>
@@ -219,5 +220,40 @@
 
     <script src="@Url.Content("~/Content/js/plugins/html2canvas/html2canvas.js")"></script>
     <script src="@Url.Content("~/Content/js/plugins/html2canvas/jquery.plugin.html2canvas.js")"></script>
+
+    @{
+        if (BaseHelper.AdvertisementStatus)
+        {
+            <script>
+                $("#maintable").removeClass("col-lg-12");
+                $("#maintable").addClass("col-lg-8");
+
+                $("#divLeftSide").removeClass("col-lg-5");
+                $("#divLeftSide").addClass("col-lg-6");
+                $("#divRightSide").removeClass("col-lg-7");
+                $("#divRightSide").addClass("col-lg-6");
+                $("#ddlSites").css("margin-left", "");
+                $("#ddlSites .btn-group .dropdown-Site span").css("font-size", "11px");
+                $("#ddlArea").css("margin-left", "");
+
+                $("#divTrendBy").css("margin", "");
+                $("#divTrendBy").removeClass("col-lg-3");
+                $("#divTrendBy").addClass("col-lg-5");
+
+                $("#divRadioWeeks").css("clear", "both");
+                $("#divRadioWeeks").removeClass("col-lg-2");
+                $("#divRadioWeeks").addClass("col-lg-3");
+
+                $("#divRadioMonths").removeClass("col-lg-2");
+                $("#divRadioMonths").addClass("col-lg-3");
+                
+                $("#divJobDate").removeClass("col-lg-3");
+                $("#divJobDate").addClass("col-lg-5");
+
+                $("#divGroup").removeClass("col-lg-8");
+                $("#divGroup").addClass("col-lg-10");
+            </script>
+        }
+    }
 </body>
 </html>
