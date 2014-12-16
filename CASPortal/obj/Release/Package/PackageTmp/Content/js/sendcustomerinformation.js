@@ -129,7 +129,7 @@ function Validate() {
         return false;
     }
 
-    if ($("#postcode").val().trim().length <= 0) {
+    if ($("#postcode").val().trim().length <= 0 || $("#postcode").val() < 0) {
         alert("Please enter Post Code.");
         $("#postcode").val("");
         $("#postcode").focus();

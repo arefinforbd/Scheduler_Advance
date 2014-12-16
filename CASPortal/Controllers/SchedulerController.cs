@@ -23,10 +23,7 @@ namespace CASPortal.Controllers
         // GET: /Scheduler/
         public ActionResult Index()
         {
-            SiteNItem siteNitem;
-            List<Service> itemList = new List<Service>();
-            List<Site> siteList = new List<Site>();
-            SchedulerRepository repository = new SchedulerRepository();
+            ReportHelper repoHelper = new ReportHelper();
             SchedulerParser parser = new SchedulerParser();
 
             if (Request["customerid"] == null)
@@ -38,41 +35,13 @@ namespace CASPortal.Controllers
             else
                 parser.SetLoginCredential(new Guid(Request["customerid"]));
 
-            StringBuilder sb = new StringBuilder("");
-            sb.Append("<li style='cursor:pointer'><a>Select Item</a></li>");
-
             if (Session["BusinessHours"] == null)
                 parser.GetBusinessTime();
 
-            siteNitem = repository.GetSiteNItems();
-
-            foreach (var item in siteNitem.listOfItems)
-            {
-                sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
-            }
-            ViewBag.Items = sb;
+            ViewBag.Items = repoHelper.LoadItem();
 
             if (Request["customerid"] == null)
-            {
-                StringBuilder siteFullName = new StringBuilder("");
-                sb = new StringBuilder("");
-                sb.Append("<li style='cursor:pointer'><a>Select Site</a></li>");
-
-                foreach (var site in siteNitem.sites)
-                {
-                    //siteFullName = new StringBuilder(site.StreetNo + ", " + site.Address1 + " " + site.Address2 + " " + site.Address3 + ", " + site.Suburb + "-" + site.PostCode + ", " + site.State);
-                    siteFullName = new StringBuilder(site.StreetNo.Trim().Length > 0 ? site.StreetNo + ", " : "");
-                    siteFullName.Append(site.Address1.Trim().Length > 0 ? site.Address1 + " " : "");
-                    siteFullName.Append(site.Address2.Trim().Length > 0 ? site.Address2 + " " : "");
-                    siteFullName.Append(site.Address3.Trim().Length > 0 ? site.Address3 + ", " : "");
-                    siteFullName.Append(site.Suburb.Trim().Length > 0 ? site.Suburb + ", " : "");
-                    siteFullName.Append(site.State.Trim().Length > 0 ? site.State + "-" : "");
-                    siteFullName.Append(site.PostCode.Trim().Length > 0 ? site.PostCode : "");
-
-                    sb.Append("<li id=" + site.SiteCode + " style='cursor:pointer'><a>" + siteFullName.ToString() + "</a></li>");
-                }
-                ViewBag.Sites = sb;
-            }
+                ViewBag.Sites = repoHelper.LoadSite();
 
             return View();
         }

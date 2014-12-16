@@ -243,6 +243,9 @@ namespace CASPortal.Controllers
 
                     ViewBag.MessageOfTheDay = messageOfTheDay;
                     ViewBag.CompanyName = companyName;
+                    if (image == null)
+                        image = new byte[2];
+
                     ViewBag.ByteImage = image;
                 }
                 else

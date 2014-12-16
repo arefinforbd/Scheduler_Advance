@@ -8,7 +8,7 @@ namespace CASPortal.Models
     public class BarData
     {
         public string DateLabel { get; set; }
-        public double lineValue { get; set; }
+        public double barValue { get; set; }
         public string label { get; set; }
     }
 }

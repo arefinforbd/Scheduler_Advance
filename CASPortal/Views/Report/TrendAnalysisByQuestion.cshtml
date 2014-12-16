@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "TrendAnalysisByQuestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ReportType = "By Question";
+}
+
+@{Html.RenderPartial("_TrendAnalysis");}
+
+<script src="@Url.Content("~/Content/js/trendanalysisbyquestion.js")"></script>

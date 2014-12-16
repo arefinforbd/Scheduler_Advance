@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\BaseHelper.cs" />
+    <Compile Include="Helper\ReportHelper.cs" />
     <Compile Include="Models\BarData.cs" />
     <Compile Include="Models\ChartType.cs" />
     <Compile Include="Models\LineData.cs" />
@@ -220,6 +221,10 @@
     <Content Include="Content\js\sb-admin-2.js" />
     <Content Include="Content\js\scheduler.js" />
     <Content Include="Content\js\sendcustomerinformation.js" />
+    <Content Include="Content\js\trendanalysisbyequip.js" />
+    <Content Include="Content\js\trendanalysisbyjob.js" />
+    <Content Include="Content\js\trendanalysisbyquestion.js" />
+    <Content Include="Content\js\trendanalysisgrouplocation.js" />
     <Content Include="Content\js\trendanalysisreport.js" />
     <Content Include="Content\tree\jstree.js" />
     <Content Include="Content\tree\jstree.min.js" />
@@ -392,7 +397,6 @@
     <Content Include="Views\CustomerInformation\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\CustomerInformation\WelcomeMessage.cshtml" />
-    <Content Include="Views\Report\TrendAnalysis.cshtml" />
     <Content Include="Views\Report\EquipmentTransaction.cshtml" />
     <None Include="Service References\CASWCFService\CASWCFService.wsdl" />
     <None Include="Service References\CASWCFService\CASWCFService.xsd">
@@ -410,6 +414,11 @@
     <None Include="Service References\CASWCFService\CASWCFService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Shared\_TrendAnalysis.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisByQuestion.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisByJob.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisByEquip.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisGroupLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

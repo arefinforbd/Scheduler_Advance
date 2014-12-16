@@ -7,14 +7,17 @@ $(document).ready(function () {
     $("#homeMenu").attr("href", $("#hdnSiteURL").val() + "/CustomerInformation/WelcomeMessage");
     if ($("#hdnOnlyCAS").val() == "false") {
         $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
-        $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysis");
-        $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
+        $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByJob");
+        $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByQuestion");
+        $("#report103").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip");
+        $("#report104").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisGroupLocation");
+        $("#report105").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
     }
     else
     {
-        $("#schedulerMenu").attr("href", "#");
-        $("#report101").attr("href", "#");
-        $("#report102").attr("href", "#");
+        $("#mainMenu").hide();
+        $("#schedulerMenu").hide();
+        $("#reportMenu").hide();
     }
     var pvtfirstval = $("#pvtfolder > :first-child").text();
     var pubfirstval = $("#pubfolder > :first-child").text();
