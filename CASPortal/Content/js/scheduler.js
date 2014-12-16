@@ -535,6 +535,15 @@ function generateTimes() {
         dataType: "json",
         success: function (data) {
             if (data != null) {
+
+                if (data.TimeSlots == null) {
+                    $("#tblTime").html("");
+                    $("#tblDate").hide();
+                    $("#tblDesc").hide();
+                    alert("TimeTables is not set yet.");
+                    return;
+                }
+
                 var html = "";
                 var html_tbl_row = "";
                 var hourHeader = "";
