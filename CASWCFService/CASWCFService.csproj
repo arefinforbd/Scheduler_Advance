@@ -39,22 +39,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CustWebAccProj, Version=2.0.5449.29481, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CustWebAccProj, Version=2.0.5450.24299, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\03_12_2014\CustWebAccProj.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\17_12_2014\CustWebAccProj.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Progress.Messages, Version=10.1.2.36659, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\03_12_2014\Progress.Messages.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\17_12_2014\Progress.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Progress.o4glrt, Version=10.1.2.36775, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\03_12_2014\Progress.o4glrt.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\17_12_2014\Progress.o4glrt.dll</HintPath>
     </Reference>
     <Reference Include="Progress.ssl, Version=10.1.2.36736, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\03_12_2014\Progress.ssl.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\17_12_2014\Progress.ssl.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -85,6 +85,7 @@
     <Compile Include="ICASWCFService.cs" />
     <Compile Include="Model\BusinessHour.cs" />
     <Compile Include="Model\ChartData.cs" />
+    <Compile Include="Model\Contract.cs" />
     <Compile Include="Model\DayHour.cs" />
     <Compile Include="Model\Folder.cs" />
     <Compile Include="Model\Service.cs" />

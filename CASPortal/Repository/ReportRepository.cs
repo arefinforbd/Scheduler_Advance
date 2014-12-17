@@ -10,6 +10,16 @@ namespace CASPortal.Repository
 {
     public class ReportRepository
     {
+        public List<Contract> GetContracts(string siteNo)
+        {
+            ReportParser parser = new ReportParser();
+            List<Contract> contracts = new List<Contract>();
+
+            contracts = parser.GetContracts(siteNo);
+
+            return contracts;
+        }
+
         public TreeNode GetTrendAnalysisTreeNodes()
         {
             TreeNode treeNode;

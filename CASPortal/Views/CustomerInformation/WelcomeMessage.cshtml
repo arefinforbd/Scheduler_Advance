@@ -14,6 +14,10 @@
         color: #428bca;
         text-decoration: none;
     }
+
+    #advertisements{
+        margin-top: -136px;
+    }
 </style>
 
 <div id="page-wrapper">
@@ -60,6 +64,6 @@
 <script>
     //If it's mobile or tablet
     if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-        alert("Customer access portal is best viewed on Landscape mode.");
+        $("#advertisements").css("margin-top", "0px");
     }
 </script>

@@ -9,6 +9,10 @@
     .navbar-default .navbar-toggle .icon-bar {
         background-color: #FFFFFF;
     }
+
+    #advertisements {
+        margin-top: -136px;
+    }
 </style>
 
     <div id="page-wrapper">        
@@ -95,3 +99,10 @@
             <!-- /.col-lg-4 -->
         </div>
     </div>
+
+<script>
+    //If it's mobile or tablet
+    if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+        $("#advertisements").css("margin-top", "0px");
+    }
+</script>

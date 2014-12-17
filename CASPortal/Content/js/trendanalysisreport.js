@@ -1,6 +1,4 @@
 ﻿var _selectedNodes = [];
-var _listSite = $("#ulSites > :first-child");
-var _listContract = $("#ulContracts > :first-child");
 var _listArea = $("#ulArea > :first-child");
 var _listChartType = $("#ulChartType > :first-child");
 
@@ -77,19 +75,12 @@ $(function () {
     //else
     //    alert("NOT IE");
 
-    var ulSite = $("#ulSites > :first-child").text();
-    $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
-
-    var ulContract = $("#ulContracts > :first-child").text();
-    $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
-
     var ulArea = $("#ulArea > :first-child").text();
     $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
 
     var ulChartType = $("#ulChartType > :first-child").text();
     $(".dropdown-ChartType").find('[data-bind="label"]').text(ulChartType);
 
-    $("#ddlConracts").hide();
     $("#jstree").hide();
     $("#divRightSide").hide();
 
@@ -100,48 +91,6 @@ $(function () {
     $("#divLineCompanyInfo").hide();
     $("#divPieCompanyInfo").hide();
     $("#divBarCompanyInfo").hide();
-
-    $("#dtpFrom").datepicker({
-        dateFormat: "dd MM, yy",
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        altFormat: "yy-mm-dd",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
-        onSelect: function (date) {
-            var dayDiff = 0;
-            if ($("#dtpTo").val().trim().length > 0) {
-                dayDiff = new Date($("#dtpTo").datepicker('getDate')) - new Date($("#dtpFrom").datepicker('getDate'));
-
-                if (dayDiff < 0) {
-                    alert("From date cannot be bigger than To date.");
-                    $("#dtpFrom").val("");
-                    return;
-                }
-            }
-        }
-    });
-
-    $("#dtpTo").datepicker({
-        dateFormat: "dd MM, yy",
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        altFormat: "yy-mm-dd",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
-        onSelect: function (date) {
-            var dayDiff = 0;
-            dayDiff = new Date($("#dtpTo").datepicker('getDate')) - new Date($("#dtpFrom").datepicker('getDate'));
-
-            if (dayDiff < 0) {
-                alert("To date cannot be smaller than From date.");
-                $("#dtpTo").val("");
-                return;
-            }
-        }
-    });
 
     $("#rdoWeeks").click(function () {
         $("#lblGroup").html("Group By No of Weeks: ");
@@ -172,80 +121,6 @@ $(function () {
             alert("Please enter less than 12 weeks.");
             $("#txtGroup").focus();
         }
-    });
-
-    $(document.body).on('click', '#ulSites li', function (event) {
-        var $target = $(event.currentTarget);
-        $("#ulSites > :first-child").show();
-        _listSite.css("background-color", "#FFFFFF");
-        _listSite.removeClass("selected");
-        $(this).addClass("selected");
-
-        if (_listSite != $(this)) {
-            _listSite.show();
-        }
-
-        $(this).css("background-color", "#f9f9c0");
-
-        if ($target.text() == $(this).text()) {
-            if (_listSite.text() == $(this).text()) {
-                return;
-            }
-            _listSite = $(this);
-        }
-
-        $target.closest('.btn-group')
-           .find('[data-bind="label"]').text($target.text())
-              .end()
-           .children('.dropdown-Site').dropdown('toggle');
-
-        if ($target.text() != "Select Site") {
-            $("#hdnSite").val($(this).attr("id"));
-            $("#ddlConracts").show();
-        }
-        else {
-            $("#ddlConracts").hide();
-            $("#jstree").hide();
-            $("#divRightSide").hide();
-        }
-
-        return false;
-    });
-
-    $(document.body).on('click', '#ulContracts li', function (event) {
-        var $target = $(event.currentTarget);
-        _listContract.css("background-color", "#FFFFFF");
-
-        if (_listContract != $(this)) {
-            _listContract.show();
-        }
-
-        $(this).css("background-color", "#f9f9c0");
-
-        if ($target.text() == $(this).text()) {
-            if (_listContract.text() == $(this).text()) {
-                return;
-            }
-            _listContract = $(this);
-        }
-
-        $target.closest('.btn-group')
-           .find('[data-bind="label"]').text($target.text())
-              .end()
-           .children('.dropdown-Contract').dropdown('toggle');
-
-        if ($target.text() != "Select Contract") {
-            $("#hdnContract").val($(this).attr("id"));
-            $("#jstree").show();
-            $("#divRightSide").show();
-            $("#divLeftSide").css("border-right", "1px solid #CCCCCC");
-        }
-        else {
-            $("#jstree").hide();
-            $("#divRightSide").hide();
-        }
-
-        return false;
     });
 
     $('#jstree').jstree({

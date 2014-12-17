@@ -184,8 +184,33 @@
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\customerinformation.js" />
+    <Content Include="Content\js\equipmenttransactionreport.js" />
     <Content Include="Content\js\jquery-1.11.0.js" />
     <Content Include="Content\js\jquery-migrate-1.2.1.js" />
+    <Content Include="Content\js\jquery-ui-1.11.1\external\jquery\jquery.js" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\js\jquery-ui-1.11.1\index.html" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.css" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.js" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.min.css" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.min.js" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.structure.css" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.structure.min.css" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.theme.css" />
+    <Content Include="Content\js\jquery-ui-1.11.1\jquery-ui.theme.min.css" />
     <Content Include="Content\js\jquery.jclock.js" />
     <Content Include="Content\js\jquery.mobile-1.4.5.js" />
     <Content Include="Content\js\plugins\Chart.js" />
@@ -218,6 +243,7 @@
     <Content Include="Content\js\plugins\src\Chart.Line.js" />
     <Content Include="Content\js\plugins\src\Chart.PolarArea.js" />
     <Content Include="Content\js\plugins\src\Chart.Radar.js" />
+    <Content Include="Content\js\report.js" />
     <Content Include="Content\js\sb-admin-2.js" />
     <Content Include="Content\js\scheduler.js" />
     <Content Include="Content\js\sendcustomerinformation.js" />
@@ -297,6 +323,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.ChartData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Contract.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.DayHour.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -310,6 +339,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetCategoryProductServiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetContractsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetCustomerSiteResponse.datasource">
@@ -398,6 +430,11 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\CustomerInformation\WelcomeMessage.cshtml" />
     <Content Include="Views\Report\EquipmentTransaction.cshtml" />
+    <Content Include="Views\Shared\_TrendAnalysis.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisByQuestion.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisByJob.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisByEquip.cshtml" />
+    <Content Include="Views\Report\TrendAnalysisGroupLocation.cshtml" />
     <None Include="Service References\CASWCFService\CASWCFService.wsdl" />
     <None Include="Service References\CASWCFService\CASWCFService.xsd">
       <SubType>Designer</SubType>
@@ -414,11 +451,6 @@
     <None Include="Service References\CASWCFService\CASWCFService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Shared\_TrendAnalysis.cshtml" />
-    <Content Include="Views\Report\TrendAnalysisByQuestion.cshtml" />
-    <Content Include="Views\Report\TrendAnalysisByJob.cshtml" />
-    <Content Include="Views\Report\TrendAnalysisByEquip.cshtml" />
-    <Content Include="Views\Report\TrendAnalysisGroupLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

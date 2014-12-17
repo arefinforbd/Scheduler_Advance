@@ -36,29 +36,29 @@ namespace CASPortal.Helper
                 siteFullName.Append(site.State.Trim().Length > 0 ? site.State + "-" : "");
                 siteFullName.Append(site.PostCode.Trim().Length > 0 ? site.PostCode : "");
 
-                sb.Append("<li id=" + site.SiteCode + " style='cursor:pointer'><a>" + siteFullName.ToString() + "</a></li>");
+                sb.Append("<li id=" + site.SiteNo + " style='cursor:pointer'><a>" + siteFullName.ToString() + "</a></li>");
             }
 
             return sb.ToString();
         }
 
-        public string LoadContract()
+        public string LoadContract(string siteNo)
         {
-            SiteNItem siteNitem;
+            List<Contract> contracts = new List<Contract>();
             StringBuilder sb = new StringBuilder("");
-            SchedulerRepository schRepository = new SchedulerRepository();
+            ReportRepository repository = new ReportRepository();
 
-            if (HttpContext.Current.Session["SiteNItem"] == null)
-                HttpContext.Current.Session["SiteNItem"] = schRepository.GetSiteNItems();
+            if (HttpContext.Current.Session["Contracts"] == null)
+                HttpContext.Current.Session["Contracts"] = repository.GetContracts(siteNo);
 
-            siteNitem = (SiteNItem)HttpContext.Current.Session["SiteNItem"];
+            contracts = (List<Contract>)HttpContext.Current.Session["Contracts"];
             sb.Append("<li style='cursor:pointer'><a>Select Contract</a></li>");
 
-            if (siteNitem == null)
+            if (contracts == null)
                 return sb.ToString();
 
-            foreach (var item in siteNitem.listOfItems)
-                sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
+            foreach (var contract in contracts)
+                sb.Append("<li id=" + contract.ContractNo + " style='cursor:pointer'><a>" + contract.ContractName + " (" + contract.ContractDescription + ")</a></li>");
 
             return sb.ToString();
         }

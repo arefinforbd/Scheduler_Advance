@@ -10,6 +10,32 @@ namespace CASPortal.WebParser
 {
     public class ReportParser
     {
+        public List<Contract> GetContracts(string siteNo)
+        {
+            Contract[] contractArr = null;
+            List<Contract> contracts = new List<Contract>();
+            DataSet ds = new DataSet();
+            CASWCFServiceClient cas = new CASWCFServiceClient();
+
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+            contractArr = cas.GetContracts(companyID, companyPassword, customerPassword, customerID, siteNo, level4ID);
+
+            if (contractArr != null)
+            {
+                foreach (Contract contract in contractArr)
+                    contracts.Add(new Contract() { ContractNo = contract.ContractNo, ContractName = contract.ContractName, ContractDescription = contract.ContractDescription });
+                
+                return contracts;
+            }
+
+            return null;
+        }
+
         public TreeNode GetTrendAnalysisTreeNodes()
         {
             TreeNode treeNode;
@@ -46,7 +72,7 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                chartArr = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, 1029, answers, area, frequency, dtFrom, dtTo, groupBy);
+                chartArr = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
 
                 if (chartArr != null)
                 {

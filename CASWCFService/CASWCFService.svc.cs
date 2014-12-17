@@ -840,6 +840,46 @@ namespace CASWCFService
             }
         }
 
+        public List<Contract> GetContracts(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID)
+        {
+            DataSet ds;
+            Contract contract;
+            List<Contract> contracts = new List<Contract>();
+            StrongTypesNS.ds_comstrDataSet dsComstr;
+            StrongTypesNS.ds_coddetDataSet dsContract;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                cus.ldcustcont(Level4ID, CustomerID.ToString(), SiteNo, out dsComstr, out dsContract);
+                ds = (DataSet)dsContract;
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        contract = new Contract();
+
+                        contract.ContractNo = Convert.ToInt32(row["co_contractno"].ToString());
+                        contract.ContractName = row["cod_prcode"].ToString();
+                        contract.ContractDescription = row["cod_invdesc"].ToString();
+
+                        contracts.Add(contract);
+                    }
+                }
+                else
+                    return null;
+
+                return contracts;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)
         {
             string appServerURL = ConfigurationManager.AppSettings["AppServerURL"];

@@ -135,6 +135,14 @@ namespace CASPortal.CASWCFService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData", ReplyAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse")]
         System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request);
+        
+        // CODEGEN: Parameter 'GetContractsResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetContracts", ReplyAction="http://tempuri.org/ICASWCFService/GetContractsResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetContractsResponse GetContracts(CASPortal.CASWCFService.GetContractsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetContracts", ReplyAction="http://tempuri.org/ICASWCFService/GetContractsResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetContractsResponse> GetContractsAsync(CASPortal.CASWCFService.GetContractsRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -278,6 +286,80 @@ namespace CASPortal.CASWCFService {
             set {
                 this.publicFoldersField = value;
                 this.RaisePropertyChanged("PublicFolders");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class Contract : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string contractDescriptionField;
+        
+        private string contractNameField;
+        
+        private int contractNoField;
+        
+        private bool contractNoFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string ContractDescription {
+            get {
+                return this.contractDescriptionField;
+            }
+            set {
+                this.contractDescriptionField = value;
+                this.RaisePropertyChanged("ContractDescription");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=1)]
+        public string ContractName {
+            get {
+                return this.contractNameField;
+            }
+            set {
+                this.contractNameField = value;
+                this.RaisePropertyChanged("ContractName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public int ContractNo {
+            get {
+                return this.contractNoField;
+            }
+            set {
+                this.contractNoField = value;
+                this.RaisePropertyChanged("ContractNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContractNoSpecified {
+            get {
+                return this.contractNoFieldSpecified;
+            }
+            set {
+                this.contractNoFieldSpecified = value;
+                this.RaisePropertyChanged("ContractNoSpecified");
             }
         }
         
@@ -3143,6 +3225,66 @@ namespace CASPortal.CASWCFService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetContracts", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetContractsRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public decimal CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string SiteNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public int Level4ID;
+        
+        public GetContractsRequest() {
+        }
+        
+        public GetContractsRequest(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.CustomerID = CustomerID;
+            this.SiteNo = SiteNo;
+            this.Level4ID = Level4ID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetContractsResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetContractsResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.Contract[] GetContractsResult;
+        
+        public GetContractsResponse() {
+        }
+        
+        public GetContractsResponse(CASPortal.CASWCFService.Contract[] GetContractsResult) {
+            this.GetContractsResult = GetContractsResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ICASWCFServiceChannel : CASPortal.CASWCFService.ICASWCFService, System.ServiceModel.IClientChannel {
     }
@@ -3644,6 +3786,39 @@ namespace CASPortal.CASWCFService {
             inValue.ToDate = ToDate;
             inValue.GroupBy = GroupBy;
             return ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportDataAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetContractsResponse CASPortal.CASWCFService.ICASWCFService.GetContracts(CASPortal.CASWCFService.GetContractsRequest request) {
+            return base.Channel.GetContracts(request);
+        }
+        
+        public CASPortal.CASWCFService.Contract[] GetContracts(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID) {
+            CASPortal.CASWCFService.GetContractsRequest inValue = new CASPortal.CASWCFService.GetContractsRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.SiteNo = SiteNo;
+            inValue.Level4ID = Level4ID;
+            CASPortal.CASWCFService.GetContractsResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetContracts(inValue);
+            return retVal.GetContractsResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetContractsResponse> CASPortal.CASWCFService.ICASWCFService.GetContractsAsync(CASPortal.CASWCFService.GetContractsRequest request) {
+            return base.Channel.GetContractsAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetContractsResponse> GetContractsAsync(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID) {
+            CASPortal.CASWCFService.GetContractsRequest inValue = new CASPortal.CASWCFService.GetContractsRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.SiteNo = SiteNo;
+            inValue.Level4ID = Level4ID;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetContractsAsync(inValue);
         }
     }
 }

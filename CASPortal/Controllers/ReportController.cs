@@ -211,7 +211,7 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            ViewBag.Contracts = repoHelper.LoadContract();
+            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
             
@@ -259,7 +259,7 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            ViewBag.Contracts = repoHelper.LoadContract();
+            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
 
@@ -277,7 +277,7 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            ViewBag.Contracts = repoHelper.LoadContract();
+            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
 
@@ -295,11 +295,20 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            ViewBag.Contracts = repoHelper.LoadContract();
+            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
 
             return View();
+        }
+
+        public ActionResult GetContracts(string siteNo)
+        {
+            ReportHelper repoHelper = new ReportHelper();
+
+            string contracts = repoHelper.LoadContract(siteNo);
+
+            return Json(contracts, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DownloadChartImage(string base64Data, string chartType)
@@ -320,7 +329,7 @@ namespace CASPortal.Controllers
                 return RedirectToAction("Index", "Login");
 
             ViewBag.Sites = repoHelper.LoadSite();
-            ViewBag.Contracts = repoHelper.LoadContract();
+            //ViewBag.Contracts = repoHelper.LoadContract("1");
 
             return View();
         }

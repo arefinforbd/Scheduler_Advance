@@ -17,7 +17,7 @@
     <br />
     <div class="row">
         <div class="col-lg-8" id="maintable">
-            <div class="panel panel-info" style="margin-left:-20px; width:105%;">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <label>Trend Analysis Report @ViewBag.ReportType</label>
                 </div>
@@ -40,7 +40,7 @@
                             </div>
                             <br />
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts" style="display:none;">
                                     <label>Contract : </label>
                                     <div class="btn-group" id="divContract">
                                         <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
@@ -54,12 +54,12 @@
                                 </div>
                             </div>
                             <br />
-                            <div id="jstree">
+                            <div id="jstree" style="display:none;">
                                 @Html.Raw(@ViewBag.TreeNodes)
                             </div>
                             <br />
                         </div>
-                        <div class="col-lg-7" id="divRightSide">
+                        <div class="col-lg-7" id="divRightSide" style="display:none;">
                             <div id="ddlArea" style="margin-left:35px;">
                                 <label>Area : </label>
                                 <div class="btn-group">
@@ -91,7 +91,7 @@
                                         <label for="rdoMonths">Months</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3" id="divJobDate">
+                                <div id="divJobDate" class="col-lg-3">
                                     <div class="radio radio-success">
                                         <input type="radio" value="Job Date" id="rdoJobDate" name="rdoDate">
                                         <label for="rdoJobDate">Job Date</label>
@@ -100,21 +100,21 @@
                                 <input type="hidden" name="hdnFrequency" id="hdnFrequency" value="1" />
                             </div>
                             <div class="row" id="divSortBy" style="margin-bottom: 10px;">
-                                <div class="col-lg-3" style="margin: 8px -83px 0 17px;">
+                                <div id="divInnerSortBy" class="col-lg-3" style="margin: 8px -83px 0 17px;">
                                     <div>
                                         <label>Sort By : </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
+                                <div id="divSortBySerialNo" class="col-lg-3">
                                     <div class="radio radio-success">
-                                        <input type="radio" value="Weeks" id="rdoSerialNo" name="rdoSortBy" checked="checked">
-                                        <label for="rdoWeeks">Serial No.</label>
+                                        <input type="radio" value="Serial No." id="rdoSerialNo" name="rdoSortBy" checked="checked">
+                                        <label for="rdoSerialNo">Serial No.</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-2">
+                                <div id="divSortByLocation" class="col-lg-2">
                                     <div class="radio radio-success">
-                                        <input type="radio" value="Section" id="rdoLocation" name="rdoSortBy">
-                                        <label for="rdoMonths">Location</label>
+                                        <input type="radio" value="Location" id="rdoLocation" name="rdoSortBy">
+                                        <label for="rdoLocation">Location</label>
                                     </div>
                                 </div>
                                 <input type="hidden" name="hdnSortBy" id="hdnSortBy" value="1" />
@@ -190,7 +190,7 @@
                             </div>
                             <div id="divLineLegend"></div>
                             <div class="flot-chart" style="height: 120%;">
-                                <canvas id="flot-line-chart" height="400" width="640"></canvas>
+                                <canvas id="flot-line-chart" height="400" width="900"></canvas>
                             </div>
                         </div>
                     </div>
@@ -248,4 +248,5 @@
     </div>
 </div>
 
+<script src="@Url.Content("~/Content/js/report.js")"></script>
 <script src="@Url.Content("~/Content/js/trendanalysisreport.js")"></script>

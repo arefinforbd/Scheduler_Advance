@@ -225,15 +225,15 @@
         if (BaseHelper.AdvertisementStatus)
         {
             <script>
-                $("#maintable").removeClass("col-lg-12");
-                $("#maintable").addClass("col-lg-8");
+                $("#maintable").removeClass("col-lg-8");
+                $("#maintable").addClass("col-lg-9");
 
                 $("#divLeftSide").removeClass("col-lg-5");
                 $("#divLeftSide").addClass("col-lg-6");
                 $("#divRightSide").removeClass("col-lg-7");
                 $("#divRightSide").addClass("col-lg-6");
                 $("#ddlSites").css("margin-left", "");
-                $("#ddlSites .btn-group .dropdown-Site span").css("font-size", "11px");
+                //$("#divLeftSide #ddlSites .btn-group .dropdown-Site span").css("font-size", "11px");
                 $("#ddlArea").css("margin-left", "");
 
                 $("#divTrendBy").css("margin", "");
@@ -250,8 +250,16 @@
                 $("#divJobDate").removeClass("col-lg-3");
                 $("#divJobDate").addClass("col-lg-5");
 
+                $("#divInnerSortBy").css("margin", "");
+                $("#divSortBySerialNo").css("clear", "both");
+                
                 $("#divGroup").removeClass("col-lg-8");
                 $("#divGroup").addClass("col-lg-10");
+
+                $("#flot-line-chart").attr("width", "630");
+
+                $("#divPrintDetails").removeClass("col-lg-2");
+                $("#divPrintDetails").addClass("col-lg-4");
             </script>
         }
     }
