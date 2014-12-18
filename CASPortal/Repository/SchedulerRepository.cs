@@ -3,6 +3,7 @@ using CASPortal.WebParser;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -26,7 +27,7 @@ namespace CASPortal.Repository
             {
                 List<BusinessHour> businessHours = new List<BusinessHour>();
 
-                DateTime dtStart = Convert.ToDateTime(dateStart);
+                DateTime dtStart = DateTime.Parse(dateStart, new CultureInfo("en-US"));
                 int dayOfWeek = (int)dtStart.DayOfWeek;
 
                 if (HttpContext.Current.Session["BusinessHours"] != null)

@@ -84,10 +84,6 @@ $(function () {
     $("#jstree").hide();
     $("#divRightSide").hide();
 
-    $("#divLinePanel").hide();
-    $("#divPiePanel").hide();
-    $("#divBarPanel").hide();
-
     $("#divLineCompanyInfo").hide();
     $("#divPieCompanyInfo").hide();
     $("#divBarCompanyInfo").hide();

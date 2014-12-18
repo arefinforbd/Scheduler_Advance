@@ -3,6 +3,7 @@ using CASPortal.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -126,13 +127,13 @@ namespace CASPortal.WebParser
 
             dateStart = dateStart.Substring(0, dateStart.IndexOf("GMT") - 1);
             //ds = cas.GetScheduledTime("kevorkt", "", "1.000", Convert.ToDateTime(dateStart));
-            timeSlotArr = cas.GetScheduledTime(companyID, companyPassword, customerPassword, Convert.ToDateTime(dateStart));
+            timeSlotArr = cas.GetScheduledTime(companyID, companyPassword, customerPassword, DateTime.Parse(dateStart, new CultureInfo("en-US")));
 
             if (timeSlotArr != null && timeSlotArr.Count() > 0)
             {
                 foreach (TimeSlot timeSlotItem in timeSlotArr)
                 {
-                    scheduledDate = Convert.ToDateTime(timeSlotItem.Date);
+                    scheduledDate = DateTime.Parse(timeSlotItem.Date, new CultureInfo("en-US"));
                     startTime = timeSlotItem.StartTime;
                     endTime = timeSlotItem.EndTime;
 

@@ -44,22 +44,22 @@ namespace CASPortal.Helper
 
         public string LoadContract(string siteNo)
         {
+            string contractDescription = "";
             List<Contract> contracts = new List<Contract>();
             StringBuilder sb = new StringBuilder("");
             ReportRepository repository = new ReportRepository();
 
-            if (HttpContext.Current.Session["Contracts"] == null)
-                HttpContext.Current.Session["Contracts"] = repository.GetContracts(siteNo);
-
-            contracts = (List<Contract>)HttpContext.Current.Session["Contracts"];
             sb.Append("<li style='cursor:pointer'><a>Select Contract</a></li>");
+            contracts = repository.GetContracts(siteNo);
 
             if (contracts == null)
                 return sb.ToString();
 
             foreach (var contract in contracts)
-                sb.Append("<li id=" + contract.ContractNo + " style='cursor:pointer'><a>" + contract.ContractName + " (" + contract.ContractDescription + ")</a></li>");
-
+            {
+                contractDescription = contract.ContractDescription.Length > 30 ? contract.ContractDescription.Substring(0, 30) : contract.ContractDescription;
+                sb.Append("<li id=" + contract.ContractNo + " style='cursor:pointer'><a>" + contract.ContractName + " (" + contractDescription + ")</a></li>");
+            }
             return sb.ToString();
         }
 

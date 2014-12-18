@@ -42,11 +42,12 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts" style="display:none;">
                                     <label>Contract : </label>
+                                    <div id="divContractLoading" class="btn-group" style="display:none;"></div>
                                     <div class="btn-group" id="divContract">
                                         <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
-                                            <span data-bind="label"></span> <span class="caret"></span>
+                                            <span data-bind="label" style="font-size:12px;"></span> <span class="caret"></span>
                                         </a>
-                                        <ul id="ulContracts" class="dropdown-menu">
+                                        <ul id="ulContracts" class="dropdown-menu" style="font-size: 12px;">
                                             @Html.Raw(ViewBag.Contracts)
                                         </ul>
                                     </div>
@@ -176,7 +177,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divLinePanel">
+                    <div class="panel panel-default" style="margin-left:-20px; width:105%;display:none;" id="divLinePanel">
                         <div class="panel-heading">
                             Line Chart
                             <input id="btnLineDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
@@ -199,7 +200,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default" style="margin-left:-20px; width:105%;" id="divPiePanel">
+                    <div class="panel panel-default" style="margin-left: -20px; width: 105%; display: none;" id="divPiePanel">
                         <div class="panel-heading">
                             Pie Chart
                             <input id="btnPieDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
@@ -222,7 +223,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default" style="margin-left:-20px; width:105%; height: 105%" id="divBarPanel">
+                    <div class="panel panel-default" style="margin-left: -20px; width: 105%; height: 105%; display: none;" id="divBarPanel">
                         <div class="panel-heading">
                             Bar Chart
                             <input id="btnBarDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">

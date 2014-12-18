@@ -6,6 +6,7 @@ using CASPortal.WebParser;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -223,8 +224,8 @@ namespace CASPortal.Controllers
         {
             DataTable dtAnswers = new DataTable();
             ReportRepository repository = new ReportRepository();
-            DateTime dtFrom = Convert.ToDateTime(fromDate);
-            DateTime dtTo = Convert.ToDateTime(toDate);
+            DateTime dtFrom = DateTime.Parse(fromDate, new CultureInfo("en-US"));
+            DateTime dtTo = DateTime.Parse(toDate, new CultureInfo("en-US"));
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
 
@@ -307,6 +308,7 @@ namespace CASPortal.Controllers
             ReportHelper repoHelper = new ReportHelper();
 
             string contracts = repoHelper.LoadContract(siteNo);
+            Session["SiteNo"] = siteNo;
 
             return Json(contracts, JsonRequestBehavior.AllowGet);
         }

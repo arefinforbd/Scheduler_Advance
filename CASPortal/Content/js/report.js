@@ -83,6 +83,8 @@ $(function () {
 
         if ($target.text() != "Select Site") {
             $("#hdnSite").val($(this).attr("id"));
+            $("#divContractLoading").show();
+            $("#divContractLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='25px' />");
             LoadContracts();
             $("#ddlConracts").show();
         }
@@ -150,11 +152,13 @@ function LoadContracts() {
             if (data != null) {
                 $("#ulContracts").html(data);
                 $(".dropdown-Contract").find('[data-bind="label"]').text($("#ulContracts > :first-child").text());
-            }
-            else {
+                $("#divContractLoading").hide();
+                $("#divContractLoading").html("");
             }
         },
         error: function (request) {
+            $("#divContractLoading").hide();
+            $("#divContractLoading").html("");
             alert("Please try again. Something went wrong.");
         }
     });
