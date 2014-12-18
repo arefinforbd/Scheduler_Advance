@@ -229,11 +229,15 @@ $("#btnReset").click(function () {
 
     var ulSite = $("#ulSites li").eq(0).text();
     $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
+
     _listSite.css("background-color", "#FFFFFF");
 
     var ulContract = $("#ulContracts li").eq(0).text();
     $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
     _listContract.css("background-color", "#FFFFFF");
+
+    _listSite = $("#ulSites > :first-child");
+    _listContract = $("#ulContracts > :first-child");
 
     var ulArea = $("#ulArea li").eq(0).text();
     $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);

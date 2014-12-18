@@ -82,6 +82,7 @@ $(function () {
            .children('.dropdown-Site').dropdown('toggle');
 
         if ($target.text() != "Select Site") {
+            _listContract = $("#ulContracts > :first-child");
             $("#hdnSite").val($(this).attr("id"));
             $("#divContractLoading").show();
             $("#divContractLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='25px' />");
@@ -89,9 +90,15 @@ $(function () {
             $("#ddlConracts").show();
         }
         else {
-            $("#ddlConracts").hide();
-            $("#jstree").hide();
-            $("#divRightSide").hide();
+            if (location.href.indexOf("Report/EquipmentTransaction") > 0) {
+                $("#ddlConracts").hide();
+                $("#divLower").hide();
+            }
+            if (location.href.indexOf("Report/TrendAnalysis") > 0) {
+                $("#ddlConracts").hide();
+                $("#jstree").hide();
+                $("#divRightSide").hide();
+            }
         }
 
         return false;
@@ -131,8 +138,13 @@ $(function () {
             }
         }
         else {
-            $("#jstree").hide();
-            $("#divRightSide").hide();
+            if (location.href.indexOf("Report/EquipmentTransaction") > 0) {
+                $("#divLower").hide();
+            }
+            if (location.href.indexOf("Report/TrendAnalysis") > 0) {
+                $("#jstree").hide();
+                $("#divRightSide").hide();
+            }
         }
 
         return false;
