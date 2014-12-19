@@ -223,41 +223,8 @@ function LoadingComplete() {
 }
 
 $("#btnReset").click(function () {
-    $('#jstree').jstree("deselect_all");
-    $("#dtpFrom").val("");
-    $("#dtpTo").val("");
-
-    var ulSite = $("#ulSites li").eq(0).text();
-    $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
-
-    _listSite.css("background-color", "#FFFFFF");
-
-    var ulContract = $("#ulContracts li").eq(0).text();
-    $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
-    _listContract.css("background-color", "#FFFFFF");
-
-    _listSite = $("#ulSites > :first-child");
-    _listContract = $("#ulContracts > :first-child");
-
-    var ulArea = $("#ulArea li").eq(0).text();
-    $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
-    _listArea.css("background-color", "#FFFFFF");
-
-    $("#divLinePanel").hide();
-    $("#divPiePanel").hide();
-    $("#divBarPanel").hide();
-
-    $("#rdoWeeks").prop("checked", true);
-    $("#lblGroup").html("Group By No of Weeks: ");
-    $("#txtGroup").removeAttr("disabled");
-    $("#txtGroup").css("background-color", "#FFFFFF");
-    $("#txtGroup").val("1");
-    $("#hdnFrequency").val("1");
-
-    $("#ddlConracts").hide();
-    $("#jstree").hide();
-    $("#divRightSide").hide();
-    $("#divLeftSide").css("border-right", "");
+    ResetTrendAnalysisSite();
+    ResetTrendAnalysisFields();
 });
 
 function DownloadChart(canvas) {

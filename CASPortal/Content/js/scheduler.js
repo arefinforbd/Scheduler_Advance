@@ -41,6 +41,9 @@ $(function () {
         showOtherMonths: true,
         selectOtherMonths: true,
         altFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
         onSelect: function (date) {
             if (new Date(FormatDateA(_calenderDate)).getDate() == new Date($("#datepicker").datepicker('getDate')).getDate()
                 && new Date(FormatDateA(_calenderDate)).getMonth() == new Date($("#datepicker").datepicker('getDate')).getMonth()

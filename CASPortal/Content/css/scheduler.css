@@ -21,6 +21,12 @@ ul.scroll-menu {
     max-height: 320px;
 }
 
+.ui-datepicker .ui-datepicker-title select {
+    color: #000000;
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
 #tblDate tr th {
     text-align: center;
     padding-right: 5px;

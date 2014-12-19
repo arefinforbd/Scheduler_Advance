@@ -95,9 +95,8 @@ $(function () {
                 $("#divLower").hide();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
-                $("#ddlConracts").hide();
-                $("#jstree").hide();
-                $("#divRightSide").hide();
+                ResetTrendAnalysisSite();
+                ResetTrendAnalysisFields();
             }
         }
 
@@ -142,8 +141,8 @@ $(function () {
                 $("#divLower").hide();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
-                $("#jstree").hide();
-                $("#divRightSide").hide();
+                ResetTrendAnalysisFields();
+                $("#ddlConracts").show();
             }
         }
 
@@ -174,4 +173,42 @@ function LoadContracts() {
             alert("Please try again. Something went wrong.");
         }
     });
+}
+
+function ResetTrendAnalysisSite() {
+    var ulSite = $("#ulSites li").eq(0).text();
+    $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
+    _listSite.css("background-color", "#FFFFFF");
+    _listSite = $("#ulSites > :first-child");
+}
+
+function ResetTrendAnalysisFields() {
+    $('#jstree').jstree("deselect_all");
+    $("#dtpFrom").val("");
+    $("#dtpTo").val("");
+
+    var ulContract = $("#ulContracts li").eq(0).text();
+    $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
+    _listContract.css("background-color", "#FFFFFF");
+    _listContract = $("#ulContracts > :first-child");
+
+    var ulArea = $("#ulArea li").eq(0).text();
+    $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
+    _listArea.css("background-color", "#FFFFFF");
+
+    $("#divLinePanel").hide();
+    $("#divPiePanel").hide();
+    $("#divBarPanel").hide();
+
+    $("#rdoWeeks").prop("checked", true);
+    $("#lblGroup").html("Group By No of Weeks: ");
+    $("#txtGroup").removeAttr("disabled");
+    $("#txtGroup").css("background-color", "#FFFFFF");
+    $("#txtGroup").val("1");
+    $("#hdnFrequency").val("1");
+
+    $("#ddlConracts").hide();
+    $("#jstree").hide();
+    $("#divRightSide").hide();
+    $("#divLeftSide").css("border-right", "");
 }

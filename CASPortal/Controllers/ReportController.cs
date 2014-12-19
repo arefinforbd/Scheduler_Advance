@@ -308,7 +308,6 @@ namespace CASPortal.Controllers
             ReportHelper repoHelper = new ReportHelper();
 
             string contracts = repoHelper.LoadContract(siteNo);
-            Session["SiteNo"] = siteNo;
 
             return Json(contracts, JsonRequestBehavior.AllowGet);
         }
