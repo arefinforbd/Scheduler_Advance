@@ -88,6 +88,10 @@ $(function () {
     $("#divPieCompanyInfo").hide();
     $("#divBarCompanyInfo").hide();
 
+    $("#divLineFooter").hide();
+    $("#divPieFooter").hide();
+    $("#divBarFooter").hide();
+
     $("#rdoWeeks").click(function () {
         $("#lblGroup").html("Group By No of Weeks: ");
         $("#txtGroup").removeAttr("disabled");
@@ -243,33 +247,39 @@ function DownloadChart(canvas) {
 
 $("#btnLineDownload").click(function () {
     $("#divLineCompanyInfo").show();
+    $("#divLineFooter").show();
     $('#divPanelBodyLine').html2canvas({
         onrendered: function (canvas) {
             $("#chartType").val("Line");
             DownloadChart(canvas);            
             $("#divLineCompanyInfo").hide();
+            $("#divLineFooter").hide();
         }
     });
 });
 
 $("#btnPieDownload").click(function () {
     $("#divPieCompanyInfo").show();
+    $("#divPieFooter").show();
     $('#divPanelBodyPie').html2canvas({
         onrendered: function (canvas) {
             $("#chartType").val("Pie");
             DownloadChart(canvas);
             $("#divPieCompanyInfo").hide();
+            $("#divPieFooter").hide();
         }
     });
 });
 
 $("#btnBarDownload").click(function () {
     $("#divBarCompanyInfo").show();
+    $("#divBarFooter").show();
     $('#divPanelBodyBar').html2canvas({
         onrendered: function (canvas) {
             $("#chartType").val("Bar");
             DownloadChart(canvas);
             $("#divBarCompanyInfo").hide();
+            $("#divBarFooter").hide();
         }
     });
 });
