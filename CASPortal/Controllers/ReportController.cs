@@ -61,7 +61,7 @@ namespace CASPortal.Controllers
             List<BarData> bars = new List<BarData>();
             foreach (ChartData chart in charts)
             {
-                bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.Section + " (" + chart.Question + ")" });
+                bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.Section + chart.Question });
             }
 
             var count = bars.GroupBy(i => new { Date = i.label })
@@ -108,7 +108,7 @@ namespace CASPortal.Controllers
 
             foreach (ChartData chart in charts)
             {
-                lines.Add(new LineData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.Section + " (" + chart.Question + ")", Count = weeksCount });
+                lines.Add(new LineData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.Section + chart.Question, Count = weeksCount });
             }
 
             return lines;
@@ -118,23 +118,13 @@ namespace CASPortal.Controllers
         {
             List<PieData> pies = new List<PieData>();
 
-
             var aggCharts = charts.GroupBy(x => new { x.Section, x.Question }).
                 Select(x => new { Section = x.Max(pd => pd.Section), Question = x.Max(pd => pd.Question), percentage =  x.Sum(pd => pd.Point)});
 
-
             foreach (var pie in aggCharts)
             {
-                pies.Add(new PieData() { label = pie.Section + " (" + pie.Question + ")", data = pie.percentage });
+                pies.Add(new PieData() { label = pie.Section + pie.Question, data = pie.percentage });
             }
-
-            //List<PieData> pies = new List<PieData>()
-            //{
-            //    new PieData(){label = "Series 0", data = 15},
-            //    new PieData(){label = "Series 1", data = 5},
-            //    new PieData(){label = "Series 2", data = 2},
-            //    new PieData(){label = "Series 3", data = 3}
-            //};
 
             return pies;
         }
@@ -230,7 +220,7 @@ namespace CASPortal.Controllers
             List<ChartData> charts = new List<ChartData>();
 
             dtAnswers = AnswerTable(selectedNodes);
-            charts = repository.PostTrendAnalysisReportData(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy);
+            charts = repository.GetTrendAnalysisByQuestion(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy);
 
             if (charts != null)
             {
@@ -265,6 +255,36 @@ namespace CASPortal.Controllers
             ViewBag.Areas = repoHelper.LoadArea();
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult TrendAnalysisByJob(int siteNo, int contractNo, string selectedNodes, string area, string fromDate, string toDate, string chartType)
+        {
+            DataTable dtAnswers = new DataTable();
+            ReportRepository repository = new ReportRepository();
+            DateTime dtFrom = DateTime.Parse(fromDate, new CultureInfo("en-US"));
+            DateTime dtTo = DateTime.Parse(toDate, new CultureInfo("en-US"));
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+
+            dtAnswers = AnswerTable(selectedNodes);
+            charts = repository.GetTrendAnalysisByJob(siteNo, contractNo, dtAnswers, area, dtFrom, dtTo);
+
+            if (charts != null)
+            {
+                if (chartType.Equals("BAR") || chartType.Equals("ALL"))
+                    chartTypeObj.Bars = GetBarData(charts);
+
+                if (chartType.Equals("LINE") || chartType.Equals("ALL"))
+                    chartTypeObj.Lines = GetLineData(charts);
+
+                if (chartType.Equals("PIE") || chartType.Equals("ALL"))
+                    chartTypeObj.Pies = GetPieData(charts);
+
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(null, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult TrendAnalysisByEquip()

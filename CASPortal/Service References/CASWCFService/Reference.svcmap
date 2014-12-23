@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ce83430d-b6a7-4e4f-ba4b-bb42243c2478" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a72b6d5b-2e5c-482e-b34f-56e2fd7907ca" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost:50557/CASWCFService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CASWCFService.xsd" MetadataType="Schema" ID="f0439516-14bd-418e-a257-0be25597ae2a" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd4" />
-    <MetadataFile FileName="CASWCFService.wsdl" MetadataType="Wsdl" ID="f5805253-1715-4247-bf0d-359c205683bc" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?wsdl" />
-    <MetadataFile FileName="CASWCFService.disco" MetadataType="Disco" ID="7d5249f6-2991-470a-86a4-447487529079" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?disco" />
-    <MetadataFile FileName="CASWCFService1.xsd" MetadataType="Schema" ID="fc7a9ba7-783e-4f31-9c3a-888edb6fd77a" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd1" />
-    <MetadataFile FileName="CASWCFService2.xsd" MetadataType="Schema" ID="e71fce95-6068-4670-a2f9-066ee5c6fb1d" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd0" />
-    <MetadataFile FileName="CASWCFService3.xsd" MetadataType="Schema" ID="073a51d9-54f3-4a65-905b-8b10bf99b526" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd3" />
-    <MetadataFile FileName="CASWCFService4.xsd" MetadataType="Schema" ID="76a2d10e-05dc-42f1-beea-a9ac46f73ddb" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CASWCFService.xsd" MetadataType="Schema" ID="84e634cb-ac9e-4882-92a3-99550e35ca08" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd4" />
+    <MetadataFile FileName="CASWCFService.wsdl" MetadataType="Wsdl" ID="47a76011-4020-401d-afe7-4d8343042687" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?wsdl" />
+    <MetadataFile FileName="CASWCFService.disco" MetadataType="Disco" ID="e52f41af-e678-4d70-8893-ef631bdab1b6" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?disco" />
+    <MetadataFile FileName="CASWCFService1.xsd" MetadataType="Schema" ID="75663eb6-e882-41f5-8e10-4e713f05dd97" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CASWCFService2.xsd" MetadataType="Schema" ID="b31a352b-de4d-4416-a60f-54b96e2d37ef" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CASWCFService3.xsd" MetadataType="Schema" ID="6e1f5598-4ffc-4cff-910d-c649bd58e3d4" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CASWCFService4.xsd" MetadataType="Schema" ID="1913271b-6eb3-483d-b1cd-366f9e0ff871" SourceId="1" SourceUrl="http://localhost:50557/CASWCFService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

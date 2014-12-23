@@ -58,7 +58,10 @@ namespace CASWCFService
         TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
 
         [OperationContract]
-        List<ChartData> PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy);
+        List<ChartData> GetTrendAnalysisByJob(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, DateTime FromDate, DateTime ToDate);
+
+        [OperationContract]
+        List<ChartData> GetTrendAnalysisByQuestion(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy);
 
         [OperationContract]
         List<Contract> GetContracts(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID);

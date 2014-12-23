@@ -369,6 +369,12 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetScheduledTimeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisByJobResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -376,9 +382,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.LoginProcessResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Site.datasource">

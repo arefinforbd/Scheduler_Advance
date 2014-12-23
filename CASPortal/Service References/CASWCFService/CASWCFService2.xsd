@@ -256,7 +256,43 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PostTrendAnalysisReportData">
+  <xs:element name="GetTrendAnalysisByJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerID" type="xs:decimal" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="SiteNo" type="xs:int" />
+        <xs:element minOccurs="0" name="ContractNo" type="xs:int" />
+        <xs:element minOccurs="0" name="answers" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FromDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="ToDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTrendAnalysisByJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetTrendAnalysisByJobResult" nillable="true" type="q10:ArrayOfChartData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTrendAnalysisByQuestion">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
@@ -287,10 +323,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PostTrendAnalysisReportDataResponse">
+  <xs:element name="GetTrendAnalysisByQuestionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="PostTrendAnalysisReportDataResult" nillable="true" type="q10:ArrayOfChartData" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetTrendAnalysisByQuestionResult" nillable="true" type="q11:ArrayOfChartData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -309,7 +345,7 @@
   <xs:element name="GetContractsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetContractsResult" nillable="true" type="q11:ArrayOfContract" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetContractsResult" nillable="true" type="q12:ArrayOfContract" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

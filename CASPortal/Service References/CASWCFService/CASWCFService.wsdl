@@ -93,11 +93,17 @@
   <wsdl:message name="ICASWCFService_GetTrendAnalysisTreeNodes_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTrendAnalysisTreeNodesResponse" />
   </wsdl:message>
-  <wsdl:message name="ICASWCFService_PostTrendAnalysisReportData_InputMessage">
-    <wsdl:part name="parameters" element="tns:PostTrendAnalysisReportData" />
+  <wsdl:message name="ICASWCFService_GetTrendAnalysisByJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendAnalysisByJob" />
   </wsdl:message>
-  <wsdl:message name="ICASWCFService_PostTrendAnalysisReportData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PostTrendAnalysisReportDataResponse" />
+  <wsdl:message name="ICASWCFService_GetTrendAnalysisByJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendAnalysisByJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetTrendAnalysisByQuestion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendAnalysisByQuestion" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetTrendAnalysisByQuestion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendAnalysisByQuestionResponse" />
   </wsdl:message>
   <wsdl:message name="ICASWCFService_GetContracts_InputMessage">
     <wsdl:part name="parameters" element="tns:GetContracts" />
@@ -162,9 +168,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes" message="tns:ICASWCFService_GetTrendAnalysisTreeNodes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse" message="tns:ICASWCFService_GetTrendAnalysisTreeNodes_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PostTrendAnalysisReportData">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData" message="tns:ICASWCFService_PostTrendAnalysisReportData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse" message="tns:ICASWCFService_PostTrendAnalysisReportData_OutputMessage" />
+    <wsdl:operation name="GetTrendAnalysisByJob">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJob" message="tns:ICASWCFService_GetTrendAnalysisByJob_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJobResponse" message="tns:ICASWCFService_GetTrendAnalysisByJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrendAnalysisByQuestion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestion" message="tns:ICASWCFService_GetTrendAnalysisByQuestion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestionResponse" message="tns:ICASWCFService_GetTrendAnalysisByQuestion_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetContracts">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetContracts" message="tns:ICASWCFService_GetContracts_InputMessage" />
@@ -299,8 +309,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PostTrendAnalysisReportData">
-      <soap:operation soapAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData" style="document" />
+    <wsdl:operation name="GetTrendAnalysisByJob">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJob" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrendAnalysisByQuestion">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

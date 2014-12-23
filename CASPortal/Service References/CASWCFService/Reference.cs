@@ -128,13 +128,21 @@ namespace CASPortal.CASWCFService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodes", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisTreeNodesResponse")]
         System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse> GetTrendAnalysisTreeNodesAsync(CASPortal.CASWCFService.GetTrendAnalysisTreeNodesRequest request);
         
-        // CODEGEN: Parameter 'PostTrendAnalysisReportDataResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData", ReplyAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse")]
+        // CODEGEN: Parameter 'GetTrendAnalysisByJobResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJob", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJobResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse PostTrendAnalysisReportData(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request);
+        CASPortal.CASWCFService.GetTrendAnalysisByJobResponse GetTrendAnalysisByJob(CASPortal.CASWCFService.GetTrendAnalysisByJobRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportData", ReplyAction="http://tempuri.org/ICASWCFService/PostTrendAnalysisReportDataResponse")]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJob", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisByJobResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisByJobResponse> GetTrendAnalysisByJobAsync(CASPortal.CASWCFService.GetTrendAnalysisByJobRequest request);
+        
+        // CODEGEN: Parameter 'GetTrendAnalysisByQuestionResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestion", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestionResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse GetTrendAnalysisByQuestion(CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestion", ReplyAction="http://tempuri.org/ICASWCFService/GetTrendAnalysisByQuestionResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse> GetTrendAnalysisByQuestionAsync(CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest request);
         
         // CODEGEN: Parameter 'GetContractsResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetContracts", ReplyAction="http://tempuri.org/ICASWCFService/GetContractsResponse")]
@@ -3139,8 +3147,89 @@ namespace CASPortal.CASWCFService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PostTrendAnalysisReportData", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class PostTrendAnalysisReportDataRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTrendAnalysisByJob", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTrendAnalysisByJobRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public decimal CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public int SiteNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public int ContractNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Data.DataTable answers;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Area;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
+        public System.DateTime FromDate;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=10)]
+        public System.DateTime ToDate;
+        
+        public GetTrendAnalysisByJobRequest() {
+        }
+        
+        public GetTrendAnalysisByJobRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, System.DateTime FromDate, System.DateTime ToDate) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerID = CustomerID;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.SiteNo = SiteNo;
+            this.ContractNo = ContractNo;
+            this.answers = answers;
+            this.Area = Area;
+            this.FromDate = FromDate;
+            this.ToDate = ToDate;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTrendAnalysisByJobResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTrendAnalysisByJobResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.ChartData[] GetTrendAnalysisByJobResult;
+        
+        public GetTrendAnalysisByJobResponse() {
+        }
+        
+        public GetTrendAnalysisByJobResponse(CASPortal.CASWCFService.ChartData[] GetTrendAnalysisByJobResult) {
+            this.GetTrendAnalysisByJobResult = GetTrendAnalysisByJobResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTrendAnalysisByQuestion", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTrendAnalysisByQuestionRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -3186,10 +3275,10 @@ namespace CASPortal.CASWCFService {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=12)]
         public int GroupBy;
         
-        public PostTrendAnalysisReportDataRequest() {
+        public GetTrendAnalysisByQuestionRequest() {
         }
         
-        public PostTrendAnalysisReportDataRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
+        public GetTrendAnalysisByQuestionRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
             this.CompanyID = CompanyID;
             this.CompanyPassword = CompanyPassword;
             this.CustomerID = CustomerID;
@@ -3209,19 +3298,19 @@ namespace CASPortal.CASWCFService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PostTrendAnalysisReportDataResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
-    public partial class PostTrendAnalysisReportDataResponse {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTrendAnalysisByQuestionResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetTrendAnalysisByQuestionResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
         [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
-        public CASPortal.CASWCFService.ChartData[] PostTrendAnalysisReportDataResult;
+        public CASPortal.CASWCFService.ChartData[] GetTrendAnalysisByQuestionResult;
         
-        public PostTrendAnalysisReportDataResponse() {
+        public GetTrendAnalysisByQuestionResponse() {
         }
         
-        public PostTrendAnalysisReportDataResponse(CASPortal.CASWCFService.ChartData[] PostTrendAnalysisReportDataResult) {
-            this.PostTrendAnalysisReportDataResult = PostTrendAnalysisReportDataResult;
+        public GetTrendAnalysisByQuestionResponse(CASPortal.CASWCFService.ChartData[] GetTrendAnalysisByQuestionResult) {
+            this.GetTrendAnalysisByQuestionResult = GetTrendAnalysisByQuestionResult;
         }
     }
     
@@ -3742,12 +3831,12 @@ namespace CASPortal.CASWCFService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse CASPortal.CASWCFService.ICASWCFService.PostTrendAnalysisReportData(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request) {
-            return base.Channel.PostTrendAnalysisReportData(request);
+        CASPortal.CASWCFService.GetTrendAnalysisByJobResponse CASPortal.CASWCFService.ICASWCFService.GetTrendAnalysisByJob(CASPortal.CASWCFService.GetTrendAnalysisByJobRequest request) {
+            return base.Channel.GetTrendAnalysisByJob(request);
         }
         
-        public CASPortal.CASWCFService.ChartData[] PostTrendAnalysisReportData(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
-            CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
+        public CASPortal.CASWCFService.ChartData[] GetTrendAnalysisByJob(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, System.DateTime FromDate, System.DateTime ToDate) {
+            CASPortal.CASWCFService.GetTrendAnalysisByJobRequest inValue = new CASPortal.CASWCFService.GetTrendAnalysisByJobRequest();
             inValue.CompanyID = CompanyID;
             inValue.CompanyPassword = CompanyPassword;
             inValue.CustomerID = CustomerID;
@@ -3757,21 +3846,40 @@ namespace CASPortal.CASWCFService {
             inValue.ContractNo = ContractNo;
             inValue.answers = answers;
             inValue.Area = Area;
-            inValue.Frequency = Frequency;
             inValue.FromDate = FromDate;
             inValue.ToDate = ToDate;
-            inValue.GroupBy = GroupBy;
-            CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportData(inValue);
-            return retVal.PostTrendAnalysisReportDataResult;
+            CASPortal.CASWCFService.GetTrendAnalysisByJobResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetTrendAnalysisByJob(inValue);
+            return retVal.GetTrendAnalysisByJobResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> CASPortal.CASWCFService.ICASWCFService.PostTrendAnalysisReportDataAsync(CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest request) {
-            return base.Channel.PostTrendAnalysisReportDataAsync(request);
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisByJobResponse> CASPortal.CASWCFService.ICASWCFService.GetTrendAnalysisByJobAsync(CASPortal.CASWCFService.GetTrendAnalysisByJobRequest request) {
+            return base.Channel.GetTrendAnalysisByJobAsync(request);
         }
         
-        public System.Threading.Tasks.Task<CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse> PostTrendAnalysisReportDataAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
-            CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest inValue = new CASPortal.CASWCFService.PostTrendAnalysisReportDataRequest();
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisByJobResponse> GetTrendAnalysisByJobAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, System.DateTime FromDate, System.DateTime ToDate) {
+            CASPortal.CASWCFService.GetTrendAnalysisByJobRequest inValue = new CASPortal.CASWCFService.GetTrendAnalysisByJobRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.SiteNo = SiteNo;
+            inValue.ContractNo = ContractNo;
+            inValue.answers = answers;
+            inValue.Area = Area;
+            inValue.FromDate = FromDate;
+            inValue.ToDate = ToDate;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetTrendAnalysisByJobAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse CASPortal.CASWCFService.ICASWCFService.GetTrendAnalysisByQuestion(CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest request) {
+            return base.Channel.GetTrendAnalysisByQuestion(request);
+        }
+        
+        public CASPortal.CASWCFService.ChartData[] GetTrendAnalysisByQuestion(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
+            CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest inValue = new CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest();
             inValue.CompanyID = CompanyID;
             inValue.CompanyPassword = CompanyPassword;
             inValue.CustomerID = CustomerID;
@@ -3785,7 +3893,31 @@ namespace CASPortal.CASWCFService {
             inValue.FromDate = FromDate;
             inValue.ToDate = ToDate;
             inValue.GroupBy = GroupBy;
-            return ((CASPortal.CASWCFService.ICASWCFService)(this)).PostTrendAnalysisReportDataAsync(inValue);
+            CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetTrendAnalysisByQuestion(inValue);
+            return retVal.GetTrendAnalysisByQuestionResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse> CASPortal.CASWCFService.ICASWCFService.GetTrendAnalysisByQuestionAsync(CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest request) {
+            return base.Channel.GetTrendAnalysisByQuestionAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse> GetTrendAnalysisByQuestionAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, System.Data.DataTable answers, string Area, int Frequency, System.DateTime FromDate, System.DateTime ToDate, int GroupBy) {
+            CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest inValue = new CASPortal.CASWCFService.GetTrendAnalysisByQuestionRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.SiteNo = SiteNo;
+            inValue.ContractNo = ContractNo;
+            inValue.answers = answers;
+            inValue.Area = Area;
+            inValue.Frequency = Frequency;
+            inValue.FromDate = FromDate;
+            inValue.ToDate = ToDate;
+            inValue.GroupBy = GroupBy;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetTrendAnalysisByQuestionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

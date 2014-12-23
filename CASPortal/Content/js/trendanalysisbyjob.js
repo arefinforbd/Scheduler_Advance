@@ -191,9 +191,9 @@ $("#btnPreview").click(function () {
 
     Loading();
     $.ajax({
-        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByQuestion",
+        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByJob",
         type: "POST",
-        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), chartType: "ALL" },
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), chartType: "ALL" },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {

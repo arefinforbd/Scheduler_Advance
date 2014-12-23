@@ -58,7 +58,7 @@ namespace CASPortal.WebParser
             return null;
         }
 
-        public List<ChartData> PostTrendAnalysisReportData(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
+        public List<ChartData> GetTrendAnalysisByJob(int siteNo, int contractNo, DataTable answers, string area, DateTime dtFrom, DateTime dtTo)
         {
             try
             {
@@ -72,7 +72,39 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                chartArr = cas.PostTrendAnalysisReportData(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
+                chartArr = cas.GetTrendAnalysisByJob(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, dtFrom, dtTo);
+
+                if (chartArr != null)
+                {
+                    foreach (ChartData chart in chartArr)
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, Section = chart.Section, Question = chart.Question, Point = chart.Point });
+
+                    return charts;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<ChartData> GetTrendAnalysisByQuestion(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
+        {
+            try
+            {
+                ChartData[] chartArr = null;
+                List<ChartData> charts = new List<ChartData>();
+                CASWCFServiceClient cas = new CASWCFServiceClient();
+
+                string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+                string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+                decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+                int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+                chartArr = cas.GetTrendAnalysisByQuestion(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
 
                 if (chartArr != null)
                 {
