@@ -49,5 +49,25 @@ namespace CASPortal.Repository
 
             return charts;
         }
+
+        public byte[] GetEquipmentTransactionBLOB(DateTime dateFrom, DateTime dateTo, bool isPrintDetails, bool isPrintMaterials, int selection, string assignedTo, int sorting, int contractFrom, int contractTo, bool isInactive, bool isShowTime, string glAssignedTo)
+        {
+            byte[] fileInfo = null;
+            ReportParser parser = new ReportParser();
+
+            fileInfo = parser.GetEquipmentTransactionBLOB(dateFrom, dateTo, isPrintDetails, isPrintMaterials, selection, assignedTo, sorting, contractFrom, contractTo, isInactive, isShowTime, glAssignedTo);
+
+            return fileInfo;
+        }
+
+        public List<Equipment> GetInstalledEquipment(int contractNo, string equipmentType)
+        {
+            ReportParser parser = new ReportParser();
+            List<Equipment> equips = new List<Equipment>();
+
+            equips = parser.GetInstalledEquipment(contractNo, equipmentType);
+
+            return equips;
+        }
     }
 }

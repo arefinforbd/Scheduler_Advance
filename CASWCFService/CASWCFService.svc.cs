@@ -929,6 +929,109 @@ namespace CASWCFService
             }
         }
 
+        public byte[] GetEquipmentTransactionBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, DateTime DateFrom, DateTime DateTo, bool IsPrintDetails, bool IsPrintMaterials, int Selection, string AssignedTo, int Sorting, int ContractFrom, int ContractTo, bool IsInactive, bool IsShowTime, string GlAssignedTo)
+        {
+            DataSet ds;
+            StrongTypesNS.ds_filedataDataSet stypefile;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                cus.ws_equtranrpt(Level4ID, CustomerIDFrom, CustomerIDTo, DateFrom, DateTo, IsPrintDetails, IsPrintMaterials, Selection, AssignedTo, Sorting, ContractFrom, ContractTo, IsInactive, IsShowTime, GlAssignedTo, out stypefile);
+                ds = (DataSet)stypefile;
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    return (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<Equipment> GetInstalledEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, string EquipmentType)
+        {
+            DataSet ds;
+            Equipment equip;
+            List<Equipment> equips = new List<Equipment>();
+            StrongTypesNS.ds_equdetDataSet dsEquipment;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                cus.ldequdet(Level4ID, ContractNo, EquipmentType, out dsEquipment);
+                ds = (DataSet)dsEquipment;
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        equip = new Equipment();
+
+                        equip.EquipmentType = row["eqd_type"].ToString();
+                        equip.Location = row["eqd_location"].ToString();
+                        equip.Serial = row["eqd_serial"].ToString();
+                        equip.JC = row["eqd_jc"].ToString();
+                        equip.JobNo = Convert.ToInt32(row["eqd_jobno"]);
+                        equip.SequenceNo = Convert.ToInt32(row["eqd_seqno"]);
+                        equip.DateInstalled = DateTime.Parse(row["eqd_date_inst"].ToString());
+                        equip.Quantity = Convert.ToInt32(row["eqd_qty"]);
+                        equip.Area = row["equ_area"].ToString();
+                        equip.Status = bool.Parse(row["eqd_status"].ToString());
+                        equip.ReportName = row["eqd_name"].ToString();
+                        equip.SectionID = Convert.ToDecimal(row["eqd_sec_id"]);
+                        equip.QuestionID = Convert.ToDecimal(row["eqd_qu_id"]);
+                        equip.Frequency = Convert.ToInt32(row["eqd_freq"]);
+                        //equip.LastJob = DateTime.Parse(row["eqd_lastjob"].ToString());
+                        //equip.NextJob = DateTime.Parse(row["eqd_nextjob"].ToString());
+                        equip.Manufacturer = row["eqd_manuf"].ToString();
+                        equip.Level4 = Convert.ToInt32(row["eqd_lvl4_sequence"]);
+                        //equip.ManufactureDate = DateTime.Parse(row["eqd_manuf_date"].ToString());
+
+                        equips.Add(equip);
+                    }
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return equips;
+        }
+
+        //public byte[] GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Stat)
+        //{
+        //    DataSet ds;
+        //    StrongTypesNS.ds_filedataDataSet stypefile;
+
+        //    try
+        //    {
+        //        Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+        //        CustWebAccProj cus = new CustWebAccProj(conn);
+
+        //        cus.ws_equtranrpt(Level4ID, CustomerIDFrom, CustomerIDTo, DateFrom, DateTo, IsPrintDetails, IsPrintMaterials, Selection, AssignedTo, Sorting, ContractFrom, ContractTo, IsInactive, IsShowTime, GlAssignedTo, out stypefile);
+        //        ds = (DataSet)stypefile;
+
+        //        if (ds != null && ds.Tables[0].Rows.Count > 0)
+        //            return (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
+
+        //        return null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)
         {
             string appServerURL = ConfigurationManager.AppSettings["AppServerURL"];

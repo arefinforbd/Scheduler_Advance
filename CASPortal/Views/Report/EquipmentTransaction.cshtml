@@ -225,3 +225,13 @@
 
 <script src="@Url.Content("~/Content/js/report.js")"></script>
 <script src="@Url.Content("~/Content/js/equipmenttransactionreport.js")"></script>
+
+@{
+    if (TempData["ErrorMessage"] != null)
+    {
+        TempData.Remove("ErrorMessage");
+        <script type="text/javascript">
+            alert("Something went wrong. Please initiate again.");
+        </script>
+    }
+}

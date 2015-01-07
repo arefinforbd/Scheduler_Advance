@@ -128,7 +128,9 @@ namespace CASPortal.Controllers
             }
             catch (Exception ex)
             {
-                return File(new byte[2], "application/octet", hiddenfilename);
+                TempData["ErrorMessage"] = "Error";
+                return RedirectToAction("Index", "CustomerInformation");
+                //return File(new byte[2], "application/octet", hiddenfilename);
             }
         }
 

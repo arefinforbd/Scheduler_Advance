@@ -151,6 +151,22 @@ namespace CASPortal.CASWCFService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetContracts", ReplyAction="http://tempuri.org/ICASWCFService/GetContractsResponse")]
         System.Threading.Tasks.Task<CASPortal.CASWCFService.GetContractsResponse> GetContractsAsync(CASPortal.CASWCFService.GetContractsRequest request);
+        
+        // CODEGEN: Parameter 'GetEquipmentTransactionBLOBResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlElementAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOB", ReplyAction="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOBResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse GetEquipmentTransactionBLOB(CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOB", ReplyAction="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOBResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse> GetEquipmentTransactionBLOBAsync(CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest request);
+        
+        // CODEGEN: Parameter 'GetInstalledEquipmentResult' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetInstalledEquipment", ReplyAction="http://tempuri.org/ICASWCFService/GetInstalledEquipmentResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        CASPortal.CASWCFService.GetInstalledEquipmentResponse GetInstalledEquipment(CASPortal.CASWCFService.GetInstalledEquipmentRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICASWCFService/GetInstalledEquipment", ReplyAction="http://tempuri.org/ICASWCFService/GetInstalledEquipmentResponse")]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetInstalledEquipmentResponse> GetInstalledEquipmentAsync(CASPortal.CASWCFService.GetInstalledEquipmentRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -294,6 +310,458 @@ namespace CASPortal.CASWCFService {
             set {
                 this.publicFoldersField = value;
                 this.RaisePropertyChanged("PublicFolders");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+    public partial class Equipment : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string areaField;
+        
+        private System.DateTime dateInstalledField;
+        
+        private bool dateInstalledFieldSpecified;
+        
+        private string equipmentTypeField;
+        
+        private int frequencyField;
+        
+        private bool frequencyFieldSpecified;
+        
+        private string jcField;
+        
+        private int jobNoField;
+        
+        private bool jobNoFieldSpecified;
+        
+        private System.DateTime lastJobField;
+        
+        private bool lastJobFieldSpecified;
+        
+        private int level4Field;
+        
+        private bool level4FieldSpecified;
+        
+        private string locationField;
+        
+        private System.DateTime manufactureDateField;
+        
+        private bool manufactureDateFieldSpecified;
+        
+        private string manufacturerField;
+        
+        private System.DateTime nextJobField;
+        
+        private bool nextJobFieldSpecified;
+        
+        private int quantityField;
+        
+        private bool quantityFieldSpecified;
+        
+        private decimal questionIDField;
+        
+        private bool questionIDFieldSpecified;
+        
+        private string reportNameField;
+        
+        private decimal sectionIDField;
+        
+        private bool sectionIDFieldSpecified;
+        
+        private int sequenceNoField;
+        
+        private bool sequenceNoFieldSpecified;
+        
+        private string serialField;
+        
+        private bool statusField;
+        
+        private bool statusFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=0)]
+        public string Area {
+            get {
+                return this.areaField;
+            }
+            set {
+                this.areaField = value;
+                this.RaisePropertyChanged("Area");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public System.DateTime DateInstalled {
+            get {
+                return this.dateInstalledField;
+            }
+            set {
+                this.dateInstalledField = value;
+                this.RaisePropertyChanged("DateInstalled");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DateInstalledSpecified {
+            get {
+                return this.dateInstalledFieldSpecified;
+            }
+            set {
+                this.dateInstalledFieldSpecified = value;
+                this.RaisePropertyChanged("DateInstalledSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=2)]
+        public string EquipmentType {
+            get {
+                return this.equipmentTypeField;
+            }
+            set {
+                this.equipmentTypeField = value;
+                this.RaisePropertyChanged("EquipmentType");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public int Frequency {
+            get {
+                return this.frequencyField;
+            }
+            set {
+                this.frequencyField = value;
+                this.RaisePropertyChanged("Frequency");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool FrequencySpecified {
+            get {
+                return this.frequencyFieldSpecified;
+            }
+            set {
+                this.frequencyFieldSpecified = value;
+                this.RaisePropertyChanged("FrequencySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=4)]
+        public string JC {
+            get {
+                return this.jcField;
+            }
+            set {
+                this.jcField = value;
+                this.RaisePropertyChanged("JC");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public int JobNo {
+            get {
+                return this.jobNoField;
+            }
+            set {
+                this.jobNoField = value;
+                this.RaisePropertyChanged("JobNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool JobNoSpecified {
+            get {
+                return this.jobNoFieldSpecified;
+            }
+            set {
+                this.jobNoFieldSpecified = value;
+                this.RaisePropertyChanged("JobNoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public System.DateTime LastJob {
+            get {
+                return this.lastJobField;
+            }
+            set {
+                this.lastJobField = value;
+                this.RaisePropertyChanged("LastJob");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LastJobSpecified {
+            get {
+                return this.lastJobFieldSpecified;
+            }
+            set {
+                this.lastJobFieldSpecified = value;
+                this.RaisePropertyChanged("LastJobSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public int Level4 {
+            get {
+                return this.level4Field;
+            }
+            set {
+                this.level4Field = value;
+                this.RaisePropertyChanged("Level4");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Level4Specified {
+            get {
+                return this.level4FieldSpecified;
+            }
+            set {
+                this.level4FieldSpecified = value;
+                this.RaisePropertyChanged("Level4Specified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=8)]
+        public string Location {
+            get {
+                return this.locationField;
+            }
+            set {
+                this.locationField = value;
+                this.RaisePropertyChanged("Location");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public System.DateTime ManufactureDate {
+            get {
+                return this.manufactureDateField;
+            }
+            set {
+                this.manufactureDateField = value;
+                this.RaisePropertyChanged("ManufactureDate");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ManufactureDateSpecified {
+            get {
+                return this.manufactureDateFieldSpecified;
+            }
+            set {
+                this.manufactureDateFieldSpecified = value;
+                this.RaisePropertyChanged("ManufactureDateSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=10)]
+        public string Manufacturer {
+            get {
+                return this.manufacturerField;
+            }
+            set {
+                this.manufacturerField = value;
+                this.RaisePropertyChanged("Manufacturer");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=11)]
+        public System.DateTime NextJob {
+            get {
+                return this.nextJobField;
+            }
+            set {
+                this.nextJobField = value;
+                this.RaisePropertyChanged("NextJob");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NextJobSpecified {
+            get {
+                return this.nextJobFieldSpecified;
+            }
+            set {
+                this.nextJobFieldSpecified = value;
+                this.RaisePropertyChanged("NextJobSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=12)]
+        public int Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+                this.RaisePropertyChanged("Quantity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QuantitySpecified {
+            get {
+                return this.quantityFieldSpecified;
+            }
+            set {
+                this.quantityFieldSpecified = value;
+                this.RaisePropertyChanged("QuantitySpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public decimal QuestionID {
+            get {
+                return this.questionIDField;
+            }
+            set {
+                this.questionIDField = value;
+                this.RaisePropertyChanged("QuestionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QuestionIDSpecified {
+            get {
+                return this.questionIDFieldSpecified;
+            }
+            set {
+                this.questionIDFieldSpecified = value;
+                this.RaisePropertyChanged("QuestionIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=14)]
+        public string ReportName {
+            get {
+                return this.reportNameField;
+            }
+            set {
+                this.reportNameField = value;
+                this.RaisePropertyChanged("ReportName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=15)]
+        public decimal SectionID {
+            get {
+                return this.sectionIDField;
+            }
+            set {
+                this.sectionIDField = value;
+                this.RaisePropertyChanged("SectionID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SectionIDSpecified {
+            get {
+                return this.sectionIDFieldSpecified;
+            }
+            set {
+                this.sectionIDFieldSpecified = value;
+                this.RaisePropertyChanged("SectionIDSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=16)]
+        public int SequenceNo {
+            get {
+                return this.sequenceNoField;
+            }
+            set {
+                this.sequenceNoField = value;
+                this.RaisePropertyChanged("SequenceNo");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SequenceNoSpecified {
+            get {
+                return this.sequenceNoFieldSpecified;
+            }
+            set {
+                this.sequenceNoFieldSpecified = value;
+                this.RaisePropertyChanged("SequenceNoSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true, Order=17)]
+        public string Serial {
+            get {
+                return this.serialField;
+            }
+            set {
+                this.serialField = value;
+                this.RaisePropertyChanged("Serial");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=18)]
+        public bool Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+                this.RaisePropertyChanged("Status");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StatusSpecified {
+            get {
+                return this.statusFieldSpecified;
+            }
+            set {
+                this.statusFieldSpecified = value;
+                this.RaisePropertyChanged("StatusSpecified");
             }
         }
         
@@ -3374,6 +3842,196 @@ namespace CASPortal.CASWCFService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetEquipmentTransactionBLOB", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetEquipmentTransactionBLOBRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public decimal CustomerIDFrom;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public decimal CustomerIDTo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        public System.DateTime DateFrom;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=7)]
+        public System.DateTime DateTo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=8)]
+        public bool IsPrintDetails;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=9)]
+        public bool IsPrintMaterials;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=10)]
+        public int Selection;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string AssignedTo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=12)]
+        public int Sorting;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=13)]
+        public int ContractFrom;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=14)]
+        public int ContractTo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=15)]
+        public bool IsInactive;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=16)]
+        public bool IsShowTime;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=17)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string GlAssignedTo;
+        
+        public GetEquipmentTransactionBLOBRequest() {
+        }
+        
+        public GetEquipmentTransactionBLOBRequest(
+                    string CompanyID, 
+                    string CompanyPassword, 
+                    string CustomerPassword, 
+                    int Level4ID, 
+                    decimal CustomerIDFrom, 
+                    decimal CustomerIDTo, 
+                    System.DateTime DateFrom, 
+                    System.DateTime DateTo, 
+                    bool IsPrintDetails, 
+                    bool IsPrintMaterials, 
+                    int Selection, 
+                    string AssignedTo, 
+                    int Sorting, 
+                    int ContractFrom, 
+                    int ContractTo, 
+                    bool IsInactive, 
+                    bool IsShowTime, 
+                    string GlAssignedTo) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.CustomerIDFrom = CustomerIDFrom;
+            this.CustomerIDTo = CustomerIDTo;
+            this.DateFrom = DateFrom;
+            this.DateTo = DateTo;
+            this.IsPrintDetails = IsPrintDetails;
+            this.IsPrintMaterials = IsPrintMaterials;
+            this.Selection = Selection;
+            this.AssignedTo = AssignedTo;
+            this.Sorting = Sorting;
+            this.ContractFrom = ContractFrom;
+            this.ContractTo = ContractTo;
+            this.IsInactive = IsInactive;
+            this.IsShowTime = IsShowTime;
+            this.GlAssignedTo = GlAssignedTo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetEquipmentTransactionBLOBResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetEquipmentTransactionBLOBResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", IsNullable=true)]
+        public byte[] GetEquipmentTransactionBLOBResult;
+        
+        public GetEquipmentTransactionBLOBResponse() {
+        }
+        
+        public GetEquipmentTransactionBLOBResponse(byte[] GetEquipmentTransactionBLOBResult) {
+            this.GetEquipmentTransactionBLOBResult = GetEquipmentTransactionBLOBResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetInstalledEquipment", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetInstalledEquipmentRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CompanyPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=2)]
+        public decimal CustomerID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CustomerPassword;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=4)]
+        public int Level4ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=5)]
+        public int ContractNo;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string EquipmentType;
+        
+        public GetInstalledEquipmentRequest() {
+        }
+        
+        public GetInstalledEquipmentRequest(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, string EquipmentType) {
+            this.CompanyID = CompanyID;
+            this.CompanyPassword = CompanyPassword;
+            this.CustomerID = CustomerID;
+            this.CustomerPassword = CustomerPassword;
+            this.Level4ID = Level4ID;
+            this.ContractNo = ContractNo;
+            this.EquipmentType = EquipmentType;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetInstalledEquipmentResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetInstalledEquipmentResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/CASWCFService.Model")]
+        public CASPortal.CASWCFService.Equipment[] GetInstalledEquipmentResult;
+        
+        public GetInstalledEquipmentResponse() {
+        }
+        
+        public GetInstalledEquipmentResponse(CASPortal.CASWCFService.Equipment[] GetInstalledEquipmentResult) {
+            this.GetInstalledEquipmentResult = GetInstalledEquipmentResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ICASWCFServiceChannel : CASPortal.CASWCFService.ICASWCFService, System.ServiceModel.IClientChannel {
     }
@@ -3951,6 +4609,134 @@ namespace CASPortal.CASWCFService {
             inValue.SiteNo = SiteNo;
             inValue.Level4ID = Level4ID;
             return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetContractsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse CASPortal.CASWCFService.ICASWCFService.GetEquipmentTransactionBLOB(CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest request) {
+            return base.Channel.GetEquipmentTransactionBLOB(request);
+        }
+        
+        public byte[] GetEquipmentTransactionBLOB(
+                    string CompanyID, 
+                    string CompanyPassword, 
+                    string CustomerPassword, 
+                    int Level4ID, 
+                    decimal CustomerIDFrom, 
+                    decimal CustomerIDTo, 
+                    System.DateTime DateFrom, 
+                    System.DateTime DateTo, 
+                    bool IsPrintDetails, 
+                    bool IsPrintMaterials, 
+                    int Selection, 
+                    string AssignedTo, 
+                    int Sorting, 
+                    int ContractFrom, 
+                    int ContractTo, 
+                    bool IsInactive, 
+                    bool IsShowTime, 
+                    string GlAssignedTo) {
+            CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest inValue = new CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerIDFrom = CustomerIDFrom;
+            inValue.CustomerIDTo = CustomerIDTo;
+            inValue.DateFrom = DateFrom;
+            inValue.DateTo = DateTo;
+            inValue.IsPrintDetails = IsPrintDetails;
+            inValue.IsPrintMaterials = IsPrintMaterials;
+            inValue.Selection = Selection;
+            inValue.AssignedTo = AssignedTo;
+            inValue.Sorting = Sorting;
+            inValue.ContractFrom = ContractFrom;
+            inValue.ContractTo = ContractTo;
+            inValue.IsInactive = IsInactive;
+            inValue.IsShowTime = IsShowTime;
+            inValue.GlAssignedTo = GlAssignedTo;
+            CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetEquipmentTransactionBLOB(inValue);
+            return retVal.GetEquipmentTransactionBLOBResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse> CASPortal.CASWCFService.ICASWCFService.GetEquipmentTransactionBLOBAsync(CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest request) {
+            return base.Channel.GetEquipmentTransactionBLOBAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse> GetEquipmentTransactionBLOBAsync(
+                    string CompanyID, 
+                    string CompanyPassword, 
+                    string CustomerPassword, 
+                    int Level4ID, 
+                    decimal CustomerIDFrom, 
+                    decimal CustomerIDTo, 
+                    System.DateTime DateFrom, 
+                    System.DateTime DateTo, 
+                    bool IsPrintDetails, 
+                    bool IsPrintMaterials, 
+                    int Selection, 
+                    string AssignedTo, 
+                    int Sorting, 
+                    int ContractFrom, 
+                    int ContractTo, 
+                    bool IsInactive, 
+                    bool IsShowTime, 
+                    string GlAssignedTo) {
+            CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest inValue = new CASPortal.CASWCFService.GetEquipmentTransactionBLOBRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.CustomerIDFrom = CustomerIDFrom;
+            inValue.CustomerIDTo = CustomerIDTo;
+            inValue.DateFrom = DateFrom;
+            inValue.DateTo = DateTo;
+            inValue.IsPrintDetails = IsPrintDetails;
+            inValue.IsPrintMaterials = IsPrintMaterials;
+            inValue.Selection = Selection;
+            inValue.AssignedTo = AssignedTo;
+            inValue.Sorting = Sorting;
+            inValue.ContractFrom = ContractFrom;
+            inValue.ContractTo = ContractTo;
+            inValue.IsInactive = IsInactive;
+            inValue.IsShowTime = IsShowTime;
+            inValue.GlAssignedTo = GlAssignedTo;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetEquipmentTransactionBLOBAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        CASPortal.CASWCFService.GetInstalledEquipmentResponse CASPortal.CASWCFService.ICASWCFService.GetInstalledEquipment(CASPortal.CASWCFService.GetInstalledEquipmentRequest request) {
+            return base.Channel.GetInstalledEquipment(request);
+        }
+        
+        public CASPortal.CASWCFService.Equipment[] GetInstalledEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, string EquipmentType) {
+            CASPortal.CASWCFService.GetInstalledEquipmentRequest inValue = new CASPortal.CASWCFService.GetInstalledEquipmentRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.ContractNo = ContractNo;
+            inValue.EquipmentType = EquipmentType;
+            CASPortal.CASWCFService.GetInstalledEquipmentResponse retVal = ((CASPortal.CASWCFService.ICASWCFService)(this)).GetInstalledEquipment(inValue);
+            return retVal.GetInstalledEquipmentResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<CASPortal.CASWCFService.GetInstalledEquipmentResponse> CASPortal.CASWCFService.ICASWCFService.GetInstalledEquipmentAsync(CASPortal.CASWCFService.GetInstalledEquipmentRequest request) {
+            return base.Channel.GetInstalledEquipmentAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CASPortal.CASWCFService.GetInstalledEquipmentResponse> GetInstalledEquipmentAsync(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, string EquipmentType) {
+            CASPortal.CASWCFService.GetInstalledEquipmentRequest inValue = new CASPortal.CASWCFService.GetInstalledEquipmentRequest();
+            inValue.CompanyID = CompanyID;
+            inValue.CompanyPassword = CompanyPassword;
+            inValue.CustomerID = CustomerID;
+            inValue.CustomerPassword = CustomerPassword;
+            inValue.Level4ID = Level4ID;
+            inValue.ContractNo = ContractNo;
+            inValue.EquipmentType = EquipmentType;
+            return ((CASPortal.CASWCFService.ICASWCFService)(this)).GetInstalledEquipmentAsync(inValue);
         }
     }
 }

@@ -111,6 +111,18 @@
   <wsdl:message name="ICASWCFService_GetContracts_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetContractsResponse" />
   </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetEquipmentTransactionBLOB_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEquipmentTransactionBLOB" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetEquipmentTransactionBLOB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEquipmentTransactionBLOBResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetInstalledEquipment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstalledEquipment" />
+  </wsdl:message>
+  <wsdl:message name="ICASWCFService_GetInstalledEquipment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstalledEquipmentResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICASWCFService">
     <wsdl:operation name="LoginProcess">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/LoginProcess" message="tns:ICASWCFService_LoginProcess_InputMessage" />
@@ -179,6 +191,14 @@
     <wsdl:operation name="GetContracts">
       <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetContracts" message="tns:ICASWCFService_GetContracts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetContractsResponse" message="tns:ICASWCFService_GetContracts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipmentTransactionBLOB">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOB" message="tns:ICASWCFService_GetEquipmentTransactionBLOB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOBResponse" message="tns:ICASWCFService_GetEquipmentTransactionBLOB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstalledEquipment">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICASWCFService/GetInstalledEquipment" message="tns:ICASWCFService_GetInstalledEquipment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICASWCFService/GetInstalledEquipmentResponse" message="tns:ICASWCFService_GetInstalledEquipment_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICASWCFService" type="tns:ICASWCFService">
@@ -329,6 +349,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetContracts">
       <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetContracts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipmentTransactionBLOB">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetEquipmentTransactionBLOB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstalledEquipment">
+      <soap:operation soapAction="http://tempuri.org/ICASWCFService/GetInstalledEquipment" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

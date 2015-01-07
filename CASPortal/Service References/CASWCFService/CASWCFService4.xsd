@@ -256,4 +256,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Contract" nillable="true" type="tns:Contract" />
+  <xs:complexType name="ArrayOfEquipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Equipment" nillable="true" type="tns:Equipment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEquipment" nillable="true" type="tns:ArrayOfEquipment" />
+  <xs:complexType name="Equipment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateInstalled" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EquipmentType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Frequency" type="xs:int" />
+      <xs:element minOccurs="0" name="JC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JobNo" type="xs:int" />
+      <xs:element minOccurs="0" name="LastJob" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Level4" type="xs:int" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ManufactureDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Manufacturer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NextJob" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="QuestionID" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionID" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SequenceNo" type="xs:int" />
+      <xs:element minOccurs="0" name="Serial" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Equipment" nillable="true" type="tns:Equipment" />
 </xs:schema>

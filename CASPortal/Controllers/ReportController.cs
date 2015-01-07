@@ -359,50 +359,99 @@ namespace CASPortal.Controllers
         public ActionResult EquipmentTransaction(FormCollection elemets)
         {
             byte[] fileInfo = null;
+            ReportRepository repository = new ReportRepository();
+
             try
             {
-                int locationID = 0;
-                int advanceID = 0;
+                int selectionID = 0;
+                int sortingID = 0;
                 string siteID = elemets["hdnSite"];
                 string contractID = elemets["hdnContract"];
                 string dateFrom = elemets["dtpFrom"];
                 string dateTo = elemets["dtpTo"];
-                string location = elemets["rdoLocation"];
-                bool printDetails = elemets["hdnPrintDetails"] == "true" ? true : false;
-                bool printMaterials = elemets["hdnPrintMaterials"] == "true" ? true : false;
-                string advance = elemets["rdoAdvance"];
+                string selection = elemets["rdoLocation"];
+                bool isPrintDetails = elemets["hdnPrintDetails"] == "true" ? true : false;
+                bool isPrintMaterials = elemets["hdnPrintMaterials"] == "true" ? true : false;
+                string sorting = elemets["rdoAdvance"];
                 string tech = elemets["hdnTech"];
-                bool showActiveStations = elemets["hdnShowActiveStations"] == "true" ? true : false;
-                bool jobTimes = elemets["hdnJobTimes"] == "true" ? true : false;
+                bool isInactive = elemets["hdnShowActiveStations"] == "true" ? true : false;
+                bool isShowTime = elemets["hdnJobTimes"] == "true" ? true : false;
 
-                if (location.Equals("Location"))
-                    locationID = 1;
-                else if (location.Equals("Section"))
-                    locationID = 2;
-                else if (location.Equals("Area"))
-                    locationID = 3;
-                else if (location.Equals("DateTime"))
-                    locationID = 4;
+                if (selection.Equals("Location"))
+                    selectionID = 1;
+                else if (selection.Equals("Section"))
+                    selectionID = 2;
+                else if (selection.Equals("Area"))
+                    selectionID = 3;
+                else if (selection.Equals("DateTime"))
+                    selectionID = 4;
                 else
-                    locationID = 5;
+                    selectionID = 5;
 
-                if (advance.Equals("None"))
-                    advanceID = 1;
-                else if (advance.Equals("Scanned"))
-                    advanceID = 2;
-                else if (advance.Equals("Un Scanned"))
-                    advanceID = 3;
-                else if (advance.Equals("New Item"))
-                    advanceID = 4;
+                if (sorting.Equals("None"))
+                    sortingID = 1;
+                else if (sorting.Equals("Scanned"))
+                    sortingID = 2;
+                else if (sorting.Equals("Un Scanned"))
+                    sortingID = 3;
+                else if (sorting.Equals("New Item"))
+                    sortingID = 4;
                 else
-                    advanceID = 5;
+                    sortingID = 5;
+
+                fileInfo = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials, 
+                    selectionID, "[ALL]", sortingID, Convert.ToInt32(contractID), Convert.ToInt32(contractID), 
+                    isInactive, isShowTime, "[ALL]");
 
                 return File(fileInfo, "application/octet", "file-name");
             }
             catch (Exception ex)
             {
-                return File(new byte[2], "application/octet", "file-name");
+                TempData["ErrorMessage"] = "Error";
+                return RedirectToAction("EquipmentTransaction", "Report");
+                //return File(new byte[2], "application/octet", "file-name");
             }
+        }
+
+        public ActionResult InstalledEquipment()
+        {
+            BaseHelper helper = new BaseHelper();
+            ReportHelper repoHelper = new ReportHelper();
+
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");
+
+            ViewBag.Sites = repoHelper.LoadSite();
+
+            return View();
+        }
+
+        public ActionResult GetInstalledLocations(int contractNo)
+        {
+            List<Equipment> equips = new List<Equipment>();
+            ReportRepository repo = new ReportRepository();
+
+            equips = repo.GetInstalledEquipment(contractNo, "CO");
+            Session["EquipmentList"] = equips;
+
+            return Json(equips, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetInstalledLocationDetail(string location)
+        {
+            List<Equipment> equips = new List<Equipment>();
+
+            equips = (List<Equipment>)Session["EquipmentList"];
+            var equip = (from e in equips
+                        where e.Location.Equals(location)
+                        select e).SingleOrDefault();
+
+            return Json(equip, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EquipmentReport()
+        {
+            return View();
         }
     }
 }

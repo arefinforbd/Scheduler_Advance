@@ -12,6 +12,8 @@ $(document).ready(function () {
         $("#report103").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip");
         $("#report104").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisGroupLocation");
         $("#report105").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
+        $("#report106").attr("href", $("#hdnSiteURL").val() + "/Report/InstalledEquipment");
+        $("#report107").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentReport");
     }
     else
     {

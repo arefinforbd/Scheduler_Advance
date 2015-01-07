@@ -135,6 +135,10 @@ $(function () {
                 $("#divRightSide").show();
                 $("#divLeftSide").css("border-right", "1px solid #CCCCCC");
             }
+            if (location.href.indexOf("Report/InstalledEquipment") > 0) {
+                LoadInstalledLocations();
+                $("#divLocationDetail").show();
+            }
         }
         else {
             if (location.href.indexOf("Report/EquipmentTransaction") > 0) {

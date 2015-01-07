@@ -106,3 +106,13 @@
         $("#advertisements").css("margin-top", "0px");
     }
 </script>
+
+@{
+    if (TempData["ErrorMessage"] != null)
+    {
+        TempData.Remove("ErrorMessage");
+        <script type="text/javascript">
+            alert("Something went wrong. Please initiate again.");
+        </script>
+    }
+}

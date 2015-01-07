@@ -186,6 +186,7 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\customerinformation.js" />
     <Content Include="Content\js\equipmenttransactionreport.js" />
+    <Content Include="Content\js\installedequipmentreport.js" />
     <Content Include="Content\js\jquery-1.11.0.js" />
     <Content Include="Content\js\jquery-migrate-1.2.1.js" />
     <Content Include="Content\js\jquery-ui-1.11.1\external\jquery\jquery.js" />
@@ -330,6 +331,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.DayHour.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Equipment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Folder.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -346,6 +350,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetCustomerSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetInstalledEquipmentResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetPrivateFileInfoResponse.datasource">
@@ -455,6 +465,8 @@
     <None Include="Service References\CASWCFService\CASWCFService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Report\InstalledEquipment.cshtml" />
+    <Content Include="Views\Report\EquipmentReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

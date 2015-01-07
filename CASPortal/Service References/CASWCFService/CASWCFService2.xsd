@@ -349,4 +349,55 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetEquipmentTransactionBLOB">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="CustomerIDFrom" type="xs:decimal" />
+        <xs:element minOccurs="0" name="CustomerIDTo" type="xs:decimal" />
+        <xs:element minOccurs="0" name="DateFrom" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="DateTo" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="IsPrintDetails" type="xs:boolean" />
+        <xs:element minOccurs="0" name="IsPrintMaterials" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Selection" type="xs:int" />
+        <xs:element minOccurs="0" name="AssignedTo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Sorting" type="xs:int" />
+        <xs:element minOccurs="0" name="ContractFrom" type="xs:int" />
+        <xs:element minOccurs="0" name="ContractTo" type="xs:int" />
+        <xs:element minOccurs="0" name="IsInactive" type="xs:boolean" />
+        <xs:element minOccurs="0" name="IsShowTime" type="xs:boolean" />
+        <xs:element minOccurs="0" name="GlAssignedTo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEquipmentTransactionBLOBResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEquipmentTransactionBLOBResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInstalledEquipment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerID" type="xs:decimal" />
+        <xs:element minOccurs="0" name="CustomerPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="ContractNo" type="xs:int" />
+        <xs:element minOccurs="0" name="EquipmentType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInstalledEquipmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CASWCFService.Model" minOccurs="0" name="GetInstalledEquipmentResult" nillable="true" type="q13:ArrayOfEquipment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
