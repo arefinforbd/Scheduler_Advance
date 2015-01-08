@@ -180,5 +180,28 @@ namespace CASPortal.WebParser
                 return null;
             }
         }
+
+        public byte[] GetEquipmentReportBLOB(int contractFrom, int contractTo, int sorting, int status)
+        {
+            try
+            {
+                byte[] fileInfo = null;
+                CASWCFServiceClient cas = new CASWCFServiceClient();
+
+                string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+                string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+                decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+                int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+                fileInfo = cas.GetEquipmentReportBLOB(companyID, companyPassword, customerPassword, level4ID, customerID, customerID, contractFrom, contractTo, sorting, status);
+
+                return fileInfo;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

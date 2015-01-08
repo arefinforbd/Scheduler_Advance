@@ -1,19 +1,113 @@
 ﻿@{
-    ViewBag.Title = "EquipmentReport";
+    ViewBag.Title = "EquipmentTransaction";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #ddlSites {
+        padding-left: 45px;
+    }
+
+    #ddlConracts {
+        padding-left: 20px;
+    }
+</style>
+
 <div id="page-wrapper">
     <br />
-    <div class="row">
-        <div class="col-lg-12" id="maintable">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <label>Equipment Report</label>
-                </div>
+    @using (Html.BeginForm("EquipmentReport", "Report"))
+    {
+        <div class="row">
+            <div class="col-lg-8" id="maintable">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <label>Equipment Transaction Report</label>
+                    </div>
+                    <div class="panel-body">
+                        @{Html.RenderPartial("_SiteNContract");}
 
-                @{Html.RenderPartial("_Advertisements");}
+                        <div id="divLower" style="display:none;">
+                            <div class="row">
+                                <div class="col-lg-4 col-xs-4">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <label>Show By Status</label>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="radio radio-success">
+                                                        <input type="radio" value="All" id="rdoAll" checked="checked" name="rdoStatus">
+                                                        <label for="rdoAll">All</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="radio radio-success">
+                                                        <input type="radio" value="Active" id="rdoActive" name="rdoStatus">
+                                                        <label for="rdoActive">Active</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="radio radio-success">
+                                                        <input type="radio" value="InActive" id="rdoInActive" name="rdoStatus">
+                                                        <label for="rdoInActive">InActive</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-xs-4">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <label>Sort By</label>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="radio radio-success">
+                                                        <input type="radio" value="Location" id="rdoLocation" checked="checked" name="rdoPlace">
+                                                        <label for="rdoLocation">Location</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="radio radio-success">
+                                                        <input type="radio" value="Area" id="rdoArea" name="rdoPlace">
+                                                        <label for="rdoArea">Area</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div id="div_btnContinue">
+                            <button class="btn btn-info" type="submit">Preview</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            @{Html.RenderPartial("_Advertisements");}
         </div>
-    </div>
+    }
 </div>
+
+@{
+    if (TempData["ErrorMessageEquip"] != null)
+    {
+        TempData.Remove("ErrorMessageEquip");
+        <script type="text/javascript">
+            alert("Something went wrong. Please initiate again.");
+        </script>
+    }
+}

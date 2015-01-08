@@ -90,7 +90,7 @@ $(function () {
             $("#ddlConracts").show();
         }
         else {
-            if (location.href.indexOf("Report/EquipmentTransaction") > 0) {
+            if (location.href.indexOf("Report/EquipmentTransaction") > 0 || location.href.indexOf("Report/EquipmentReport") > 0) {
                 $("#ddlConracts").hide();
                 $("#divLower").hide();
             }
@@ -132,7 +132,7 @@ $(function () {
 
         if ($target.text() != "Select Contract") {
             $("#hdnContract").val($(this).attr("id"));
-            if (location.href.indexOf("Report/EquipmentTransaction") > 0) {
+            if (location.href.indexOf("Report/EquipmentTransaction") > 0 || location.href.indexOf("Report/EquipmentReport") > 0) {
                 $("#divLower").show();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
@@ -143,11 +143,10 @@ $(function () {
             if (location.href.indexOf("Report/InstalledEquipment") > 0) {
                 $("#divLoading").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
                 LoadInstalledLocations();
-                $("#divLocationDetail").show();
             }
         }
         else {
-            if (location.href.indexOf("Report/EquipmentTransaction") > 0) {
+            if (location.href.indexOf("Report/EquipmentTransaction") > 0 || location.href.indexOf("Report/EquipmentReport") > 0) {
                 $("#divLower").hide();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {

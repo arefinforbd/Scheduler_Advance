@@ -69,5 +69,15 @@ namespace CASPortal.Repository
 
             return equips;
         }
+
+        public byte[] GetEquipmentReportBLOB(int contractFrom, int contractTo, int sorting, int status)
+        {
+            byte[] fileInfo = null;
+            ReportParser parser = new ReportParser();
+
+            fileInfo = parser.GetEquipmentReportBLOB(contractFrom, contractTo, sorting, status);
+
+            return fileInfo;
+        }
     }
 }

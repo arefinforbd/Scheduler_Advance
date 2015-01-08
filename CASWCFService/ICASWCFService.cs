@@ -71,5 +71,8 @@ namespace CASWCFService
 
         [OperationContract]
         List<Equipment> GetInstalledEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, string EquipmentType);
+
+        [OperationContract]
+        byte[] GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status);
     }
 }

@@ -352,6 +352,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetCustomerSiteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetEquipmentReportBLOBResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -449,6 +452,9 @@
     <Content Include="Views\Report\TrendAnalysisByJob.cshtml" />
     <Content Include="Views\Report\TrendAnalysisByEquip.cshtml" />
     <Content Include="Views\Report\TrendAnalysisGroupLocation.cshtml" />
+    <Content Include="Views\Report\InstalledEquipment.cshtml" />
+    <Content Include="Views\Report\EquipmentReport.cshtml" />
+    <Content Include="Views\Shared\_SiteNContract.cshtml" />
     <None Include="Service References\CASWCFService\CASWCFService.wsdl" />
     <None Include="Service References\CASWCFService\CASWCFService.xsd">
       <SubType>Designer</SubType>
@@ -465,9 +471,6 @@
     <None Include="Service References\CASWCFService\CASWCFService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Report\InstalledEquipment.cshtml" />
-    <Content Include="Views\Report\EquipmentReport.cshtml" />
-    <Content Include="Views\Shared\_SiteNContract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

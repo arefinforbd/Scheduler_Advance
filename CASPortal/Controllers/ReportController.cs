@@ -451,7 +451,55 @@ namespace CASPortal.Controllers
 
         public ActionResult EquipmentReport()
         {
+            BaseHelper helper = new BaseHelper();
+            ReportHelper repoHelper = new ReportHelper();
+
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");
+
+            ViewBag.Sites = repoHelper.LoadSite();
+            //ViewBag.Contracts = repoHelper.LoadContract("1");
+
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EquipmentReport(FormCollection elemets)
+        {
+            byte[] fileInfo = null;
+            ReportRepository repository = new ReportRepository();
+
+            try
+            {
+                int statusID = 0;
+                int sortingID = 0;
+
+                string siteID = elemets["hdnSite"];
+                string contractID = elemets["hdnContract"];
+                string status = elemets["rdoStatus"];
+                string sorting = elemets["rdoPlace"];
+
+                if (status.Equals("All"))
+                    statusID = 0;
+                else if (status.Equals("Active"))
+                    statusID = 1;
+                else
+                    statusID = 2;
+
+                if (sorting.Equals("Location"))
+                    sortingID = 1;
+                else if (sorting.Equals("Area"))
+                    sortingID = 2;
+
+                fileInfo = repository.GetEquipmentReportBLOB(Convert.ToInt32(contractID), Convert.ToInt32(contractID), sortingID, statusID);
+
+                return File(fileInfo, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessageEquip"] = "Error";
+                return RedirectToAction("EquipmentReport", "Report");
+            }
         }
     }
 }

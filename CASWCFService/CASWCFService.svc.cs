@@ -1008,29 +1008,29 @@ namespace CASWCFService
             return equips;
         }
 
-        //public byte[] GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Stat)
-        //{
-        //    DataSet ds;
-        //    StrongTypesNS.ds_filedataDataSet stypefile;
+        public byte[] GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status)
+        {
+            DataSet ds;
+            StrongTypesNS.ds_filedataDataSet stypefile;
 
-        //    try
-        //    {
-        //        Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
-        //        CustWebAccProj cus = new CustWebAccProj(conn);
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
 
-        //        cus.ws_equtranrpt(Level4ID, CustomerIDFrom, CustomerIDTo, DateFrom, DateTo, IsPrintDetails, IsPrintMaterials, Selection, AssignedTo, Sorting, ContractFrom, ContractTo, IsInactive, IsShowTime, GlAssignedTo, out stypefile);
-        //        ds = (DataSet)stypefile;
+                cus.ws_equrep(Level4ID, CustomerIDFrom, CustomerIDTo, ContractFrom, ContractTo, Sorting, Status, out stypefile);
+                ds = (DataSet)stypefile;
 
-        //        if (ds != null && ds.Tables[0].Rows.Count > 0)
-        //            return (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                    return (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
 
-        //        return null;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null;
-        //    }
-        //}
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)
         {

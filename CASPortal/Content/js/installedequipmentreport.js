@@ -31,6 +31,7 @@
                 html += '<span style="font-size:12px;color: #CCCCCC;margin-top:-10px;float:left;">Click on the location list to see details</span>';
                 $("#divEquipmentLocation").html(html);
                 $("#divLoading").html("");
+                $("#divLocationDetail").show();
             }
         },
         error: function (request) {
