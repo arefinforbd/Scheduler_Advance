@@ -43,36 +43,16 @@
                         <label>Equipment Transaction Report</label>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites">
-                                <label>Sites : </label>
-                                <div class="btn-group">
-                                    <a class="btn btn-info dropdown-toggle dropdown-Site" data-toggle="dropdown" href="#">
-                                        <span data-bind="label"></span> <span class="caret"></span>
-                                    </a>
-                                    <ul id="ulSites" class="dropdown-menu scroll-menu">
-                                        @Html.Raw(ViewBag.Sites)
-                                    </ul>
-                                </div>
-                                <input type="hidden" name="hdnSite" id="hdnSite" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts" style="display:none;">
-                                <label>Contract : </label>
-                                <div class="btn-group" id="divContract">
-                                    <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
-                                        <span data-bind="label"></span> <span class="caret"></span>
-                                    </a>
-                                    <ul id="ulContracts" class="dropdown-menu">
-                                        @Html.Raw(ViewBag.Contracts)
-                                    </ul>
-                                </div>
-                                <input type="hidden" name="hdnContract" id="hdnContract" />
-                            </div>
-                        </div>
-                        <br />
+                        
+
+
+
+                        @{Html.RenderPartial("_SiteNContract");}
+
+
+
+
+
                         <div id="divLower" style="display:none;">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
@@ -223,7 +203,6 @@
     }
 </div>
 
-<script src="@Url.Content("~/Content/js/report.js")"></script>
 <script src="@Url.Content("~/Content/js/equipmenttransactionreport.js")"></script>
 
 @{

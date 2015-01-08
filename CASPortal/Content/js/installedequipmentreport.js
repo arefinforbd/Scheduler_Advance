@@ -9,17 +9,28 @@
             if (data != null) {
 
                 var locObject = data[0].Location;
-                html += '<table class="table table-striped table-bordered table-hover" id="datatablefiles" style="font-size:12px;cursor:pointer;"><thead><tr><th>Seq</th><th>Location</th></tr></thead><tbody>';
+                html += '<table class="table table-striped table-bordered table-hover" id="datatablefiles" style="font-size:12px;cursor:pointer;"><thead><tr><th>Seq.</th><th>Location</th></tr></thead><tbody>';
                 LoadInstalledLocationDetail(locObject);
 
                 $.each(data, function (i, loc) {
-                    html += '<tr>'
-                        + '<td>' + loc.SequenceNo + '</td>'
-                        + '<td location=' + loc.Location + '>' + loc.Location + '</td>'
-                        + '</tr>';
+                    if (i < 1) {
+                        html += '<tr>'
+                            + '<td style="background-color: #f9f9c0;">' + loc.SequenceNo + '</td>'
+                            + '<td style="background-color: #f9f9c0;" location=' + loc.Location + '>' + loc.Location + '</td>'
+                            + '</tr>';
+                    }
+                    else {
+                        html += '<tr>'
+                            + '<td location=' + loc.Location + '>' + loc.SequenceNo + '</td>'
+                            + '<td location=' + loc.Location + '>' + loc.Location + '</td>'
+                            + '</tr>';
+                    }
                     i++;
                 });
+                html += "</tbody></table>";
+                html += '<span style="font-size:12px;color: #CCCCCC;margin-top:-10px;float:left;">Click on the location list to see details</span>';
                 $("#divEquipmentLocation").html(html);
+                $("#divLoading").html("");
             }
         },
         error: function (request) {
@@ -29,11 +40,26 @@
 }
 
 $(document.body).on('click', '#divEquipmentLocation #datatablefiles td', function (event) {
-    
+    var i = 0;
+    $("#divEquipmentLocation #datatablefiles tr").each(function () {
+        $(this).css("background-color", "#ffffff");
+        if (i == 0 || i % 2 > 0){
+            $(this).children('td').each(function () {
+                $(this).css("background-color", "#f9f9f9");
+            });
+        }           
+        else{
+            $(this).children('td').each(function () {
+                $(this).css("background-color", "#ffffff");
+            });
+        }
+        i++;
+    });
+
     LoadInstalledLocationDetail($(this).attr("location"));
-
-    //$(this).css("background-color", "#f9f9c0");
-
+    $($(this).parent()).children('td').each(function () {
+        $(this).css("background-color", "#f9f9c0");
+    });
     return false;
 });
 

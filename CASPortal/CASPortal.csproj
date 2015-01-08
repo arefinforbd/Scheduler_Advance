@@ -467,6 +467,7 @@
     </None>
     <Content Include="Views\Report\InstalledEquipment.cshtml" />
     <Content Include="Views\Report\EquipmentReport.cshtml" />
+    <Content Include="Views\Shared\_SiteNContract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

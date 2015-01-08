@@ -399,11 +399,11 @@ namespace CASPortal.Controllers
                 else
                     sortingID = 5;
 
-                fileInfo = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials, 
-                    selectionID, "[ALL]", sortingID, Convert.ToInt32(contractID), Convert.ToInt32(contractID), 
+                fileInfo = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials,
+                    sortingID, "[ALL]", selectionID, Convert.ToInt32(contractID), Convert.ToInt32(contractID), 
                     isInactive, isShowTime, "[ALL]");
 
-                return File(fileInfo, "application/octet", "file-name");
+                return File(fileInfo, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
             }
             catch (Exception ex)
             {

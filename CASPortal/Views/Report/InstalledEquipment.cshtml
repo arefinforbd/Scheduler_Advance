@@ -3,124 +3,123 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #ddlSites{
+        margin-left: 25px;
+    }
+</style>
+
 <div id="page-wrapper">
     <br />
     <div class="row">
-        <div class="col-lg-12" id="maintable">
+        <div class="col-lg-12 col-xs-12" id="maintable">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <label>Installed Equipment</label>
                 </div>
                 <div class="panel-body">
+
+
+
+
+                    @{Html.RenderPartial("_SiteNContract");}
+
+
+                    
+
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlSites" style="margin-left: 25px;">
-                            <label>Sites : </label>
-                            <div class="btn-group">
-                                <a class="btn btn-info dropdown-toggle dropdown-Site" data-toggle="dropdown" href="#">
-                                    <span data-bind="label"></span> <span class="caret"></span>
-                                </a>
-                                <ul id="ulSites" class="dropdown-menu scroll-menu">
-                                    @Html.Raw(ViewBag.Sites)
-                                </ul>
-                            </div>
-                            <input type="hidden" name="hdnSite" id="hdnSite" />
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ddlConracts" style="display:none;">
-                            <label>Contract : </label>
-                            <div class="btn-group" id="divContract">
-                                <a class="btn btn-info dropdown-toggle dropdown-Contract" data-toggle="dropdown" href="#">
-                                    <span data-bind="label"></span> <span class="caret"></span>
-                                </a>
-                                <ul id="ulContracts" class="dropdown-menu"></ul>
-                            </div>
-                            <input type="hidden" name="hdnContract" id="hdnContract" />
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-lg-3">
+                        <div id="divLoading"></div>
+                        <div class="col-lg-3 col-xs-3">
                             <div id="divEquipmentLocation"></div>
                         </div>
-                        <div class="col-lg-7" id="divLocationDetail" style="display: none;border: 1px solid #CCCCCC; padding: 10px 0 10px 0;border-radius:5px;">
-                            <div class="=row">
-                                <div class="col-lg-3">
-                                    Date Installed:
+                        <div class="col-lg-9 col-xs-9" id="divLocationDetail" style="display: none;">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <label>Details</label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label id="lblDateInstalled"></label>
-                                </div>
-                            </div>
-                            <br/><br />
-                            <div class="=row">
-                                <div class="col-lg-3">
-                                    Sequence:
-                                </div>
-                                <div class="col-lg-2">
-                                    <label id="lblSeq"></label>
-                                </div>
-                                <div class="col-lg-3">
-                                    Serial No:
-                                </div>
-                                <div class="col-lg-3">
-                                    <label id="lblSerialNo"></label>
-                                </div>
-                            </div>
-                            <br /><br />
-                            <div class="=row">
-                                <div class="col-lg-3">
-                                    Report Name:
-                                </div>
-                                <div class="col-lg-2">
-                                    <label id="lblReportName"></label>
-                                </div>
-                                <div class="col-lg-3">
-                                    Location:
-                                </div>
-                                <div class="col-lg-3">
-                                    <label id="lblLocation"></label>
-                                </div>
-                            </div>
-                            <br /><br />
-                            <div class="=row">
-                                <div class="col-lg-3">
-                                    Section ID:
-                                </div>
-                                <div class="col-lg-2">
-                                    <label id="lblSectionID"></label>
-                                </div>
-                                <div class="col-lg-2">
-                                    Type:
-                                </div>
-                                <div class="col-lg-3">
-                                    <label id="lblType"></label>
-                                </div>
-                            </div>
-                            <br /><br />
-                            <div class="=row">
-                                <div class="col-lg-3">
-                                    Question ID:
-                                </div>
-                                <div class="col-lg-2">
-                                    <label id="lblQuestionID"></label>
-                                </div>
-                                <div class="col-lg-2">
-                                    Area:
-                                </div>
-                                <div class="col-lg-3">
-                                    <label id="lblArea"></label>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="=row">
+                                                <div class="col-lg-3 col-xs-3">
+                                                    Date Installed:
+                                                </div>
+                                                <div class="col-lg-3 col-xs-3">
+                                                    <label id="lblDateInstalled"></label>
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div class="=row">
+                                                <div class="col-lg-3 col-xs-3">
+                                                    Sequence:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblSeq"></label>
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    Serial No:
+                                                </div>
+                                                <div class="col-lg-3 col-xs-3">
+                                                    <label id="lblSerialNo"></label>
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div class="=row">
+                                                <div class="col-lg-3 col-xs-3">
+                                                    Report Name:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblReportName"></label>
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    Location:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblLocation"></label>
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div class="=row">
+                                                <div class="col-lg-3 col-xs-3">
+                                                    Section ID:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblSectionID"></label>
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    Type:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblType"></label>
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div class="=row">
+                                                <div class="col-lg-3 col-xs-3">
+                                                    Question ID:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblQuestionID"></label>
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    Area:
+                                                </div>
+                                                <div class="col-lg-2 col-xs-2">
+                                                    <label id="lblArea"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
             @{Html.RenderPartial("_Advertisements");}
+            </div>
         </div>
     </div>
 </div>
 
-<script src="@Url.Content("~/Content/js/report.js")"></script>
 <script src="@Url.Content("~/Content/js/installedequipmentreport.js")"></script>

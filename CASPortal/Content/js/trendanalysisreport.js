@@ -227,7 +227,7 @@ function LoadingComplete() {
 }
 
 $("#btnReset").click(function () {
-    ResetTrendAnalysisSite();
+    ResetSite();
     ResetTrendAnalysisFields();
 });
 

@@ -95,8 +95,13 @@ $(function () {
                 $("#divLower").hide();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
-                ResetTrendAnalysisSite();
+                ResetSite();
                 ResetTrendAnalysisFields();
+            }
+            if (location.href.indexOf("Report/InstalledEquipment") > 0) {
+                $("#ddlConracts").hide();
+                ResetSite();
+                ResetInstalledEquipmentFields();
             }
         }
 
@@ -136,6 +141,7 @@ $(function () {
                 $("#divLeftSide").css("border-right", "1px solid #CCCCCC");
             }
             if (location.href.indexOf("Report/InstalledEquipment") > 0) {
+                $("#divLoading").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
                 LoadInstalledLocations();
                 $("#divLocationDetail").show();
             }
@@ -147,6 +153,9 @@ $(function () {
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
                 ResetTrendAnalysisFields();
                 $("#ddlConracts").show();
+            }
+            if (location.href.indexOf("Report/InstalledEquipment") > 0) {
+                ResetInstalledEquipmentFields();
             }
         }
 
@@ -179,7 +188,7 @@ function LoadContracts() {
     });
 }
 
-function ResetTrendAnalysisSite() {
+function ResetSite() {
     var ulSite = $("#ulSites li").eq(0).text();
     $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
     _listSite.css("background-color", "#FFFFFF");
@@ -215,4 +224,15 @@ function ResetTrendAnalysisFields() {
     $("#jstree").hide();
     $("#divRightSide").hide();
     $("#divLeftSide").css("border-right", "");
+}
+
+function ResetInstalledEquipmentFields() {
+
+    var ulContract = $("#ulContracts li").eq(0).text();
+    $(".dropdown-Contract").find('[data-bind="label"]').text(ulContract);
+    _listContract.css("background-color", "#FFFFFF");
+    _listContract = $("#ulContracts > :first-child");
+
+    $("#divEquipmentLocation").html("");
+    $("#divLocationDetail").hide();
 }

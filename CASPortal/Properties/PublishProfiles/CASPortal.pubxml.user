@@ -13,13 +13,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/07/2015 16:43:17</publishTime>
+      <publishTime>01/08/2015 12:07:59</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/07/2015 16:43:17</publishTime>
+      <publishTime>01/08/2015 12:07:59</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>01/07/2015 16:41:25</publishTime>
+      <publishTime>01/08/2015 12:07:49</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
       <publishTime>11/04/2014 16:50:45</publishTime>
@@ -262,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/17/2014 16:41:45</publishTime>
     </File>
     <File Include="Content/js/installedequipmentreport.js">
-      <publishTime>01/07/2015 16:32:52</publishTime>
+      <publishTime>01/08/2015 11:44:30</publishTime>
     </File>
     <File Include="Content/js/jquery-1.11.0.js">
       <publishTime>06/09/2014 18:47:18</publishTime>
@@ -439,7 +439,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/17/2014 06:04:30</publishTime>
     </File>
     <File Include="Content/js/report.js">
-      <publishTime>01/07/2015 16:35:02</publishTime>
+      <publishTime>01/08/2015 11:43:02</publishTime>
     </File>
     <File Include="Content/js/sb-admin-2.js">
       <publishTime>06/25/2014 17:47:48</publishTime>
@@ -463,7 +463,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/15/2014 10:32:45</publishTime>
     </File>
     <File Include="Content/js/trendanalysisreport.js">
-      <publishTime>12/19/2014 15:52:39</publishTime>
+      <publishTime>01/08/2015 09:51:47</publishTime>
     </File>
     <File Include="Content/less/mixins.less">
       <publishTime>06/24/2014 20:45:16</publishTime>
@@ -532,7 +532,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2014 15:49:49</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/07/2015 16:43:12</publishTime>
+      <publishTime>01/08/2015 12:07:54</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -685,13 +685,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2014 11:46:28</publishTime>
     </File>
     <File Include="Views/Report/EquipmentReport.cshtml">
-      <publishTime>01/07/2015 16:39:44</publishTime>
+      <publishTime>01/07/2015 16:51:50</publishTime>
     </File>
     <File Include="Views/Report/EquipmentTransaction.cshtml">
       <publishTime>01/06/2015 10:44:25</publishTime>
     </File>
     <File Include="Views/Report/InstalledEquipment.cshtml">
-      <publishTime>01/07/2015 16:34:17</publishTime>
+      <publishTime>01/08/2015 11:56:22</publishTime>
     </File>
     <File Include="Views/Report/TrendAnalysis.cshtml">
       <publishTime>12/15/2014 09:38:45</publishTime>
