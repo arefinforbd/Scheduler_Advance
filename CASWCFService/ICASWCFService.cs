@@ -67,12 +67,12 @@ namespace CASWCFService
         List<Contract> GetContracts(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID);
 
         [OperationContract]
-        byte[] GetEquipmentTransactionBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, DateTime DateFrom, DateTime DateTo, bool IsPrintDetails, bool IsPrintMaterials, int Selection, string AssignedTo, int Sorting, int ContractFrom, int ContractTo, bool IsInactive, bool IsShowTime, string GlAssignedTo);
+        Equipment GetEquipmentTransactionBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, DateTime DateFrom, DateTime DateTo, bool IsPrintDetails, bool IsPrintMaterials, int Selection, string AssignedTo, int Sorting, int ContractFrom, int ContractTo, bool IsInactive, bool IsShowTime, string GlAssignedTo);
 
         [OperationContract]
         List<Equipment> GetInstalledEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int ContractNo, string EquipmentType);
 
         [OperationContract]
-        byte[] GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status);
+        Equipment GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status);
     }
 }

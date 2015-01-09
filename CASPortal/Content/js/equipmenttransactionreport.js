@@ -1,4 +1,11 @@
-﻿function Validate() {
+﻿$(function () {
+    $("#chkShowActiveStations").prop("checked", true);
+    $("#hdnShowActiveStations").val("true");
+    $("#chkJobTimes").prop("checked", true);
+    $("#hdnJobTimes").val("true");
+});
+
+function Validate() {
 
     if ($("a.dropdown-Site span[data-bind='label']").text() == "Select Site") {
         alert("Please select Site.");

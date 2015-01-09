@@ -50,14 +50,14 @@ namespace CASPortal.Repository
             return charts;
         }
 
-        public byte[] GetEquipmentTransactionBLOB(DateTime dateFrom, DateTime dateTo, bool isPrintDetails, bool isPrintMaterials, int selection, string assignedTo, int sorting, int contractFrom, int contractTo, bool isInactive, bool isShowTime, string glAssignedTo)
+        public Equipment GetEquipmentTransactionBLOB(DateTime dateFrom, DateTime dateTo, bool isPrintDetails, bool isPrintMaterials, int selection, string assignedTo, int sorting, int contractFrom, int contractTo, bool isInactive, bool isShowTime, string glAssignedTo)
         {
-            byte[] fileInfo = null;
+            Equipment equip = new Equipment();
             ReportParser parser = new ReportParser();
 
-            fileInfo = parser.GetEquipmentTransactionBLOB(dateFrom, dateTo, isPrintDetails, isPrintMaterials, selection, assignedTo, sorting, contractFrom, contractTo, isInactive, isShowTime, glAssignedTo);
+            equip = parser.GetEquipmentTransactionBLOB(dateFrom, dateTo, isPrintDetails, isPrintMaterials, selection, assignedTo, sorting, contractFrom, contractTo, isInactive, isShowTime, glAssignedTo);
 
-            return fileInfo;
+            return equip;
         }
 
         public List<Equipment> GetInstalledEquipment(int contractNo, string equipmentType)
@@ -70,14 +70,14 @@ namespace CASPortal.Repository
             return equips;
         }
 
-        public byte[] GetEquipmentReportBLOB(int contractFrom, int contractTo, int sorting, int status)
+        public Equipment GetEquipmentReportBLOB(int contractFrom, int contractTo, int sorting, int status)
         {
-            byte[] fileInfo = null;
+            Equipment equip = new Equipment();
             ReportParser parser = new ReportParser();
 
-            fileInfo = parser.GetEquipmentReportBLOB(contractFrom, contractTo, sorting, status);
+            equip = parser.GetEquipmentReportBLOB(contractFrom, contractTo, sorting, status);
 
-            return fileInfo;
+            return equip;
         }
     }
 }

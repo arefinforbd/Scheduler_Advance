@@ -359,6 +359,7 @@ namespace CASPortal.Controllers
         public ActionResult EquipmentTransaction(FormCollection elemets)
         {
             byte[] fileInfo = null;
+            Equipment equip = new Equipment();
             ReportRepository repository = new ReportRepository();
 
             try
@@ -399,17 +400,18 @@ namespace CASPortal.Controllers
                 else
                     sortingID = 5;
 
-                fileInfo = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials,
+                equip = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials,
                     sortingID, "[ALL]", selectionID, Convert.ToInt32(contractID), Convert.ToInt32(contractID), 
                     isInactive, isShowTime, "[ALL]");
 
-                return File(fileInfo, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+                return File(equip.FileBLOB, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+                //return File(equip.FileBLOB, "application/pdf", (DateTime.Now.Ticks.ToString()));
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = "Error";
-                return RedirectToAction("EquipmentTransaction", "Report");
-                //return File(new byte[2], "application/octet", "file-name");
+                return Content("Error occurred", "application/json");
+                //return RedirectToAction("EquipmentTransaction", "Report");
             }
         }
 
@@ -467,6 +469,7 @@ namespace CASPortal.Controllers
         public ActionResult EquipmentReport(FormCollection elemets)
         {
             byte[] fileInfo = null;
+            Equipment equip = new Equipment();
             ReportRepository repository = new ReportRepository();
 
             try
@@ -491,9 +494,9 @@ namespace CASPortal.Controllers
                 else if (sorting.Equals("Area"))
                     sortingID = 2;
 
-                fileInfo = repository.GetEquipmentReportBLOB(Convert.ToInt32(contractID), Convert.ToInt32(contractID), sortingID, statusID);
+                equip = repository.GetEquipmentReportBLOB(Convert.ToInt32(contractID), Convert.ToInt32(contractID), sortingID, statusID);
 
-                return File(fileInfo, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+                return File(equip.FileBLOB, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
             }
             catch (Exception ex)
             {

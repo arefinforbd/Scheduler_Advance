@@ -122,11 +122,11 @@ namespace CASPortal.WebParser
             }
         }
 
-        public byte[] GetEquipmentTransactionBLOB(DateTime dateFrom, DateTime dateTo, bool isPrintDetails, bool isPrintMaterials, int selection, string assignedTo, int sorting, int contractFrom, int contractTo, bool isInactive, bool isShowTime, string glAssignedTo)
+        public Equipment GetEquipmentTransactionBLOB(DateTime dateFrom, DateTime dateTo, bool isPrintDetails, bool isPrintMaterials, int selection, string assignedTo, int sorting, int contractFrom, int contractTo, bool isInactive, bool isShowTime, string glAssignedTo)
         {
             try
             {
-                byte[] fileInfo = null;
+                Equipment equip = new Equipment();
                 CASWCFServiceClient cas = new CASWCFServiceClient();
 
                 string companyID = HttpContext.Current.Session["CompanyID"].ToString();
@@ -135,9 +135,9 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                fileInfo = cas.GetEquipmentTransactionBLOB(companyID, companyPassword, customerPassword, level4ID, customerID, customerID, dateFrom, dateTo, isPrintDetails, isPrintMaterials, selection, assignedTo, sorting, contractFrom, contractTo, isInactive, isShowTime, glAssignedTo);
+                equip = cas.GetEquipmentTransactionBLOB(companyID, companyPassword, customerPassword, level4ID, customerID, customerID, dateFrom, dateTo, isPrintDetails, isPrintMaterials, selection, assignedTo, sorting, contractFrom, contractTo, isInactive, isShowTime, glAssignedTo);
 
-                return fileInfo;
+                return equip;
             }
             catch (Exception ex)
             {
@@ -181,11 +181,11 @@ namespace CASPortal.WebParser
             }
         }
 
-        public byte[] GetEquipmentReportBLOB(int contractFrom, int contractTo, int sorting, int status)
+        public Equipment GetEquipmentReportBLOB(int contractFrom, int contractTo, int sorting, int status)
         {
             try
             {
-                byte[] fileInfo = null;
+                Equipment equip = new Equipment();
                 CASWCFServiceClient cas = new CASWCFServiceClient();
 
                 string companyID = HttpContext.Current.Session["CompanyID"].ToString();
@@ -194,9 +194,9 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                fileInfo = cas.GetEquipmentReportBLOB(companyID, companyPassword, customerPassword, level4ID, customerID, customerID, contractFrom, contractTo, sorting, status);
+                equip = cas.GetEquipmentReportBLOB(companyID, companyPassword, customerPassword, level4ID, customerID, customerID, contractFrom, contractTo, sorting, status);
 
-                return fileInfo;
+                return equip;
             }
             catch (Exception ex)
             {

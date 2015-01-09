@@ -929,9 +929,11 @@ namespace CASWCFService
             }
         }
 
-        public byte[] GetEquipmentTransactionBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, DateTime DateFrom, DateTime DateTo, bool IsPrintDetails, bool IsPrintMaterials, int Selection, string AssignedTo, int Sorting, int ContractFrom, int ContractTo, bool IsInactive, bool IsShowTime, string GlAssignedTo)
+        public Equipment GetEquipmentTransactionBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, DateTime DateFrom, DateTime DateTo, bool IsPrintDetails, bool IsPrintMaterials, int Selection, string AssignedTo, int Sorting, int ContractFrom, int ContractTo, bool IsInactive, bool IsShowTime, string GlAssignedTo)
         {
             DataSet ds;
+            string outputMessage = "";
+            Equipment equip = new Equipment();
             StrongTypesNS.ds_filedataDataSet stypefile;
 
             try
@@ -939,13 +941,15 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                cus.ws_equtranrpt(Level4ID, CustomerIDFrom, CustomerIDTo, DateFrom, DateTo, IsPrintDetails, IsPrintMaterials, Selection, AssignedTo, Sorting, ContractFrom, ContractTo, IsInactive, IsShowTime, GlAssignedTo, out stypefile);
+                cus.ws_equtranrpt(Level4ID, CustomerIDFrom, CustomerIDTo, DateFrom, DateTo, IsPrintDetails, IsPrintMaterials, Selection, AssignedTo, Sorting, ContractFrom, ContractTo, IsInactive, IsShowTime, GlAssignedTo, out stypefile, out outputMessage);
                 ds = (DataSet)stypefile;
 
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
-                    return (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
+                    equip.FileBLOB = (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
 
-                return null;
+                equip.OutputMessage = outputMessage;
+
+                return equip;
             }
             catch (Exception ex)
             {
@@ -1008,9 +1012,11 @@ namespace CASWCFService
             return equips;
         }
 
-        public byte[] GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status)
+        public Equipment GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status)
         {
             DataSet ds;
+            string outputMessage = "";
+            Equipment equip = new Equipment();
             StrongTypesNS.ds_filedataDataSet stypefile;
 
             try
@@ -1018,13 +1024,15 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                cus.ws_equrep(Level4ID, CustomerIDFrom, CustomerIDTo, ContractFrom, ContractTo, Sorting, Status, out stypefile);
+                cus.ws_equrep(Level4ID, CustomerIDFrom, CustomerIDTo, ContractFrom, ContractTo, Sorting, Status, out stypefile, out outputMessage);
                 ds = (DataSet)stypefile;
 
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
-                    return (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
+                    equip.FileBLOB = (byte[])(ds.Tables[0].Rows[0]["ttf_fileinfo"]);
 
-                return null;
+                equip.OutputMessage = outputMessage;
+
+                return equip;
             }
             catch (Exception ex)
             {

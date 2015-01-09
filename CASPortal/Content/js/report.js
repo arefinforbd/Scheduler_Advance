@@ -1,6 +1,25 @@
 ﻿var _listSite = $("#ulSites > :first-child");
 var _listContract = $("#ulContracts > :first-child");
 
+function Validate() {
+
+    if ($("a.dropdown-Site span[data-bind='label']").text() == "Select Site") {
+        alert("Please select Site.");
+        $("a.dropdown-Site").fadeOut();
+        $("a.dropdown-Site").fadeIn();
+        return false;
+    }
+
+    if ($("a.dropdown-Contract span[data-bind='label']").text() == "Select Contract") {
+        alert("Please select Contract.");
+        $("a.dropdown-Contract").fadeOut();
+        $("a.dropdown-Contract").fadeIn();
+        return false;
+    }
+
+    return true;
+}
+
 $(function () {
 
     $("#ddlConracts").hide();
@@ -32,6 +51,9 @@ $(function () {
                     $("#dtpFrom").val("");
                     return;
                 }
+            }
+            if ($("#dtpTo").datepicker('getDate') == null) {
+                $('#dtpTo').datepicker("setDate", $("#dtpFrom").datepicker('getDate'));
             }
         }
     });

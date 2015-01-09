@@ -47,5 +47,9 @@ namespace CASWCFService.Model
         public int Level4 { get; set; }
         [DataMember]
         public DateTime ManufactureDate { get; set; }
+        [DataMember]
+        public byte[] FileBLOB { get; set; }
+        [DataMember]
+        public string OutputMessage { get; set; }
     }
 }
