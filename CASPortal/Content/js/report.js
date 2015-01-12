@@ -255,5 +255,7 @@ function ResetInstalledEquipmentFields() {
     _listContract = $("#ulContracts > :first-child");
 
     $("#divEquipmentLocation").html("");
+    $("#divEquipmentLocation").hide();
+    $("#divEquipmentLocationFooter").hide();
     $("#divLocationDetail").hide();
 }

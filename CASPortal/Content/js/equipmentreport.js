@@ -17,6 +17,8 @@
         return false;
     }
 
+    $("#divLoading").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
+
     if ($("#rdoAll").prop("checked") == true)
         statusVal = "All";
     if ($("#rdoActive").prop("checked") == true)
@@ -44,10 +46,11 @@
                 $("#hdnFormSubmit").val("BLOB");
                 $('#eqrepoform').submit();
             }
-
+            $("#divLoading").html("");
             return false;
         }
     })
 
+    $("#divLoading").html("");
     return true;
 }

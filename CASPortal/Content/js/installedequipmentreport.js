@@ -1,5 +1,7 @@
 ﻿function LoadInstalledLocations() {
     var html = "";
+    var locationStyle = "";
+
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Report/GetInstalledLocations",
         type: "POST",
@@ -13,16 +15,22 @@
                 LoadInstalledLocationDetail(locObject);
 
                 $.each(data, function (i, loc) {
+
+                    if (loc.Status == false)
+                        locationStyle = "background-color: #ebccd1;font-weight: bold;";
+                    else
+                        locationStyle = "";
+
                     if (i < 1) {
                         html += '<tr>'
-                            + '<td style="background-color: #f9f9c0;">' + loc.SequenceNo + '</td>'
-                            + '<td style="background-color: #f9f9c0;" location=' + loc.Location + '>' + loc.Location + '</td>'
+                            + '<td style="background-color: #f9f9c0;"' + locationStyle + '" location=' + loc.Location + '>' + loc.SequenceNo + '</td>'
+                            + '<td style="background-color: #f9f9c0;"' + locationStyle + '" location=' + loc.Location + '>' + loc.Location + '</td>'
                             + '</tr>';
                     }
                     else {
                         html += '<tr>'
-                            + '<td location=' + loc.Location + '>' + loc.SequenceNo + '</td>'
-                            + '<td location=' + loc.Location + '>' + loc.Location + '</td>'
+                            + '<td style="' + locationStyle + '" location=' + loc.Location + '>' + loc.SequenceNo + '</td>'
+                            + '<td style="' + locationStyle + '" location=' + loc.Location + '>' + loc.Location + '</td>'
                             + '</tr>';
                     }
                     i++;

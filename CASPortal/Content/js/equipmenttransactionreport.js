@@ -45,6 +45,8 @@ function Validate() {
         return false;
     }
 
+    $("#divLoading").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
+
     if ($("#rdoLocation").prop("checked") == true)
         locationVal = "Location";
     if ($("#rdoSection").prop("checked") == true)
@@ -86,10 +88,12 @@ function Validate() {
                 $('#eqtransrepoform').submit();
             }
             
+            $("#divLoading").html("");
             return false;
         }
     })
 
+    $("#divLoading").html("");
     return true;
 }
 

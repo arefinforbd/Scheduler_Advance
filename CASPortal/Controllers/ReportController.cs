@@ -503,11 +503,11 @@ namespace CASPortal.Controllers
                 string hdnFormSubmit = elemets["hdnFormSubmit"];
 
                 if (status.Equals("All"))
-                    statusID = 0;
-                else if (status.Equals("Active"))
                     statusID = 1;
-                else
+                else if (status.Equals("Active"))
                     statusID = 2;
+                else
+                    statusID = 3;
 
                 if (sorting.Equals("Location"))
                     sortingID = 1;
