@@ -28,9 +28,11 @@
                     i++;
                 });
                 html += "</tbody></table>";
-                html += '<span style="font-size:12px;color: #CCCCCC;margin-top:-10px;float:left;">Click on the location list to see details</span>';
                 $("#divEquipmentLocation").html(html);
+                $("#divEquipmentLocationFooter").html('<span style="font-size:12px;color: #CCCCCC;margin-top:-10px;float:left;">Click on the location list to see details</span>');
                 $("#divLoading").html("");
+                $("#divEquipmentLocation").show();
+                $("#divEquipmentLocationFooter").show();
                 $("#divLocationDetail").show();
             }
         },

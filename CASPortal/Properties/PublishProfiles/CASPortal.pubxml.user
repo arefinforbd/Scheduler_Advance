@@ -13,13 +13,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/09/2015 15:45:23</publishTime>
+      <publishTime>01/12/2015 12:01:15</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/09/2015 15:45:23</publishTime>
+      <publishTime>01/12/2015 12:01:15</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>01/09/2015 15:43:30</publishTime>
+      <publishTime>01/12/2015 12:01:05</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
       <publishTime>11/04/2014 16:50:45</publishTime>
@@ -258,8 +258,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/js/customerinformation.js">
       <publishTime>01/07/2015 12:15:51</publishTime>
     </File>
+    <File Include="Content/js/equipmentreport.js">
+      <publishTime>01/12/2015 11:28:36</publishTime>
+    </File>
     <File Include="Content/js/equipmenttransactionreport.js">
-      <publishTime>01/09/2015 14:15:08</publishTime>
+      <publishTime>01/12/2015 11:42:07</publishTime>
     </File>
     <File Include="Content/js/installedequipmentreport.js">
       <publishTime>01/08/2015 15:44:18</publishTime>
@@ -532,7 +535,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2014 15:49:49</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/09/2015 15:45:18</publishTime>
+      <publishTime>01/12/2015 12:01:10</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -562,7 +565,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>01/07/2015 11:53:28</publishTime>
+      <publishTime>01/12/2015 11:22:57</publishTime>
     </File>
     <File Include="Service References/CASService/CASPortal.CASService.LoginProcessResponse.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -688,10 +691,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2014 11:46:28</publishTime>
     </File>
     <File Include="Views/Report/EquipmentReport.cshtml">
-      <publishTime>01/09/2015 08:54:22</publishTime>
+      <publishTime>01/12/2015 11:35:22</publishTime>
     </File>
     <File Include="Views/Report/EquipmentTransaction.cshtml">
-      <publishTime>01/09/2015 15:35:20</publishTime>
+      <publishTime>01/12/2015 11:37:50</publishTime>
     </File>
     <File Include="Views/Report/InstalledEquipment.cshtml">
       <publishTime>01/08/2015 15:00:46</publishTime>
@@ -751,7 +754,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2014 13:47:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/09/2015 15:43:32</publishTime>
+      <publishTime>01/12/2015 12:01:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

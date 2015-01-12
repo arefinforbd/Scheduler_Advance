@@ -4,8 +4,36 @@
 }
 
 <style>
-    #ddlSites{
+    #ddlSites {
         margin-left: 25px;
+    }
+
+    #divEquipmentLocation {
+        height: 320px;
+        overflow-y: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+
+    ::-webkit-scrollbar:vertical {
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar:horizontal {
+        height: 12px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #5bc0de;
+        border-radius: 10px;
+        border: 2px solid #ffffff;
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #ffffff;
     }
 </style>
 
@@ -22,10 +50,11 @@
 
                     <div class="row">
                         <div id="divLoading"></div>
-                        <div class="col-lg-3 col-xs-3">
-                            <div id="divEquipmentLocation"></div>
+                        <div class="col-lg-3 col-xs-5">
+                            <div id="divEquipmentLocation" style="display: none;"></div>
+                            <div id="divEquipmentLocationFooter" style="margin-top: 10px;"></div>
                         </div>
-                        <div class="col-lg-9 col-xs-9" id="divLocationDetail" style="display: none;">
+                        <div class="col-lg-9 col-xs-7" id="divLocationDetail" style="display: none;">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
                                     <label>Details</label>
@@ -34,70 +63,70 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="=row">
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     Date Installed:
                                                 </div>
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     <label id="lblDateInstalled"></label>
                                                 </div>
                                             </div>
                                             <br /><br />
                                             <div class="=row">
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     Sequence:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblSeq"></label>
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     Serial No:
                                                 </div>
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     <label id="lblSerialNo"></label>
                                                 </div>
                                             </div>
                                             <br /><br />
                                             <div class="=row">
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     Report Name:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblReportName"></label>
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     Location:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblLocation"></label>
                                                 </div>
                                             </div>
                                             <br /><br />
                                             <div class="=row">
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     Section ID:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblSectionID"></label>
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     Type:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblType"></label>
                                                 </div>
                                             </div>
                                             <br /><br />
                                             <div class="=row">
-                                                <div class="col-lg-3 col-xs-3">
+                                                <div class="col-lg-3">
                                                     Question ID:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblQuestionID"></label>
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     Area:
                                                 </div>
-                                                <div class="col-lg-2 col-xs-2">
+                                                <div class="col-lg-2">
                                                     <label id="lblArea"></label>
                                                 </div>
                                             </div>
@@ -106,13 +135,20 @@
 
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
-            @{Html.RenderPartial("_Advertisements");}
+                @{Html.RenderPartial("_Advertisements");}
             </div>
         </div>
     </div>
 </div>
 
 <script src="@Url.Content("~/Content/js/installedequipmentreport.js")"></script>
+
+<script>
+    //If it's mobile or tablet
+    if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+        $("#divEquipmentLocation").css("width", "130px");
+    }
+</script>
