@@ -185,6 +185,7 @@
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\customerinformation.js" />
+    <Content Include="Content\js\equipmentreport.js" />
     <Content Include="Content\js\equipmenttransactionreport.js" />
     <Content Include="Content\js\installedequipmentreport.js" />
     <Content Include="Content\js\jquery-1.11.0.js" />

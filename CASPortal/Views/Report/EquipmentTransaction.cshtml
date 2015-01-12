@@ -34,7 +34,7 @@
 
 <div id="page-wrapper">
     <br />
-    @using (Html.BeginForm("EquipmentTransaction", "Report", FormMethod.Post, new { encType = "multipart/form-data", id = "eqrepoform", name = "eqrepoform" }))
+    @using (Html.BeginForm("EquipmentTransaction", "Report", FormMethod.Post, new { encType = "multipart/form-data", id = "eqtransrepoform", name = "eqtransrepoform" }))
     {
         <div class="row">
             <div class="col-lg-8" id="maintable">
@@ -185,8 +185,8 @@
                     </div>
                     <div class="panel-footer">
                         <div id="div_btnContinue">
-                            @*<button class="btn btn-info" type="submit" onclick="return Validate()">Preview</button>*@
-                            <input type="submit" class="btn btn-info" name="operation" id="process" value="Preview" />
+                            <input type="hidden" id="hdnFormSubmit" name="hdnFormSubmit" />
+                            <input type="button" class="btn btn-info" name="operation" id="process" onclick="return Validate()" value="Preview" />
                         </div>
                     </div>
                 </div>
@@ -197,40 +197,3 @@
 </div>
 
 <script src="@Url.Content("~/Content/js/equipmenttransactionreport.js")"></script>
-
-@{
-    if (TempData["ErrorMessage"] != null)
-    {
-        TempData.Remove("ErrorMessage");
-        <script type="text/javascript">
-            alert("Something went wrong. Please initiate again.");
-        </script>
-    }
-}
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-
-        $('#process').click(function () {
-            $('#eqrepoform').submit();
-        });
-
-        $("#eqrepoform2").on("submit", function (event) {
-            //event.preventDefault();
-
-            /*var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                    alert(resp);
-                }
-            })*/
-        });
-    });
-
-</script>

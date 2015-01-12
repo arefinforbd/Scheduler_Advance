@@ -1,4 +1,5 @@
 ﻿$(function () {
+    $("#hdnFormSubmit").val("");
     $("#chkShowActiveStations").prop("checked", true);
     $("#hdnShowActiveStations").val("true");
     $("#chkJobTimes").prop("checked", true);
@@ -6,6 +7,9 @@
 });
 
 function Validate() {
+
+    var locationVal = "";
+    var advanceVal = "";
 
     if ($("a.dropdown-Site span[data-bind='label']").text() == "Select Site") {
         alert("Please select Site.");
@@ -40,6 +44,51 @@ function Validate() {
         alert("To date cannot be smaller than From date.");
         return false;
     }
+
+    if ($("#rdoLocation").prop("checked") == true)
+        locationVal = "Location";
+    if ($("#rdoSection").prop("checked") == true)
+        locationVal = "Section";
+    if ($("#rdoArea").prop("checked") == true)
+        locationVal = "Area";
+    if ($("#rdoDateTime").prop("checked") == true)
+        locationVal = "DateTime";
+    if ($("#rdoSingleSection").prop("checked") == true)
+        locationVal = "Single Section";
+
+    if ($("#rdoNone").prop("checked") == true)
+        advanceVal = "None";
+    if ($("#rdoScanned").prop("checked") == true)
+        advanceVal = "Scanned";
+    if ($("#rdoUnScanned").prop("checked") == true)
+        advanceVal = "Un Scanned";
+    if ($("#rdoNewItem").prop("checked") == true)
+        advanceVal = "New Item";
+    if ($("#rdoReplaced").prop("checked") == true)
+        advanceVal = "Single Replaced";
+
+    var url = $("#hdnSiteURL").val() + "/Report/EquipmentTransaction";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            hdnSite: $("#hdnSite").val(), hdnContract: $("#hdnContract").val(), dtpFrom: $("#dtpFrom").val(),
+            dtpTo: $("#dtpTo").val(), rdoLocation: locationVal, hdnPrintDetails: $("#hdnPrintDetails").val(),
+            hdnPrintMaterials: $("#hdnPrintMaterials").val(), rdoAdvance: advanceVal, hdnTech: $("#hdnTech").val(),
+            hdnShowActiveStations: $("#hdnShowActiveStations").val(), hdnJobTimes: $("#hdnJobTimes").val()
+        },
+        dataType: "json",
+        success: function (resp) {
+            if (resp == "No BLOB")
+                alert("There is no data to show.");
+            else {
+                $("#hdnFormSubmit").val("BLOB");
+                $('#eqtransrepoform').submit();
+            }
+            
+            return false;
+        }
+    })
 
     return true;
 }

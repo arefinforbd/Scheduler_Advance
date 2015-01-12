@@ -358,7 +358,10 @@ namespace CASPortal.Controllers
         [HttpPost]
         public ActionResult EquipmentTransaction(FormCollection elemets)
         {
-            byte[] fileInfo = null;
+
+            //return Json("No Data.", JsonRequestBehavior.AllowGet);
+
+            //byte[] fileInfo = null;
             Equipment equip = new Equipment();
             ReportRepository repository = new ReportRepository();
 
@@ -377,6 +380,7 @@ namespace CASPortal.Controllers
                 string tech = elemets["hdnTech"];
                 bool isInactive = elemets["hdnShowActiveStations"] == "true" ? true : false;
                 bool isShowTime = elemets["hdnJobTimes"] == "true" ? true : false;
+                string hdnFormSubmit = elemets["hdnFormSubmit"];
 
                 if (selection.Equals("Location"))
                     selectionID = 1;
@@ -400,18 +404,33 @@ namespace CASPortal.Controllers
                 else
                     sortingID = 5;
 
-                equip = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials,
-                    sortingID, "[ALL]", selectionID, Convert.ToInt32(contractID), Convert.ToInt32(contractID), 
-                    isInactive, isShowTime, "[ALL]");
+                if (hdnFormSubmit == null || hdnFormSubmit.Trim().Length == 0)
+                {
+                    if (Session["EQUIPTRANSBLOB"] != null)
+                        Session.Remove("EQUIPTRANSBLOB");
 
-                return File(equip.FileBLOB, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
-                //return File(equip.FileBLOB, "application/pdf", (DateTime.Now.Ticks.ToString()));
+                    equip = repository.GetEquipmentTransactionBLOB(DateTime.Parse(dateFrom), DateTime.Parse(dateTo), isPrintDetails, isPrintMaterials,
+                        sortingID, "[ALL]", selectionID, Convert.ToInt32(contractID), Convert.ToInt32(contractID),
+                        isInactive, isShowTime, "[ALL]");
+                }
+
+                if (hdnFormSubmit != null && hdnFormSubmit.Trim().Length > 0)
+                {
+                    if (Session["EQUIPTRANSBLOB"] != null)
+                        return File((byte[])Session["EQUIPTRANSBLOB"], "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+                }
+
+                if (equip.OutputMessage.Trim().Length > 0)
+                    return Json("No BLOB", JsonRequestBehavior.AllowGet);
+                else
+                {
+                    Session["EQUIPTRANSBLOB"] = equip.FileBLOB;
+                    return Json("BLOB", JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Error";
-                return Content("Error occurred", "application/json");
-                //return RedirectToAction("EquipmentTransaction", "Report");
+                return Json("No BLOB", JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -480,7 +499,8 @@ namespace CASPortal.Controllers
                 string siteID = elemets["hdnSite"];
                 string contractID = elemets["hdnContract"];
                 string status = elemets["rdoStatus"];
-                string sorting = elemets["rdoPlace"];
+                string sorting = elemets["rdoSort"];
+                string hdnFormSubmit = elemets["hdnFormSubmit"];
 
                 if (status.Equals("All"))
                     statusID = 0;
@@ -494,14 +514,31 @@ namespace CASPortal.Controllers
                 else if (sorting.Equals("Area"))
                     sortingID = 2;
 
-                equip = repository.GetEquipmentReportBLOB(Convert.ToInt32(contractID), Convert.ToInt32(contractID), sortingID, statusID);
+                if (hdnFormSubmit == null || hdnFormSubmit.Trim().Length == 0)
+                {
+                    if (Session["EQUIPREPORTBLOB"] != null)
+                        Session.Remove("EQUIPREPORTBLOB");
 
-                return File(equip.FileBLOB, "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+                    equip = repository.GetEquipmentReportBLOB(Convert.ToInt32(contractID), Convert.ToInt32(contractID), sortingID, statusID);
+                }
+
+                if (hdnFormSubmit != null && hdnFormSubmit.Trim().Length > 0)
+                {
+                    if (Session["EQUIPREPORTBLOB"] != null)
+                        return File((byte[])Session["EQUIPREPORTBLOB"], "application/octet", (DateTime.Now.Ticks.ToString() + ".pdf"));
+                }
+
+                if (equip.OutputMessage.Trim().Length > 0)
+                    return Json("No BLOB", JsonRequestBehavior.AllowGet);
+                else
+                {
+                    Session["EQUIPREPORTBLOB"] = equip.FileBLOB;
+                    return Json("BLOB", JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessageEquip"] = "Error";
-                return RedirectToAction("EquipmentReport", "Report");
+                return Json("No BLOB", JsonRequestBehavior.AllowGet);
             }
         }
     }

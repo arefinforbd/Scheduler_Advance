@@ -15,7 +15,7 @@
 
 <div id="page-wrapper">
     <br />
-    @using (Html.BeginForm("EquipmentReport", "Report"))
+    @using (Html.BeginForm("EquipmentReport", "Report", FormMethod.Post, new { encType = "multipart/form-data", id = "eqrepoform", name = "eqrepoform" }))
     {
         <div class="row">
             <div class="col-lg-8" id="maintable">
@@ -71,7 +71,7 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                     <div class="radio radio-success">
-                                                        <input type="radio" value="Location" id="rdoLocation" checked="checked" name="rdoPlace">
+                                                        <input type="radio" value="Location" id="rdoLocation" checked="checked" name="rdoSort">
                                                         <label for="rdoLocation">Location</label>
                                                     </div>
                                                 </div>
@@ -79,7 +79,7 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                     <div class="radio radio-success">
-                                                        <input type="radio" value="Area" id="rdoArea" name="rdoPlace">
+                                                        <input type="radio" value="Area" id="rdoArea" name="rdoSort">
                                                         <label for="rdoArea">Area</label>
                                                     </div>
                                                 </div>
@@ -92,7 +92,8 @@
                     </div>
                     <div class="panel-footer">
                         <div id="div_btnContinue">
-                            <button class="btn btn-info" type="submit" onclick="return Validate()">Preview</button>
+                            <input type="hidden" id="hdnFormSubmit" name="hdnFormSubmit" />
+                            <input type="button" class="btn btn-info" name="operation" id="process" onclick="return Validate()" value="Preview" />
                         </div>
                     </div>
                 </div>
@@ -102,12 +103,4 @@
     }
 </div>
 
-@{
-    if (TempData["ErrorMessageEquip"] != null)
-    {
-        TempData.Remove("ErrorMessageEquip");
-        <script type="text/javascript">
-            alert("Something went wrong. Please initiate again.");
-        </script>
-    }
-}
+<script src="@Url.Content("~/Content/js/equipmentreport.js")"></script>
