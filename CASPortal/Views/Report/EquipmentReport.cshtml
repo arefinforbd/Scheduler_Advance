@@ -14,7 +14,12 @@
 </style>
 
 <div id="page-wrapper">
-    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Welcome, @HttpContext.Current.Session["CompanyName"].ToString()</h3>
+        </div>
+    </div>
+
     @using (Html.BeginForm("EquipmentReport", "Report", FormMethod.Post, new { encType = "multipart/form-data", id = "eqrepoform", name = "eqrepoform" }))
     {
         <div class="row">

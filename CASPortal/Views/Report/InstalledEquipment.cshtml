@@ -38,9 +38,14 @@
 </style>
 
 <div id="page-wrapper">
-    <br />
     <div class="row">
-        <div class="col-lg-12 col-xs-12" id="maintable">
+        <div class="col-lg-12">
+            <h3 class="page-header">Welcome, @HttpContext.Current.Session["CompanyName"].ToString()</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12" id="maintable">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <label>Installed Equipment</label>
@@ -66,8 +71,14 @@
                                                 <div class="col-lg-3">
                                                     Date Installed:
                                                 </div>
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-2">
                                                     <label id="lblDateInstalled"></label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    Status:
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label id="lblStatus"></label>
                                                 </div>
                                             </div>
                                             <br /><br />
@@ -138,9 +149,9 @@
                         </div>
                     </div>
                 </div>
-                @{Html.RenderPartial("_Advertisements");}
             </div>
         </div>
+        @{Html.RenderPartial("_Advertisements");}
     </div>
 </div>
 

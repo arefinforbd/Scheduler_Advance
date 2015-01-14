@@ -1,13 +1,23 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Scheduler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="@Url.Content("~/Content/css/scheduler.css")" rel="stylesheet" type="text/css" />
 
+<style>
+    #page-wrapper {
+        padding: 0 15px;
+    }
+</style>
+
 <div id="page-wrapper">
-    <br/>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Welcome, @HttpContext.Current.Session["CompanyName"].ToString()</h3>
+        </div>
+    </div>
+
     <input type="hidden" id="hdnItemID" />
     <input type="hidden" id="hdnDuration" />
 

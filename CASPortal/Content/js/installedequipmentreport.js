@@ -17,7 +17,7 @@
                 $.each(data, function (i, loc) {
 
                     if (loc.Status == false)
-                        locationStyle = "background-color: #ebccd1;font-weight: bold;";
+                        locationStyle = "background-color: rgb(240,128,128);";
                     else
                         locationStyle = "";
 
@@ -37,7 +37,7 @@
                 });
                 html += "</tbody></table>";
                 $("#divEquipmentLocation").html(html);
-                $("#divEquipmentLocationFooter").html('<span style="font-size:12px;color: #CCCCCC;margin-top:-10px;float:left;">Click on the location list to see details</span>');
+                $("#divEquipmentLocationFooter").html('<span style="font-size:12px;color: #CCCCCC;margin-top:-10px;float:left;">Click on the above location list to see details.</span>');
                 $("#divLoading").html("");
                 $("#divEquipmentLocation").show();
                 $("#divEquipmentLocationFooter").show();
@@ -52,25 +52,37 @@
 
 $(document.body).on('click', '#divEquipmentLocation #datatablefiles td', function (event) {
     var i = 0;
+    
     $("#divEquipmentLocation #datatablefiles tr").each(function () {
         $(this).css("background-color", "#ffffff");
-        if (i == 0 || i % 2 > 0){
+        if (i == 0 || i % 2 > 0) {
             $(this).children('td').each(function () {
-                $(this).css("background-color", "#f9f9f9");
+                if ($(this).css("background-color") != "rgb(240, 128, 128)") {
+                    $(this).css("background-color", "#f9f9f9");
+                }
+                $(this).css("font-weight", "normal");
             });
-        }           
-        else{
+        }
+        else {
             $(this).children('td').each(function () {
-                $(this).css("background-color", "#ffffff");
+                if ($(this).css("background-color") != "rgb(240, 128, 128)") {
+                    $(this).css("background-color", "#ffffff");
+                }
+                $(this).css("font-weight", "normal");
             });
         }
         i++;
     });
 
     LoadInstalledLocationDetail($(this).attr("location"));
-    $($(this).parent()).children('td').each(function () {
-        $(this).css("background-color", "#f9f9c0");
-    });
+    if ($(this).css("background-color") != "rgb(240,128,128)") {
+        $($(this).parent()).children('td').each(function () {
+            if ($(this).css("background-color") != "rgb(240, 128, 128)") {
+                $(this).css("background-color", "#f9f9c0");
+            }
+            $(this).css("font-weight", "bold");
+        });
+    }
     return false;
 });
 
@@ -87,6 +99,14 @@ function LoadInstalledLocationDetail(location) {
                 installedDate = installedDate.replace(")/", "");;
 
                 $("#lblDateInstalled").text(getMMDDYY(parseInt(installedDate)));
+                if (data.Status == true) {
+                    $("#lblStatus").text("Active");
+                    $("#lblStatus").css("color", "#00CC00");
+                }
+                else {
+                    $("#lblStatus").text("InActive");
+                    $("#lblStatus").css("color", "#FF0000");
+                }
                 $("#lblSeq").text(data.SequenceNo);
                 $("#lblSerialNo").text(data.Serial);
                 $("#lblReportName").text(data.ReportName);

@@ -69,6 +69,17 @@ namespace CASPortal.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult GetMobileMessageStatus()
+        {
+            bool status = Session["MobileMessageStatus"] == null ? true : false;
+            
+            if (Session["MobileMessageStatus"] == null)
+                Session["MobileMessageStatus"] = true;
+
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetFolderFiles(string folderName, string folderType, string clientTzOffset)
         {
             Folder folder;
@@ -245,6 +256,7 @@ namespace CASPortal.Controllers
 
                     ViewBag.MessageOfTheDay = messageOfTheDay;
                     ViewBag.CompanyName = companyName;
+                    Session["CompanyName"] = companyName;
                     if (image == null)
                         image = new byte[2];
 

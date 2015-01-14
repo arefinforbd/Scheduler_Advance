@@ -18,11 +18,9 @@
     <div id="page-wrapper">        
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Customer Access System</h2>
+                <h3 class="page-header">Welcome, @HttpContext.Current.Session["CompanyName"].ToString()</h3>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
 
         @{Html.RenderPartial("_HeaderLogo");}
         
