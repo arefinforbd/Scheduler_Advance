@@ -13,13 +13,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 15:41:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/14/2015 11:56:09</publishTime>
+      <publishTime>01/15/2015 10:41:30</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/14/2015 11:56:09</publishTime>
+      <publishTime>01/15/2015 10:41:30</publishTime>
     </File>
     <File Include="bin/CASPortal.dll">
-      <publishTime>01/14/2015 11:55:25</publishTime>
+      <publishTime>01/15/2015 10:19:40</publishTime>
     </File>
     <File Include="bin/CASPortal.XmlSerializers.dll">
       <publishTime>11/04/2014 16:50:45</publishTime>
@@ -454,16 +454,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/15/2014 14:38:33</publishTime>
     </File>
     <File Include="Content/js/trendanalysisbyequip.js">
-      <publishTime>12/15/2014 10:30:33</publishTime>
+      <publishTime>01/15/2015 09:02:48</publishTime>
     </File>
     <File Include="Content/js/trendanalysisbyjob.js">
-      <publishTime>12/23/2014 11:26:34</publishTime>
+      <publishTime>01/15/2015 09:03:27</publishTime>
     </File>
     <File Include="Content/js/trendanalysisbyquestion.js">
-      <publishTime>12/15/2014 10:15:43</publishTime>
+      <publishTime>01/15/2015 09:03:39</publishTime>
     </File>
     <File Include="Content/js/trendanalysisgrouplocation.js">
-      <publishTime>12/15/2014 10:32:45</publishTime>
+      <publishTime>01/15/2015 09:03:49</publishTime>
     </File>
     <File Include="Content/js/trendanalysisreport.js">
       <publishTime>01/08/2015 09:51:47</publishTime>
@@ -535,7 +535,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/21/2014 15:49:49</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/14/2015 11:56:03</publishTime>
+      <publishTime>01/15/2015 10:41:25</publishTime>
     </File>
     <File Include="Properties/DataSources/System.Data.DataSet.datasource">
       <publishTime>10/03/2014 16:13:54</publishTime>
@@ -571,103 +571,106 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/03/2014 16:13:54</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.ChartData.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Contract.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.DayHour.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Equipment.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Folder.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetBusinessTimeResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetCASDefaultDataResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetCategoryProductServiceResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetContractsResponse.datasource">
-      <publishTime>01/09/2015 14:00:32</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetCustomerSiteResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetEquipmentReportBLOBResponse.datasource">
-      <publishTime>01/09/2015 14:00:32</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetEquipmentTransactionBLOBResponse.datasource">
-      <publishTime>01/09/2015 14:00:32</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetInstalledEquipmentResponse.datasource">
-      <publishTime>01/09/2015 14:00:32</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPrivateFileInfoResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPrivateFolderFilesResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPrivateFoldersResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPublicFileInfoResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPublicFolderFilesResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetPublicFoldersResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetScheduledTimeResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
+    </File>
+    <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetTrendAnalysisByEquipmentResponse.datasource">
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetTrendAnalysisByJobResponse.datasource">
-      <publishTime>01/09/2015 14:00:32</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse.datasource">
-      <publishTime>01/09/2015 14:00:32</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:01</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Item.datasource">
       <publishTime>11/12/2014 17:11:31</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.LoginMessageOfDayResponse.datasource">
-      <publishTime>01/09/2015 14:00:31</publishTime>
+      <publishTime>01/14/2015 17:08:00</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.LoginProcessResponse.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.PostTrendAnalysisReportDataResponse.datasource">
       <publishTime>12/17/2014 13:45:15</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Site.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.SiteNItem.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.TimeSlot.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.TreeNode.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Service References/CASWCFService/CASPortal.CASWCFService.Welcome.datasource">
-      <publishTime>01/09/2015 14:00:30</publishTime>
+      <publishTime>01/14/2015 17:07:59</publishTime>
     </File>
     <File Include="Views/CustomerInformation/Index.cshtml">
-      <publishTime>01/14/2015 10:29:47</publishTime>
+      <publishTime>01/15/2015 10:38:18</publishTime>
     </File>
     <File Include="Views/CustomerInformation/LoadPrivateFolders.cshtml">
       <publishTime>10/03/2014 17:04:31</publishTime>
@@ -676,7 +679,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/05/2014 13:01:21</publishTime>
     </File>
     <File Include="Views/CustomerInformation/WelcomeMessage.cshtml">
-      <publishTime>01/14/2015 11:48:25</publishTime>
+      <publishTime>01/15/2015 10:38:51</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -691,13 +694,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2014 11:46:28</publishTime>
     </File>
     <File Include="Views/Report/EquipmentReport.cshtml">
-      <publishTime>01/14/2015 10:13:02</publishTime>
+      <publishTime>01/15/2015 10:36:11</publishTime>
     </File>
     <File Include="Views/Report/EquipmentTransaction.cshtml">
-      <publishTime>01/14/2015 10:12:48</publishTime>
+      <publishTime>01/15/2015 10:35:46</publishTime>
     </File>
     <File Include="Views/Report/InstalledEquipment.cshtml">
-      <publishTime>01/14/2015 11:30:17</publishTime>
+      <publishTime>01/15/2015 10:36:29</publishTime>
     </File>
     <File Include="Views/Report/TrendAnalysis.cshtml">
       <publishTime>12/15/2014 09:38:45</publishTime>
@@ -715,13 +718,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/16/2014 11:21:44</publishTime>
     </File>
     <File Include="Views/Scheduler/CustomerInformation.cshtml">
-      <publishTime>01/14/2015 10:35:28</publishTime>
+      <publishTime>01/15/2015 10:37:21</publishTime>
     </File>
     <File Include="Views/Scheduler/DynamicInterval.cshtml">
       <publishTime>10/22/2014 10:06:54</publishTime>
     </File>
     <File Include="Views/Scheduler/Index.cshtml">
-      <publishTime>01/14/2015 10:34:11</publishTime>
+      <publishTime>01/15/2015 10:37:53</publishTime>
     </File>
     <File Include="Views/Scheduler/ViewSample.cshtml">
       <publishTime>11/03/2014 12:36:37</publishTime>
@@ -736,13 +739,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/17/2014 11:57:34</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/14/2015 11:30:17</publishTime>
+      <publishTime>01/15/2015 10:34:08</publishTime>
     </File>
     <File Include="Views/Shared/_SiteNContract.cshtml">
       <publishTime>01/08/2015 14:50:36</publishTime>
     </File>
     <File Include="Views/Shared/_TrendAnalysis.cshtml">
-      <publishTime>01/14/2015 10:16:33</publishTime>
+      <publishTime>01/15/2015 10:36:57</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/03/2014 15:40:58</publishTime>
@@ -754,7 +757,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/03/2014 13:47:27</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/14/2015 11:55:25</publishTime>
+      <publishTime>01/15/2015 10:19:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

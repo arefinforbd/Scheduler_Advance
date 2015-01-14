@@ -12,6 +12,8 @@ namespace CASWCFService.Model
         [DataMember]
         public string DateLabel { get; set; }
         [DataMember]
+        public string SerialNumber { get; set; }
+        [DataMember]
         public string Section { get; set; }
         [DataMember]
         public string Question { get; set; }

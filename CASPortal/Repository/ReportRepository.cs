@@ -50,6 +50,16 @@ namespace CASPortal.Repository
             return charts;
         }
 
+        public List<ChartData> GetTrendAnalysisByEquipment(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool sortBy, bool exclude)
+        {
+            ReportParser parser = new ReportParser();
+            List<ChartData> charts = new List<ChartData>();
+
+            charts = parser.GetTrendAnalysisByEquipment(siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy, sortBy, exclude);
+
+            return charts;
+        }
+
         public Equipment GetEquipmentTransactionBLOB(DateTime dateFrom, DateTime dateTo, bool isPrintDetails, bool isPrintMaterials, int selection, string assignedTo, int sorting, int contractFrom, int contractTo, bool isInactive, bool isShowTime, string glAssignedTo)
         {
             Equipment equip = new Equipment();

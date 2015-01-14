@@ -383,6 +383,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetScheduledTimeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisByEquipmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisByJobResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>

@@ -55,13 +55,16 @@ namespace CASPortal.Controllers
             return dtTable;
         }
 
-        private List<Dictionary<string, object>> GetBarData(List<ChartData> charts)
+        private List<Dictionary<string, object>> GetBarData(List<ChartData> charts, bool IsQuestion)
         {
             DataTable dtTable = null;
             List<BarData> bars = new List<BarData>();
             foreach (ChartData chart in charts)
             {
-                bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.Section + chart.Question });
+                if(IsQuestion)
+                    bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.Section + chart.Question });
+                else
+                    bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.SerialNumber });
             }
 
             var count = bars.GroupBy(i => new { Date = i.label })
@@ -95,35 +98,67 @@ namespace CASPortal.Controllers
                 return null;
         }
 
-        public List<LineData> GetLineData(List<ChartData> charts)
+        public List<LineData> GetLineData(List<ChartData> charts, bool IsQuestion)
         {
-            var colCount = charts.GroupBy(i => new { Section = i.Section, Question = i.Question })
-                 .Select(group => new
-                 {
-                     Label = group.First().Section
-                 }).ToList().Count;
-
-            int weeksCount = charts.Count / colCount;
             List<LineData> lines = new List<LineData>();
 
-            foreach (ChartData chart in charts)
+            if (IsQuestion)
             {
-                lines.Add(new LineData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.Section + chart.Question, Count = weeksCount });
+                var colCount = charts.GroupBy(i => new { Section = i.Section, Question = i.Question })
+                                 .Select(group => new
+                                 {
+                                     Label = group.First().Section
+                                 }).ToList().Count;
+
+                int weeksCount = charts.Count / colCount;
+
+                foreach (ChartData chart in charts)
+                {
+                    lines.Add(new LineData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.Section + chart.Question, Count = weeksCount });
+                }
+            }
+            else
+            {
+                var colCount = charts.GroupBy(i => new { SerialNumber = i.SerialNumber })
+                                 .Select(group => new
+                                 {
+                                     Label = group.First().SerialNumber
+                                 }).ToList().Count;
+
+                int weeksCount = charts.Count / colCount;
+
+                foreach (ChartData chart in charts)
+                {
+                    lines.Add(new LineData() { DateLabel = chart.DateLabel, lineValue = chart.Point, label = chart.SerialNumber, Count = weeksCount });
+                }
             }
 
             return lines;
         }
 
-        public List<PieData> GetPieData(List<ChartData> charts)
+        public List<PieData> GetPieData(List<ChartData> charts, bool IsQuestion)
         {
             List<PieData> pies = new List<PieData>();
 
-            var aggCharts = charts.GroupBy(x => new { x.Section, x.Question }).
-                Select(x => new { Section = x.Max(pd => pd.Section), Question = x.Max(pd => pd.Question), percentage =  x.Sum(pd => pd.Point)});
-
-            foreach (var pie in aggCharts)
+            if (IsQuestion)
             {
-                pies.Add(new PieData() { label = pie.Section + pie.Question, data = pie.percentage });
+                var aggCharts = charts.GroupBy(x => new { x.Section, x.Question }).
+                    Select(x => new { Section = x.Max(pd => pd.Section), Question = x.Max(pd => pd.Question), percentage = x.Sum(pd => pd.Point) });
+
+                foreach (var pie in aggCharts)
+                {
+                    pies.Add(new PieData() { label = pie.Section + pie.Question, data = pie.percentage });
+                }
+            }
+            else
+            {
+                var aggCharts = charts.GroupBy(x => new { x.SerialNumber }).
+                    Select(x => new { SerialNumber = x.Max(pd => pd.SerialNumber), percentage = x.Sum(pd => pd.Point) });
+
+                foreach (var pie in aggCharts)
+                {
+                    pies.Add(new PieData() { label = pie.SerialNumber, data = pie.percentage });
+                }
             }
 
             return pies;
@@ -225,13 +260,13 @@ namespace CASPortal.Controllers
             if (charts != null)
             {
                 if (chartType.Equals("BAR") || chartType.Equals("ALL"))
-                    chartTypeObj.Bars = GetBarData(charts);
+                    chartTypeObj.Bars = GetBarData(charts, true);
 
                 if (chartType.Equals("LINE") || chartType.Equals("ALL"))
-                    chartTypeObj.Lines = GetLineData(charts);
+                    chartTypeObj.Lines = GetLineData(charts, true);
 
                 if (chartType.Equals("PIE") || chartType.Equals("ALL"))
-                    chartTypeObj.Pies = GetPieData(charts);
+                    chartTypeObj.Pies = GetPieData(charts, true);
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -273,13 +308,13 @@ namespace CASPortal.Controllers
             if (charts != null)
             {
                 if (chartType.Equals("BAR") || chartType.Equals("ALL"))
-                    chartTypeObj.Bars = GetBarData(charts);
+                    chartTypeObj.Bars = GetBarData(charts, true);
 
                 if (chartType.Equals("LINE") || chartType.Equals("ALL"))
-                    chartTypeObj.Lines = GetLineData(charts);
+                    chartTypeObj.Lines = GetLineData(charts, true);
 
                 if (chartType.Equals("PIE") || chartType.Equals("ALL"))
-                    chartTypeObj.Pies = GetPieData(charts);
+                    chartTypeObj.Pies = GetPieData(charts, true);
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -303,6 +338,39 @@ namespace CASPortal.Controllers
             ViewBag.Areas = repoHelper.LoadArea();
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult TrendAnalysisByEquip(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy, string sortBy, bool exclude, string chartType)
+        {
+            bool sortedBy = false;
+            DataTable dtAnswers = new DataTable();
+            ReportRepository repository = new ReportRepository();
+            DateTime dtFrom = DateTime.Parse(fromDate, new CultureInfo("en-US"));
+            DateTime dtTo = DateTime.Parse(toDate, new CultureInfo("en-US"));
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+
+            sortedBy = sortBy.Equals("Location") ? false : true;
+
+            dtAnswers = AnswerTable(selectedNodes);
+            charts = repository.GetTrendAnalysisByEquipment(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy, sortedBy, exclude);
+
+            if (charts != null)
+            {
+                if (chartType.Equals("BAR") || chartType.Equals("ALL"))
+                    chartTypeObj.Bars = GetBarData(charts, false);
+
+                if (chartType.Equals("LINE") || chartType.Equals("ALL"))
+                    chartTypeObj.Lines = GetLineData(charts, false);
+
+                if (chartType.Equals("PIE") || chartType.Equals("ALL"))
+                    chartTypeObj.Pies = GetPieData(charts, false);
+
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(null, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult TrendAnalysisGroupLocation()

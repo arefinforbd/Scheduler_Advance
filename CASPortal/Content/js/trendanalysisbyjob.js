@@ -219,13 +219,11 @@ $("#btnPreview").click(function () {
                     $("#btnPieDownload").hide();
                     $("#btnBarDownload").hide();
                 }
-
-                LoadingComplete();
             }
             else {
-                LoadingComplete();
                 alert("There is no data to show.");
             }
+            LoadingComplete();
         },
         error: function (request) {
             LoadingComplete();

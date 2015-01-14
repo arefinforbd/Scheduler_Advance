@@ -1,6 +1,11 @@
 ﻿$(function () {
-    //$("#divSortBy").hide();
-    //$("#divFrequency").css("margin-bottom", "10px");
+    $("#chkExclude").prop("checked", true);
+    $("#hdnExclude").val("true");
+    $("#divExclude").show();
+});
+
+$("#chkExclude").click(function () {
+    $("#hdnExclude").val($(this).prop("checked"));
 });
 
 function LoadLineChart(data) {
@@ -178,6 +183,7 @@ function LoadBarChart(data) {
 
 $("#btnPreview").click(function () {
 
+    var sortBy;
     var labels = [];
     var strChartType = "All Charts";
 
@@ -188,11 +194,16 @@ $("#btnPreview").click(function () {
     $("#divPiePanel").hide();
     $("#divBarPanel").hide();
 
+    if ($("#rdoSerialNo").prop("checked") == true)
+        sortBy = "SerialNo";
+    if ($("#rdoLocation").prop("checked") == true)
+        sortBy = "Location";
+
     Loading();
     $.ajax({
-        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByQuestion",
+        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip",
         type: "POST",
-        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), chartType: "ALL" },
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), sortBy: sortBy, exclude: $("#hdnExclude").val(), chartType: "ALL" },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
@@ -218,13 +229,11 @@ $("#btnPreview").click(function () {
                     $("#btnPieDownload").hide();
                     $("#btnBarDownload").hide();
                 }
-
-                LoadingComplete();
             }
             else {
-                LoadingComplete();
                 alert("There is no data to show.");
             }
+            LoadingComplete();
         },
         error: function (request) {
             LoadingComplete();

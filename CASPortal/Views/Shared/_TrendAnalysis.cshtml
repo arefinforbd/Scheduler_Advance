@@ -17,224 +17,225 @@
     }
 </style>
 
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h3 class="page-header">Welcome, @HttpContext.Current.Session["CompanyName"].ToString()</h3>
-        </div>
-    </div>
+<div class="row">
+    <div class="col-lg-8" id="maintable">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <label>Trend Analysis Report @ViewBag.ReportType</label>
+            </div>
+            <div class="panel-body" id="divTrendReportFields">
+                <div class="row">
+                    <div class="col-lg-5" id="divLeftSide">
+                        @{Html.RenderPartial("_SiteNContract");}
 
-    <div class="row">
-        <div class="col-lg-8" id="maintable">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <label>Trend Analysis Report @ViewBag.ReportType</label>
-                </div>
-                <div class="panel-body" id="divTrendReportFields">
-                    <div class="row">
-                        <div class="col-lg-5" id="divLeftSide">
-                            @{Html.RenderPartial("_SiteNContract");}
-
-                            <div id="jstree" style="display:none;">
-                                @Html.Raw(@ViewBag.TreeNodes)
-                            </div>
-                            <br />
+                        <div id="jstree" style="display:none;">
+                            @Html.Raw(@ViewBag.TreeNodes)
                         </div>
-                        <div class="col-lg-7" id="divRightSide" style="display:none;">
-                            <div id="ddlArea" style="margin-left:35px;">
-                                <label>Area : </label>
-                                <div class="btn-group">
-                                    <a class="btn btn-info dropdown-toggle dropdown-Area" data-toggle="dropdown" href="#">
-                                        <span id="spanArea" data-bind="label"></span> <span class="caret"></span>
-                                    </a>
-                                    <ul id="ulArea" class="dropdown-menu scroll-menu">
-                                        @Html.Raw(ViewBag.Areas)
-                                    </ul>
-                                </div>
-                                <input type="hidden" name="hdnArea" id="hdnArea" />
-                            </div>
-                            <br />
-                            <div class="row" id="divFrequency">
-                                <div id="divTrendBy" class="col-lg-3" style="margin: 8px -73px 0 7px;">
-                                    <div>
-                                        <label>Trend By : </label>
-                                    </div>
-                                </div>
-                                <div id="divRadioWeeks" class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Weeks" id="rdoWeeks" name="rdoDate" checked="checked">
-                                        <label for="rdoWeeks">Weeks</label>
-                                    </div>
-                                </div>
-                                <div id="divRadioMonths" class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Section" id="rdoMonths" name="rdoDate">
-                                        <label for="rdoMonths">Months</label>
-                                    </div>
-                                </div>
-                                <div id="divJobDate" class="col-lg-3">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Job Date" id="rdoJobDate" name="rdoDate">
-                                        <label for="rdoJobDate">Job Date</label>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="hdnFrequency" id="hdnFrequency" value="1" />
-                            </div>
-                            <div class="row" id="divSortBy" style="margin-bottom: 10px;">
-                                <div id="divInnerSortBy" class="col-lg-3" style="margin: 8px -83px 0 17px;">
-                                    <div>
-                                        <label>Sort By : </label>
-                                    </div>
-                                </div>
-                                <div id="divSortBySerialNo" class="col-lg-3">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Serial No." id="rdoSerialNo" name="rdoSortBy" checked="checked">
-                                        <label for="rdoSerialNo">Serial No.</label>
-                                    </div>
-                                </div>
-                                <div id="divSortByLocation" class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Location" id="rdoLocation" name="rdoSortBy">
-                                        <label for="rdoLocation">Location</label>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="hdnSortBy" id="hdnSortBy" value="1" />
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-xs-6">
-                                    <label>Date from : </label>
-                                    <div class="btn-group">
-                                        <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer; width: 130px;">
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-xs-5">
-                                    <label>Date to : </label>
-                                    <div class="btn-group">
-                                        <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer; width: 130px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div id="divGroup" class="col-lg-8">
-                                    <label id="lblGroup">Group by No of Weeks: </label>
-                                    <div class="btn-group">
-                                        <input class="form-control input-sm text-center" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <br />
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <div id="div_btnContinue">
-                        <div id="ddlChartType" style="float: left">
+                    <div class="col-lg-7" id="divRightSide" style="display:none;">
+                        <div id="ddlArea" style="margin-left:35px;">
+                            <label>Area : </label>
                             <div class="btn-group">
-                                <a class="btn btn-default dropdown-toggle dropdown-ChartType" data-toggle="dropdown" href="#">
-                                    <span id="spanChartType" data-bind="label"></span> <span class="caret"></span>
+                                <a class="btn btn-info dropdown-toggle dropdown-Area" data-toggle="dropdown" href="#">
+                                    <span id="spanArea" data-bind="label"></span> <span class="caret"></span>
                                 </a>
-                                <ul id="ulChartType" class="dropdown-menu scroll-menu">
-                                    <li style='cursor:pointer'><a>All Charts</a></li>
-                                    <li style='cursor:pointer'><a>LINE</a></li>
-                                    <li style='cursor:pointer'><a>PIE</a></li>
-                                    <li style='cursor:pointer'><a>BAR</a></li>
+                                <ul id="ulArea" class="dropdown-menu scroll-menu">
+                                    @Html.Raw(ViewBag.Areas)
                                 </ul>
                             </div>
-                            <input type="hidden" name="hdnChartType" id="hdnChartType" />
+                            <input type="hidden" name="hdnArea" id="hdnArea" />
                         </div>
-                        <input id="btnPreview" class="btn btn-success submitClass" value="Preview" type="button" name="submit" style="margin-left:10px;">
-                        <input id="btnReset" class="btn btn-info" type="button" value="Reset" style="margin-left:10px;width:83px;">
+                        <br />
+                        <div class="row" id="divFrequency">
+                            <div id="divTrendBy" class="col-lg-3" style="margin: 8px -73px 0 7px;">
+                                <div>
+                                    <label>Trend By : </label>
+                                </div>
+                            </div>
+                            <div id="divRadioWeeks" class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Weeks" id="rdoWeeks" name="rdoDate" checked="checked">
+                                    <label for="rdoWeeks">Weeks</label>
+                                </div>
+                            </div>
+                            <div id="divRadioMonths" class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Section" id="rdoMonths" name="rdoDate">
+                                    <label for="rdoMonths">Months</label>
+                                </div>
+                            </div>
+                            <div id="divJobDate" class="col-lg-3">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Job Date" id="rdoJobDate" name="rdoDate">
+                                    <label for="rdoJobDate">Job Date</label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="hdnFrequency" id="hdnFrequency" value="1" />
+                        </div>
+                        <div class="row" id="divSortBy" style="margin-bottom: 10px;">
+                            <div id="divInnerSortBy" class="col-lg-3" style="margin: 8px -83px 0 17px;">
+                                <div>
+                                    <label>Sort By : </label>
+                                </div>
+                            </div>
+                            <div id="divSortBySerialNo" class="col-lg-3">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Serial No." id="rdoSerialNo" name="rdoSortBy" checked="checked">
+                                    <label for="rdoSerialNo">Serial No.</label>
+                                </div>
+                            </div>
+                            <div id="divSortByLocation" class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Location" id="rdoLocation" name="rdoSortBy">
+                                    <label for="rdoLocation">Location</label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="hdnSortBy" id="hdnSortBy" value="1" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-xs-5">
+                                <label>Date from : </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer; width: 130px;">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xs-5">
+                                <label>Date to : </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer; width: 130px;">
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div id="divGroup" class="col-lg-8">
+                                <label id="lblGroup">Group by No of Weeks: </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm text-center" id="txtGroup" name="txtGroup" value="1" style="background-color: #FFFFFF; width: 46px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="divExclude" class="col-lg-10" style="display:none;">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" value="Exclude Equipments with NO Activities" id="chkExclude" name="chkExclude">
+                                    <label for="chkExclude">Exclude Equipments with NO Activities</label>
+                                    <input type="hidden" id="hdnExclude" name="hdnExclude">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="divLoading"></div>
-            <br />
-
-            <form id="frmDownloadChart" method="post">
-                <input type="hidden" id="base64Data" name="base64Data" />
-                <input type="hidden" id="chartType" name="chartType" />
-            </form>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default" style="margin-left:-20px; width:105%;display:none;" id="divLinePanel">
-                        <div class="panel-heading">
-                            Line Chart
-                            <input id="btnLineDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
+            <div class="panel-footer">
+                <div id="div_btnContinue">
+                    <div id="ddlChartType" style="float: left">
+                        <div class="btn-group">
+                            <a class="btn btn-default dropdown-toggle dropdown-ChartType" data-toggle="dropdown" href="#">
+                                <span id="spanChartType" data-bind="label"></span> <span class="caret"></span>
+                            </a>
+                            <ul id="ulChartType" class="dropdown-menu scroll-menu">
+                                <li style='cursor:pointer'><a>All Charts</a></li>
+                                <li style='cursor:pointer'><a>LINE</a></li>
+                                <li style='cursor:pointer'><a>PIE</a></li>
+                                <li style='cursor:pointer'><a>BAR</a></li>
+                            </ul>
                         </div>
-                        <div class="panel-body" id="divPanelBodyLine">
-                            <div id="divLineCompanyInfo" class="text-center text-success">
-                                <b>Trend Analysis Chart</b><br />
-                                TemiSoft Pty Ltd<br />
-                                Date Range: 01/12/2014 to 31/12/2014<br /><br />
-                            </div>
-                            <div id="divLineLegend"></div>
-                            <div class="flot-chart" style="height: 120%;">
-                                <canvas id="flot-line-chart" height="400" width="900"></canvas>
-                            </div>
-                            <br />
-                            <div class="text-center text-warning" id="divLineFooter">
-                                <span style="font-size:11px;">© TEMISOFT PTY LTD 1997 - @System.DateTime.Today.Year. All Rights Reserved. ServicePRO® Licenced to: TEMISOFT DEVELOPMENT SYSTEM</span>
-                            </div>
-                        </div>
+                        <input type="hidden" name="hdnChartType" id="hdnChartType" />
                     </div>
+                    <input id="btnPreview" class="btn btn-success submitClass" value="Preview" type="button" name="submit" style="margin-left:10px;">
+                    <input id="btnReset" class="btn btn-info" type="button" value="Reset" style="margin-left:10px;width:83px;">
                 </div>
             </div>
+        </div>
+        <div id="divLoading"></div>
+        <br />
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default" style="margin-left: -20px; width: 105%; display: none;" id="divPiePanel">
-                        <div class="panel-heading">
-                            Pie Chart
-                            <input id="btnPieDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
-                        </div>
+        <form id="frmDownloadChart" method="post">
+            <input type="hidden" id="base64Data" name="base64Data" />
+            <input type="hidden" id="chartType" name="chartType" />
+        </form>
 
-                        <div class="panel-body" id="divPanelBodyPie">
-                            <div id="divPieCompanyInfo" class="text-center text-success">
-                                <b>Trend Analysis Chart</b><br />
-                                TemiSoft Pty Ltd<br />
-                                Date Range: 01/12/2014 to 31/12/2014<br />
-                            </div>
-                            <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-pie-chart"></div>
-                            </div>
-                            <div class="text-center text-warning" id="divPieFooter">
-                                <span style="font-size:11px;">© TEMISOFT PTY LTD 1997 - @System.DateTime.Today.Year. All Rights Reserved. ServicePRO® Licenced to: TEMISOFT DEVELOPMENT SYSTEM</span>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" style="margin-left:-20px; width:105%;display:none;" id="divLinePanel">
+                    <div class="panel-heading">
+                        Line Chart
+                        <input id="btnLineDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
                     </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default" style="margin-left: -20px; width: 105%; height: 105%; display: none;" id="divBarPanel">
-                        <div class="panel-heading">
-                            Bar Chart
-                            <input id="btnBarDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
+                    <div class="panel-body" id="divPanelBodyLine">
+                        <div id="divLineCompanyInfo" class="text-center text-success">
+                            <b>Trend Analysis Chart</b><br />
+                            TemiSoft Pty Ltd<br />
+                            Date Range: 01/12/2014 to 31/12/2014<br /><br />
                         </div>
-
-                        <div class="panel-body" id="divPanelBodyBar">
-                            <div id="divBarCompanyInfo" class="text-center text-success">
-                                <b>Trend Analysis Chart</b><br />
-                                TemiSoft Pty Ltd<br />
-                                Date Range: 01/12/2014 to 31/12/2014<br /><br />
-                            </div>
-                            <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-bar-chart"></div>
-                            </div>
-                            <br />
-                            <div class="text-center text-warning" id="divBarFooter">
-                                <span style="font-size:11px;">© TEMISOFT PTY LTD 1997 - @System.DateTime.Today.Year. All Rights Reserved. ServicePRO® Licenced to: TEMISOFT DEVELOPMENT SYSTEM</span>
-                            </div>
+                        <div id="divLineLegend"></div>
+                        <div class="flot-chart" style="height: 120%;">
+                            <canvas id="flot-line-chart" height="400" width="900"></canvas>
+                        </div>
+                        <br />
+                        <div class="text-center text-warning" id="divLineFooter">
+                            <span style="font-size:11px;">© TEMISOFT PTY LTD 1997 - @System.DateTime.Today.Year. All Rights Reserved. ServicePRO® Licenced to: TEMISOFT DEVELOPMENT SYSTEM</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        @{Html.RenderPartial("_Advertisements");}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" style="margin-left: -20px; width: 105%; display: none;" id="divPiePanel">
+                    <div class="panel-heading">
+                        Pie Chart
+                        <input id="btnPieDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
+                    </div>
+
+                    <div class="panel-body" id="divPanelBodyPie">
+                        <div id="divPieCompanyInfo" class="text-center text-success">
+                            <b>Trend Analysis Chart</b><br />
+                            TemiSoft Pty Ltd<br />
+                            Date Range: 01/12/2014 to 31/12/2014<br />
+                        </div>
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-pie-chart"></div>
+                        </div>
+                        <div class="text-center text-warning" id="divPieFooter">
+                            <span style="font-size:11px;">© TEMISOFT PTY LTD 1997 - @System.DateTime.Today.Year. All Rights Reserved. ServicePRO® Licenced to: TEMISOFT DEVELOPMENT SYSTEM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" style="margin-left: -20px; width: 105%; height: 105%; display: none;" id="divBarPanel">
+                    <div class="panel-heading">
+                        Bar Chart
+                        <input id="btnBarDownload" class="btn btn-warning btn-download-chart" type="button" value="Download Chart">
+                    </div>
+
+                    <div class="panel-body" id="divPanelBodyBar">
+                        <div id="divBarCompanyInfo" class="text-center text-success">
+                            <b>Trend Analysis Chart</b><br />
+                            TemiSoft Pty Ltd<br />
+                            Date Range: 01/12/2014 to 31/12/2014<br /><br />
+                        </div>
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-bar-chart"></div>
+                        </div>
+                        <br />
+                        <div class="text-center text-warning" id="divBarFooter">
+                            <span style="font-size:11px;">© TEMISOFT PTY LTD 1997 - @System.DateTime.Today.Year. All Rights Reserved. ServicePRO® Licenced to: TEMISOFT DEVELOPMENT SYSTEM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    @{Html.RenderPartial("_Advertisements");}
 </div>
 
 <script src="@Url.Content("~/Content/js/report.js")"></script>

@@ -64,6 +64,9 @@ namespace CASWCFService
         List<ChartData> GetTrendAnalysisByQuestion(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy);
 
         [OperationContract]
+        List<ChartData> GetTrendAnalysisByEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy, bool SortBy, bool IsExclude);
+
+        [OperationContract]
         List<Contract> GetContracts(string CompanyID, string CompanyPassword, string CustomerPassword, decimal CustomerID, string SiteNo, int Level4ID);
 
         [OperationContract]

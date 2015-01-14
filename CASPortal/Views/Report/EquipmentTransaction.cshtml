@@ -32,174 +32,166 @@
     }
 </style>
 
-<div id="page-wrapper">
+@using (Html.BeginForm("EquipmentTransaction", "Report", FormMethod.Post, new { encType = "multipart/form-data", id = "eqtransrepoform", name = "eqtransrepoform" }))
+{
     <div class="row">
-        <div class="col-lg-12">
-            <h3 class="page-header">Welcome, @HttpContext.Current.Session["CompanyName"].ToString()</h3>
-        </div>
-    </div>
+        <div class="col-lg-8" id="maintable">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <label>Equipment Transaction Report</label>
+                </div>
+                <div class="panel-body">
+                    @{Html.RenderPartial("_SiteNContract");}
 
-    @using (Html.BeginForm("EquipmentTransaction", "Report", FormMethod.Post, new { encType = "multipart/form-data", id = "eqtransrepoform", name = "eqtransrepoform" }))
-    {
-        <div class="row">
-            <div class="col-lg-8" id="maintable">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <label>Equipment Transaction Report</label>
-                    </div>
-                    <div class="panel-body">
-                        @{Html.RenderPartial("_SiteNContract");}
-
-                        <div id="divLower" style="display:none;">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
-                                    <label>Date from : </label>
-                                    <div class="btn-group">
-                                        <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
-                                    <label>Date to : </label>
-                                    <div class="btn-group">
-                                        <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
-                                    </div>
+                    <div id="divLower" style="display:none;">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
+                                <label>Date from : </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm" id="dtpFrom" name="dtpFrom" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
                                 </div>
                             </div>
-                            <div class="row" id="divLocation">
-                                <div class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Location" id="rdoLocation" checked="checked" name="rdoLocation">
-                                        <label for="rdoLocation">Location</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Section" id="rdoSection" name="rdoLocation">
-                                        <label for="rdoSection">Section</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Area" id="rdoArea" name="rdoLocation">
-                                        <label for="rdoArea">Area</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="DateTime" id="rdoDateTime" name="rdoLocation">
-                                        <label for="rdoDateTime">Date/Time</label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="radio radio-success">
-                                        <input type="radio" value="Single Section" id="rdoSingleSection" name="rdoLocation">
-                                        <label for="rdoSingleSection">Single Section</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" id="divPrintCheckboxes">
-                                <div id="divPrintDetails" class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
-                                    <div class="checkbox checkbox-success">
-                                        <input type="checkbox" value="Print Details" id="chkPrintDetails" name="chkPrintDetails">
-                                        <label for="chkPrintDetails">Print Details</label>
-                                        <input type="hidden" id="hdnPrintDetails" name="hdnPrintDetails">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                                    <div class="checkbox checkbox-success">
-                                        <input type="checkbox" value="PrintMaterials" id="chkPrintMaterials" name="chkPrintMaterials">
-                                        <label for="chkPrintMaterials">Print Materials</label>
-                                        <input type="hidden" id="hdnPrintMaterials" name="hdnPrintMaterials">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <label>Advanced Filtering</label>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="radio radio-success">
-                                                <input type="radio" value="None" id="rdoNone" checked="checked" name="rdoAdvance">
-                                                <label for="rdoNone">None</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <label>Tech : </label>
-                                            <div class="btn-group" id="divContract">
-                                                <a class="btn btn-info dropdown-toggle dropdown-Tech" data-toggle="dropdown" href="#">
-                                                    <span data-bind="label"></span> <span class="caret"></span>
-                                                </a>
-                                                <ul id="ulContracts1" class="dropdown-menu">
-                                                    @Html.Raw(ViewBag.Contracts)
-                                                </ul>
-                                            </div>
-                                            <input type="hidden" name="hdnTech" id="hdnTech" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="radio radio-success">
-                                                <input type="radio" value="Scanned" id="rdoScanned" name="rdoAdvance">
-                                                <label for="rdoScanned">Scanned</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="radio radio-success">
-                                                <input type="radio" value="UnScanned" id="rdoUnScanned" name="rdoAdvance">
-                                                <label for="rdoUnScanned">Un Scanned</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="radio radio-success">
-                                                <input type="radio" value="New Item" id="rdoNewItem" name="rdoAdvance">
-                                                <label for="rdoNewItem">New Item</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="checkbox checkbox-success">
-                                                <input type="checkbox" value="ShowActiveStations" id="chkShowActiveStations" name="chkShowActiveStations">
-                                                <label for="chkShowActiveStations">Show Active Stations</label>
-                                                <input type="hidden" id="hdnShowActiveStations" name="hdnShowActiveStations">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="radio radio-success">
-                                                <input type="radio" value="Replaced" id="rdoReplaced" name="rdoAdvance">
-                                                <label for="rdoReplaced">Replaced</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="checkbox checkbox-success">
-                                                <input type="checkbox" value="JobTimes" id="chkJobTimes" name="chkJobTimes">
-                                                <label for="chkJobTimes">Show Start/End Job Times</label>
-                                                <input type="hidden" id="hdnJobTimes" name="hdnJobTimes">
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 divDatePicker">
+                                <label>Date to : </label>
+                                <div class="btn-group">
+                                    <input class="form-control input-sm" id="dtpTo" name="dtpTo" placeholder="Click to select" readonly="" style="background-color: #FFFFFF; cursor: pointer;">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-footer">
-                        <div id="div_btnContinue">
-                            <input type="hidden" id="hdnFormSubmit" name="hdnFormSubmit" />
-                            <input type="button" class="btn btn-info" name="operation" id="process" onclick="return Validate()" value="Preview" />
+                        <div class="row" id="divLocation">
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Location" id="rdoLocation" checked="checked" name="rdoLocation">
+                                    <label for="rdoLocation">Location</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Section" id="rdoSection" name="rdoLocation">
+                                    <label for="rdoSection">Section</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Area" id="rdoArea" name="rdoLocation">
+                                    <label for="rdoArea">Area</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="DateTime" id="rdoDateTime" name="rdoLocation">
+                                    <label for="rdoDateTime">Date/Time</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="radio radio-success">
+                                    <input type="radio" value="Single Section" id="rdoSingleSection" name="rdoLocation">
+                                    <label for="rdoSingleSection">Single Section</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="divPrintCheckboxes">
+                            <div id="divPrintDetails" class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" value="Print Details" id="chkPrintDetails" name="chkPrintDetails">
+                                    <label for="chkPrintDetails">Print Details</label>
+                                    <input type="hidden" id="hdnPrintDetails" name="hdnPrintDetails">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" value="PrintMaterials" id="chkPrintMaterials" name="chkPrintMaterials">
+                                    <label for="chkPrintMaterials">Print Materials</label>
+                                    <input type="hidden" id="hdnPrintMaterials" name="hdnPrintMaterials">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <label>Advanced Filtering</label>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="None" id="rdoNone" checked="checked" name="rdoAdvance">
+                                            <label for="rdoNone">None</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <label>Tech : </label>
+                                        <div class="btn-group" id="divContract">
+                                            <a class="btn btn-info dropdown-toggle dropdown-Tech" data-toggle="dropdown" href="#">
+                                                <span data-bind="label"></span> <span class="caret"></span>
+                                            </a>
+                                            <ul id="ulContracts1" class="dropdown-menu">
+                                                @Html.Raw(ViewBag.Contracts)
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" name="hdnTech" id="hdnTech" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="Scanned" id="rdoScanned" name="rdoAdvance">
+                                            <label for="rdoScanned">Scanned</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="UnScanned" id="rdoUnScanned" name="rdoAdvance">
+                                            <label for="rdoUnScanned">Un Scanned</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="New Item" id="rdoNewItem" name="rdoAdvance">
+                                            <label for="rdoNewItem">New Item</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" value="ShowActiveStations" id="chkShowActiveStations" name="chkShowActiveStations">
+                                            <label for="chkShowActiveStations">Show Active Stations</label>
+                                            <input type="hidden" id="hdnShowActiveStations" name="hdnShowActiveStations">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="radio radio-success">
+                                            <input type="radio" value="Replaced" id="rdoReplaced" name="rdoAdvance">
+                                            <label for="rdoReplaced">Replaced</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" value="JobTimes" id="chkJobTimes" name="chkJobTimes">
+                                            <label for="chkJobTimes">Show Start/End Job Times</label>
+                                            <input type="hidden" id="hdnJobTimes" name="hdnJobTimes">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="divLoading"></div>
+                <div class="panel-footer">
+                    <div id="div_btnContinue">
+                        <input type="hidden" id="hdnFormSubmit" name="hdnFormSubmit" />
+                        <input type="button" class="btn btn-info" name="operation" id="process" onclick="return Validate()" value="Preview" />
+                    </div>
+                </div>
             </div>
-            @{Html.RenderPartial("_Advertisements");}
+            <div id="divLoading"></div>
         </div>
-    }
-</div>
+        @{Html.RenderPartial("_Advertisements");}
+    </div>
+}
 
 <script src="@Url.Content("~/Content/js/equipmenttransactionreport.js")"></script>
