@@ -1,4 +1,6 @@
-﻿<link href="@Url.Content("~/Content/tree/themes/default/style.min.css")" rel="stylesheet" type="text/css" />
+﻿@using CASPortal.Helper;
+
+<link href="@Url.Content("~/Content/tree/themes/default/style.min.css")" rel="stylesheet" type="text/css" />
 
 <style>
     #ddlSites {
@@ -240,3 +242,16 @@
 
 <script src="@Url.Content("~/Content/js/report.js")"></script>
 <script src="@Url.Content("~/Content/js/trendanalysisreport.js")"></script>
+
+@{
+    if (!BaseHelper.AdvertisementStatus)
+    {
+        <script>
+            $(function () {
+                if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()) == false){
+                    $("#divSortByLocation").css("margin-left", "-46px");
+                }
+            });
+        </script>
+    }
+}

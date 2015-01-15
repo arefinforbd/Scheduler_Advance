@@ -70,11 +70,6 @@ function Validate() {
 
 $(function () {
 
-    //if ((!!navigator.userAgent.match(/Trident.*rv\:11\./)) || (/msie/.test(navigator.userAgent.toLowerCase())))
-    //    alert("IE");
-    //else
-    //    alert("NOT IE");
-
     var ulArea = $("#ulArea > :first-child").text();
     $(".dropdown-Area").find('[data-bind="label"]').text(ulArea);
 

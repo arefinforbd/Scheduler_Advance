@@ -22,6 +22,10 @@ function Validate() {
 
 $(function () {
 
+    $("#reportSubMenu").addClass("in");
+    $("#reportSubMenu").css("height", "auto");
+    //$("#liReport104").find('[href="http://localhost:56735/Report/TrendAnalysisGroupLocation"]').css("background-color", "#DDDDDD");
+
     $("#ddlConracts").hide();
 
     var ulSite = $("#ulSites > :first-child").text();
@@ -240,6 +244,10 @@ function ResetTrendAnalysisFields() {
     $("#txtGroup").css("background-color", "#FFFFFF");
     $("#txtGroup").val("1");
     $("#hdnFrequency").val("1");
+
+    $("#rdoSerialNo").prop("checked", true);
+    $("#chkExclude").prop("checked", true);
+    $("#hdnExclude").val("true");
 
     $("#ddlConracts").hide();
     $("#jstree").hide();
