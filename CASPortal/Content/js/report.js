@@ -24,7 +24,7 @@ $(function () {
 
     $("#reportSubMenu").addClass("in");
     $("#reportSubMenu").css("height", "auto");
-    //$("#liReport104").find('[href="http://localhost:56735/Report/TrendAnalysisGroupLocation"]').css("background-color", "#DDDDDD");
+    $("#reportMenu").parent().addClass("active");
 
     $("#ddlConracts").hide();
 

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "TrendAnalysisGroupLocation";
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.ReportType = "Group Location";
@@ -8,9 +7,3 @@
 @{Html.RenderPartial("_TrendAnalysis");}
 
 <script src="@Url.Content("~/Content/js/trendanalysisgrouplocation.js")"></script>
-
-<script>
-    $(function () {
-        $("#liReport104").find('[href="http://localhost:56735/Report/TrendAnalysisGroupLocation"]').css("background-color", "#DDDDDD");
-    });
-</script>

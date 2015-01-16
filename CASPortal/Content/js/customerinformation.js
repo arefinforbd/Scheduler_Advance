@@ -32,6 +32,8 @@ $(document).ready(function () {
         format: '%A %B %d, %Y %I:%M:%S' // 12-hour
     };
     $('#livedateTime').jclock(datetime);
+
+    $("#side-menu").find('[href="' + location.href + '"]').css("background-color", "#DDDDDD");
 });
 
 function GetAdvertiseStatus() {

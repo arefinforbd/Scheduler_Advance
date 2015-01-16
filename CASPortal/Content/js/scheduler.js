@@ -158,6 +158,7 @@ $(document.body).on('click', '#ulSites li', function (event) {
             ResetForSite();
     }
     else {
+        $("#ddlItems").hide();
         $("#divDatePicker").hide();
         $("#tblDate").hide();
         $("#tblTime").hide();
@@ -585,10 +586,10 @@ function generateTimes() {
                         endingHr = GetEndingHour(td);
 
                         if (td % 2 > 0) {
-                            html += '<td starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
+                            html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
                         }
                         else {
-                            html += '<td starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
+                            html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
                         }
                     }
                     html += '</tr>';
