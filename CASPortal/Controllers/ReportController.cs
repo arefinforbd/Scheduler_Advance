@@ -393,11 +393,18 @@ namespace CASPortal.Controllers
 
         public ActionResult GetContracts(string siteNo)
         {
-            ReportHelper repoHelper = new ReportHelper();
+            try
+            {
+                ReportHelper repoHelper = new ReportHelper();
 
-            string contracts = repoHelper.LoadContract(siteNo);
+                string contracts = repoHelper.LoadContract(siteNo);
 
-            return Json(contracts, JsonRequestBehavior.AllowGet);
+                return Json(contracts, JsonRequestBehavior.AllowGet);
+            }
+            catch (TimeoutException ex)
+            {
+                return Json("Session timed out", JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult DownloadChartImage(string base64Data, string chartType)

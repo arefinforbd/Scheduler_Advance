@@ -204,6 +204,12 @@ function LoadContracts() {
                 $("#divContractLoading").hide();
                 $("#divContractLoading").html("");
             }
+            if (data == "Session timed out") {
+                $("#divContractLoading").hide();
+                $("#divContractLoading").html("");
+                alert("Session timed out. Please log in again.");
+                window.location.href = $("#hdnSiteURL").val();
+            }
         },
         error: function (request) {
             $("#divContractLoading").hide();

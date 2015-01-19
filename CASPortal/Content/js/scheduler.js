@@ -585,11 +585,22 @@ function generateTimes() {
                         startingHr = GetStartingHour(td);
                         endingHr = GetEndingHour(td);
 
-                        if (td % 2 > 0) {
-                            html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
+
+                        if (/iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())) {
+                            if (td % 2 > 0) {
+                                html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
+                            }
+                            else {
+                                html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
+                            }
                         }
                         else {
-                            html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
+                            if (td % 2 > 0) {
+                                html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td00"></td>';
+                            }
+                            else {
+                                html += '<td style="cursor: pointer;" starthour="' + startingHr + '" colspan="' + (_duration * 2) + '" title="' + (startingHr + "-" + endingHr) + '" combid="id' + td + tr + '" id="id' + td + '" row="' + tr + '" data-target="#myModal" data-toggle="modal" class="tdTime td30"></td>';
+                            }
                         }
                     }
                     html += '</tr>';

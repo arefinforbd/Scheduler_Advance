@@ -17,6 +17,9 @@ namespace CASPortal.WebParser
             DataSet ds = new DataSet();
             CASWCFServiceClient cas = new CASWCFServiceClient();
 
+            if (HttpContext.Current.Session["CompanyID"] == null)
+                throw new TimeoutException("Session timed out");
+
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
