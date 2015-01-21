@@ -61,6 +61,38 @@ namespace CASPortal.WebParser
             return null;
         }
 
+        public List<ChartData> GetTrendAnalysis(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool jobdate)
+        {
+            try
+            {
+                ChartData[] chartArr = null;
+                List<ChartData> charts = new List<ChartData>();
+                CASWCFServiceClient cas = new CASWCFServiceClient();
+
+                string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+                string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+                decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+                int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+                chartArr = cas.GetTrendAnalysis(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy, jobdate);
+
+                if (chartArr != null)
+                {
+                    foreach (ChartData chart in chartArr)
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, SerialNumber = chart.SerialNumber, Area = chart.Area, Point = chart.Point });
+
+                    return charts;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        
         public List<ChartData> GetTrendAnalysisByJob(int siteNo, int contractNo, DataTable answers, string area, DateTime dtFrom, DateTime dtTo)
         {
             try

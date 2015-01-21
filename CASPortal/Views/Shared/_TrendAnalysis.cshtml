@@ -36,7 +36,7 @@
                         <br />
                     </div>
                     <div class="col-lg-7" id="divRightSide" style="display:none;">
-                        <div id="ddlArea" style="margin-left:35px;">
+                        <div id="ddlArea" style="margin: 0 35px 20px 0;">
                             <label>Area : </label>
                             <div class="btn-group">
                                 <a class="btn btn-info dropdown-toggle dropdown-Area" data-toggle="dropdown" href="#">
@@ -48,7 +48,6 @@
                             </div>
                             <input type="hidden" name="hdnArea" id="hdnArea" />
                         </div>
-                        <br />
                         <div class="row" id="divFrequency">
                             <div id="divTrendBy" class="col-lg-3" style="margin: 8px -73px 0 7px;">
                                 <div>
@@ -95,7 +94,7 @@
                             </div>
                             <input type="hidden" name="hdnSortBy" id="hdnSortBy" value="1" />
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 20px;">
                             <div class="col-lg-6 col-xs-5">
                                 <label>Date from : </label>
                                 <div class="btn-group">
@@ -109,7 +108,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br />
                         <div class="row">
                             <div id="divGroup" class="col-lg-8">
                                 <label id="lblGroup">Group by No of Weeks: </label>
@@ -124,6 +122,15 @@
                                     <input type="checkbox" value="Exclude Equipments with NO Activities" id="chkExclude" name="chkExclude">
                                     <label for="chkExclude">Exclude Equipments with NO Activities</label>
                                     <input type="hidden" id="hdnExclude" name="hdnExclude">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="divUseJobDate" class="col-lg-10" style="display:none;">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" value="Use Job Date" id="chkUseJobDate" name="chkUseJobDate">
+                                    <label for="chkUseJobDate">Use Job Date</label>
+                                    <input type="hidden" id="hdnUseJobDate" name="hdnUseJobDate">
                                 </div>
                             </div>
                         </div>

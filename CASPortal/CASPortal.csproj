@@ -119,6 +119,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CustomerInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -250,6 +251,7 @@
     <Content Include="Content\js\sb-admin-2.js" />
     <Content Include="Content\js\scheduler.js" />
     <Content Include="Content\js\sendcustomerinformation.js" />
+    <Content Include="Content\js\trendanalysis.js" />
     <Content Include="Content\js\trendanalysisbyequip.js" />
     <Content Include="Content\js\trendanalysisbyjob.js" />
     <Content Include="Content\js\trendanalysisbyquestion.js" />
@@ -392,6 +394,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisByQuestionResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetTrendAnalysisTreeNodesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -459,6 +464,7 @@
     <Content Include="Views\Report\InstalledEquipment.cshtml" />
     <Content Include="Views\Report\EquipmentReport.cshtml" />
     <Content Include="Views\Shared\_SiteNContract.cshtml" />
+    <Content Include="Views\Report\TrendAnalysis.cshtml" />
     <None Include="Service References\CASWCFService\CASWCFService.wsdl" />
     <None Include="Service References\CASWCFService\CASWCFService.xsd">
       <SubType>Designer</SubType>

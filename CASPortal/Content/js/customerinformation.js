@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("#homeMenu").attr("href", $("#hdnSiteURL").val() + "/CustomerInformation/WelcomeMessage");
     if ($("#hdnOnlyCAS").val() == "false") {
         $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
+        $("#report108").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysis");
         $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByJob");
         $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByQuestion");
         $("#report103").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip");

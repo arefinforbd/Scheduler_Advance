@@ -23,8 +23,8 @@
 
                     if (i < 1) {
                         html += '<tr>'
-                            + '<td style="background-color: #f9f9c0;"' + locationStyle + '" location=' + loc.Location + '>' + loc.SequenceNo + '</td>'
-                            + '<td style="background-color: #f9f9c0;"' + locationStyle + '" location=' + loc.Location + '>' + loc.Location + '</td>'
+                            + '<td style="background-color: #f9f9c0; font-weight: bold;"' + locationStyle + '" location=' + loc.Location + '>' + loc.SequenceNo + '</td>'
+                            + '<td style="background-color: #f9f9c0; font-weight: bold;"' + locationStyle + '" location=' + loc.Location + '>' + loc.Location + '</td>'
                             + '</tr>';
                     }
                     else {
