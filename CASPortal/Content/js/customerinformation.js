@@ -4,24 +4,7 @@ var listobjectpub = $("#pubfolder > :first-child");
 $(document).ready(function () {
     hideSbtBtn();
     $("#logoutMenu").attr("href", $("#hdnSiteURL").val() + "/Login/Logout");
-    $("#homeMenu").attr("href", $("#hdnSiteURL").val() + "/CustomerInformation/WelcomeMessage");
-    if ($("#hdnOnlyCAS").val() == "false") {
-        $("#schedulerMenu").attr("href", $("#hdnSiteURL").val() + "/Scheduler");
-        $("#report108").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysis");
-        $("#report101").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByJob");
-        $("#report102").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByQuestion");
-        $("#report103").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip");
-        $("#report104").attr("href", $("#hdnSiteURL").val() + "/Report/TrendAnalysisGroupLocation");
-        $("#report105").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentTransaction");
-        $("#report106").attr("href", $("#hdnSiteURL").val() + "/Report/InstalledEquipment");
-        $("#report107").attr("href", $("#hdnSiteURL").val() + "/Report/EquipmentReport");
-    }
-    else
-    {
-        $("#mainMenu").hide();
-        $("#schedulerMenu").hide();
-        $("#reportMenu").hide();
-    }
+
     var pvtfirstval = $("#pvtfolder > :first-child").text();
     var pubfirstval = $("#pubfolder > :first-child").text();
     $("#pvtfolder > :first-child").hide();

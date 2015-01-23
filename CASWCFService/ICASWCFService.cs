@@ -58,6 +58,9 @@ namespace CASWCFService
         TreeNode GetTrendAnalysisTreeNodes(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
 
         [OperationContract]
+        List<ChartData> GetTrendAnalysis(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy, bool IsUseDate);
+
+        [OperationContract]
         List<ChartData> GetTrendAnalysisByJob(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, DateTime FromDate, DateTime ToDate);
 
         [OperationContract]
@@ -77,5 +80,8 @@ namespace CASWCFService
 
         [OperationContract]
         Equipment GetEquipmentReportBLOB(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, decimal CustomerIDFrom, decimal CustomerIDTo, int ContractFrom, int ContractTo, int Sorting, int Status);
+
+        [OperationContract]
+        List<NavigationMenu> GetNavigationMenu(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, string RootMenu);
     }
 }

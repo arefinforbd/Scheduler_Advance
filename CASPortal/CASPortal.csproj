@@ -113,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -129,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\BaseHelper.cs" />
+    <Compile Include="Helper\NavigationMenuHelper.cs" />
     <Compile Include="Helper\ReportHelper.cs" />
     <Compile Include="Models\BarData.cs" />
     <Compile Include="Models\ChartType.cs" />
@@ -140,6 +140,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\NavigationMenuRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\SchedulerRepository.cs" />
     <Compile Include="Service References\CASWCFService\Reference.cs">
@@ -147,6 +148,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="WebParser\NavigationMenuParser.cs" />
     <Compile Include="WebParser\ReportParser.cs" />
     <Compile Include="WebParser\SchedulerParser.cs" />
   </ItemGroup>
@@ -364,6 +366,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetInstalledEquipmentResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetNavigationMenuResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetPrivateFileInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -404,6 +409,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.LoginProcessResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.NavigationMenu.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Site.datasource">

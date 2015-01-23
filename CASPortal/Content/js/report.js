@@ -22,8 +22,8 @@ function Validate() {
 
 $(function () {
 
-    $("#reportSubMenu").addClass("in");
-    $("#reportSubMenu").css("height", "auto");
+    $(".ulSubMenu").addClass("in");
+    $(".ulSubMenu").css("height", "auto");
     $("#reportMenu").parent().addClass("active");
 
     $("#ddlConracts").hide();

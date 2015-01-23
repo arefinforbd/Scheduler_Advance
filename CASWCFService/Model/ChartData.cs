@@ -18,6 +18,8 @@ namespace CASWCFService.Model
         [DataMember]
         public string Question { get; set; }
         [DataMember]
+        public string Area { get; set; }
+        [DataMember]
         public double Point { get; set; }
     }
 }

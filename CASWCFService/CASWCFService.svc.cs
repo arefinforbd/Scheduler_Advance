@@ -789,6 +789,57 @@ namespace CASWCFService
             }
         }
 
+        public List<ChartData> GetTrendAnalysis(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy, bool IsUseDate)
+        {
+            string responseMessage = "";
+            string message = "";
+            DataSet dsChart;
+            ChartData chart;
+            List<ChartData> charts = new List<ChartData>();
+            StrongTypesNS.ds_chart_bar2DataSet chartDataset;
+            StrongTypesNS.ds_answers2DataSet dsAnswers = new StrongTypesNS.ds_answers2DataSet();
+
+            try
+            {
+                foreach (DataRow row in answers.Rows)
+                {
+                    dsAnswers.Tables[0].Rows.Add(row["RootNode"].ToString(), Convert.ToDecimal(row["SectionID"]),
+                        Convert.ToDecimal(row["QuestionID"]), "", Convert.ToInt32(row["AnswerID"]), row["SectionDesc"].ToString(),
+                        row["QuestionDesc"].ToString(), row["AnswerDesc"].ToString(), row["SectionCaption"].ToString(),
+                        row["QuestionCaption"].ToString());
+                }
+
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                message = cus.ws_bartrdalys(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Area, Frequency, FromDate, ToDate, GroupBy, IsUseDate, out chartDataset, out responseMessage);
+                dsChart = (DataSet)chartDataset;
+
+                if (dsChart != null && dsChart.Tables["tt_chart_bar"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsChart.Tables["tt_chart_bar"].Rows)
+                    {
+                        chart = new ChartData();
+
+                        chart.SerialNumber = row["ttcb_serialnumber"].ToString();
+                        chart.Area = row["ttcb_area"].ToString();
+                        chart.DateLabel = Convert.ToDateTime(row["ttcb_date"]).ToString("dd/MM/yyyy");
+                        chart.Point = Convert.ToDouble(row["ttcb_points"]);
+
+                        charts.Add(chart);
+                    }
+                }
+                else
+                    return null;
+
+                return charts;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }        
+        
         public List<ChartData> GetTrendAnalysisByJob(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, DateTime FromDate, DateTime ToDate)
         {
             string responseMessage;
@@ -845,7 +896,7 @@ namespace CASWCFService
             DataSet dsChart;
             ChartData chart;
             List<ChartData> charts = new List<ChartData>();
-            StrongTypesNS.ds_chart_bar3DataSet chartDataset;
+            StrongTypesNS.ds_chart_bar4DataSet chartDataset;
             StrongTypesNS.ds_answers2DataSet dsAnswers = new StrongTypesNS.ds_answers2DataSet();
 
             try
@@ -896,7 +947,7 @@ namespace CASWCFService
             DataSet dsChart;
             ChartData chart;
             List<ChartData> charts = new List<ChartData>();
-            StrongTypesNS.ds_chart_bar2DataSet chartDataset;
+            StrongTypesNS.ds_chart_bar3DataSet chartDataset;
             StrongTypesNS.ds_answers2DataSet dsAnswers = new StrongTypesNS.ds_answers2DataSet();
 
             try
@@ -1090,6 +1141,51 @@ namespace CASWCFService
             {
                 return null;
             }
+        }
+
+        public List<NavigationMenu> GetNavigationMenu(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, string RootMenu)
+        {
+            DataSet ds;
+            NavigationMenu navMenu;
+            List<NavigationMenu> navMenus = new List<NavigationMenu>();
+            StrongTypesNS.ds_menulineDataSet dsMenu;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                cus.ldwebmenu(Level4ID, CompanyID, RootMenu, out dsMenu);
+                ds = (DataSet)dsMenu;
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        navMenu = new NavigationMenu();
+
+                        navMenu.MenuName = row["m_name"].ToString();
+                        navMenu.MenuOrder = Convert.ToInt32(row["ml_order"]);
+                        navMenu.MenuTitle = row["ml_title"].ToString();
+                        navMenu.MenuCalls = row["ml_calls"].ToString();
+                        navMenu.MenuCanSee = row["ml_cansee"].ToString();
+                        navMenu.MenuType = Convert.ToBoolean(row["ml_type"]);
+                        navMenu.MenuImageNo = Convert.ToInt32(row["ml_imageno"]);
+                        navMenu.Level4 = Convert.ToInt32(row["ml_lvl4_sequence"]);
+                        navMenu.MenuDescription = row["ml_menu_desc"].ToString();
+
+                        navMenus.Add(navMenu);
+                    }
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return navMenus;
         }
 
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)
