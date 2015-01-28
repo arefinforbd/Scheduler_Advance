@@ -2,6 +2,14 @@
     $("#divSortBy").hide();
     $("#divJobDate").hide();
     $("#divFrequency").css("margin-bottom", "10px");
+    $("#chkUseJobDate").prop("checked", true);
+    $("#hdnUseJobDate").val("true");
+    $("#divUseJobDate").show();
+    $("#divTrendBy").css("margin", "8px -66px 0 0");
+});
+
+$("#chkUseJobDate").click(function () {
+    $("#hdnUseJobDate").val($(this).prop("checked"));
 });
 
 function LoadLineChart(data) {

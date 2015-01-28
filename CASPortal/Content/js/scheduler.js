@@ -133,7 +133,7 @@ $(document.body).on('click', '#ulSites li', function (event) {
     _listSite.css("background-color", "#FFFFFF");
     _listSite.removeClass("selected");
     $(this).addClass("selected");
-    $("#ddlItems").show();
+    //$("#ddlItems").show();
 
     if (_listSite != $(this)) {
         _listSite.show();

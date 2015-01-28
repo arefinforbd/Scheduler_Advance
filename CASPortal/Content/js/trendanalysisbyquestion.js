@@ -1,6 +1,7 @@
 ﻿$(function () {
     $("#divSortBy").hide();
     $("#divFrequency").css("margin-bottom", "10px");
+    $("#ddlArea").hide();
 });
 
 function LoadLineChart(data) {

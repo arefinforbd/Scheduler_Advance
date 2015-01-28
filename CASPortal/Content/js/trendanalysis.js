@@ -3,6 +3,8 @@
     $("#chkUseJobDate").prop("checked", true);
     $("#hdnUseJobDate").val("true");
     $("#divUseJobDate").show();
+    $("#divFrequency").css("margin-bottom", "10px");
+    $("#divTrendBy").css("margin", "8px -66px 0 0");
 });
 
 $("#chkUseJobDate").click(function () {

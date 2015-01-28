@@ -2,6 +2,7 @@
     $("#chkExclude").prop("checked", true);
     $("#hdnExclude").val("true");
     $("#divExclude").show();
+    $("#ddlArea").hide();
 });
 
 $("#chkExclude").click(function () {
