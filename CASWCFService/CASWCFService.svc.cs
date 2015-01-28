@@ -889,7 +889,7 @@ namespace CASWCFService
             }
         }
 
-        public List<ChartData> GetTrendAnalysisByQuestion(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy)
+        public List<ChartData> GetTrendAnalysisByQuestion(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy)
         {
             string responseMessage = "";
             string message = "";
@@ -912,7 +912,7 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                message = cus.ws_bartrdbyque(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Area, Frequency, FromDate, ToDate, GroupBy, out chartDataset, out responseMessage);
+                message = cus.ws_bartrdbyque(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Frequency, FromDate, ToDate, GroupBy, out chartDataset, out responseMessage);
                 dsChart = (DataSet)chartDataset;
 
                 if (dsChart != null && dsChart.Tables["tt_chart_bar"].Rows.Count > 0)
@@ -940,7 +940,7 @@ namespace CASWCFService
             }
         }
 
-        public List<ChartData> GetTrendAnalysisByEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, string Area, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy, bool SortBy, bool IsExclude)
+        public List<ChartData> GetTrendAnalysisByEquipment(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, int SiteNo, int ContractNo, DataTable answers, int Frequency, DateTime FromDate, DateTime ToDate, int GroupBy, bool SortBy, bool IsExclude)
         {
             string responseMessage = "";
             string message = "";
@@ -963,7 +963,7 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                message = cus.ws_bartrdbyequjob(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Area, Frequency, FromDate, ToDate, GroupBy, SortBy, IsExclude, out chartDataset, out responseMessage);
+                message = cus.ws_bartrdbyequjob(Level4ID, CustomerID, SiteNo, ContractNo, dsAnswers, Frequency, FromDate, ToDate, GroupBy, SortBy, IsExclude, out chartDataset, out responseMessage);
                 dsChart = (DataSet)chartDataset;
 
                 if (dsChart != null && dsChart.Tables["tt_chart_bar"].Rows.Count > 0)
@@ -1186,6 +1186,45 @@ namespace CASWCFService
             }
 
             return navMenus;
+        }
+
+        public List<EmployeeTech> GetEmployeeTech(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID)
+        {
+            DataSet ds;
+            EmployeeTech emp = new EmployeeTech();
+            List<EmployeeTech> emps = new List<EmployeeTech>();
+            StrongTypesNS.ds_emmstrDataSet dsEmployee;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                cus.ws_getemmstr(Level4ID, out dsEmployee);
+                ds = (DataSet)dsEmployee;
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        emp = new EmployeeTech();
+
+                        emp.Code = row["emm_code"].ToString();
+                        emp.FirstName = row["emm_fname"].ToString();
+                        emp.LastName = row["emm_lname"].ToString();
+
+                        emps.Add(emp);
+                    }
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return emps;
         }
 
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)

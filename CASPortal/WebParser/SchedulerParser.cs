@@ -156,24 +156,6 @@ namespace CASPortal.WebParser
 
             item.TimeSlots = timeSlots.ToArray();
 
-            /*
-            item.TimeSlots = new List<TimeSlot>(){
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "9",
-                    EndTime = "10"
-                },
-                new TimeSlot
-                {
-                    ItemID = 2,
-                    Date = Convert.ToDateTime("03/Nov/2014").ToString("dd/MMM/yyyy"),
-                    StartTime = "14",
-                    EndTime = "16"
-                }
-            };*/
-
             return item;
         }
 

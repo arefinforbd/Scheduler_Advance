@@ -150,5 +150,23 @@ namespace CASPortal.Helper
 
             return sbArea.ToString();
         }
+
+        public string LoadTech()
+        {
+            List<EmployeeTech> emps = new List<EmployeeTech>();
+            StringBuilder sb = new StringBuilder("");
+            ReportRepository repository = new ReportRepository();
+
+            sb.Append("<li style='cursor:pointer'><a>[ALL]</a></li>");
+            emps = repository.GetEmployeeTech();
+
+            if (emps == null)
+                return sb.ToString();
+
+            foreach (var emp in emps)
+                sb.Append("<li id=" + emp.Code + " style='cursor:pointer'><a>" + emp.Code + "</a></li>");
+
+            return sb.ToString();
+        }
     }
 }

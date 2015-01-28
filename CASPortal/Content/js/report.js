@@ -119,6 +119,7 @@ $(function () {
             if (location.href.indexOf("Report/EquipmentTransaction") > 0 || location.href.indexOf("Report/EquipmentReport") > 0) {
                 $("#ddlConracts").hide();
                 $("#divLower").hide();
+                ResetTech();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
                 ResetSite();
@@ -174,6 +175,7 @@ $(function () {
         else {
             if (location.href.indexOf("Report/EquipmentTransaction") > 0 || location.href.indexOf("Report/EquipmentReport") > 0) {
                 $("#divLower").hide();
+                ResetTech();
             }
             if (location.href.indexOf("Report/TrendAnalysis") > 0) {
                 ResetTrendAnalysisFields();
@@ -224,6 +226,13 @@ function ResetSite() {
     $(".dropdown-Site").find('[data-bind="label"]').text(ulSite);
     _listSite.css("background-color", "#FFFFFF");
     _listSite = $("#ulSites > :first-child");
+}
+
+function ResetTech() {
+    var ulTech = $("#ulTechs li").eq(0).text();
+    $(".dropdown-Tech").find('[data-bind="label"]').text(ulTech);
+    _listTech.css("background-color", "#FFFFFF");
+    $("#hdnTech").val("");
 }
 
 function ResetTrendAnalysisFields() {

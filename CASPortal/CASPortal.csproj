@@ -336,6 +336,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.DayHour.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.EmployeeTech.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Equipment.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -355,6 +358,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetCustomerSiteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetEmployeeTechResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetEquipmentReportBLOBResponse.datasource">

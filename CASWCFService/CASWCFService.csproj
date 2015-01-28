@@ -39,22 +39,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CustWebAccProj, Version=2.0.5499.12564, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CustWebAccProj, Version=2.0.5506.23966, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\21_01_2015\CustWebAccProj.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\28_01_2015\CustWebAccProj.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Progress.Messages, Version=10.1.2.36659, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\21_01_2015\Progress.Messages.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\28_01_2015\Progress.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Progress.o4glrt, Version=10.1.2.36775, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\21_01_2015\Progress.o4glrt.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\28_01_2015\Progress.o4glrt.dll</HintPath>
     </Reference>
     <Reference Include="Progress.ssl, Version=10.1.2.36736, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References - .NET\21_01_2015\Progress.ssl.dll</HintPath>
+      <HintPath>..\..\..\References - .NET\28_01_2015\Progress.ssl.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -89,6 +89,7 @@
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contract.cs" />
     <Compile Include="Model\DayHour.cs" />
+    <Compile Include="Model\EmployeeTech.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Folder.cs" />
     <Compile Include="Model\NavigationMenu.cs" />

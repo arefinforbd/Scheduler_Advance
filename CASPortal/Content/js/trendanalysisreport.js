@@ -1,5 +1,6 @@
 ﻿var _selectedNodes = [];
 var _listArea = $("#ulArea > :first-child");
+var _listTech = $("#ulTechs > :first-child");
 var _listChartType = $("#ulChartType > :first-child");
 
 var labels = [];

@@ -204,7 +204,7 @@ $("#btnPreview").click(function () {
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip",
         type: "POST",
-        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), sortBy: sortBy, exclude: $("#hdnExclude").val(), chartType: $("#spanChartType").html() },
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), sortBy: sortBy, exclude: $("#hdnExclude").val(), chartType: $("#spanChartType").html() },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {

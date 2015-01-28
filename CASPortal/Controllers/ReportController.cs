@@ -291,7 +291,7 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult TrendAnalysisByQuestion(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy, string chartType)
+        public ActionResult TrendAnalysisByQuestion(int siteNo, int contractNo, string selectedNodes, int frequency, string fromDate, string toDate, int groupBy, string chartType)
         {
             DataTable dtAnswers = new DataTable();
             ReportRepository repository = new ReportRepository();
@@ -301,7 +301,7 @@ namespace CASPortal.Controllers
             List<ChartData> charts = new List<ChartData>();
 
             dtAnswers = AnswerTable(selectedNodes);
-            charts = repository.GetTrendAnalysisByQuestion(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy);
+            charts = repository.GetTrendAnalysisByQuestion(siteNo, contractNo, dtAnswers, frequency, dtFrom, dtTo, groupBy);
 
             if (charts != null)
             {
@@ -387,7 +387,7 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult TrendAnalysisByEquip(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy, string sortBy, bool exclude, string chartType)
+        public ActionResult TrendAnalysisByEquip(int siteNo, int contractNo, string selectedNodes, int frequency, string fromDate, string toDate, int groupBy, string sortBy, bool exclude, string chartType)
         {
             bool sortedBy = false;
             DataTable dtAnswers = new DataTable();
@@ -400,7 +400,7 @@ namespace CASPortal.Controllers
             sortedBy = sortBy.Equals("Location") ? false : true;
 
             dtAnswers = AnswerTable(selectedNodes);
-            charts = repository.GetTrendAnalysisByEquipment(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy, sortedBy, exclude);
+            charts = repository.GetTrendAnalysisByEquipment(siteNo, contractNo, dtAnswers, frequency, dtFrom, dtTo, groupBy, sortedBy, exclude);
 
             if (charts != null)
             {
@@ -471,7 +471,7 @@ namespace CASPortal.Controllers
                 return RedirectToAction("Index", "Login");
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
+            ViewBag.Tech = repoHelper.LoadTech();
 
             return View();
         }

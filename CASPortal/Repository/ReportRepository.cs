@@ -50,22 +50,22 @@ namespace CASPortal.Repository
             return charts;
         }
 
-        public List<ChartData> GetTrendAnalysisByQuestion(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
+        public List<ChartData> GetTrendAnalysisByQuestion(int siteNo, int contractNo, DataTable answers, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
         {
             ReportParser parser = new ReportParser();
             List<ChartData> charts = new List<ChartData>();
 
-            charts = parser.GetTrendAnalysisByQuestion(siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
+            charts = parser.GetTrendAnalysisByQuestion(siteNo, contractNo, answers, frequency, dtFrom, dtTo, groupBy);
 
             return charts;
         }
 
-        public List<ChartData> GetTrendAnalysisByEquipment(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool sortBy, bool exclude)
+        public List<ChartData> GetTrendAnalysisByEquipment(int siteNo, int contractNo, DataTable answers, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool sortBy, bool exclude)
         {
             ReportParser parser = new ReportParser();
             List<ChartData> charts = new List<ChartData>();
 
-            charts = parser.GetTrendAnalysisByEquipment(siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy, sortBy, exclude);
+            charts = parser.GetTrendAnalysisByEquipment(siteNo, contractNo, answers, frequency, dtFrom, dtTo, groupBy, sortBy, exclude);
 
             return charts;
         }
@@ -98,6 +98,16 @@ namespace CASPortal.Repository
             equip = parser.GetEquipmentReportBLOB(contractFrom, contractTo, sorting, status);
 
             return equip;
+        }
+
+        public List<EmployeeTech> GetEmployeeTech()
+        {
+            ReportParser parser = new ReportParser();
+            List<EmployeeTech> emps = new List<EmployeeTech>();
+
+            emps = parser.GetEmployeeTech();
+
+            return emps;
         }
     }
 }
