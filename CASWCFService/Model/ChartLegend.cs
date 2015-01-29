@@ -7,17 +7,17 @@ using System.Web;
 namespace CASWCFService.Model
 {
     [DataContract]
-    public class BusinessHour
+    public class ChartLegend
     {
         [DataMember]
-        public bool IsWorkingDay { get; set; }
+        public string Line1 { get; set; }
         [DataMember]
-        public string Date { get; set; }
+        public string Line2 { get; set; }
         [DataMember]
-        public int NoOfDay { get; set; }
+        public string Line3 { get; set; }
         [DataMember]
-        public float BusinessStartHour { get; set; }
+        public string Line4 { get; set; }
         [DataMember]
-        public float BusinessEndHour { get; set; }
+        public string Footer { get; set; }
     }
 }

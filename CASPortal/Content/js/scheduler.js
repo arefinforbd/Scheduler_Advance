@@ -133,7 +133,7 @@ $(document.body).on('click', '#ulSites li', function (event) {
     _listSite.css("background-color", "#FFFFFF");
     _listSite.removeClass("selected");
     $(this).addClass("selected");
-    $("#ddlItems").show();
+    //$("#ddlItems").show();
 
     if (_listSite != $(this)) {
         _listSite.show();
@@ -642,6 +642,7 @@ function generateTimes() {
                             $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
+                            $("#tblTime").find('[combid="id' + lIndex + '"]').css("cursor", "not-allowed");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                         }
@@ -672,6 +673,7 @@ function generateTimes() {
                             $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
+                            $("#tblTime").find('[combid="id' + lIndex + '"]').css("cursor", "not-allowed");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                             $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                         }
@@ -700,6 +702,7 @@ function generateTimes() {
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("title");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').addClass("afterhour");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("cursor", "not-allowed");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("border-right", "1px solid #CCCCCC");
                             }
@@ -727,6 +730,7 @@ function generateTimes() {
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("background-color", "#808080")
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("vertical-align", "middle");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').css("padding", "0px");
+                                $("#tblTime").find('[combid="id' + lIndex + '"]').css("cursor", "not-allowed");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-target");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("data-toggle");
                                 $("#tblTime").find('[combid="id' + lIndex + '"]').removeAttr("class");
@@ -757,6 +761,7 @@ function generateTimes() {
                             $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("data-toggle");
                             $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("class");
                             $("#tblTime").find('[combid="id' + startindex + '"]').addClass("afterhour");
+                            $("#tblTime").find('[combid="id' + lIndex + '"]').css("cursor", "not-allowed");
                             $("#tblTime").find('[combid="id' + startindex + '"]').html("Public Holiday");
                         }
                     }
@@ -795,6 +800,7 @@ function generateTimes() {
                             $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("data-toggle");
                             $("#tblTime").find('[combid="id' + startindex + '"]').removeAttr("class");
                             $("#tblTime").find('[combid="id' + startindex + '"]').addClass("afterhour");
+                            $("#tblTime").find('[combid="id' + lIndex + '"]').css("cursor", "not-allowed");
                             $("#tblTime").find('[combid="id' + startindex + '"]').html("Weekend");
                         }
                     }

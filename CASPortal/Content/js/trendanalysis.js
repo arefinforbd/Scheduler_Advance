@@ -1,7 +1,14 @@
 ﻿$(function () {
-    $("#divFrequency").hide();
     $("#divSortBy").hide();
-    //$("#divFrequency").css("margin-bottom", "10px");
+    $("#chkUseJobDate").prop("checked", true);
+    $("#hdnUseJobDate").val("true");
+    $("#divUseJobDate").show();
+    $("#divFrequency").css("margin-bottom", "10px");
+    $("#divTrendBy").css("margin", "8px -66px 0 0");
+});
+
+$("#chkUseJobDate").click(function () {
+    $("#hdnUseJobDate").val($(this).prop("checked"));
 });
 
 function LoadLineChart(data) {
@@ -191,13 +198,12 @@ $("#btnPreview").click(function () {
 
     Loading();
     $.ajax({
-        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByJob",
+        url: $("#hdnSiteURL").val() + "/Report/TrendAnalysis",
         type: "POST",
-        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), chartType: $("#spanChartType").html() },
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), jobdate: $("#hdnUseJobDate").val(), chartType: $("#spanChartType").html() },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
-                //$('#jstree').jstree("deselect_all");
 
                 //LINE Chart
                 if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "LINE")) {
@@ -229,6 +235,8 @@ $("#btnPreview").click(function () {
         },
         error: function (request) {
             LoadingComplete();
+            $("#btnPreview").removeAttr("disabled");
+            $("#btnReset").removeAttr("disabled");
             alert("Please try again. Something went wrong.");
         }
     });

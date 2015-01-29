@@ -2,6 +2,7 @@
     $("#chkExclude").prop("checked", true);
     $("#hdnExclude").val("true");
     $("#divExclude").show();
+    $("#ddlArea").hide();
 });
 
 $("#chkExclude").click(function () {
@@ -203,7 +204,7 @@ $("#btnPreview").click(function () {
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Report/TrendAnalysisByEquip",
         type: "POST",
-        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), area: $("#spanArea").html(), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), sortBy: sortBy, exclude: $("#hdnExclude").val(), chartType: "ALL" },
+        data: { siteNo: $("#hdnSite").val(), contractNo: $("#hdnContract").val(), selectedNodes: JSON.stringify(_selectedNodes), frequency: $("#hdnFrequency").val(), fromDate: $("#dtpFrom").val(), toDate: $("#dtpTo").val(), groupBy: $("#txtGroup").val(), sortBy: sortBy, exclude: $("#hdnExclude").val(), chartType: $("#spanChartType").html() },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
@@ -223,6 +224,8 @@ $("#btnPreview").click(function () {
                 if (($("#spanChartType").html() == strChartType || $("#spanChartType").html() == "BAR")) {
                     LoadBarChart(data);
                 }
+
+                ShowChartLegend(data);
 
                 if (/iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())) {
                     $("#btnLineDownload").hide();

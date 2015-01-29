@@ -15,11 +15,11 @@ using System.Web.Script.Serialization;
 
 namespace CASPortal.Controllers
 {
-    public class ReportController : Controller
+    public class ReportController : BaseController
     {
         //
         // GET: /Report/
-        public ActionResult Index()
+        public new ActionResult Index()
         {
             return View();
         }
@@ -62,7 +62,7 @@ namespace CASPortal.Controllers
             foreach (ChartData chart in charts)
             {
                 if(IsQuestion)
-                    bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.Section + chart.Question });
+                    bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.Section + chart.Area + chart.Question });
                 else
                     bars.Add(new BarData() { DateLabel = chart.DateLabel, barValue = chart.Point, label = chart.SerialNumber });
             }
@@ -79,7 +79,6 @@ namespace CASPortal.Controllers
             {
                 dtTable = RowToColumn(bars, weeksCount);
 
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
                 List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
                 Dictionary<string, object> row;
                 foreach (DataRow dr in dtTable.Rows)
@@ -226,6 +225,55 @@ namespace CASPortal.Controllers
             return dtAnswers;
         }
 
+        public ActionResult TrendAnalysis()
+        {
+            BaseHelper helper = new BaseHelper();
+            ReportHelper repoHelper = new ReportHelper();
+
+            if (!helper.IsValidUser())
+                return RedirectToAction("Index", "Login");
+
+            TempData["RootNode"] = "Barcode";
+
+            ViewBag.Sites = repoHelper.LoadSite();
+            ViewBag.TreeNodes = repoHelper.LoadTree();
+            ViewBag.Areas = repoHelper.LoadArea();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TrendAnalysis(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy, bool jobdate, string chartType)
+        {
+            DataTable dtAnswers = new DataTable();
+            ReportRepository repository = new ReportRepository();
+            DateTime dtFrom = DateTime.Parse(fromDate, new CultureInfo("en-US"));
+            DateTime dtTo = DateTime.Parse(toDate, new CultureInfo("en-US"));
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+
+            dtAnswers = AnswerTable(selectedNodes);
+            charts = repository.GetTrendAnalysis(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy, jobdate);
+
+            if (charts != null)
+            {
+                if (chartType.Equals("BAR") || chartType.Equals("All Charts"))
+                    chartTypeObj.Bars = GetBarData(charts, false);
+
+                if (chartType.Equals("LINE") || chartType.Equals("All Charts"))
+                    chartTypeObj.Lines = GetLineData(charts, false);
+
+                if (chartType.Equals("PIE") || chartType.Equals("All Charts"))
+                    chartTypeObj.Pies = GetPieData(charts, false);
+
+                chartTypeObj.Legend = charts[0].Legend;
+
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult TrendAnalysisByQuestion()
         {
             BaseHelper helper = new BaseHelper();
@@ -237,7 +285,6 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
             
@@ -245,7 +292,7 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult TrendAnalysisByQuestion(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy, string chartType)
+        public ActionResult TrendAnalysisByQuestion(int siteNo, int contractNo, string selectedNodes, int frequency, string fromDate, string toDate, int groupBy, string chartType)
         {
             DataTable dtAnswers = new DataTable();
             ReportRepository repository = new ReportRepository();
@@ -255,18 +302,20 @@ namespace CASPortal.Controllers
             List<ChartData> charts = new List<ChartData>();
 
             dtAnswers = AnswerTable(selectedNodes);
-            charts = repository.GetTrendAnalysisByQuestion(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy);
+            charts = repository.GetTrendAnalysisByQuestion(siteNo, contractNo, dtAnswers, frequency, dtFrom, dtTo, groupBy);
 
             if (charts != null)
             {
-                if (chartType.Equals("BAR") || chartType.Equals("ALL"))
+                if (chartType.Equals("BAR") || chartType.Equals("All Charts"))
                     chartTypeObj.Bars = GetBarData(charts, true);
 
-                if (chartType.Equals("LINE") || chartType.Equals("ALL"))
+                if (chartType.Equals("LINE") || chartType.Equals("All Charts"))
                     chartTypeObj.Lines = GetLineData(charts, true);
 
-                if (chartType.Equals("PIE") || chartType.Equals("ALL"))
+                if (chartType.Equals("PIE") || chartType.Equals("All Charts"))
                     chartTypeObj.Pies = GetPieData(charts, true);
+
+                chartTypeObj.Legend = charts[0].Legend;
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -285,7 +334,6 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
 
@@ -307,14 +355,16 @@ namespace CASPortal.Controllers
 
             if (charts != null)
             {
-                if (chartType.Equals("BAR") || chartType.Equals("ALL"))
+                if (chartType.Equals("BAR") || chartType.Equals("All Charts"))
                     chartTypeObj.Bars = GetBarData(charts, true);
 
-                if (chartType.Equals("LINE") || chartType.Equals("ALL"))
+                if (chartType.Equals("LINE") || chartType.Equals("All Charts"))
                     chartTypeObj.Lines = GetLineData(charts, true);
 
-                if (chartType.Equals("PIE") || chartType.Equals("ALL"))
+                if (chartType.Equals("PIE") || chartType.Equals("All Charts"))
                     chartTypeObj.Pies = GetPieData(charts, true);
+
+                chartTypeObj.Legend = charts[0].Legend;
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -333,7 +383,6 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
 
@@ -341,7 +390,7 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult TrendAnalysisByEquip(int siteNo, int contractNo, string selectedNodes, string area, int frequency, string fromDate, string toDate, int groupBy, string sortBy, bool exclude, string chartType)
+        public ActionResult TrendAnalysisByEquip(int siteNo, int contractNo, string selectedNodes, int frequency, string fromDate, string toDate, int groupBy, string sortBy, bool exclude, string chartType)
         {
             bool sortedBy = false;
             DataTable dtAnswers = new DataTable();
@@ -354,18 +403,20 @@ namespace CASPortal.Controllers
             sortedBy = sortBy.Equals("Location") ? false : true;
 
             dtAnswers = AnswerTable(selectedNodes);
-            charts = repository.GetTrendAnalysisByEquipment(siteNo, contractNo, dtAnswers, area, frequency, dtFrom, dtTo, groupBy, sortedBy, exclude);
+            charts = repository.GetTrendAnalysisByEquipment(siteNo, contractNo, dtAnswers, frequency, dtFrom, dtTo, groupBy, sortedBy, exclude);
 
             if (charts != null)
             {
-                if (chartType.Equals("BAR") || chartType.Equals("ALL"))
+                if (chartType.Equals("BAR") || chartType.Equals("All Charts"))
                     chartTypeObj.Bars = GetBarData(charts, false);
 
-                if (chartType.Equals("LINE") || chartType.Equals("ALL"))
+                if (chartType.Equals("LINE") || chartType.Equals("All Charts"))
                     chartTypeObj.Lines = GetLineData(charts, false);
 
-                if (chartType.Equals("PIE") || chartType.Equals("ALL"))
+                if (chartType.Equals("PIE") || chartType.Equals("All Charts"))
                     chartTypeObj.Pies = GetPieData(charts, false);
+
+                chartTypeObj.Legend = charts[0].Legend;
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -384,7 +435,6 @@ namespace CASPortal.Controllers
             TempData["RootNode"] = "Barcode";
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
             ViewBag.TreeNodes = repoHelper.LoadTree();
             ViewBag.Areas = repoHelper.LoadArea();
 
@@ -425,7 +475,7 @@ namespace CASPortal.Controllers
                 return RedirectToAction("Index", "Login");
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
+            ViewBag.Tech = repoHelper.LoadTech();
 
             return View();
         }
@@ -554,7 +604,6 @@ namespace CASPortal.Controllers
                 return RedirectToAction("Index", "Login");
 
             ViewBag.Sites = repoHelper.LoadSite();
-            //ViewBag.Contracts = repoHelper.LoadContract("1");
 
             return View();
         }

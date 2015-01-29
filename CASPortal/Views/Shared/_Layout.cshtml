@@ -125,59 +125,9 @@
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="" id="homeMenu"><i class="fa fa-sitemap fa-fw"></i> Home</a>
-                        </li>
-                        <li>
-                            <a href="#" id="mainMenu"><i class="fa fa-dashboard fa-fw"></i> Main</a>
-                        </li>
-                        <li>
-                            <a href="#" id="reportMenu"><i class="fa fa-table fa-fw"></i> Reports<span class="fa arrow"></span></a>
-                            <ul id="reportSubMenu" class="nav nav-second-level">
-                                <li>
-                                    <a href="#" id="report101">Trend Analysis By Job</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="report102">Trend Analysis By Question</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="report103">Trend Analysis By Equip</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="report104">Trend Analysis Group Location</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="report105">Equipment Transaction</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="report106">Installed Equipment</a>
-                                </li>
-                                <li>
-                                    <a href="#" id="report107">Equipment Report</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="" id="schedulerMenu"><i class="fa fa-files-o fa-fw"></i> Scheduler</a>
-                        </li>
-                    </ul>
+                    @Html.Raw(@HttpContext.Current.Session["NavigationMenuString"])
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
         <div class="mainDiv">
             <div id="page-wrapper">
@@ -243,7 +193,6 @@
                 $("#divRightSide").removeClass("col-lg-7");
                 $("#divRightSide").addClass("col-lg-6");
                 $("#ddlSites").css("margin-left", "");
-                //$("#divLeftSide #ddlSites .btn-group .dropdown-Site span").css("font-size", "11px");
                 $("#ddlArea").css("margin-left", "");
 
                 $("#divTrendBy").css("margin", "");

@@ -1,5 +1,6 @@
 ﻿var _selectedNodes = [];
 var _listArea = $("#ulArea > :first-child");
+var _listTech = $("#ulTechs > :first-child");
 var _listChartType = $("#ulChartType > :first-child");
 
 var labels = [];
@@ -16,6 +17,14 @@ function LineColor(colourIndex) {
         lineColor = randomColorFactor() + "," + randomColorFactor() + "," + randomColorFactor();
     else
         lineColor = colours[colourIndex];
+}
+
+function ShowChartLegend(data) {
+    $(".spanLine1").html(data.Legend.Line1);
+    $(".spanLine2").html(data.Legend.Line2);
+    $(".spanLine3").html(data.Legend.Line3);
+    $(".spanLine4").html(data.Legend.Line4);
+    $(".spanChartFooter").html(data.Legend.Footer);
 }
 
 function Validate() {

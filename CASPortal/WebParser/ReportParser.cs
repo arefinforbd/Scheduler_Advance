@@ -61,6 +61,38 @@ namespace CASPortal.WebParser
             return null;
         }
 
+        public List<ChartData> GetTrendAnalysis(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool jobdate)
+        {
+            try
+            {
+                ChartData[] chartArr = null;
+                List<ChartData> charts = new List<ChartData>();
+                CASWCFServiceClient cas = new CASWCFServiceClient();
+
+                string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+                string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+                string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+                decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+                int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+                chartArr = cas.GetTrendAnalysis(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy, jobdate);
+
+                if (chartArr != null)
+                {
+                    foreach (ChartData chart in chartArr)
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, SerialNumber = chart.SerialNumber, Area = chart.Area, Point = chart.Point, Legend = chart.Legend });
+
+                    return charts;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        
         public List<ChartData> GetTrendAnalysisByJob(int siteNo, int contractNo, DataTable answers, string area, DateTime dtFrom, DateTime dtTo)
         {
             try
@@ -80,7 +112,7 @@ namespace CASPortal.WebParser
                 if (chartArr != null)
                 {
                     foreach (ChartData chart in chartArr)
-                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, Section = chart.Section, Question = chart.Question, Point = chart.Point });
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, Section = chart.Section, Question = chart.Question, Point = chart.Point, Legend = chart.Legend });
 
                     return charts;
                 }
@@ -93,7 +125,7 @@ namespace CASPortal.WebParser
             }
         }
 
-        public List<ChartData> GetTrendAnalysisByQuestion(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
+        public List<ChartData> GetTrendAnalysisByQuestion(int siteNo, int contractNo, DataTable answers, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy)
         {
             try
             {
@@ -107,12 +139,12 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                chartArr = cas.GetTrendAnalysisByQuestion(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy);
+                chartArr = cas.GetTrendAnalysisByQuestion(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, frequency, dtFrom, dtTo, groupBy);
 
                 if (chartArr != null)
                 {
                     foreach (ChartData chart in chartArr)
-                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, Section = chart.Section, Question = chart.Question, Point = chart.Point });
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, Section = chart.Section, Question = chart.Question, Point = chart.Point, Legend = chart.Legend });
 
                     return charts;
                 }
@@ -125,7 +157,7 @@ namespace CASPortal.WebParser
             }
         }
 
-        public List<ChartData> GetTrendAnalysisByEquipment(int siteNo, int contractNo, DataTable answers, string area, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool sortBy, bool exclude)
+        public List<ChartData> GetTrendAnalysisByEquipment(int siteNo, int contractNo, DataTable answers, int frequency, DateTime dtFrom, DateTime dtTo, int groupBy, bool sortBy, bool exclude)
         {
             try
             {
@@ -139,12 +171,12 @@ namespace CASPortal.WebParser
                 decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
                 int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-                chartArr = cas.GetTrendAnalysisByEquipment(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, area, frequency, dtFrom, dtTo, groupBy, sortBy, exclude);
+                chartArr = cas.GetTrendAnalysisByEquipment(companyID, companyPassword, customerID, customerPassword, level4ID, siteNo, contractNo, answers, frequency, dtFrom, dtTo, groupBy, sortBy, exclude);
 
                 if (chartArr != null)
                 {
                     foreach (ChartData chart in chartArr)
-                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, SerialNumber = chart.SerialNumber, Section = chart.Section, Question = chart.Question, Point = chart.Point });
+                        charts.Add(new ChartData() { DateLabel = chart.DateLabel, SerialNumber = chart.SerialNumber, Section = chart.Section, Question = chart.Question, Point = chart.Point, Legend = chart.Legend });
 
                     return charts;
                 }
@@ -237,6 +269,35 @@ namespace CASPortal.WebParser
             {
                 return null;
             }
+        }
+
+        public List<EmployeeTech> GetEmployeeTech()
+        {
+            EmployeeTech[] empArr = null;
+            List<EmployeeTech> emps = new List<EmployeeTech>();
+            DataSet ds = new DataSet();
+            CASWCFServiceClient cas = new CASWCFServiceClient();
+
+            if (HttpContext.Current.Session["CompanyID"] == null)
+                throw new TimeoutException("Session timed out");
+
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+            empArr = cas.GetEmployeeTech(companyID, companyPassword, customerID, customerPassword, level4ID);
+
+            if (empArr != null)
+            {
+                foreach (EmployeeTech emp in empArr)
+                    emps.Add(new EmployeeTech { Code = emp.Code, FirstName = emp.FirstName, LastName = emp.LastName });
+
+                return emps;
+            }
+
+            return null;
         }
     }
 }

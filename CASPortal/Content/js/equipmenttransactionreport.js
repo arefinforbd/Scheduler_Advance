@@ -1,9 +1,46 @@
-﻿$(function () {
+﻿var _listTech = $("#ulTechs > :first-child");
+
+$(function () {
     $("#hdnFormSubmit").val("");
     $("#chkShowActiveStations").prop("checked", true);
     $("#hdnShowActiveStations").val("true");
     $("#chkJobTimes").prop("checked", true);
     $("#hdnJobTimes").val("true");
+
+    var ulTech = $("#ulTechs > :first-child").text();
+    $(".dropdown-Tech").find('[data-bind="label"]').text(ulTech);
+
+    $(document.body).on('click', '#ulTechs li', function (event) {
+        var $target = $(event.currentTarget);
+        $("#ulTechs > :first-child").show();
+        _listTech.css("background-color", "#FFFFFF");
+        _listTech.removeClass("selected");
+        $(this).addClass("selected");
+
+        if (_listTech != $(this)) {
+            _listTech.show();
+        }
+
+        $(this).css("background-color", "#f9f9c0");
+
+        if ($target.text() == $(this).text()) {
+            if (_listTech.text() == $(this).text()) {
+                return;
+            }
+            _listTech = $(this);
+        }
+
+        $target.closest('.btn-group')
+           .find('[data-bind="label"]').text($target.text())
+              .end()
+           .children('.dropdown-Tech').dropdown('toggle');
+
+        if ($target.text() != "[ALL]") {
+            $("#hdnTech").val($(this).attr("id"));
+        }
+
+        return false;
+    });
 });
 
 function Validate() {
