@@ -107,6 +107,15 @@ $(function () {
               .end()
            .children('.dropdown-Site').dropdown('toggle');
 
+        if ($("#ddlSites .btn-group").width() > 315) {
+            $("#ddlSites").css("margin-left", "-10px");
+            $("#ddlSites .btn-group a").css("font-size", "12px");
+        }
+        else {
+            $("#ddlSites").css("margin-left", "25px");
+            $("#ddlSites .btn-group a").css("font-size", "14px");
+        }
+
         if ($target.text() != "Select Site") {
             _listContract = $("#ulContracts > :first-child");
             $("#hdnSite").val($(this).attr("id"));
@@ -156,6 +165,15 @@ $(function () {
            .find('[data-bind="label"]').text($target.text())
               .end()
            .children('.dropdown-Contract').dropdown('toggle');
+
+        if ($("#ddlConracts #divContract").width() > 290) {
+            $("#ddlConracts").css("margin-left", "-10px");
+            $("#ddlConracts #divContract a").css("font-size", "12px");
+        }
+        else {
+            $("#ddlConracts").css("margin-left", "0px");
+            $("#ddlConracts  #divContract a").css("font-size", "14px");
+        }
 
         if ($target.text() != "Select Contract") {
             $("#hdnContract").val($(this).attr("id"));
