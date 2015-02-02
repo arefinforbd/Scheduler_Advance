@@ -250,12 +250,15 @@ function DownloadChart(canvas) {
 }
 
 $("#btnLineDownload").click(function () {
+    $("#divPanelBodyLineInner").css("border", "1px solid #CCCCCC");
+    $("#divPanelBodyLineInner").css("padding", "15px");
     $("#divLineCompanyInfo").show();
     $("#divLineFooter").show();
     $('#divPanelBodyLine').html2canvas({
         onrendered: function (canvas) {
             $("#chartType").val("Line");
-            DownloadChart(canvas);            
+            DownloadChart(canvas);
+            $("#divPanelBodyLineInner").removeAttr("style");
             $("#divLineCompanyInfo").hide();
             $("#divLineFooter").hide();
         }
@@ -263,12 +266,15 @@ $("#btnLineDownload").click(function () {
 });
 
 $("#btnPieDownload").click(function () {
+    $("#divPanelBodyPieInner").css("border", "1px solid #CCCCCC");
+    $("#divPanelBodyPieInner").css("padding", "15px");
     $("#divPieCompanyInfo").show();
     $("#divPieFooter").show();
     $('#divPanelBodyPie').html2canvas({
         onrendered: function (canvas) {
             $("#chartType").val("Pie");
             DownloadChart(canvas);
+            $("#divPanelBodyPieInner").removeAttr("style");
             $("#divPieCompanyInfo").hide();
             $("#divPieFooter").hide();
         }
@@ -276,12 +282,15 @@ $("#btnPieDownload").click(function () {
 });
 
 $("#btnBarDownload").click(function () {
+    $("#divPanelBodyBarInner").css("border", "1px solid #CCCCCC");
+    $("#divPanelBodyBarInner").css("padding", "15px");
     $("#divBarCompanyInfo").show();
     $("#divBarFooter").show();
     $('#divPanelBodyBar').html2canvas({
         onrendered: function (canvas) {
             $("#chartType").val("Bar");
             DownloadChart(canvas);
+            $("#divPanelBodyBarInner").removeAttr("style");
             $("#divBarCompanyInfo").hide();
             $("#divBarFooter").hide();
         }
