@@ -1273,6 +1273,19 @@ namespace CASWCFService
             return emps;
         }
 
+        public List<Advertisement> GetAdvertisement()
+        {
+            Advertisement ad;
+            List<Advertisement> ads = new List<Advertisement>()
+            {
+                new Advertisement() { Header = "Advertisement 101", ImageURL = "", TextContents = "Advertisement 101 Advertisement 101 Advertisement 101 Advertisement 101"},
+                new Advertisement() { Header = "Advertisement 102", ImageURL = "", TextContents = "Advertisement 102 Advertisement 102 Advertisement 102 Advertisement 102" },
+                new Advertisement() { Header = "Advertisement 103", ImageURL = "", TextContents = "Advertisement 103 Advertisement 103 Advertisement 103 Advertisement 103" }
+            };
+
+            return ads;
+        }
+        
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)
         {
             string appServerURL = ConfigurationManager.AppSettings["AppServerURL"];

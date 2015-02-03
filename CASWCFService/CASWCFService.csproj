@@ -85,6 +85,7 @@
       <DependentUpon>CASWCFService.svc</DependentUpon>
     </Compile>
     <Compile Include="ICASWCFService.cs" />
+    <Compile Include="Model\Advertisement.cs" />
     <Compile Include="Model\BusinessHour.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\ChartLegend.cs" />

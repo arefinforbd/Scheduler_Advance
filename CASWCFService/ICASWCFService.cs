@@ -86,5 +86,8 @@ namespace CASWCFService
 
         [OperationContract]
         List<EmployeeTech> GetEmployeeTech(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
+
+        [OperationContract]
+        List<Advertisement> GetAdvertisement();
     }
 }
