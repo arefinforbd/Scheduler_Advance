@@ -82,8 +82,6 @@ function Validate() {
         return false;
     }
 
-    $("#divLoading").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
-
     if ($("#rdoLocation").prop("checked") == true)
         locationVal = "Location";
     if ($("#rdoSection").prop("checked") == true)
@@ -106,6 +104,9 @@ function Validate() {
     if ($("#rdoReplaced").prop("checked") == true)
         advanceVal = "Single Replaced";
 
+    $("#divLoading").html("<img alt='' title='' src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
+    $("#process").attr("disabled", "disabled");
+
     var url = $("#hdnSiteURL").val() + "/Report/EquipmentTransaction";
     $.ajax({
         url: url,
@@ -123,14 +124,17 @@ function Validate() {
             else {
                 $("#hdnFormSubmit").val("BLOB");
                 $('#eqtransrepoform').submit();
+                $("#divLoading").html("");
+                $("#process").removeAttr("disabled");
+                return true;
             }
-            
             $("#divLoading").html("");
+            $("#process").removeAttr("disabled");
             return false;
         }
     })
-
     $("#divLoading").html("");
+    $("#process").removeAttr("disabled");
     return true;
 }
 

@@ -17,8 +17,6 @@
         return false;
     }
 
-    $("#divLoading").html("<img alt= title= src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
-
     if ($("#rdoAll").prop("checked") == true)
         statusVal = "All";
     if ($("#rdoActive").prop("checked") == true)
@@ -30,6 +28,9 @@
         sortVal = "Location";
     if ($("#rdoArea").prop("checked") == true)
         sortVal = "Area";
+
+    $("#divLoading").html("<img alt='' title='' src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
+    $("#process").attr("disabled", "disabled");
 
     var url = $("#hdnSiteURL").val() + "/Report/EquipmentReport";
     $.ajax({
@@ -45,12 +46,17 @@
             else {
                 $("#hdnFormSubmit").val("BLOB");
                 $('#eqrepoform').submit();
+                $("#divLoading").html("");
+                $("#process").removeAttr("disabled");
+                return true;
             }
             $("#divLoading").html("");
+            $("#process").removeAttr("disabled");
             return false;
         }
     })
 
     $("#divLoading").html("");
+    $("#process").removeAttr("disabled");
     return true;
 }

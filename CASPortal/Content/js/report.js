@@ -125,6 +125,8 @@ $(function () {
             $("#ddlConracts").show();
         }
         else {
+            $("#ddlConracts  #divContract a").css("font-size", "14px");
+
             if (location.href.indexOf("Report/EquipmentTransaction") > 0 || location.href.indexOf("Report/EquipmentReport") > 0) {
                 $("#ddlConracts").hide();
                 $("#divLower").hide();

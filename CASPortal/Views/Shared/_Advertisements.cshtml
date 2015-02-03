@@ -1,6 +1,14 @@
-﻿<style>
+﻿@using CASPortal.Helper;
+
+<style>
     .advertisementblock {
         padding: 0px;
+    }
+    .wordwrap {
+        word-wrap: break-word;
+    }
+    .contentpadding {
+        padding: 10px;
     }
 </style>
 
@@ -14,27 +22,24 @@
 
             <div class="col-lg-12 advertisementblock">
                 <div class="panel panel-green">
-                    <div class="panel-heading"> Advertisement 1 </div>
-                    <div class="panel-body">
-                        <p>Advertisement text or image will go here. Advertisement text or image will go here. Advertisement text or image will go here.</p>
+                    <div class="panel-heading" id="divAdHeader1"></div>
+                    <div class="panel-body wordwrap contentpadding" id="divAdContents1">
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-12 advertisementblock">
                 <div class="panel panel-red">
-                    <div class="panel-heading"> Advertisement 2 </div>
-                    <div class="panel-body">
-                        <p>Advertisement text or image will go here. Advertisement text or image will go here. Advertisement text or image will go here.</p>
+                    <div class="panel-heading" id="divAdHeader2"></div>
+                    <div class="panel-body wordwrap contentpadding" id="divAdContents2">
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-12 advertisementblock">
                 <div class="panel panel-yellow">
-                    <div class="panel-heading"> Advertisement 3 </div>
-                    <div class="panel-body">
-                        <p>Advertisement text or image will go here. Advertisement text or image will go here. Advertisement text or image will go here.</p>
+                    <div class="panel-heading" id="divAdHeader3"></div>
+                    <div class="panel-body wordwrap contentpadding" id="divAdContents3">
                     </div>
                 </div>
             </div>
@@ -43,3 +48,35 @@
     </div>
     <!-- /.panel -->
 </div>
+
+@{
+    if(BaseHelper.AdvertisementStatus){
+
+        <script>
+            $(function () {
+                LoadAdvertisements();
+            });
+
+            function LoadAdvertisements() {
+                $.ajax({
+                    url: $("#hdnSiteURL").val() + "/Base/GetAdvertisement",
+                    type: "POST",
+                    data: { },
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data != null) {
+                            $.each(data, function (i, ad) {
+                                $("#divAdHeader" + (i + 1)).html(ad.Header);
+                                $("#divAdContents" + (i + 1)).html(ad.TextContents);
+                                i++;
+                            });
+                        }
+                    },
+                    error: function (request) {
+                        alert("Please try again. Something went wrong.");
+                    }
+                });
+            }
+        </script>
+    }
+}

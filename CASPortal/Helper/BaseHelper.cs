@@ -14,6 +14,16 @@ namespace CASPortal.Helper
         public static bool AdvertisementStatus = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AdvertisementStatus"].ToLower());
         public static string OnlyCAS = System.Configuration.ConfigurationManager.AppSettings["OnlyCAS"].ToLower();
 
+        public static bool DynamicAd = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["DynamicAd"]);
+
+        public static string AdHeader1 = System.Configuration.ConfigurationManager.AppSettings["AdHeader1"].ToString();
+        public static string AdHeader2 = System.Configuration.ConfigurationManager.AppSettings["AdHeader2"].ToString();
+        public static string AdHeader3 = System.Configuration.ConfigurationManager.AppSettings["AdHeader3"].ToString();
+
+        public static string AdText1 = System.Configuration.ConfigurationManager.AppSettings["AdText1"].ToString();
+        public static string AdText2 = System.Configuration.ConfigurationManager.AppSettings["AdText2"].ToString();
+        public static string AdText3 = System.Configuration.ConfigurationManager.AppSettings["AdText3"].ToString();
+
         public static string GetSiteUrl()
         {
             string strApp = HttpContext.Current.Request.ApplicationPath;

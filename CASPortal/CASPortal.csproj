@@ -140,6 +140,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\NavigationMenuRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
     <Compile Include="Repository\SchedulerRepository.cs" />
@@ -148,6 +149,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="WebParser\BaseParser.cs" />
     <Compile Include="WebParser\NavigationMenuParser.cs" />
     <Compile Include="WebParser\ReportParser.cs" />
     <Compile Include="WebParser\SchedulerParser.cs" />
@@ -327,6 +329,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Advertisement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.ChartData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -343,6 +348,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Folder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetAdvertisementResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.GetBusinessTimeResponse.datasource">
