@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CASWCFService.dll">
-      <publishTime>01/29/2015 13:22:42</publishTime>
+      <publishTime>02/02/2015 15:22:40</publishTime>
     </File>
     <File Include="bin/CustWebAccProj.dll">
       <publishTime>01/29/2015 13:00:17</publishTime>

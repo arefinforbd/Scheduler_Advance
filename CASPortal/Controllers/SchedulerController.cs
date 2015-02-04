@@ -21,6 +21,7 @@ namespace CASPortal.Controllers
 
         //
         // GET: /Scheduler/
+        [RedirectingActionAttribute]
         public ActionResult Index()
         {
             ReportHelper repoHelper = new ReportHelper();

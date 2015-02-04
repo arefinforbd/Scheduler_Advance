@@ -31,15 +31,23 @@ namespace CASPortal.WebParser
             if (navMenuArr != null)
             {
                 foreach (NavigationMenu navMenu in navMenuArr)
-                    navMenus.Add(new NavigationMenu() { MenuName = navMenu.MenuName, MenuOrder = navMenu.MenuOrder, 
-                        MenuTitle = navMenu.MenuTitle, MenuCalls = navMenu.MenuCalls, MenuCanSee = navMenu.MenuCanSee, 
-                        MenuType = navMenu.MenuType, MenuImageNo = navMenu.MenuImageNo, Level4 = navMenu.Level4, 
-                        MenuDescription = navMenu.MenuDescription });
+                    navMenus.Add(new NavigationMenu()
+                    {
+                        MenuName = navMenu.MenuName,
+                        MenuOrder = navMenu.MenuOrder,
+                        MenuTitle = navMenu.MenuTitle,
+                        MenuCalls = navMenu.MenuCalls,
+                        MenuCanSee = navMenu.MenuCanSee,
+                        MenuType = navMenu.MenuType,
+                        MenuImageNo = navMenu.MenuImageNo,
+                        Level4 = navMenu.Level4,
+                        MenuDescription = navMenu.MenuDescription
+                    });
 
                 return navMenus;
             }
-
-            return null;
+            else
+                throw new Exception("This account is not authorised.");
         }
     }
 }

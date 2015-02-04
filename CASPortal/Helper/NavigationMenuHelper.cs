@@ -1,4 +1,5 @@
 ﻿using CASPortal.CASWCFService;
+using CASPortal.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,27 @@ namespace CASPortal.Helper
             sb.Append("</ul>");
 
             return sb.ToString();
+        }
+
+        public bool CheckMenuPermission(string URL)
+        {
+            List<NavigationMenu> navMenus = new List<NavigationMenu>();
+            NavigationMenuRepository repo = new NavigationMenuRepository();
+
+            if (HttpContext.Current.Session["NavigationMenu"] == null)
+            {
+                HttpContext.Current.Session["NavigationMenu"] = repo.GetNavigationMenu("WebAccess");
+                navMenus = (List<NavigationMenu>)HttpContext.Current.Session["NavigationMenu"];
+            }
+            else
+                navMenus = (List<NavigationMenu>)HttpContext.Current.Session["NavigationMenu"];
+
+            var menu = navMenus.Where(m => m.MenuCalls.Equals(URL)).SingleOrDefault();
+
+            if (menu == null)
+                return false;
+            else
+                return true;
         }
     }
 }

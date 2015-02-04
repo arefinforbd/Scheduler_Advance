@@ -225,6 +225,7 @@ namespace CASPortal.Controllers
             return dtAnswers;
         }
 
+        [RedirectingActionAttribute]
         public ActionResult TrendAnalysis()
         {
             BaseHelper helper = new BaseHelper();
@@ -274,6 +275,7 @@ namespace CASPortal.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        [RedirectingActionAttribute]
         public ActionResult TrendAnalysisByQuestion()
         {
             BaseHelper helper = new BaseHelper();
@@ -323,6 +325,7 @@ namespace CASPortal.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        [RedirectingActionAttribute]
         public ActionResult TrendAnalysisByJob()
         {
             BaseHelper helper = new BaseHelper();
@@ -372,6 +375,7 @@ namespace CASPortal.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        [RedirectingActionAttribute]
         public ActionResult TrendAnalysisByEquip()
         {
             BaseHelper helper = new BaseHelper();
@@ -424,6 +428,7 @@ namespace CASPortal.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        [RedirectingActionAttribute]
         public ActionResult TrendAnalysisGroupLocation()
         {
             BaseHelper helper = new BaseHelper();
@@ -466,6 +471,7 @@ namespace CASPortal.Controllers
             return File(fileInfo, "application/octet", chartType + "_" + DateTime.Now.Ticks + ".png");
         }
 
+        [RedirectingActionAttribute]
         public ActionResult EquipmentTransaction()
         {
             BaseHelper helper = new BaseHelper();
@@ -559,6 +565,7 @@ namespace CASPortal.Controllers
             }
         }
 
+        [RedirectingActionAttribute]
         public ActionResult InstalledEquipment()
         {
             BaseHelper helper = new BaseHelper();
@@ -595,6 +602,7 @@ namespace CASPortal.Controllers
             return Json(equip, JsonRequestBehavior.AllowGet);
         }
 
+        [RedirectingActionAttribute]
         public ActionResult EquipmentReport()
         {
             BaseHelper helper = new BaseHelper();

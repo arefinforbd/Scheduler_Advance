@@ -122,6 +122,7 @@
     <Compile Include="Controllers\CustomerInformationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RedirectingActionAttribute.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
