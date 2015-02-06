@@ -65,23 +65,30 @@ namespace CASPortal.Helper
 
         public bool CheckMenuPermission(string URL)
         {
-            List<NavigationMenu> navMenus = new List<NavigationMenu>();
-            NavigationMenuRepository repo = new NavigationMenuRepository();
-
-            if (HttpContext.Current.Session["NavigationMenu"] == null)
+            try
             {
-                HttpContext.Current.Session["NavigationMenu"] = repo.GetNavigationMenu("WebAccess");
-                navMenus = (List<NavigationMenu>)HttpContext.Current.Session["NavigationMenu"];
+                List<NavigationMenu> navMenus = new List<NavigationMenu>();
+                NavigationMenuRepository repo = new NavigationMenuRepository();
+
+                if (HttpContext.Current.Session["NavigationMenu"] == null)
+                {
+                    HttpContext.Current.Session["NavigationMenu"] = repo.GetNavigationMenu("WebAccess");
+                    navMenus = (List<NavigationMenu>)HttpContext.Current.Session["NavigationMenu"];
+                }
+                else
+                    navMenus = (List<NavigationMenu>)HttpContext.Current.Session["NavigationMenu"];
+
+                var menu = navMenus.Where(m => m.MenuCalls.Equals(URL)).SingleOrDefault();
+
+                if (menu == null)
+                    return false;
+                else
+                    return true;
             }
-            else
-                navMenus = (List<NavigationMenu>)HttpContext.Current.Session["NavigationMenu"];
-
-            var menu = navMenus.Where(m => m.MenuCalls.Equals(URL)).SingleOrDefault();
-
-            if (menu == null)
+            catch (Exception ex)
+            {
                 return false;
-            else
-                return true;
+            }
         }
     }
 }
