@@ -200,8 +200,8 @@ function onFolderSelection(folderType) {
 
 $(document.body).on('click', '.fileclass', function (event) {
     $("#hiddenfoldertype").val($("#folderHeading").html());
-    $("#hiddenfilename").val($(this).html().trim());
-    $("#hiddenfoldername").val($("#folderName").html());
+    $("#hiddenfilename").val($(this).text().trim());
+    $("#hiddenfoldername").val($("#folderName").text());
     showSbtBtn();
 });
 
