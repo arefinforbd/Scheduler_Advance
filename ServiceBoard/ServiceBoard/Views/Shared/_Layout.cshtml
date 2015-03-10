@@ -1,0 +1,239 @@
+﻿@using ServiceBoard.Helper;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/font-awesome.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/ace.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/js/ace-extra.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery-2.1.3.js")"></script>
+
+    <link href="@Url.Content("~/Content/css/customfont.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <style>
+        .page-header {
+            margin: 0 0 7px;
+            padding-top: 0px;
+        }
+    </style>
+
+</head>
+
+<body class="no-skin">
+    <input type="hidden" id="hdnSiteURL" value="@SPBoardHelper.GetSiteUrl()" />
+    <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-leaf"></i>
+                        ServiceBoard Admin
+                    </small>
+                </a>
+            </div>
+
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="@Url.Content("~/Content/avatars/avatar1.png")" alt="Jason's Photo" />
+                            <span class="user-info">
+                                <small>Welcome,</small>
+                                Jason
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-cog"></i>
+                                    Settings
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="profile.html">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a id="linkLogout" href="@SPBoardHelper.GetSiteUrl()/Login/Logout">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div><!-- /.navbar-container -->
+    </div>
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div id="sidebar" class="sidebar responsive sidebar-fixed">
+            <script type="text/javascript">
+                try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+            </script>
+
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                    <button class="btn btn-success">
+                        <i class="ace-icon fa fa-signal"></i>
+                    </button>
+
+                    <button class="btn btn-info">
+                        <i class="ace-icon fa fa-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-warning">
+                        <i class="ace-icon fa fa-users"></i>
+                    </button>
+
+                    <button class="btn btn-danger">
+                        <i class="ace-icon fa fa-cogs"></i>
+                    </button>
+                </div>
+
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                    <span class="btn btn-success"></span>
+
+                    <span class="btn btn-info"></span>
+
+                    <span class="btn btn-warning"></span>
+
+                    <span class="btn btn-danger"></span>
+                </div>
+            </div><!-- /.sidebar-shortcuts -->
+
+            <ul class="nav nav-list">
+                <li class="active">
+                    <a href="@SPBoardHelper.GetSiteUrl()/SPBoard">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text"> Dashboard </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="">
+                    <a href="/SPBoard/">
+                        <i class="menu-icon fa fa-list"></i>
+                        <span class="menu-text"> Sales </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul><!-- /.nav-list -->
+
+            @*<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>*@
+
+            <script type="text/javascript">
+                try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+            </script>
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="breadcrumbs" id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="ace-icon fa fa-home home-icon"></i>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ul><!-- /.breadcrumb -->
+
+                    <div class="nav-search" id="nav-search">
+                        <form class="form-search">
+                            <span class="input-icon">
+                                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                                <i class="ace-icon fa fa-search nav-search-icon"></i>
+                            </span>
+                        </form>
+                    </div><!-- /.nav-search -->
+                </div>
+
+                <div class="page-content">
+                    <div class="page-header">
+                        <h1>
+                            @ViewBag.Title
+                            <small>
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                                @ViewBag.SubTitle
+                            </small>
+                        </h1>
+                    </div>
+                    
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div><!-- /.main-content -->
+
+        <div class="footer">
+            <div class="footer-inner">
+                <div class="footer-content">
+                    <span class="bigger-120">
+                        <span class="blue bolder">@ViewBag.Title</span>
+                        Application &copy; 1997-@System.DateTime.Now.Year
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/ace-elements.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/ace.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.pie.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.axislabels.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.orderBars.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/ChartLine/Chart.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery-ui.js")"></script>
+</body>
+</html>

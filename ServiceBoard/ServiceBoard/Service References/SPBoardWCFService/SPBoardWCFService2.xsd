@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:62634/SPBoardWCFService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SPBoardWCFService.Model" />
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LoginResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesAnalysis">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="ReportType" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesAnalysisResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SPBoardWCFService.Model" minOccurs="0" name="GetSalesAnalysisResult" nillable="true" type="q1:ArrayOfChartData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesAnalysisByCategorySum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="ReportType" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesAnalysisByCategorySumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SPBoardWCFService.Model" minOccurs="0" name="GetSalesAnalysisByCategorySumResult" nillable="true" type="q2:ArrayOfChartData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesAnalysisByCategoryDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FromDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="ToDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesAnalysisByCategoryDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SPBoardWCFService.Model" minOccurs="0" name="GetSalesAnalysisByCategoryDetailResult" nillable="true" type="q3:ArrayOfChartData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDebtorAnalysis">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+        <xs:element minOccurs="0" name="InvoiceType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CustomerFrom" type="xs:decimal" />
+        <xs:element minOccurs="0" name="CustomerTo" type="xs:decimal" />
+        <xs:element minOccurs="0" name="SortBy" type="xs:int" />
+        <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PrintCredit" type="xs:boolean" />
+        <xs:element minOccurs="0" name="NameFrom" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NameTo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="AgeBal" type="xs:int" />
+        <xs:element minOccurs="0" name="UnIndJobs" type="xs:boolean" />
+        <xs:element minOccurs="0" name="BalanceDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Retention" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDebtorAnalysisResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SPBoardWCFService.Model" minOccurs="0" name="GetDebtorAnalysisResult" nillable="true" type="q4:ArrayOfChartData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CompanyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CompanyPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Level4ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SPBoardWCFService.Model" minOccurs="0" name="GetCategoryResult" nillable="true" type="q5:ArrayOfCategory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

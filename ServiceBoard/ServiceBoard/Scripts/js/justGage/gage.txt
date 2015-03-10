@@ -1,0 +1,214 @@
+@using ServiceBoard.Helper;
+
+@{
+    ViewBag.Title = "SPBoard";
+    ViewBag.SubTitle = "overview and stats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .flot-chart-content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .view-more {
+        border-radius: 100px;
+    }
+
+    #recent-tab a.tabSales:hover {
+        border: 1px solid #CCCCCC;
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+
+            <div class="col-sm-5">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title lighter">
+                            <i class="ace-icon fa fa-rss"></i>
+                            Resource Utilization
+                        </h4>
+
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-4">
+                            @*<div id="piechart-placeholder"></div>*@
+                            <div id="gagechart"></div>
+                        </div>
+                    </div>
+                    <a class="btn btn-white btn-yellow btn-sm pull-right view-more" style="margin-top: 30px; font-size: 12px;">View More...</a>
+                </div>
+            </div>
+            
+            <div class="col-sm-7">
+                <div class="widget-box transparent" id="recent-box" style="border-left: dotted 1px #CCCCCC;">
+                    <div class="widget-header">
+                        <h4 class="widget-title lighter smaller">
+                            <i class="ace-icon fa fa-signal orange"></i>Sales Analysis
+                        </h4>
+
+                        <div class="widget-toolbar no-border tabbable">
+                            <ul class="nav nav-tabs" id="recent-tab">
+                                <li class="active">
+                                    <a class="tabSales" data-toggle="tab" href="#task-tab">Overall</a>
+                                </li>
+
+                                <li id="liYTD">
+                                    <a class="tabSales" data-toggle="tab" href="#member-tab">YTD</a>
+                                </li>
+
+                                <li id="liCatComp" class="">
+                                    <a class="tabSales" data-toggle="tab" href="#comment-tab">Cat. Comp</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main padding-4">
+                            <div class="tab-content padding-8" style="padding-left:40px;">
+                                <div id="task-tab" class="tab-pane active">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="rdoYTD" class="ace" type="radio" name="form-field-radio">
+                                                    <span class="lbl"> YTD</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3" style="margin-left:-25px;">
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="rdoMTD" class="ace" type="radio" name="form-field-radio">
+                                                    <span class="lbl"> MTD</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="hdnReportType" name="hdnReportType" />
+                                    </div>
+
+                                    <div id="divYTDLoading" style="display:none;"></div>
+                                    <div class="flot-chart-content" id="flot-bar-chart" style="margin:10px 0 0 15px;height:250px;width:450px;"></div>
+                                </div>
+
+                                <div id="member-tab" class="tab-pane">
+                                    <div id="divYTDLoading2" style="display:none;"></div>
+                                    <div id=""></div>
+                                </div>
+
+                                <div id="comment-tab" class="tab-pane">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="rdoYTDCat" class="ace" type="radio" name="form-field-radio3">
+                                                    <span class="lbl"> YTD</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3" style="margin-left:-25px;">
+                                            <div class="radio">
+                                                <label>
+                                                    <input id="rdoMTDCat" class="ace" type="radio" name="form-field-radio3">
+                                                    <span class="lbl"> MTD</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="hdnReportTypeCat" name="hdnReportTypeCat" />
+                                    </div>
+
+                                    <div id="divYTDLoading3" style="display:none;"></div>
+                                    <div class="flot-chart-content" id="flot-bar-chart-cat" style="margin:10px 0 0 15px;height:250px;width:450px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisByCategoryDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hr hr32 hr-dotted"></div>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title lighter">
+                            <i class="ace-icon fa fa-signal"></i>
+                            Debtors Analysis
+                        </h4>
+
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-4">
+                            <div id="sales-charts"></div>
+                        </div>
+                    </div>
+                    <a class="btn btn-white btn-yellow btn-sm pull-right view-more" style="margin-top: 30px;font-size:12px;">View More...</a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="widget-box transparent" style="border-left: dotted 1px #CCCCCC;">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title lighter">
+                            <i class="ace-icon fa fa-star orange"></i>
+                            Booked Jobs
+                        </h4>
+
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-4">
+                            <div id="flot-bar-chart3"></div>
+                        </div>
+                    </div>
+                    <a class="btn btn-white btn-yellow btn-sm pull-right view-more" style="margin-top: 30px;font-size:12px;">View More...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/js/justGage/raphael.2.1.0.min.js")"></script>
+<script src="@Url.Content("~/Scripts/js/justGage/justgage.1.0.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/js/pages/spboard.js")"></script>
+<script src="@Url.Content("~/Scripts/js/pages/salesanalysishome.js")"></script>
+
+<script>
+
+    $(function () {
+        var g = new JustGage({
+            id: "gagechart",
+            value: getRandomInt(0, 100),
+            min: 0,
+            max: 100,
+            title: "Big Fella",
+            label: "pounds"
+        });
+    });
+
+</script>

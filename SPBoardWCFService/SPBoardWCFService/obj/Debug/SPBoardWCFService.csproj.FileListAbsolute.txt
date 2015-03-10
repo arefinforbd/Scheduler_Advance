@@ -1,0 +1,9 @@
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\SPBoardWCFService.dll.config
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\SPBoardWCFService.dll
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\SPBoardWCFService.pdb
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\Progress.Messages.dll
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\Progress.o4glrt.dll
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\Progress.ssl.dll
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\bin\SPBoard.dll
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\obj\Debug\SPBoardWCFService.dll
+C:\Arefin\VS2013\Dev\SPBoardWCFService\SPBoardWCFService\obj\Debug\SPBoardWCFService.pdb

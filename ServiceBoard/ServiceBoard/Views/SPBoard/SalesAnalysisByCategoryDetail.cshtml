@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "SPBoard";
+    ViewBag.SubTitle = "Sales Detail Analysis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/Content/css/jquery-ui.custom.css")" />
+<link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
+
+<style>
+    .flot-chart-content {
+        width: 100%;
+        height: 100%;
+    }
+
+    #selCategory-menu {
+        height: 320px;
+        overflow-y: scroll;
+    } 
+    
+    .ui-menu .ui-state-focus {
+        margin: 0;
+    }
+
+    .ui-datepicker{
+        width: 240px;
+    }
+
+    .datepicker-label{
+        float:left;
+        margin-right:10px;
+        padding-top:5px;
+    }
+
+    #selCharts-button {
+        float: left;
+        margin-right: 8px;
+        height: 34px;
+        background-color: #FFFFFF;
+    }
+    
+    .form-control, select {
+        color: #000000;
+    }
+
+    #selCharts-button .ui-selectmenu-text {
+        padding-top: 6px;
+    } 
+    
+    input[readonly] {
+        background: none repeat scroll 0 0 #ffffff !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4 class="widget-title">Search...</h4>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+                    <form>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <label class="block blue" for="Category-button" style="float:left;margin-right:19px;padding-top:4px;">Category</label>
+                                    <select id="selCategory" name="selCategory" style="width: 200px; display: none;">
+                                        @Html.Raw(ViewBag.Categories)
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <label class="block blue datepicker-label" for="Category-button">Date From</label>
+                                    <div class="input-group" style="width: 240px;">
+                                        <input class="form-control date-picker" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" placeholder="Click to select" readonly="" style="cursor: pointer;" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label class="block blue datepicker-label" for="Category-button">Date To</label>
+                                    <div class="input-group" style="width: 240px;">
+                                        <input class="form-control date-picker" id="id-date-picker-2" type="text" data-date-format="dd-mm-yyyy" placeholder="Click to select" readonly="" style="cursor: pointer;" />
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions left" style="padding-left: 16px;">
+                            <select id="selCharts" name="selCharts">
+                                <option selected="selected">Bar</option>
+                                <option>Pie</option>
+                                <option>Line</option>
+                            </select>
+
+                            <input class="btn btn-sm btn-info" type="button" id="btnPreview" value="Preview" />
+                            <input class="btn btn-sm btn-success" type="button" id="btnReset" value="Reset" style="margin-left:5px;width:75px;" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div id="divLoading" style="display:none;"></div>
+        <div class="widget-box" id="widget-bar-chart" style="display:none;">
+            <div class="widget-header">
+                <h4 class="widget-title">Category Comparison</h4>
+            </div>
+
+            <div class="widget-body" style="padding:10px;">
+                <div class="widget-main no-padding">
+                    <div class="flot-chart-content" id="flot-bar-chart" style="margin: 10px 0 0 15px;height: 350px; width: 750px;"></div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="widget-box" id="widget-bar-chart2" style="display:none;">
+            <div class="widget-header">
+                <h4 class="widget-title">Overall</h4>
+            </div>
+
+            <div class="widget-body" style="padding:10px;">
+                <div class="widget-main no-padding">
+                    <div class="flot-chart-content" id="flot-bar-chart2" style="margin: 10px 0 0 15px;height: 350px; width: 750px;"></div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="widget-box" id="widget-bar-chart3" style="display:none;">
+            <div class="widget-header">
+                <h4 class="widget-title">YTD</h4>
+            </div>
+
+            <div class="widget-body" style="padding:10px;">
+                <div class="widget-main no-padding">
+                    <div class="flot-chart-content" id="flot-bar-chart3" style="margin: 10px 0 0 15px;height: 350px; width: 750px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/js/date-time/bootstrap-datepicker.js")"></script>
+<script src="@Url.Content("~/Scripts/js/pages/spboard.js")"></script>
+<script src="@Url.Content("~/Scripts/js/pages/salesanalysisdetail.js")"></script>
