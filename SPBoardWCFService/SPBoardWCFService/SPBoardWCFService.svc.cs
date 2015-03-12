@@ -51,8 +51,6 @@ namespace SPBoardWCFService
 
             try
             {
-                Level4ID = 1;
-
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
@@ -100,8 +98,6 @@ namespace SPBoardWCFService
 
             try
             {
-                Level4ID = 1;
-
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
@@ -148,8 +144,6 @@ namespace SPBoardWCFService
 
             try
             {
-                Level4ID = 1;
-
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
@@ -246,8 +240,6 @@ namespace SPBoardWCFService
 
             try
             {
-                Level4ID = 1;
-
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
@@ -270,6 +262,46 @@ namespace SPBoardWCFService
                     return null;
 
                 return categories;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<ResourceUtilization> GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate)
+        {
+            DataSet dsSummary;
+            ResourceUtilization resource = new ResourceUtilization();
+            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+            StrongTypesNS.ds_summaryDataSet summaryDataset;
+            StrongTypesNS.ds_detailsDataSet detailsDataset;
+            StrongTypesNS.ds_lvl2_oneDayPerTechDataSet techDataset;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword);
+                SPBoard sboard = new SPBoard(conn);
+
+                sboard.ws_rscUtlz(Level4ID, FromDate, ToDate, out summaryDataset, out detailsDataset, out techDataset);
+                dsSummary = (DataSet)summaryDataset;
+
+                if (dsSummary != null && dsSummary.Tables["tt_summary"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsSummary.Tables["tt_summary"].Rows)
+                    {
+                        resource = new ResourceUtilization();
+
+                        resource.UsedPercentage = Convert.ToDecimal(row["tt_s_used_percent"]);
+                        resource.FreePercentage = Convert.ToDecimal(row["tt_s_free_percent"]);
+
+                        resources.Add(resource);
+                    }
+                }
+                else
+                    return null;
+
+                return resources;
             }
             catch (Exception ex)
             {

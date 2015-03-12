@@ -20,6 +20,13 @@ namespace ServiceBoard.Controllers
             if (Session["CompanyID"] == null)
                 return RedirectToAction("Index", "Login");
 
+            SPBoardRepository repository = new SPBoardRepository();
+            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+
+            resources = repository.GetResourceUtilization(DateTime.Today, DateTime.Today);
+
+            ViewBag.ResourcePercentage = Math.Round((resources[0].UsedPercentage * 100), 2);
+
             return View();
         }
 

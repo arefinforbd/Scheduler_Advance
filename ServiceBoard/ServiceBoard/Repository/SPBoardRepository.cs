@@ -58,5 +58,15 @@ namespace ServiceBoard.Repository
 
             return categories;
         }
+
+        public List<ResourceUtilization> GetResourceUtilization(DateTime fromDate, DateTime toDate)
+        {
+            SPBoardParser parser = new SPBoardParser();
+            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+
+            resources = parser.GetResourceUtilization(fromDate, toDate);
+
+            return resources;
+        }
     }
 }

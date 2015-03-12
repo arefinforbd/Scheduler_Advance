@@ -29,5 +29,8 @@ namespace SPBoardWCFService
 
         [OperationContract]
         List<Category> GetCategory(string CompanyID, string CompanyPassword, int Level4ID);
+
+        [OperationContract]
+        List<ResourceUtilization> GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate);
     }
 }

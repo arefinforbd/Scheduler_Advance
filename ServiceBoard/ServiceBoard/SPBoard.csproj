@@ -289,6 +289,7 @@
     <Content Include="Scripts\js\gauge\gauge.js" />
     <Content Include="Scripts\js\gauge\gauge.min.js" />
     <Content Include="Scripts\js\html5shiv.min.js" />
+    <Content Include="Scripts\js\infobox.js" />
     <Content Include="Scripts\js\jqGrid\i18n\grid.locale-en.js" />
     <Content Include="Scripts\js\jqGrid\jquery.jqGrid.min.js" />
     <Content Include="Scripts\js\jquery-2.1.3.js" />
@@ -320,6 +321,7 @@
     <Content Include="Scripts\js\justGage\raphael.2.1.0.min.js" />
     <Content Include="Scripts\js\markdown\bootstrap-markdown.min.js" />
     <Content Include="Scripts\js\markdown\markdown.min.js" />
+    <Content Include="Scripts\js\markerwithlabel.js" />
     <Content Include="Scripts\js\morris\morris-data.js" />
     <Content Include="Scripts\js\morris\morris.js" />
     <Content Include="Scripts\js\morris\morris.min.js" />
@@ -346,6 +348,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.LoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.ResourceUtilization.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\SPBoardWCFService\SPBoardWCFService.disco" />

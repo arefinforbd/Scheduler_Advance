@@ -42,19 +42,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Progress.Messages, Version=10.1.2.36659, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150306\Progress.Messages.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150312\Progress.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Progress.o4glrt, Version=10.1.2.36775, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150306\Progress.o4glrt.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150312\Progress.o4glrt.dll</HintPath>
     </Reference>
     <Reference Include="Progress.ssl, Version=10.1.2.36736, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150306\Progress.ssl.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150312\Progress.ssl.dll</HintPath>
     </Reference>
-    <Reference Include="SPBoard, Version=2.0.5542.27402, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SPBoard, Version=2.0.5548.28806, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150306\SPBoard.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150312\SPBoard.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,6 +83,7 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\ChartLegend.cs" />
+    <Compile Include="Model\ResourceUtilization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPBoardWCFService.svc.cs">
       <DependentUpon>SPBoardWCFService.svc</DependentUpon>

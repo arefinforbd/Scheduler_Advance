@@ -102,5 +102,18 @@ namespace ServiceBoard.WebParser
 
             return categories;
         }
+
+        public List<ResourceUtilization> GetResourceUtilization(DateTime fromDate, DateTime toDate)
+        {
+            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+            SPBoardWCFServiceClient sp = new SPBoardWCFServiceClient();
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+            resources = sp.GetResourceUtilization(companyID, companyPassword, level4ID, fromDate, toDate);
+
+            return resources;
+        }
     }
 }
