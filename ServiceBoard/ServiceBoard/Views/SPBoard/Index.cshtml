@@ -26,6 +26,20 @@
     #recent-tab a.tabSales:hover {
         border: 1px solid #CCCCCC;
     }
+
+    .widget-box{
+        margin: 0px;
+    } 
+    
+    .jobListItem {
+        border-bottom: 1px dotted #CCCCCC;
+        padding-bottom: 8px;
+    }
+
+    .popup-textbox {
+        height: 27px;
+        margin: 5px;
+    }
 </style>
 
 <div class="row">
@@ -81,7 +95,7 @@
                                         <div class="col-lg-5" style="color: #1e8b04; font-size: 11px; position: absolute; left: 60%; top: 35%;">
                                             <span>Booked Resource: @ViewBag.ResourcePercentage%</span>
                                             <br />
-                                            <span>Available Resource: @(100-ViewBag.ResourcePercentage)%</span>
+                                            <span>Available Resource: @(100 - ViewBag.ResourcePercentage)%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -243,9 +257,101 @@
         <div class="row">
             <div class="col-lg-12">
                 <div id="dialog-googlemap" class="hide">
-                    <p>
-                        <div id="googleMap-dialog" style="height:450px;width:1070px;"></div>
-                    </p>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Area: <input type="text" class="popup-textbox" style="width: 140px;" />
+                            Suburb: <input type="text" class="popup-textbox" style="width: 140px;" />
+                            Postcode: <input type="text" class="popup-textbox" style="width: 80px;" />
+                            Tech: <input type="text" class="popup-textbox" style="width: 120px;" />
+                            Date From: <input type="text" class="popup-textbox" style="width: 100px;" />
+                            Date To: <input type="text" class="popup-textbox" style="width: 100px;" />
+
+                            <button class="btn btn-xs btn-success" style="margin-left: 10px;">
+                                <i class="ace-icon fa fa-search bigger-110"></i>
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-lg-3" style="padding-left:7px;padding-right:5px;">
+                            <div class="widget-box transparent" style="margin: 0px; border: 1px solid #CCCCCC; padding-bottom: 15px;">
+                                <div class="widget-header widget-header-flat">
+                                    <h4 class="widget-title lighter">
+                                        Searched Jobs (12)
+                                    </h4>
+                                </div>
+
+                                <div class="widget-body">
+                                    <div id="divJoblist" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;">
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">97 Eastern Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">22 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">208 Coward Street, Mascot, NSW 2020</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">329 Elizabeth Street, Surry Hills, NSW 2010</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">1 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                        <div class="jobListItem">
+                                            <a href="#">111 Trentino Road, Turramurra, NSW 2074</a>
+                                            <br />
+                                            William Factory
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9" style="padding-left: 0px; padding-right: 8px;">
+                            <div id="googleMap-dialog" style="height:450px;width:890px;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -261,10 +367,44 @@
 
 <script>
 
-    function GetGoogleMapLocation(googlemap, zoomLevel, showTooltip) {
+    $(".jobListItem a").click(function () {
+
+        var map;
+        var address = $(this).html();
+        var myOptions = {
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        map = new google.maps.Map(document.getElementById("googleMap-dialog"), myOptions);
+        var infowindow = new google.maps.InfoWindow();
+        var pinIconUrl = 'http://maps.google.com/mapfiles/ms/icons/';
+        var pinColors = ['green-dot.png', 'red-dot.png', 'blue-dot.png', 'red-dot.png', 'green-dot.png'];
+
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false', null, function (data) {
+
+            var p = data.results[0].geometry.location
+            var latlng = new google.maps.LatLng(p.lat, p.lng);
+            var bookedDate = (new Date().getDate()) + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
+            var tooltipText = "Address: <span style='font-weight: bold;'>" + address + "</span><br/>Booked on: <span style='font-weight: bold;'>" + bookedDate + "</span><br/>Booked by: <span style='font-weight: bold;'>William factory</span>";
+
+            infowindow.close();
+            map.setCenter(new google.maps.LatLng(p.lat, p.lng));
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                icon: pinIconUrl + pinColors[0]
+            });
+
+            infowindow.setContent(tooltipText);
+            infowindow.open(map, marker);
+        });
+    });
+
+    function GetGoogleMapLocation(googlemap, zoomLevel, showTooltip, showLabel) {
         var map;
         var index = 0;
-        var elevator;
 
         var myOptions = {
             zoom: zoomLevel,
@@ -298,27 +438,29 @@
                     icon: pinIconUrl + pinColors[index]
                 });
 
-                var labelText = "<div style='background-color: yellow;'>" + (10 * (index + 1)) + "</div>";
+                if (showLabel) {
+                    var labelText = "<div style='background-color: yellow;'>" + (10 * (index + 1)) + "</div>";
 
-                var labelOption = {
-                    content: labelText
-                            , boxStyle: {
-                                border: "1px solid black"
-                              , textAlign: "center"
-                              , fontSize: "8pt"
-                              , width: "20px"
-                            }
-                    , disableAutoPan: true
-                    , pixelOffset: new google.maps.Size(-10, 0)
-                    , position: latlng
-                    , closeBoxURL: ""
-                    , isHidden: false
-                    , pane: "mapPane"
-                    , enableEventPropagation: true
-                };
+                    var labelOption = {
+                        content: labelText
+                                , boxStyle: {
+                                    border: "1px solid black"
+                                  , textAlign: "center"
+                                  , fontSize: "8pt"
+                                  , width: "20px"
+                                }
+                        , disableAutoPan: true
+                        , pixelOffset: new google.maps.Size(-10, 0)
+                        , position: latlng
+                        , closeBoxURL: ""
+                        , isHidden: false
+                        , pane: "mapPane"
+                        , enableEventPropagation: true
+                    };
 
-                var ibLabel = new InfoBox(labelOption);
-                ibLabel.open(map, marker);
+                    var ibLabel = new InfoBox(labelOption);
+                    ibLabel.open(map, marker);
+                }
 
                 google.maps.event.addListener(marker, 'click', function () {
                     if (showTooltip) {
@@ -342,13 +484,13 @@
             label: "percentage"
         });
 
-        GetGoogleMapLocation($('#googleMap'), 4, true);
+        GetGoogleMapLocation($('#googleMap'), 4, true, true);
 
         $("#vmore-googlemap").on('click', function (e) {
 
             var dialog = $("#dialog-googlemap").removeClass('hide').dialog({
                 modal: true,
-                width: "1100px",
+                width: "1200px",
                 show: {
                     effect: "blind",
                     duration: 500
@@ -364,7 +506,7 @@
                 ]
             });
 
-            GetGoogleMapLocation($('#googleMap-dialog'), 4, true);
+            GetGoogleMapLocation($('#googleMap-dialog'), 4, true, true);
             $("#ui-id-1").html("<i class='ace-icon fa fa-star orange'></i> Booked Jobs");
             google.maps.event.trigger(map, 'resize');
         });
