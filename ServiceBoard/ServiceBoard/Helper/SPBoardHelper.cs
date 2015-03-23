@@ -56,7 +56,8 @@ namespace ServiceBoard.Helper
         public enum YearOrMonth
         {
             Year,
-            Month
+            Month,
+            None
         };
 
         public string LoadCategory()
@@ -66,7 +67,7 @@ namespace ServiceBoard.Helper
             SPBoardRepository repo = new SPBoardRepository();
 
             if (HttpContext.Current.Session["Categories"] == null)
-                HttpContext.Current.Session["Categories"] = repo.GetCategory();
+                HttpContext.Current.Session["Categories"] = repo.GetCombo().Categories;
 
             categories = (List<Category>)HttpContext.Current.Session["Categories"];
             sb.Append("<option selected='selected'>Select Category</option>");
@@ -76,6 +77,62 @@ namespace ServiceBoard.Helper
 
             foreach (var item in categories)
                 sb.Append("<option>" + item.CategoryName + "</option>");
+
+            return sb.ToString();
+        }
+
+        public string LoadAreas()
+        {
+            StringBuilder sb = new StringBuilder("");
+            List<Area> areas = new List<Area>();
+            SPBoardRepository repo = new SPBoardRepository();
+
+            if (HttpContext.Current.Session["Combo"] == null)
+                HttpContext.Current.Session["Combo"] = repo.GetCombo();
+
+            areas = ((ComboClass)HttpContext.Current.Session["Combo"]).Areas;
+
+            foreach (Area area in areas)
+                sb.Append("<option value='" + area.AreaCode + "'>" + area.AreaCode + "</option>");
+
+            return sb.ToString();
+        }
+
+        public string LoadInvoiceTypes()
+        {
+            StringBuilder sb = new StringBuilder("");
+            SPBoardRepository repo = new SPBoardRepository();
+            List<InvoiceType> invoiceTypes = new List<InvoiceType>();
+
+            if (HttpContext.Current.Session["Combo"] == null)
+                HttpContext.Current.Session["Combo"] = repo.GetCombo();
+
+            invoiceTypes = ((ComboClass)HttpContext.Current.Session["Combo"]).InvoiceTypes;
+            var invoice = invoiceTypes.Where(i => i.InvoiceTypeCode.ToLower().Contains("all")).SingleOrDefault();
+            invoiceTypes.Remove(invoice);
+
+            sb.Append("<select multiple='multiple' id='ddlinvoiceType'>");
+            foreach (InvoiceType invoiceType in invoiceTypes)
+                sb.Append("<option value='" + invoiceType.InvoiceTypeCode + "'>" + invoiceType.InvoiceTypeCode + "</option>");
+
+            sb.Append("</select>");
+
+            return sb.ToString();
+        }
+
+        public string LoadDateBalance()
+        {
+            StringBuilder sb = new StringBuilder("");
+            List<ChartData> charts = new List<ChartData>();
+            SPBoardRepository repo = new SPBoardRepository();
+
+            if (HttpContext.Current.Session["DateBalance"] == null)
+                HttpContext.Current.Session["DateBalance"] = repo.GetDebtorAnalysis("", 0, 0, 0, "", true, "", "", 0, false, DateTime.Today, true);
+
+            charts = (List<ChartData>)HttpContext.Current.Session["DateBalance"];
+
+            foreach (ChartData chart in charts)
+                sb.Append("<option value='" + chart.Label + "'>" + chart.Label + "</option>");
 
             return sb.ToString();
         }

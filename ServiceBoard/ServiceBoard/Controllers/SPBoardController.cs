@@ -20,12 +20,14 @@ namespace ServiceBoard.Controllers
             if (Session["CompanyID"] == null)
                 return RedirectToAction("Index", "Login");
 
+            decimal usedPercentage = 0;
             SPBoardRepository repository = new SPBoardRepository();
-            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+            ResourceUtilization resource = new ResourceUtilization();
 
-            resources = repository.GetResourceUtilization(DateTime.Today, DateTime.Today);
+            resource = repository.GetResourceUtilization(DateTime.Today, DateTime.Today, false);
+            usedPercentage = resource.ResourceUtilizationSummaries == null ? 0 : resource.ResourceUtilizationSummaries[0].UsedPercentage;
 
-            ViewBag.ResourcePercentage = Math.Round((resources[0].UsedPercentage * 100), 2);
+            ViewBag.ResourcePercentage = Math.Round((usedPercentage * 100), 2);
 
             return View();
         }
@@ -66,7 +68,7 @@ namespace ServiceBoard.Controllers
             return dtTable;
         }
 
-        private List<Dictionary<string, object>> GetBarData(List<ChartData> charts, bool IsCategory, ServiceBoard.Helper.SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.Year)
+        private List<Dictionary<string, object>> GetBarData(List<ChartData> charts, bool IsCategory, ServiceBoard.Helper.SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.None)
         {
             DataTable dtTable = null;
             List<Bar> bars = new List<Bar>();
@@ -82,10 +84,12 @@ namespace ServiceBoard.Controllers
                 }
                 else
                 {
-                    if(yrm == SPBoardHelper.YearOrMonth.Year)
+                    if (yrm == SPBoardHelper.YearOrMonth.Year)
                         bars.Add(new Bar() { BarXLabel = chart.Category, BarValue = chart.YTDAmount, BarLegend = helper.GetYearMonth(chart.DateLabel) });
-                    else
+                    else if (yrm == SPBoardHelper.YearOrMonth.Month)
                         bars.Add(new Bar() { BarXLabel = chart.Category, BarValue = chart.MTDAmount, BarLegend = helper.GetYearMonth(chart.DateLabel) });
+                    else
+                        bars.Add(new Bar() { BarXLabel = chart.Label, BarValue = chart.Point, BarLegend = chart.DateLabel });
                 }
             }
 
@@ -132,9 +136,7 @@ namespace ServiceBoard.Controllers
             //int weeksCount = charts.Count / colCount;
 
             foreach (ChartData chart in charts)
-            {
                 lines.Add(new LineData() { DateLabel = chart.Label, lineValue = chart.Point, label = chart.Label, Count = charts.Count });
-            }
 
             return lines;
         }
@@ -151,7 +153,7 @@ namespace ServiceBoard.Controllers
             if (charts != null)
             {
                 var chartList = charts.OrderByDescending(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
-                chartTypeObj.Bars = GetBarData(chartList, false);
+                chartTypeObj.Bars = GetBarData(chartList, false, SPBoardHelper.YearOrMonth.Year);
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -233,6 +235,78 @@ namespace ServiceBoard.Controllers
             }
 
             return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DebtorAnalysisDetail()
+        {
+            if (Session["CompanyID"] == null)
+                return RedirectToAction("Index", "Login");
+
+            SPBoardHelper helper = new SPBoardHelper();
+
+            ViewBag.InvoiceTypes = helper.LoadInvoiceTypes();
+            ViewBag.Areas = helper.LoadAreas();
+            ViewBag.DateBalances = helper.LoadDateBalance();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DebtorAnalysisDetail(string invoiceType, decimal customerFrom, decimal customerTo, int sortBy, string area, bool printCredit, string nameFrom, string nameTo, int ageBal, bool unIndJobs, DateTime balanceDate, bool retention)
+        {
+            //NOT COMPLETED
+
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+            SPBoardRepository repository = new SPBoardRepository();
+            SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.Year;
+
+            charts = repository.GetDebtorAnalysis("", 0, 0, 0, "", true, "", "", 0, false, DateTime.Today, true);
+
+            if (charts != null)
+            {
+                var chartList = charts.OrderByDescending(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
+                chartTypeObj.Bars = GetBarData(chartList, false, yrm);
+
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ResourceUtilizationDetail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResourceUtilizationDetail(DateTime fromDate, DateTime toDate)
+        {
+            ChartType chartTypeObj = new ChartType();
+            SPBoardRepository repository = new SPBoardRepository();
+            ResourceUtilization resource = new ResourceUtilization();
+
+            resource = repository.GetResourceUtilization(fromDate, toDate, true);
+            var dateChartList = resource.Charts.Where(c => c.Category.ToLower().Equals("bydate")).ToList();
+            var chartList = dateChartList.OrderByDescending(o => o.DateLabel).ToList();
+            chartTypeObj.Bars = GetBarData(chartList, true);
+
+            return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ResourceUtilizationOneDayPerTech(DateTime fromDate, DateTime toDate)
+        {
+            ChartType chartTypeObj = new ChartType();
+            SPBoardRepository repository = new SPBoardRepository();
+            ResourceUtilization resource = new ResourceUtilization();
+            SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.Year;
+
+            resource = repository.GetResourceUtilization(fromDate, toDate, true);
+            var techChartList = resource.Charts.Where(c => c.Category.ToLower().Equals("bytech")).ToList();
+            chartTypeObj.Bars = GetBarData(techChartList, false, yrm);
+
+            return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
         }
 	}
 }

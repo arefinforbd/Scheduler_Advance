@@ -281,6 +281,7 @@
     <Content Include="Scripts\js\flot\jquery.flot.pie.min.js" />
     <Content Include="Scripts\js\flot\jquery.flot.resize.js" />
     <Content Include="Scripts\js\flot\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.stack.js" />
     <Content Include="Scripts\js\flot\jquery.flot.tooltip.min.js" />
     <Content Include="Scripts\js\fuelux\fuelux.spinner.min.js" />
     <Content Include="Scripts\js\fuelux\fuelux.tree.min.js" />
@@ -327,6 +328,7 @@
     <Content Include="Scripts\js\morris\morris.min.js" />
     <Content Include="Scripts\js\morris\raphael.js" />
     <Content Include="Scripts\js\morris\raphael.min.js" />
+    <Content Include="Scripts\js\pages\bootstrap-multiselect-modified.js" />
     <Content Include="Scripts\js\pages\salesanalysisdetail.js" />
     <Content Include="Scripts\js\pages\salesanalysishome.js" />
     <Content Include="Scripts\js\pages\spboard.js" />
@@ -341,10 +343,10 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.Category.datasource">
+    <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.ChartData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.ChartData.datasource">
+    <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.ComboClass.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.LoginResponse.datasource">
@@ -382,6 +384,8 @@
     <Content Include="Views\SPBoard\Index_Old.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\SPBoard\SalesAnalysisByCategoryDetail.cshtml" />
+    <Content Include="Views\SPBoard\DebtorAnalysisDetail.cshtml" />
+    <Content Include="Views\SPBoard\ResourceUtilizationDetail.cshtml" />
     <None Include="Service References\SPBoardWCFService\SPBoardWCFService.wsdl" />
     <None Include="Service References\SPBoardWCFService\SPBoardWCFService.xsd">
       <SubType>Designer</SubType>
@@ -394,14 +398,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\SPBoardWCFService\" />

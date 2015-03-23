@@ -73,7 +73,7 @@ function LoadAJAXSalesAnalysisDetail() {
         success: function (data) {
             if (data != null) {
                 $("#widget-bar-chart").show();
-                LoadBarChart(data, $("#flot-bar-chart"));
+                LoadBarChart(data, $("#flot-bar-chart"), false);
                 LoadingComplete();
             }
             else {

@@ -117,6 +117,7 @@ function LoadBarChart(data, chartControl) {
                     bars: { order: innerindex },
                     data: yaxisvalues
                 });
+                
                 yaxisvalues = [];
                 innerindex++;
             }
@@ -124,10 +125,10 @@ function LoadBarChart(data, chartControl) {
     }
 
     $.plot(chartControl, dataset, {
-        series: {
+        series: {stack: 0,
             bars: {
                 show: true,
-                barWidth: 0.13,
+                barWidth: 0.2,
                 align: 'center'
             }
         },

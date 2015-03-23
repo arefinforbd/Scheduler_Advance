@@ -49,24 +49,24 @@ namespace ServiceBoard.Repository
             return charts;
         }
 
-        public List<Category> GetCategory()
+        public ComboClass GetCombo()
         {
             SPBoardParser parser = new SPBoardParser();
-            List<Category> categories = new List<Category>();
+            ComboClass combo = new ComboClass();
 
-            categories = parser.GetCategory();
+            combo = parser.GetCombo();
 
-            return categories;
+            return combo;
         }
 
-        public List<ResourceUtilization> GetResourceUtilization(DateTime fromDate, DateTime toDate)
+        public ResourceUtilization GetResourceUtilization(DateTime fromDate, DateTime toDate, bool stacked)
         {
             SPBoardParser parser = new SPBoardParser();
-            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+            ResourceUtilization resource = new ResourceUtilization();
 
-            resources = parser.GetResourceUtilization(fromDate, toDate);
+            resource = parser.GetResourceUtilization(fromDate, toDate, stacked);
 
-            return resources;
+            return resource;
         }
     }
 }

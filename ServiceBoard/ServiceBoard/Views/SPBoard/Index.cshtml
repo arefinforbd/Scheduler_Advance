@@ -7,6 +7,11 @@
 }
 
 <script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.pie.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.axislabels.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.orderBars.js")"></script>
+<script src="@Url.Content("~/Scripts/js/ChartLine/Chart.js")"></script>
 
 <style>
     #flot-bar-chart3 {
@@ -105,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size: 12px; clear: both;">View More...</a>
+                        <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/ResourceUtilizationDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size: 12px; clear: both;">View More...</a>
                     </div>
                 </div>
             </div>
@@ -225,7 +230,7 @@
                         <div class="widget-main padding-4">
                             <canvas id="flot-line-chart" width="490" height="300"></canvas>
                         </div>
-                        <a class="btn btn-white btn-yellow btn-sm pull-right view-more" style="margin-bottom: 10px; font-size:12px;">View More...</a>
+                        <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/DebtorAnalysisDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="margin-bottom: 10px; font-size:12px;">View More...</a>
                     </div>
                 </div>
             </div>
@@ -381,7 +386,7 @@
         var pinIconUrl = 'http://maps.google.com/mapfiles/ms/icons/';
         var pinColors = ['green-dot.png', 'red-dot.png', 'blue-dot.png', 'red-dot.png', 'green-dot.png'];
 
-        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false', null, function (data) {
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=true', null, function (data) {
 
             var p = data.results[0].geometry.location
             var latlng = new google.maps.LatLng(p.lat, p.lng);
@@ -416,12 +421,12 @@
         var infowindow = new google.maps.InfoWindow();
 
         //var addresses = ['1 Trentino Road, Turramurra, NSW 2074', '208 Coward Street, Mascot, NSW 2020', '37, Britannina Drive, Glenfield, NSW 2164'];
-        var addresses = ['NSW 2074', 'NSW 2020', 'NSW 2164', 'VIC 3000', 'WA 6000'];
+        var addresses = ['NSW 2074', 'NSW 2020', 'NSW 2167', 'VIC 3000', 'WA 6000'];
         var pinIconUrl = 'http://maps.google.com/mapfiles/ms/icons/';
         var pinColors = ['green-dot.png', 'red-dot.png', 'blue-dot.png', 'red-dot.png', 'green-dot.png'];
 
         for (var x = 0; x < addresses.length; x++) {
-            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=false', null, function (data) {
+            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=true', null, function (data) {
 
                 var p = data.results[0].geometry.location
                 var latlng = new google.maps.LatLng(p.lat, p.lng);
@@ -462,12 +467,16 @@
                     ibLabel.open(map, marker);
                 }
 
-                google.maps.event.addListener(marker, 'click', function () {
-                    if (showTooltip) {
-                        infowindow.setContent(tooltipText);
-                        infowindow.open(map, marker);
-                    }
-                });
+                var getMapClickListener = function (m) {
+                    return function () {
+                        if (showTooltip) {
+                            infowindow.setContent(tooltipText);
+                            infowindow.open(m, marker);
+                        }
+                    };
+                };
+
+                google.maps.event.addListener(marker, 'click', getMapClickListener(map));
                 index++;
             });
         }

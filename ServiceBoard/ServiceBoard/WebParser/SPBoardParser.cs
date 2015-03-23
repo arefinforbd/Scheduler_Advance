@@ -90,30 +90,30 @@ namespace ServiceBoard.WebParser
             return charts;
         }
 
-        public List<Category> GetCategory()
+        public ComboClass GetCombo()
         {
-            List<Category> categories = new List<Category>();
+            ComboClass combo = new ComboClass();
             SPBoardWCFServiceClient sp = new SPBoardWCFServiceClient();
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            categories = sp.GetCategory(companyID, companyPassword, level4ID);
+            combo = sp.GetCombo(companyID, companyPassword, level4ID);
 
-            return categories;
+            return combo;
         }
 
-        public List<ResourceUtilization> GetResourceUtilization(DateTime fromDate, DateTime toDate)
+        public ResourceUtilization GetResourceUtilization(DateTime fromDate, DateTime toDate, bool stacked)
         {
-            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+            ResourceUtilization resource = new ResourceUtilization();
             SPBoardWCFServiceClient sp = new SPBoardWCFServiceClient();
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            resources = sp.GetResourceUtilization(companyID, companyPassword, level4ID, fromDate, toDate);
+            resource = sp.GetResourceUtilization(companyID, companyPassword, level4ID, fromDate, toDate, stacked);
 
-            return resources;
+            return resource;
         }
     }
 }
