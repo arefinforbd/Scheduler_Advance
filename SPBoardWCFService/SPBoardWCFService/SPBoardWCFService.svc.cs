@@ -229,14 +229,25 @@ namespace SPBoardWCFService
             }
         }
 
-        public List<Category> GetCategory(string CompanyID, string CompanyPassword, int Level4ID)
+        public ComboClass GetCombo(string CompanyID, string CompanyPassword, int Level4ID)
         {
             DataSet dsCategory;
             Category category = new Category();
             List<Category> categories = new List<Category>();
+
+            DataSet dsArea;
+            Area area = new Area();
+            List<Area> areas = new List<Area>();
+
+            DataSet dsInvoiceType;
+            InvoiceType invoiceType = new InvoiceType();
+            List<InvoiceType> invoiceTypes = new List<InvoiceType>();
+
             StrongTypesNS.ds_categoryDataSet categoryDataset;
             StrongTypesNS.ds_areaDataSet areaDataset;
             StrongTypesNS.ds_invTypeDataSet invoiceDataset;
+
+            ComboClass combo = new ComboClass();
 
             try
             {
@@ -245,6 +256,8 @@ namespace SPBoardWCFService
 
                 sboard.ws_combo(Level4ID, out categoryDataset, out areaDataset, out invoiceDataset);
                 dsCategory = (DataSet)categoryDataset;
+                dsArea = (DataSet)areaDataset;
+                dsInvoiceType = (DataSet)invoiceDataset;
 
                 if (dsCategory != null && dsCategory.Tables["tt_pd_mstr"].Rows.Count > 0)
                 {
@@ -257,11 +270,38 @@ namespace SPBoardWCFService
 
                         categories.Add(category);
                     }
+                    combo.Categories = categories;
                 }
-                else
-                    return null;
 
-                return categories;
+                if (dsArea != null && dsArea.Tables["tt_br_mstr"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsArea.Tables["tt_br_mstr"].Rows)
+                    {
+                        area = new Area();
+
+                        area.Sequence = Convert.ToInt32(row["tt_br_seq"]);
+                        area.AreaCode = row["tt_br_code"].ToString();
+
+                        areas.Add(area);
+                    }
+                    combo.Areas = areas;
+                }
+
+                if (dsInvoiceType != null && dsInvoiceType.Tables["tt_invType"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsInvoiceType.Tables["tt_invType"].Rows)
+                    {
+                        invoiceType = new InvoiceType();
+
+                        invoiceType.Sequence = Convert.ToInt32(row["tt_inv_seq"]);
+                        invoiceType.InvoiceTypeCode = row["tt_inv_type"].ToString();
+
+                        invoiceTypes.Add(invoiceType);
+                    }
+                    combo.InvoiceTypes = invoiceTypes;
+                }
+
+                return combo;
             }
             catch (Exception ex)
             {
@@ -269,11 +309,22 @@ namespace SPBoardWCFService
             }
         }
 
-        public List<ResourceUtilization> GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate)
+        public ResourceUtilization GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true)
         {
             DataSet dsSummary;
+            DataSet dsDetail;
+            DataSet dsOneDayPerTech;
+            ChartData chart = new ChartData();
+            List<ChartData> charts = new List<ChartData>();
             ResourceUtilization resource = new ResourceUtilization();
-            List<ResourceUtilization> resources = new List<ResourceUtilization>();
+
+            ResourceUtilizationSummary summary = new ResourceUtilizationSummary();
+            List<ResourceUtilizationSummary> summaries = new List<ResourceUtilizationSummary>();
+            ResourceUtilizationDetail detail = new ResourceUtilizationDetail();
+            List<ResourceUtilizationDetail> details = new List<ResourceUtilizationDetail>();
+            ResourceUtilizationOneDayPerTech tech = new ResourceUtilizationOneDayPerTech();
+            List<ResourceUtilizationOneDayPerTech> techs = new List<ResourceUtilizationOneDayPerTech>();
+
             StrongTypesNS.ds_summaryDataSet summaryDataset;
             StrongTypesNS.ds_detailsDataSet detailsDataset;
             StrongTypesNS.ds_lvl2_oneDayPerTechDataSet techDataset;
@@ -285,23 +336,92 @@ namespace SPBoardWCFService
 
                 sboard.ws_rscUtlz(Level4ID, FromDate, ToDate, out summaryDataset, out detailsDataset, out techDataset);
                 dsSummary = (DataSet)summaryDataset;
+                dsDetail = (DataSet)detailsDataset;
+                dsOneDayPerTech = (DataSet)techDataset;
 
                 if (dsSummary != null && dsSummary.Tables["tt_summary"].Rows.Count > 0)
                 {
                     foreach (DataRow row in dsSummary.Tables["tt_summary"].Rows)
                     {
-                        resource = new ResourceUtilization();
+                        summary = new ResourceUtilizationSummary();
 
-                        resource.UsedPercentage = Convert.ToDecimal(row["tt_s_used_percent"]);
-                        resource.FreePercentage = Convert.ToDecimal(row["tt_s_free_percent"]);
+                        summary.UsedPercentage = Convert.ToDecimal(row["tt_s_used_percent"]);
+                        summary.FreePercentage = Convert.ToDecimal(row["tt_s_free_percent"]);
 
-                        resources.Add(resource);
+                        summaries.Add(summary);
                     }
+                    resource.ResourceUtilizationSummaries = summaries;
                 }
-                else
-                    return null;
 
-                return resources;
+                if (dsDetail != null && dsDetail.Tables["tt_details"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsDetail.Tables["tt_details"].Rows)
+                    {
+                        if (Stacked)
+                        {
+                            for (int index = 0; index < 2; index++)
+                            {
+                                chart = new ChartData();
+
+                                chart.Label = Convert.ToDateTime(row["tt_d_date"]).ToString("dd/MM/yyyy");
+                                chart.DateLabel = index == 0 ? "Used Percentage" : "Free Percentage";
+                                chart.Point = (index == 0 ? Convert.ToDouble(row["tt_d_used_percent"]) : Convert.ToDouble(row["tt_d_free_percent"])) * 100;
+                                chart.Category = "ByDate";
+
+                                charts.Add(chart);
+                            }
+                        }
+                        else
+                        {
+                            detail = new ResourceUtilizationDetail();
+
+                            detail.DateTimePercentage = Convert.ToDateTime(row["tt_d_date"]);
+                            detail.UsedPercentage = Convert.ToDecimal(row["tt_d_used_percent"]);
+                            detail.FreePercentage = Convert.ToDecimal(row["tt_d_free_percent"]);
+
+                            details.Add(detail);
+                        }
+                    }
+                    resource.ResourceUtilizationDetails = details.Count > 0 ? details : null;
+                    resource.Charts = charts.Count > 0 ? charts : null;
+                }
+
+                if (dsOneDayPerTech != null && dsOneDayPerTech.Tables["tt_lvl2_oneDayPerTech"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsOneDayPerTech.Tables["tt_lvl2_oneDayPerTech"].Rows)
+                    {
+                        if (Stacked)
+                        {
+                            for (int index = 0; index < 2; index++)
+                            {
+                                chart = new ChartData();
+
+                                chart.Label = Convert.ToDateTime(row["tt_oDpT_date"]).ToString("dd/MM/yyyy");
+                                chart.DateLabel = chart.Label;
+                                tech.TechName = row["tt_oDpT_tech"].ToString();
+                                chart.Point = index == 0 ? Convert.ToDouble(row["tt_oDpT_used_percent"]) : Convert.ToDouble(row["tt_oDpT_free_percent"]);
+                                chart.Category = "ByTech";
+
+                                charts.Add(chart);
+                            }
+                        }
+                        else
+                        {
+                            tech = new ResourceUtilizationOneDayPerTech();
+
+                            tech.DateTimePercentage = Convert.ToDateTime(row["tt_oDpT_date"]);
+                            tech.TechName = row["tt_oDpT_tech"].ToString();
+                            tech.UsedPercentage = Convert.ToDecimal(row["tt_oDpT_used_percent"]);
+                            tech.FreePercentage = Convert.ToDecimal(row["tt_oDpT_free_percent"]);
+
+                            techs.Add(tech);
+                        }
+                    }
+                    resource.ResourceUtilizationOneDayPerTechs = techs.Count > 0 ? techs : null;
+                    resource.Charts = charts.Count > 0 ? charts : null;
+                }
+
+                return resource;
             }
             catch (Exception ex)
             {

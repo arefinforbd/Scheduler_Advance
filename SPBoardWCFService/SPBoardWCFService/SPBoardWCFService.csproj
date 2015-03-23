@@ -80,9 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISPBoardWCFService.cs" />
+    <Compile Include="Model\Area.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\ChartLegend.cs" />
+    <Compile Include="Model\ComboClass.cs" />
+    <Compile Include="Model\InvoiceType.cs" />
     <Compile Include="Model\ResourceUtilization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPBoardWCFService.svc.cs">

@@ -28,9 +28,9 @@ namespace SPBoardWCFService
         List<ChartData> GetDebtorAnalysis(string CompanyID, string CompanyPassword, int Level4ID, string InvoiceType, decimal CustomerFrom, decimal CustomerTo, int SortBy, string Area, bool PrintCredit, string NameFrom, string NameTo, int AgeBal, bool UnIndJobs, DateTime BalanceDate, bool Retention);
 
         [OperationContract]
-        List<Category> GetCategory(string CompanyID, string CompanyPassword, int Level4ID);
+        ComboClass GetCombo(string CompanyID, string CompanyPassword, int Level4ID);
 
         [OperationContract]
-        List<ResourceUtilization> GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate);
+        ResourceUtilization GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true);
     }
 }
