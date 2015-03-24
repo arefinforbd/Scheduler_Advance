@@ -142,4 +142,154 @@ function LoadBarChart(data, chartControl) {
             ticks: xvalues
         }
     });
+    chartControl.UseTooltip();
+}
+
+function LoadBarChartHorizontal(data, chartControl) {
+
+    var yaxisvalues = [];
+    var dataset = [];
+
+    var innerindex = 0;
+    var xvalues = [];
+    var parsedData = data.Bars;
+    var colCount = 0;
+
+    //Creating labels for x-axis
+    for (var loopindex = 0; loopindex < data.Bars.length; loopindex++) {
+        $.each(parsedData[loopindex], function (colName, value) {
+            if (colName == "BarXLabel") {
+                yaxisvalues.push([loopindex, value]);
+            }
+        });
+    }
+
+    //Counting the number of columns returned from server
+    //$.each(parsedData[0], function (colName, value) {
+    //    if (colName == "BarXLabel") {
+    //        colCount++;
+    //    }
+    //});
+
+    innerindex = 0;
+    for (var loopindex = 0; loopindex < 1; loopindex++) {
+        $.each(data.Bars[loopindex], function (colName, value) {
+            if (colName != "BarXLabel") {
+
+                for (var index = 0; index < data.Bars.length; index++) {
+                    xvalues.push([data.Bars[index][colName], index]);
+                }
+
+                dataset.push({
+                    label: colName,
+                    data: xvalues
+                });
+
+                xvalues = [];
+                innerindex++;
+            }
+        });
+    }
+
+    $.plot(chartControl, dataset, {
+        series: {
+            stack: 0,
+            bars: {
+                show: true, horizontal: true, align: 'center', barWidth: 0.5
+            }
+        },
+        xaxis: {max: 120},
+        yaxis: {
+            ticks: yaxisvalues
+        },
+        grid: {
+            hoverable: true
+        },
+        valueLabels: {
+            show: true
+        }
+    });
+    chartControl.UseTooltipStacked();
+}
+
+var previousPoint = null, previousLabel = null;
+
+$.fn.UseTooltip = function () {
+    $(this).bind("plothover", function (event, pos, item) {
+        if (item) {
+            if ((previousLabel != item.series.label) ||
+         (previousPoint != item.dataIndex)) {
+                previousPoint = item.dataIndex;
+                previousLabel = item.series.label;
+                $("#tooltip").remove();
+
+                var toolTipContent = "";
+                var x = 0;
+                var color = item.series.color;
+
+                if (previousLabel == "Used Percentage")
+                    x = item.datapoint[1].toFixed(2);
+                else
+                    x = 100 - item.datapoint[2].toFixed(2);
+
+                toolTipContent = "<strong>" + previousLabel + ": " + x + "%</strong>";
+
+                showTooltip(item.pageX,
+                item.pageY,
+                color,
+                toolTipContent);
+            }
+        } else {
+            $("#tooltip").remove();
+            previousPoint = null;
+        }
+    });
+};
+
+$.fn.UseTooltipStacked = function () {
+    $(this).bind("plothover", function (event, pos, item) {
+        if (item) {
+            if ((previousLabel != item.series.label) ||
+         (previousPoint != item.dataIndex)) {
+                previousPoint = item.dataIndex;
+                previousLabel = item.series.label;
+                $("#tooltip").remove();
+
+                var toolTipContent = "";
+                var x = 0;
+                var color = item.series.color;
+
+                if (previousLabel == "Used Percentage")
+                    x = item.datapoint[0].toFixed(2);
+                else
+                    x = 100 - item.datapoint[2].toFixed(2);
+
+                toolTipContent = "<strong>" + previousLabel + ": " + x + "%</strong>";
+
+                showTooltip(item.pageX,
+                item.pageY,
+                color,
+                toolTipContent);
+            }
+        } else {
+            $("#tooltip").remove();
+            previousPoint = null;
+        }
+    });
+};
+
+function showTooltip(x, y, color, contents) {
+    $('<div id="tooltip">' + contents + '</div>').css({
+        position: 'absolute',
+        display: 'none',
+        top: y - 10,
+        left: x + 10,
+        border: '2px solid ' + color,
+        padding: '3px',
+        'font-size': '9px',
+        'border-radius': '5px',
+        'background-color': '#fff',
+        'font-family': 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+        opacity: 0.9
+    }).appendTo("body").fadeIn(200);
 }

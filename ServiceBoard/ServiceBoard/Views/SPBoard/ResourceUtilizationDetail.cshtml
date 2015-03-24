@@ -125,14 +125,14 @@
             </div>
         </div>
         <br />
-        <div class="widget-box" id="widget-bar-chart2" style="display:none;">
+        <div class="widget-box" id="widget-bar-chart2" style="display:block;">
             <div class="widget-header">
                 <h4 class="widget-title">Resource Utilization Day Per Tech</h4>
             </div>
 
             <div class="widget-body" style="padding:10px;">
                 <div class="widget-main no-padding">
-                    <div class="flot-chart-content" id="flot-bar-chart2" style="margin: 10px 0 0 15px;height: 350px;"></div>
+                    <div class="flot-chart-content" id="flot-bar-chart2" style="margin: 10px 0 0 15px;height: 450px;"></div>
                 </div>
             </div>
         </div>
@@ -198,7 +198,7 @@
             $("#divLoading").show();
             $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
             LoadAJAXResourceUtilizationDetail();
-            //LoadAJAXResourceUtilizationOneDayPerTech();
+            LoadAJAXResourceUtilizationOneDayPerTech();
         });
 
         $("#btnReset").click(function () {
@@ -240,14 +240,14 @@
         var ToDate = $("#id-date-picker-2").val();
 
         $.ajax({
-            url: $("#hdnSiteURL").val() + "/SPBoard/ResourceUtilizationOneDayPerTech",
+            url: $("#hdnSiteURL").val() + "/SPBoard/ResourceUtilizationDetail",
             type: "POST",
             data: { fromDate: FromDate, toDate: ToDate },
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
-                    $("#widget-bar-chart").show();
-                    LoadBarChart(data, $("#flot-bar-chart2"));
+                    $("#widget-bar-chart2").show();
+                    LoadBarChartHorizontal(data, $("#flot-bar-chart2"));
                     LoadingComplete();
                 }
                 else {
@@ -260,6 +260,37 @@
                 alert("Please try again. Something went wrong.");
             }
         });
+
+        //var d1 = [];
+        //var d2 = [];
+
+        //d1 = [[0, 0], [10, 1], [20, 2], [30, 3], [40, 4], [0, 5], [10, 6], [20, 7], [30, 8], [40, 9]];
+        //d2 = [[0, 0], [20, 1], [40, 2], [60, 3], [80, 4], [0, 5], [20, 6], [40, 7], [60, 8], [80, 9]];
+
+        //dataSet = [];
+        //dataSet = [{ "data": d1, "label": "Used Percentage" }, { "data": d2, "label": "Free Percentage" }];
+
+        //var tick_labels = [[0, "Group 0"], [1, "Group 1"], [2, "Group 2"], [3, "Group 3"], [4, "Group 4"], [5, "Group 5"], [6, "Group 6"], [7, "Group 7"], [8, "Group 8"], [9, "Group 9"]];
+
+        //var options = {
+        //    series: {
+        //        stack: 0,
+        //        lines: { show: false, steps: false },
+        //        bars: { show: true, horizontal: true, align: 'center', barWidth: 0.5 },
+        //    },
+        //    grid: {
+        //        hoverable: true
+        //    },
+        //    valueLabels: {
+        //        show: true
+        //    },
+        //    yaxis: { ticks: tick_labels }
+        //};
+
+        //$("widget-bar-chart2").show();
+        //var plotarea = $("#flot-bar-chart2");
+        //$.plot(plotarea, dataSet, options);
+        //plotarea.UseTooltip();
     }
 
     function LoadingComplete() {
