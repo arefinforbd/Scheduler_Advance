@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "SPBoard";
-    ViewBag.SubTitle = "Resource Utilization";
+    ViewBag.SubTitle = "Resource Utilization Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,21 +29,6 @@
         float: left;
         margin-right: 10px;
         padding-top: 5px;
-    }
-
-    #selCharts-button {
-        float: left;
-        margin-right: 8px;
-        height: 34px;
-        background-color: #FFFFFF;
-    }
-
-    .form-control, select {
-        color: #000000;
-    }
-
-    #selCharts-button .ui-selectmenu-text {
-        padding-top: 6px;
     }
 
     input[readonly] {
@@ -98,12 +83,6 @@
                         </fieldset>
 
                         <div class="form-actions left" style="padding-left: 16px;">
-                            <select id="selCharts" name="selCharts">
-                                <option selected="selected">Bar</option>
-                                <option>Pie</option>
-                                <option>Line</option>
-                            </select>
-
                             <input class="btn btn-sm btn-info" type="button" id="btnPreview" value="Preview" />
                             <input class="btn btn-sm btn-success" type="button" id="btnReset" value="Reset" style="margin-left:5px;width:75px;" />
                         </div>

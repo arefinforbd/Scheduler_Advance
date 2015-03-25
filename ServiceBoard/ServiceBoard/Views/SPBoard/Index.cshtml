@@ -19,6 +19,14 @@
         height: 260px;
     }
 
+    #flot-bar-chart3 .flot-base {
+        margin: 9px 0 0 40px;
+    }
+
+    #flot-bar-chart3 .flot-text .flot-x-axis {
+        margin: 5px 0 0 35px;
+    }
+    
     .flot-chart-content {
         width: 100%;
         height: 100%;
@@ -107,7 +115,7 @@
                                 </div>
 
                                 <div id="resource2ndTab" class="tab-pane">
-                                    <div id="flot-bar-chart3" style="margin: 20px 0 0 10px;"></div>
+                                    <div id="flot-bar-chart3" style="margin: -15px 0 20px 0; height: 300px;width:380px;"></div>
                                     <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/ResourceUtilizationOneDayPertech" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size: 12px; clear: both;">View More...</a>
                                 </div>
                             </div>
@@ -370,6 +378,7 @@
 <script src="@Url.Content("~/Scripts/js/justGage/raphael.2.1.0.min.js")"></script>
 <script src="@Url.Content("~/Scripts/js/justGage/justgage.1.0.1.js")"></script>
 <script src="@Url.Content("~/Scripts/js/infobox.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.stack.js")"></script>
 
 <script>
 
@@ -483,16 +492,47 @@
         }
     }
 
+    function LoadAJAXResourceUtilizationOneDayPerTech() {
+
+        var FromDate = FormatCustomDate(new Date());
+
+        $.ajax({
+            url: $("#hdnSiteURL").val() + "/SPBoard/ResourceUtilizationOneDayPerTech",
+            type: "POST",
+            data: { fromDate: FromDate },
+            dataType: "JSON",
+            success: function (data) {
+                if (data != null && data.Bars != null) {
+                    LoadBarChartHorizontal(data, $("#flot-bar-chart3"), false);
+                    $("#flot-bar-chart3 div.legend table").css("opacity", "0.85");
+                    $("#flot-bar-chart3 div.legend table").css("background-color", "#FFFFFF");
+                    $("#flot-bar-chart3 div.legend table").css("right", "-25px");
+                }
+                else {
+                    $("#flot-bar-chart3").css("text-align", "center");
+                    $("#flot-bar-chart3").css("margin", "0 auto");
+                    $("#flot-bar-chart3").css("padding-top", "100px");
+                    $("#flot-bar-chart3").css("color", "#BBBBBB");
+                    $("#flot-bar-chart3").html("There is no data for today. Click View More for details.");
+                }
+            },
+            error: function (request) {
+            }
+        });
+    }
+
     $(function () {
 
-        var g = new JustGage({
-            id: "flot-bar-chart3",
-            value: getRandomInt(0, 100),
-            min: 0,
-            max: 100,
-            title: "Utilization",
-            label: "percentage"
-        });
+        //var g = new JustGage({
+        //    id: "flot-bar-chart3",
+        //    value: getRandomInt(0, 100),
+        //    min: 0,
+        //    max: 100,
+        //    title: "Utilization",
+        //    label: "percentage"
+        //});
+
+        LoadAJAXResourceUtilizationOneDayPerTech();
 
         GetGoogleMapLocation($('#googleMap'), 4, true, true);
 

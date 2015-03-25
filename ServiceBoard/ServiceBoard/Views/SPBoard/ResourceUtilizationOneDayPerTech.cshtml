@@ -31,21 +31,6 @@
         padding-top: 5px;
     }
 
-    #selCharts-button {
-        float: left;
-        margin-right: 8px;
-        height: 34px;
-        background-color: #FFFFFF;
-    }
-
-    .form-control, select {
-        color: #000000;
-    }
-
-    #selCharts-button .ui-selectmenu-text {
-        padding-top: 6px;
-    }
-
     input[readonly] {
         background: none repeat scroll 0 0 #ffffff !important;
     }
@@ -82,12 +67,6 @@
                         </fieldset>
 
                         <div class="form-actions left" style="padding-left: 16px;">
-                            <select id="selCharts" name="selCharts">
-                                <option selected="selected">Bar</option>
-                                <option>Pie</option>
-                                <option>Line</option>
-                            </select>
-
                             <input class="btn btn-sm btn-info" type="button" id="btnPreview" value="Preview" />
                             <input class="btn btn-sm btn-success" type="button" id="btnReset" value="Reset" style="margin-left:5px;width:75px;" />
                         </div>
@@ -128,12 +107,7 @@
             altFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
-            yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
-            onSelect: function (date) {
-                if ($("#id-date-picker-2").datepicker('getDate') == null) {
-                    $('#id-date-picker-2').datepicker("setDate", $("#id-date-picker-1").datepicker('getDate'));
-                }
-            }
+            yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2)
         })
         .next().on(ace.click_event, function () {
             $(this).prev().focus();
@@ -167,7 +141,7 @@
                 if (data != null && data.Bars != null) {
                     $("#widget-bar-chart2").show();
                     $("#flot-bar-chart2").height(data.Bars.length <= 5 ? (data.Bars.length * 100) : (data.Bars.length * 50));
-                    LoadBarChartHorizontal(data, $("#flot-bar-chart2"));
+                    LoadBarChartHorizontal(data, $("#flot-bar-chart2"), true);
                     LoadingComplete();
                 }
                 else {
@@ -191,7 +165,7 @@
     function Validate() {
 
         if ($("#id-date-picker-1").val().trim().length <= 0) {
-            alert("Please enter From Date.");
+            alert("Please select Report Date.");
             $("#id-date-picker-1").focus();
             return false;
         }

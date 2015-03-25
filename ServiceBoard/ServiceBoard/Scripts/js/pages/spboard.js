@@ -145,7 +145,7 @@ function LoadBarChart(data, chartControl) {
     chartControl.UseTooltip();
 }
 
-function LoadBarChartHorizontal(data, chartControl) {
+function LoadBarChartHorizontal(data, chartControl, isGridHover) {
 
     var yaxisvalues = [];
     var dataset = [];
@@ -203,7 +203,7 @@ function LoadBarChartHorizontal(data, chartControl) {
             ticks: yaxisvalues
         },
         grid: {
-            hoverable: true
+            hoverable: isGridHover
         },
         valueLabels: {
             show: true
@@ -283,7 +283,7 @@ function showTooltip(x, y, color, contents) {
         position: 'absolute',
         display: 'none',
         top: y - 10,
-        left: x + 10,
+        left: x,
         border: '2px solid ' + color,
         padding: '3px',
         'font-size': '9px',
@@ -292,4 +292,18 @@ function showTooltip(x, y, color, contents) {
         'font-family': 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
         opacity: 0.9
     }).appendTo("body").fadeIn(200);
+}
+
+function FormatCustomDate(datevalue) {
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+
+    var finalDate = "";
+    var yyyy = datevalue.getFullYear().toString();
+    var mm = monthNames[datevalue.getMonth()];
+    var dd = datevalue.getDate().toString();
+
+    finalDate = dd + " " + mm + ", " + yyyy;
+
+    return finalDate;
 }
