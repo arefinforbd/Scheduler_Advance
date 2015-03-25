@@ -165,14 +165,14 @@ function LoadBarChartHorizontal(data, chartControl) {
     }
 
     //Counting the number of columns returned from server
-    //$.each(parsedData[0], function (colName, value) {
-    //    if (colName == "BarXLabel") {
-    //        colCount++;
-    //    }
-    //});
+    $.each(parsedData[0], function (colName, value) {
+        if (colName == "BarXLabel") {
+            colCount++;
+        }
+    });
 
     innerindex = 0;
-    for (var loopindex = 0; loopindex < 1; loopindex++) {
+    for (var loopindex = 0; loopindex < colCount; loopindex++) {
         $.each(data.Bars[loopindex], function (colName, value) {
             if (colName != "BarXLabel") {
 
@@ -198,7 +198,7 @@ function LoadBarChartHorizontal(data, chartControl) {
                 show: true, horizontal: true, align: 'center', barWidth: 0.5
             }
         },
-        xaxis: {max: 120},
+        xaxis: {max: 100},
         yaxis: {
             ticks: yaxisvalues
         },

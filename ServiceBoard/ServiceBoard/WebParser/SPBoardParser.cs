@@ -115,5 +115,18 @@ namespace ServiceBoard.WebParser
 
             return resource;
         }
+
+        public ResourceUtilization GetResourceUtilizationOneDayPerTech(DateTime fromDate, bool stacked)
+        {
+            ResourceUtilization resource = new ResourceUtilization();
+            SPBoardWCFServiceClient sp = new SPBoardWCFServiceClient();
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+            resource = sp.GetResourceUtilizationOneDayPerTech(companyID, companyPassword, level4ID, fromDate, fromDate, stacked);
+
+            return resource;
+        }
     }
 }

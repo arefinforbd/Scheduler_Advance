@@ -322,8 +322,6 @@ namespace SPBoardWCFService
             List<ResourceUtilizationSummary> summaries = new List<ResourceUtilizationSummary>();
             ResourceUtilizationDetail detail = new ResourceUtilizationDetail();
             List<ResourceUtilizationDetail> details = new List<ResourceUtilizationDetail>();
-            ResourceUtilizationOneDayPerTech tech = new ResourceUtilizationOneDayPerTech();
-            List<ResourceUtilizationOneDayPerTech> techs = new List<ResourceUtilizationOneDayPerTech>();
 
             StrongTypesNS.ds_summaryDataSet summaryDataset;
             StrongTypesNS.ds_detailsDataSet detailsDataset;
@@ -386,6 +384,40 @@ namespace SPBoardWCFService
                     resource.Charts = charts.Count > 0 ? charts : null;
                 }
 
+                return resource;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public ResourceUtilization GetResourceUtilizationOneDayPerTech(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true)
+        {
+            DataSet dsSummary;
+            DataSet dsDetail;
+            DataSet dsOneDayPerTech;
+            ChartData chart = new ChartData();
+            List<ChartData> charts = new List<ChartData>();
+            ResourceUtilization resource = new ResourceUtilization();
+
+            ResourceUtilizationOneDayPerTech tech = new ResourceUtilizationOneDayPerTech();
+            List<ResourceUtilizationOneDayPerTech> techs = new List<ResourceUtilizationOneDayPerTech>();
+
+            StrongTypesNS.ds_summaryDataSet summaryDataset;
+            StrongTypesNS.ds_detailsDataSet detailsDataset;
+            StrongTypesNS.ds_lvl2_oneDayPerTechDataSet techDataset;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword);
+                SPBoard sboard = new SPBoard(conn);
+
+                sboard.ws_rscUtlz(Level4ID, FromDate, ToDate, out summaryDataset, out detailsDataset, out techDataset);
+                dsSummary = (DataSet)summaryDataset;
+                dsDetail = (DataSet)detailsDataset;
+                dsOneDayPerTech = (DataSet)techDataset;
+
                 if (dsOneDayPerTech != null && dsOneDayPerTech.Tables["tt_lvl2_oneDayPerTech"].Rows.Count > 0)
                 {
                     foreach (DataRow row in dsOneDayPerTech.Tables["tt_lvl2_oneDayPerTech"].Rows)
@@ -396,10 +428,9 @@ namespace SPBoardWCFService
                             {
                                 chart = new ChartData();
 
-                                chart.Label = Convert.ToDateTime(row["tt_oDpT_date"]).ToString("dd/MM/yyyy");
-                                chart.DateLabel = chart.Label;
-                                tech.TechName = row["tt_oDpT_tech"].ToString();
-                                chart.Point = index == 0 ? Convert.ToDouble(row["tt_oDpT_used_percent"]) : Convert.ToDouble(row["tt_oDpT_free_percent"]);
+                                chart.Label = row["tt_oDpT_tech"].ToString();
+                                chart.DateLabel = index == 0 ? "Used Percentage" : "Free Percentage";
+                                chart.Point = (index == 0 ? Convert.ToDouble(row["tt_oDpT_used_percent"]) : Convert.ToDouble(row["tt_oDpT_free_percent"])) * 100;
                                 chart.Category = "ByTech";
 
                                 charts.Add(chart);

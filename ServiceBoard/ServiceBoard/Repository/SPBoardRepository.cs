@@ -68,5 +68,15 @@ namespace ServiceBoard.Repository
 
             return resource;
         }
+
+        public ResourceUtilization GetResourceUtilizationOneDayPerTech(DateTime fromDate, bool stacked)
+        {
+            SPBoardParser parser = new SPBoardParser();
+            ResourceUtilization resource = new ResourceUtilization();
+
+            resource = parser.GetResourceUtilizationOneDayPerTech(fromDate, stacked);
+
+            return resource;
+        }
     }
 }

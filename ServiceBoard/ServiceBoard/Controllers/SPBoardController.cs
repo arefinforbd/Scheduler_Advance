@@ -117,7 +117,7 @@ namespace ServiceBoard.Controllers
                     rows.Add(row);
                 }
 
-                return rows;
+                 return rows;
             }
             else
                 return null;
@@ -294,17 +294,24 @@ namespace ServiceBoard.Controllers
             return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ResourceUtilizationOneDayPerTech()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public ActionResult ResourceUtilizationOneDayPerTech(DateTime fromDate, DateTime toDate)
+        public ActionResult ResourceUtilizationOneDayPerTech(DateTime fromDate)
         {
             ChartType chartTypeObj = new ChartType();
             SPBoardRepository repository = new SPBoardRepository();
             ResourceUtilization resource = new ResourceUtilization();
-            SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.Year;
 
-            resource = repository.GetResourceUtilization(fromDate, toDate, true);
-            var techChartList = resource.Charts.Where(c => c.Category.ToLower().Equals("bytech")).ToList();
-            chartTypeObj.Bars = GetBarData(techChartList, false, yrm);
+            resource = repository.GetResourceUtilizationOneDayPerTech(fromDate, true);
+            if (resource != null && resource.Charts != null)
+            {
+                var techChartList = resource.Charts.Where(c => c.Category.ToLower().Equals("bytech")).ToList().OrderByDescending(o => o.DateLabel).ToList();
+                chartTypeObj.Bars = GetBarData(techChartList, true);
+            }
 
             return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
         }

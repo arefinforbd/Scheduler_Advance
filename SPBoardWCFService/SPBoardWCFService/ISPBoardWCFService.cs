@@ -32,5 +32,8 @@ namespace SPBoardWCFService
 
         [OperationContract]
         ResourceUtilization GetResourceUtilization(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true);
+
+        [OperationContract]
+        ResourceUtilization GetResourceUtilizationOneDayPerTech(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true);
     }
 }

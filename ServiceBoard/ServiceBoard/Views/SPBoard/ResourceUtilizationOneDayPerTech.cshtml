@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "SPBoard";
-    ViewBag.SubTitle = "Resource Utilization";
+    ViewBag.SubTitle = "Resource Utilization One Day Per Tech";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -66,27 +66,11 @@
                                 <div class="col-lg-5 col-sm-6">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-3 col-xs-3">
-                                            <label class="block blue datepicker-label">Date From</label>
+                                            <label class="block blue datepicker-label">Report As At</label>
                                         </div>
                                         <div class="col-lg-8 col-sm-8 col-xs-8">
                                             <div class="input-group" style="width: 240px;">
                                                 <input class="form-control date-picker" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" placeholder="Click to select" readonly="" style="cursor: pointer;" />
-                                                <span class="input-group-addon" style="cursor: pointer;">
-                                                    <i class="fa fa-calendar bigger-110"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-sm-3 col-xs-3">
-                                            <label class="block blue datepicker-label">Date To</label>
-                                        </div>
-                                        <div class="col-lg-8 col-sm-8 col-xs-8">
-                                            <div class="input-group" style="width: 240px;">
-                                                <input class="form-control date-picker" id="id-date-picker-2" type="text" data-date-format="dd-mm-yyyy" placeholder="Click to select" readonly="" style="cursor: pointer;" />
                                                 <span class="input-group-addon" style="cursor: pointer;">
                                                     <i class="fa fa-calendar bigger-110"></i>
                                                 </span>
@@ -113,14 +97,14 @@
         </div>
         <br />
         <div id="divLoading" style="display:none;"></div>
-        <div class="widget-box" id="widget-bar-chart" style="display:none;">
+        <div class="widget-box" id="widget-bar-chart2" style="display:none;">
             <div class="widget-header">
-                <h4 class="widget-title">Resource Utilization Detail</h4>
+                <h4 class="widget-title">Resource Utilization One Day Per Tech</h4>
             </div>
 
             <div class="widget-body" style="padding:10px;">
                 <div class="widget-main no-padding">
-                    <div class="flot-chart-content" id="flot-bar-chart" style="margin: 10px 0 0 15px;height: 350px;"></div>
+                    <div class="flot-chart-content" id="flot-bar-chart2" style="margin: 10px 0 0 15px; height: 450px; width: 95%;"></div>
                 </div>
             </div>
         </div>
@@ -155,29 +139,6 @@
             $(this).prev().focus();
         });
 
-        $('#id-date-picker-2').datepicker({
-            dateFormat: "dd MM, yy",
-            showOtherMonths: true,
-            selectOtherMonths: true,
-            altFormat: "yy-mm-dd",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
-            onSelect: function (date) {
-                var dayDiff = 0;
-                dayDiff = new Date($("#id-date-picker-2").datepicker('getDate')) - new Date($("#id-date-picker-1").datepicker('getDate'));
-
-                if (dayDiff < 0) {
-                    alert("To date cannot be smaller than From date.");
-                    $("#id-date-picker-2").val("");
-                    return;
-                }
-            }
-        })
-        .next().on(ace.click_event, function () {
-            $(this).prev().focus();
-        });
-
         $("#btnPreview").click(function () {
 
             if (Validate() == false)
@@ -185,7 +146,7 @@
 
             $("#divLoading").show();
             $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
-            LoadAJAXResourceUtilizationDetail();
+            LoadAJAXResourceUtilizationOneDayPerTech();
         });
 
         $("#btnReset").click(function () {
@@ -193,23 +154,24 @@
         });
     });
 
-    function LoadAJAXResourceUtilizationDetail() {
+    function LoadAJAXResourceUtilizationOneDayPerTech() {
 
         var FromDate = $("#id-date-picker-1").val();
-        var ToDate = $("#id-date-picker-2").val();
 
         $.ajax({
-            url: $("#hdnSiteURL").val() + "/SPBoard/ResourceUtilizationDetail",
+            url: $("#hdnSiteURL").val() + "/SPBoard/ResourceUtilizationOneDayPerTech",
             type: "POST",
-            data: { fromDate: FromDate, toDate: ToDate },
+            data: { fromDate: FromDate },
             dataType: "JSON",
             success: function (data) {
-                if (data != null) {
-                    $("#widget-bar-chart").show();
-                    LoadBarChart(data, $("#flot-bar-chart"));
+                if (data != null && data.Bars != null) {
+                    $("#widget-bar-chart2").show();
+                    $("#flot-bar-chart2").height(data.Bars.length <= 5 ? (data.Bars.length * 100) : (data.Bars.length * 50));
+                    LoadBarChartHorizontal(data, $("#flot-bar-chart2"));
                     LoadingComplete();
                 }
                 else {
+                    $("#widget-bar-chart2").hide();
                     LoadingComplete();
                     alert("There is no data to show.");
                 }
@@ -231,20 +193,6 @@
         if ($("#id-date-picker-1").val().trim().length <= 0) {
             alert("Please enter From Date.");
             $("#id-date-picker-1").focus();
-            return false;
-        }
-
-        if ($("#id-date-picker-2").val().trim().length <= 0) {
-            alert("Please enter To Date.");
-            $("#id-date-picker-2").focus();
-            return false;
-        }
-
-        var dayDiff = 0;
-        dayDiff = new Date($("#id-date-picker-2").datepicker('getDate')) - new Date($("#id-date-picker-1").datepicker('getDate'));
-
-        if (dayDiff < 0) {
-            alert("To date cannot be smaller than From date.");
             return false;
         }
 
