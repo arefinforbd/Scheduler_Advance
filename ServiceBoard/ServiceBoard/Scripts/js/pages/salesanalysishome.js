@@ -109,7 +109,7 @@ function LoadAJAXDebtorAnalysis() {
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
-                LoadLineChart(data);
+                LoadLineChart(data, "flot-line-chart");
             }
             else {
                 alert("There is no data to show.");

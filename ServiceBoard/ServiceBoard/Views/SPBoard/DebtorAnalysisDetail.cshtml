@@ -5,6 +5,11 @@
 }
 
 <link href="@Url.Content("~/Content/css/bootstrap-multiselect.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/js/ChartLine/Chart.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.pie.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.axislabels.js")"></script>
+<script src="@Url.Content("~/Scripts/js/flot/jquery.flot.orderBars.js")"></script>
 
 <style>
 
@@ -53,6 +58,10 @@
 
     #selCharts-button .ui-selectmenu-text {
         padding-top: 6px;
+    }
+
+    #flot-bar-chart div.legend{
+        display: none;
     }
 </style>
 
@@ -175,8 +184,34 @@
                                         <div class="col-lg-3 col-xs-3">
                                             <label class="block blue">Invoice Type</label>
                                         </div>
-                                        <div class="col-lg-8 col-xs-8">
+                                        <div class="col-lg-8 col-xs-8" id="divMultiSelectInvoiceTypes">
                                             @Html.Raw(ViewBag.InvoiceTypes)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3">
+                                            <label class="block blue">Sort</label>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="radio" style="padding-left: 9px;">
+                                                <label>
+                                                    <input id="rdoByName" class="ace" type="radio" name="form-field-radio">
+                                                    <span class="lbl"> By Name</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-4">
+                                            <div class="radio" style="padding-left: 9px;">
+                                                <label>
+                                                    <input id="rdoByNumber" class="ace" type="radio" name="form-field-radio">
+                                                    <span class="lbl"> By Number</span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +223,7 @@
                                         <div class="col-lg-3"></div>
                                         <div class="col-lg-8">
                                             <label>
-                                                <input id="chkPrintDetails" class="ace" type="checkbox">
+                                                <input id="chkPrintCredit" class="ace" type="checkbox">
                                                 <span class="lbl"> Print Credits Only</span>
                                             </label>
                                         </div>
@@ -227,9 +262,9 @@
 
                         <div class="form-actions left" style="padding-left: 16px;">
                             <select id="selCharts" name="selCharts">
-                                <option selected="selected">Bar</option>
-                                <option>Pie</option>
+                                <option selected="selected">All Charts</option>
                                 <option>Line</option>
+                                <option>Bar</option>
                             </select>
 
                             <input class="btn btn-sm btn-info" type="button" id="btnPreview" value="Preview" />
@@ -241,38 +276,26 @@
         </div>
         <br />
         <div id="divLoading" style="display:none;"></div>
+        <div class="widget-box" id="widget-line-chart" style="display:none;">
+            <div class="widget-header">
+                <h4 class="widget-title">Line Chart</h4>
+            </div>
+
+            <div class="widget-body" style="padding:10px;">
+                <div class="widget-main no-padding">
+                    <canvas id="flot-line-chart" width="900" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        <br />
         <div class="widget-box" id="widget-bar-chart" style="display:none;">
             <div class="widget-header">
-                <h4 class="widget-title">Category Comparison</h4>
+                <h4 class="widget-title">Bar Chart</h4>
             </div>
 
             <div class="widget-body" style="padding:10px;">
                 <div class="widget-main no-padding">
-                    <div class="flot-chart-content" id="flot-bar-chart" style="margin: 10px 0 0 15px;height: 350px; width: 750px;"></div>
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="widget-box" id="widget-bar-chart2" style="display:none;">
-            <div class="widget-header">
-                <h4 class="widget-title">Overall</h4>
-            </div>
-
-            <div class="widget-body" style="padding:10px;">
-                <div class="widget-main no-padding">
-                    <div class="flot-chart-content" id="flot-bar-chart2" style="margin: 10px 0 0 15px;height: 350px; width: 750px;"></div>
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="widget-box" id="widget-bar-chart3" style="display:none;">
-            <div class="widget-header">
-                <h4 class="widget-title">YTD</h4>
-            </div>
-
-            <div class="widget-body" style="padding:10px;">
-                <div class="widget-main no-padding">
-                    <div class="flot-chart-content" id="flot-bar-chart3" style="margin: 10px 0 0 15px;height: 350px; width: 750px;"></div>
+                    <div class="flot-chart-content" id="flot-bar-chart" style="margin: 10px 0 0 15px;height: 350px; width: 95%;"></div>
                 </div>
             </div>
         </div>
@@ -280,13 +303,15 @@
 </div>
 
 <script src="@Url.Content("~/Scripts/js/pages/bootstrap-multiselect-modified.js")"></script>
+<script src="@Url.Content("~/Scripts/js/pages/spboard.js")"></script>
 
 <script type="text/javascript">
     $(function () {
 
+        $("#rdoByName").prop("checked", true);
         $("#selAreas").css('width', '240px').selectmenu({ position: {} });
         $("#selDateBalances").css('width', '240px').selectmenu({ position: {} });
-        $("#selCharts").css('width', '80px').selectmenu({ position: {} });
+        $("#selCharts").css('width', '100px').selectmenu({ position: {} });
 
         $('#id-date-picker-1').datepicker({
             dateFormat: "dd MM, yy",
@@ -324,17 +349,30 @@
 
         var Category = $("#selCategory-button .ui-selectmenu-text").html();
         var FromDate = $("#id-date-picker-1").val();
-        //var ToDate = $("#id-date-picker-2").val();
+        var SortBy = $("#rdoByNumber").prop("checked") == true ? 0 : 1;
+        var AgeBalance = $("#selDateBalances-button .ui-selectmenu-text").html();
+        var ageBalanceNumber = 0;
+
+        if (AgeBalance == "[All]")
+            ageBalanceNumber = 0;
+        else if (AgeBalance == "Current")
+            ageBalanceNumber = 1;
+        else if($("#selDateBalances-button .ui-selectmenu-text").html().indexOf("+") > 0)
+            ageBalanceNumber = $("#selDateBalances-button .ui-selectmenu-text").html().replace(" Days+", "");
+        else
+            ageBalanceNumber = $("#selDateBalances-button .ui-selectmenu-text").html().replace(" Days", "");
 
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/DebtorAnalysisDetail",
             type: "POST",
-            data: { invoiceType: InvoiceType, customerFrom: CustomerFrom, customerTo: CustomerTo, sortBy: SortBy, area: Area, printCredit: PrintCredit, nameFrom: NameFrom, nameTo: NameTo, ageBal: AgeBal, unIndJobs: UnIndJobs, balanceDate: BalanceDate, retention: Retention },
+            data: { invoiceType: $("#divMultiSelectInvoiceTypes button.multiselect").attr("title"), customerFrom: $("#txtCustomerFrom").val(), customerTo: $("#txtCustomerTo").val(), sortBy: SortBy, area: $("#selAreas-button .ui-selectmenu-text").html(), printCredit: $("#chkPrintCredit").prop("checked"), nameFrom: $("#txtNameFrom").val(), nameTo: $("#txtNameTo").val(), ageBal: ageBalanceNumber, unIndJobs: $("#chkUnInvoiced").prop("checked"), balanceDate: $("#id-date-picker-1").val(), retention: $("#chkRetention").prop("checked") },
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
+                    $("#widget-line-chart").show();
+                    LoadLineChart(data, "flot-line-chart");
                     $("#widget-bar-chart").show();
-                    LoadBarChart(data, $("#flot-bar-chart"), false);
+                    LoadBarChart(data, $("#flot-bar-chart"), true);
                     LoadingComplete();
                 }
                 else {

@@ -8,7 +8,7 @@
         lineColor = colours[colourIndex];
 }
 
-function LoadLineChart(data) {
+function LoadLineChart(data, chartControl) {
 
     var labels = [];
     var colourIndex = 0;
@@ -54,24 +54,24 @@ function LoadLineChart(data) {
     }
     $("#tooltip").remove();
 
-    var ctx = document.getElementById("flot-line-chart").getContext("2d");
+    var ctx = document.getElementById(chartControl).getContext("2d");
 
     //If mobile or tablet
-    //if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
-    //    $("#flot-line-chart").removeAttr("height");
-    //    $("#flot-line-chart").removeAttr("width");
-    //    window.myLine = new Chart(ctx).Line(lineChartData, {
-    //        responsive: true
-    //    });
-    //}
-    //else {
-    //    window.myLine = new Chart(ctx).Line(lineChartData, {
-    //        responsive: false
-    //    });
-    //}
-    window.myLine = new Chart(ctx).Line(lineChartData, {
-        responsive: false
-    });
+    if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase())) {
+        $("#" + chartControl).removeAttr("height");
+        $("#" + chartControl).removeAttr("width");
+        window.myLine = new Chart(ctx).Line(lineChartData, {
+            responsive: true
+        });
+    }
+    else {
+        window.myLine = new Chart(ctx).Line(lineChartData, {
+            responsive: false
+        });
+    }
+    //window.myLine = new Chart(ctx).Line(lineChartData, {
+    //    responsive: false
+    //});
 
     //var divDebtorWidth = $("#divDebtor").width() - ($("#divDebtor").width() * 0.1);
     //$("#flot-line-chart").width(divDebtorWidth);

@@ -131,6 +131,7 @@ namespace ServiceBoard.Helper
 
             charts = (List<ChartData>)HttpContext.Current.Session["DateBalance"];
 
+            sb.Append("<option value='[All]'>[All]</option>");
             foreach (ChartData chart in charts)
                 sb.Append("<option value='" + chart.Label + "'>" + chart.Label + "</option>");
 

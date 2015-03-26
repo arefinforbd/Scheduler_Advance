@@ -265,8 +265,9 @@ namespace ServiceBoard.Controllers
 
             if (charts != null)
             {
-                var chartList = charts.OrderByDescending(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
-                chartTypeObj.Bars = GetBarData(chartList, false, yrm);
+                //var chartList = charts.OrderByDescending(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
+                chartTypeObj.Lines = GetLineData(charts);
+                chartTypeObj.Bars = GetBarData(charts, true);
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }

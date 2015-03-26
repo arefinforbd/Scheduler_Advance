@@ -87,7 +87,7 @@
             nonSelectedText: "None selected",
             nSelectedText: "selected",
             allSelectedText: "All selected",
-            numberDisplayed: 3,
+            numberDisplayed: 30,
             disableIfEmpty: !1,
             templates: {
                 button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"></button>',

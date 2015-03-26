@@ -23,20 +23,27 @@ namespace ServiceBoard.Controllers
             string message;
             LoginRepository repo = new LoginRepository();
 
-            bool status = repo.Login(companyId, companyPassword, out level4ID, out message);
-
-            if (status)
+            try
             {
-                Session.Add("CompanyID", companyId);
-                Session.Add("CompanyPassword", companyPassword);
-                Session.Add("Level4ID", level4ID);
+                bool status = repo.Login(companyId, companyPassword, out level4ID, out message);
 
-                return RedirectToAction("Index", "SPBoard");
+                if (status)
+                {
+                    Session.Add("CompanyID", companyId);
+                    Session.Add("CompanyPassword", companyPassword);
+                    Session.Add("Level4ID", level4ID);
+
+                    return RedirectToAction("Index", "SPBoard");
+                }
+                else
+                    ModelState.AddModelError("", message);
+
+                return View();
             }
-            else
-                ModelState.AddModelError("", message);
-
-            return View();
+            catch(Exception ex){
+                ModelState.AddModelError("", ex.InnerException.Message);
+                return View();
+            }
         }
 
         public ActionResult Logout()
