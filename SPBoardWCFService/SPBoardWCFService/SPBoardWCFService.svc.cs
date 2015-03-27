@@ -194,8 +194,8 @@ namespace SPBoardWCFService
                 Connection conn = GetConnection("kevorkt", CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
-                //sboard.ws_debtrp(Level4ID, InvoiceType, CustomerFrom, CustomerTo, SortBy, Area, PrintCredit, NameFrom, NameTo, AgeBal, UnIndJobs, BalanceDate, Retention, out debtorDataset, out legend);
-                sboard.ws_debtrp(Level4ID, "[ALL]", 1, 100, 2, "[ALL]", false, "", "", 1, false, DateTime.Today, false, out debtorDataset, out legend);
+                sboard.ws_debtrp(Level4ID, InvoiceType, CustomerFrom, CustomerTo, SortBy, Area, PrintCredit, NameFrom, NameTo, AgeBal, UnIndJobs, BalanceDate, Retention, out debtorDataset, out legend);
+                //sboard.ws_debtrp(Level4ID, "[ALL]", 1, 100, 2, "[ALL]", false, "", "", 1, false, DateTime.Today, false, out debtorDataset, out legend);
                 dsChart = (DataSet)debtorDataset;
                 dsLegend = (DataSet)legend;
 

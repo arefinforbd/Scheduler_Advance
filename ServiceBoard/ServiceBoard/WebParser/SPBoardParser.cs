@@ -82,10 +82,13 @@ namespace ServiceBoard.WebParser
 
             charts = sp.GetDebtorAnalysis(companyID, companyPassword, level4ID, invoiceType, customerFrom, customerTo, sortBy, area, printCredit, nameFrom, nameTo, ageBal, unIndJobs, balanceDate, retention);
 
-            var itemToRemove = charts.Single(r => r.Label.ToLower().Equals("total amount"));
-            charts.Remove(itemToRemove);
-            itemToRemove = charts.Single(r => r.Label.ToLower().Equals("unallocated total"));
-            charts.Remove(itemToRemove);
+            if (charts != null)
+            {
+                var itemToRemove = charts.Single(r => r.Label.ToLower().Equals("total amount"));
+                charts.Remove(itemToRemove);
+                itemToRemove = charts.Single(r => r.Label.ToLower().Equals("unallocated total"));
+                charts.Remove(itemToRemove);
+            }
 
             return charts;
         }

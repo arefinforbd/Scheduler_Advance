@@ -224,7 +224,7 @@ namespace ServiceBoard.Controllers
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
 
-            charts = repository.GetDebtorAnalysis("", 0, 0, 0, "", true, "", "", 0, false, DateTime.Today, true);
+            charts = repository.GetDebtorAnalysis("[ALL]", 1, 100, 2, "[ALL]", false, "", "", 1, false, DateTime.Today, false);
 
             if (charts != null)
             {
@@ -259,9 +259,9 @@ namespace ServiceBoard.Controllers
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
-            SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.Year;
 
-            charts = repository.GetDebtorAnalysis("", 0, 0, 0, "", true, "", "", 0, false, DateTime.Today, true);
+            //charts = repository.GetDebtorAnalysis("", 0, 0, 0, "", true, "", "", 0, false, DateTime.Today, true);
+            charts = repository.GetDebtorAnalysis(invoiceType, customerFrom, customerTo, sortBy, area, printCredit, nameFrom, nameTo, ageBal, unIndJobs, balanceDate, retention);
 
             if (charts != null)
             {

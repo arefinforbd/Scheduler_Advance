@@ -84,9 +84,9 @@
             filterBehavior: "text",
             includeFilterClearBtn: !0,
             preventInputChangeEvent: !1,
-            nonSelectedText: "None selected",
+            nonSelectedText: "Select Invoice",
             nSelectedText: "selected",
-            allSelectedText: "All selected",
+            allSelectedText: "[ALL]",
             numberDisplayed: 30,
             disableIfEmpty: !1,
             templates: {

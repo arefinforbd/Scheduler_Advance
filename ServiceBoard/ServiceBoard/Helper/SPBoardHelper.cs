@@ -122,18 +122,23 @@ namespace ServiceBoard.Helper
 
         public string LoadDateBalance()
         {
+            int index = 2;
             StringBuilder sb = new StringBuilder("");
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repo = new SPBoardRepository();
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
             if (HttpContext.Current.Session["DateBalance"] == null)
-                HttpContext.Current.Session["DateBalance"] = repo.GetDebtorAnalysis("", 0, 0, 0, "", true, "", "", 0, false, DateTime.Today, true);
+                HttpContext.Current.Session["DateBalance"] = repo.GetDebtorAnalysis("[ALL]", 1, 100, 2, "[ALL]", false, "", "", 1, false, DateTime.Today, false);
 
             charts = (List<ChartData>)HttpContext.Current.Session["DateBalance"];
 
-            sb.Append("<option value='[All]'>[All]</option>");
+            sb.Append("<option value='1'>[ALL]</option>");
             foreach (ChartData chart in charts)
-                sb.Append("<option value='" + chart.Label + "'>" + chart.Label + "</option>");
+            {
+                sb.Append("<option value='" + index + "'>" + chart.Label + "</option>");
+                index++;
+            }
 
             return sb.ToString();
         }
