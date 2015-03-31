@@ -343,10 +343,41 @@
             $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
             LoadAJAXDebtorAnalysisDetail();
         });
+
+        $("#btnReset").click(function () {
+
+            $("#widget-line-chart").hide();
+            $("#widget-bar-chart").hide();
+
+            $("#id-date-picker-1").val("");
+            $("#txtNameFrom").val("");
+            $("#txtNameTo").val("");
+            $("#txtCustomerFrom").val("");
+            $("#txtCustomerTo").val("");
+
+            var area = $('#selAreas :nth-child(1)').html();
+            $('#selAreas :nth-child(1)').prop('selected', 'selected');
+            $("#selAreas-button .ui-selectmenu-text").html(area);
+
+            var dateBal = $('#selDateBalances :nth-child(1)').html();
+            $('#selDateBalances :nth-child(1)').prop('selected', 'selected');
+            $("#selDateBalances-button .ui-selectmenu-text").html(dateBal);
+
+            $("#rdoByName").prop("checked", true);
+            $("#chkPrintCredit").prop("checked", false);
+            $("#chkUnInvoiced").prop("checked", false);
+            $("#chkRetention").prop("checked", false);
+
+            $(".dropdown-menu [type='checkbox']").prop("checked", false);
+            $(".dropdown-menu li").removeClass("active");
+            $("#divMultiSelectInvoiceTypes button.multiselect").html("Select Invoice");
+        });
     });
 
     function LoadAJAXDebtorAnalysisDetail() {
 
+        var strChartType = "All Charts";
+        var ChartType = $("#selCharts-button .ui-selectmenu-text").html();
         var Category = $("#selCategory-button .ui-selectmenu-text").html();
         var FromDate = $("#id-date-picker-1").val();
         var SortBy = $("#rdoByName").prop("checked") == true ? 1 : 2;
@@ -356,14 +387,26 @@
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/DebtorAnalysisDetail",
             type: "POST",
-            data: { invoiceType: InvoiceType, customerFrom: $("#txtCustomerFrom").val(), customerTo: $("#txtCustomerTo").val(), sortBy: SortBy, area: $("#selAreas-button .ui-selectmenu-text").html(), printCredit: $("#chkPrintCredit").prop("checked"), nameFrom: $("#txtNameFrom").val(), nameTo: $("#txtNameTo").val(), ageBal: ageBalanceNumber, unIndJobs: $("#chkUnInvoiced").prop("checked"), balanceDate: $("#id-date-picker-1").val(), retention: $("#chkRetention").prop("checked") },
+            data: { invoiceType: InvoiceType, customerFrom: $("#txtCustomerFrom").val(), customerTo: $("#txtCustomerTo").val(), sortBy: SortBy, area: $("#selAreas-button .ui-selectmenu-text").html(), printCredit: $("#chkPrintCredit").prop("checked"), nameFrom: $("#txtNameFrom").val(), nameTo: $("#txtNameTo").val(), ageBal: ageBalanceNumber, unIndJobs: $("#chkUnInvoiced").prop("checked"), balanceDate: $("#id-date-picker-1").val(), retention: $("#chkRetention").prop("checked"), chartType: ChartType },
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
-                    $("#widget-line-chart").show();
-                    LoadLineChart(data, "flot-line-chart");
-                    $("#widget-bar-chart").show();
-                    LoadBarChart(data, $("#flot-bar-chart"), true);
+
+                    $("#widget-line-chart").hide();
+                    $("#widget-bar-chart").hide();
+
+                    //LINE Chart
+                    if ((ChartType == strChartType || ChartType == "Line")) {
+                        $("#widget-line-chart").show();
+                        LoadLineChart(data, "flot-line-chart");
+                    }
+
+                    //BAR Chart
+                    if ((ChartType == strChartType || ChartType == "Bar")) {
+                        $("#widget-bar-chart").show();
+                        LoadBarChart(data, $("#flot-bar-chart"), true);
+                    }
+
                     LoadingComplete();
                 }
                 else {
@@ -390,6 +433,18 @@
         if ($("#id-date-picker-1").val().trim().length <= 0) {
             alert("Please select Report Date.");
             $("#id-date-picker-1").focus();
+            return false;
+        }
+
+        if ($("#txtCustomerFrom").val().trim().length <= 0) {
+            alert("Please enter Customer Info.");
+            $("#txtCustomerFrom").focus();
+            return false;
+        }
+
+        if ($("#txtCustomerTo").val().trim().length <= 0) {
+            alert("Please enter Customer Info.");
+            $("#txtCustomerTo").focus();
             return false;
         }
 

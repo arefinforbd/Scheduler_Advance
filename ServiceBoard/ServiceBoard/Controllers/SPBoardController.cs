@@ -76,8 +76,9 @@ namespace ServiceBoard.Controllers
 
             foreach (ChartData chart in charts)
             {
-                if(!IsCategory){
-                    if(yrm == SPBoardHelper.YearOrMonth.Year)
+                if (!IsCategory)
+                {
+                    if (yrm == SPBoardHelper.YearOrMonth.Year)
                         bars.Add(new Bar() { BarXLabel = chart.Label, BarValue = chart.Point, BarLegend = chart.DateLabel.Substring(0, 4) });
                     else
                         bars.Add(new Bar() { BarXLabel = chart.Label, BarValue = chart.Point, BarLegend = helper.GetYearMonth(chart.DateLabel) });
@@ -117,7 +118,7 @@ namespace ServiceBoard.Controllers
                     rows.Add(row);
                 }
 
-                 return rows;
+                return rows;
             }
             else
                 return null;
@@ -199,17 +200,46 @@ namespace ServiceBoard.Controllers
         [HttpPost]
         public ActionResult SalesAnalysisByCategoryDetail(string category, DateTime fromDate, DateTime toDate)
         {
+            string xAxisLabel = "";
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
-            SPBoardHelper.YearOrMonth yrm = SPBoardHelper.YearOrMonth.Year;
 
             charts = repository.GetSalesAnalysisByCategoryDetail(category, fromDate, toDate);
 
             if (charts != null)
             {
-                var chartList = charts.OrderByDescending(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
-                chartTypeObj.Bars = GetBarData(chartList, false, yrm);
+                Dictionary<string, object> chartDic;
+                List<Dictionary<string, object>> chartDics = new List<Dictionary<string, object>>();
+
+                var monthList = charts.GroupBy(i => new { Category = i.Label })
+                             .Select(group => new
+                             {
+                                 MonthLabel = group.First().Label
+                             }).ToList();
+
+                foreach (var month in monthList)
+                {
+                    chartDic = new Dictionary<string, object>();
+
+                    var sortedCharts = charts.Where(c => c.Label == month.MonthLabel).ToList();
+
+                    for (int loop = 0; loop < sortedCharts.Count; loop++)
+                    {
+                        if(loop == 0)
+                            xAxisLabel = sortedCharts[1].DateLabel.Substring(0, 4) + "<--";
+                        else
+                            xAxisLabel += month.MonthLabel + "-->" + sortedCharts[0].DateLabel.Substring(0, 4);
+                    }
+
+                    chartDic.Add("BarXLabel", xAxisLabel);
+                    foreach (var chart in charts.Where(c => c.Label == month.MonthLabel).ToList())
+                        chartDic.Add(chart.DateLabel.Substring(0, 4), chart.Point);
+
+                    chartDics.Add(chartDic);
+                }
+
+                chartTypeObj.Bars = chartDics;
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -252,7 +282,7 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult DebtorAnalysisDetail(string invoiceType, decimal customerFrom, decimal customerTo, int sortBy, string area, bool printCredit, string nameFrom, string nameTo, int ageBal, bool unIndJobs, DateTime balanceDate, bool retention)
+        public ActionResult DebtorAnalysisDetail(string invoiceType, decimal customerFrom, decimal customerTo, int sortBy, string area, bool printCredit, string nameFrom, string nameTo, int ageBal, bool unIndJobs, DateTime balanceDate, bool retention, string chartType)
         {
             //NOT COMPLETED
 
@@ -265,9 +295,11 @@ namespace ServiceBoard.Controllers
 
             if (charts != null)
             {
-                //var chartList = charts.OrderByDescending(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
-                chartTypeObj.Lines = GetLineData(charts);
-                chartTypeObj.Bars = GetBarData(charts, true);
+                if (chartType.Equals("Line") || chartType.Equals("All Charts"))
+                    chartTypeObj.Lines = GetLineData(charts);                
+
+                if (chartType.Equals("Bar") || chartType.Equals("All Charts"))
+                    chartTypeObj.Bars = GetBarData(charts, true);
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }

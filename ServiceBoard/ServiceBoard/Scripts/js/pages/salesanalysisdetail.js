@@ -55,7 +55,11 @@
     });
 
     $("#btnReset").click(function () {
-        alert("OK");
+        var category = $('#selCategory :nth-child(1)').html();
+        $('#selCategory :nth-child(1)').prop('selected', 'selected');
+        $("#selCategory-button .ui-selectmenu-text").html(category);
+        $("#id-date-picker-1").val("");
+        $("#id-date-picker-2").val("");
     });
 });
 
