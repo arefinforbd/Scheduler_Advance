@@ -170,6 +170,7 @@
         $("#btnReset").click(function () {
             $("#id-date-picker-1").val("");
             $("#id-date-picker-2").val("");
+            $("#widget-bar-chart").hide();
         });
     });
 
@@ -186,7 +187,7 @@
             success: function (data) {
                 if (data != null) {
                     $("#widget-bar-chart").show();
-                    LoadBarChart(data, $("#flot-bar-chart"));
+                    LoadBarChart(data, $("#flot-bar-chart"), true);
                     LoadingComplete();
                 }
                 else {
@@ -225,6 +226,11 @@
 
         if (dayDiff < 0) {
             alert("To date cannot be smaller than From date.");
+            return false;
+        }
+
+        if (dayDiff > 864000000) {
+            alert("Please keep the date range less than or equal to 10 days.");
             return false;
         }
 

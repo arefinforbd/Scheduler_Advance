@@ -77,7 +77,7 @@ function LoadLineChart(data, chartControl) {
     //$("#flot-line-chart").width(divDebtorWidth);
 }
 
-function LoadBarChart(data, chartControl) {
+function LoadBarChart(data, chartControl, isLegend) {
 
     var yaxisvalues = [];
     var dataset = [];
@@ -113,7 +113,7 @@ function LoadBarChart(data, chartControl) {
                 }
 
                 dataset.push({
-                    label: colName,
+                    label: (isLegend == true ? colName : ""),
                     bars: { order: innerindex },
                     data: yaxisvalues
                 });

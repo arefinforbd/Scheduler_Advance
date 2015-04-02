@@ -8,7 +8,7 @@ namespace ServiceBoard.WebParser
 {
     public class SPBoardParser
     {
-        public List<ChartData> GetSalesAnalysis(int reportType)
+        public List<ChartData> GetSalesAnalysis(int reportType, DateTime fromDate, DateTime toDate)
         {
             List<ChartData> charts = new List<ChartData>();
             SPBoardWCFServiceClient sp = new SPBoardWCFServiceClient();
@@ -16,26 +16,28 @@ namespace ServiceBoard.WebParser
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            if (reportType == 1)
-            {
-                if (HttpContext.Current.Session["SalesAnalysisYTD"] != null)
-                    charts = (List<ChartData>)HttpContext.Current.Session["SalesAnalysisYTD"];
-                else
-                {
-                    charts = sp.GetSalesAnalysis(companyID, companyPassword, level4ID, reportType);
-                    HttpContext.Current.Session["SalesAnalysisYTD"] = charts;
-                }
-            }
-            else if (reportType == 2)
-            {
-                if (HttpContext.Current.Session["SalesAnalysisMTD"] != null)
-                    charts = (List<ChartData>)HttpContext.Current.Session["SalesAnalysisMTD"];
-                else
-                {
-                    charts = sp.GetSalesAnalysis(companyID, companyPassword, level4ID, reportType);
-                    HttpContext.Current.Session["SalesAnalysisMTD"] = charts;
-                }
-            }
+            //if (reportType == 1)
+            //{
+            //    if (HttpContext.Current.Session["SalesAnalysisYTD"] != null)
+            //        charts = (List<ChartData>)HttpContext.Current.Session["SalesAnalysisYTD"];
+            //    else
+            //    {
+            //        charts = sp.GetSalesAnalysis(companyID, companyPassword, level4ID, reportType, fromDate, toDate);
+            //        HttpContext.Current.Session["SalesAnalysisYTD"] = charts;
+            //    }
+            //}
+            //else if (reportType == 2)
+            //{
+            //    if (HttpContext.Current.Session["SalesAnalysisMTD"] != null)
+            //        charts = (List<ChartData>)HttpContext.Current.Session["SalesAnalysisMTD"];
+            //    else
+            //    {
+            //        charts = sp.GetSalesAnalysis(companyID, companyPassword, level4ID, reportType, fromDate, toDate);
+            //        HttpContext.Current.Session["SalesAnalysisMTD"] = charts;
+            //    }
+            //}
+
+            charts = sp.GetSalesAnalysis(companyID, companyPassword, level4ID, reportType, fromDate, toDate);
 
             return charts;
         }

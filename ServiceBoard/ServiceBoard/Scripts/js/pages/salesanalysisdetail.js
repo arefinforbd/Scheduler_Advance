@@ -44,33 +44,55 @@
         $(this).prev().focus();
     });
     
-    $("#btnPreview").click(function () {
+    $("#btnPreviewOverall").click(function () {
 
         if (Validate() == false)
             return;
 
         $("#divLoading").show();
         $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
-        LoadAJAXSalesAnalysisDetail();
+        LoadAJAXSalesAnalysisOverallDetailYTD();
+        LoadAJAXSalesAnalysisOverallDetailMTD();
     });
 
-    $("#btnReset").click(function () {
+    $("#btnResetOverall").click(function () {
+        $("#id-date-picker-1").val("");
+        $("#id-date-picker-2").val("");
+        $("#widget-bar-chart").hide();
+        $("#widget-bar-chart2").hide();
+    });
+
+    $("#btnPreviewByCategory").click(function () {
+
+        if (Validate() == false)
+            return;
+
+        legend = false;
+        $("#divLoading").show();
+        $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
+        LoadAJAXSalesAnalysisByCategoryDetailYTD();
+        LoadAJAXSalesAnalysisByCategoryDetailMTD();
+    });
+
+    $("#btnResetByCategory").click(function () {
         var category = $('#selCategory :nth-child(1)').html();
         $('#selCategory :nth-child(1)').prop('selected', 'selected');
         $("#selCategory-button .ui-selectmenu-text").html(category);
         $("#id-date-picker-1").val("");
         $("#id-date-picker-2").val("");
+        $("#widget-bar-chart").hide();
+        $("#widget-bar-chart2").hide();
     });
 });
 
-function LoadAJAXSalesAnalysisDetail() {
+function LoadAJAXSalesAnalysisOverallDetailYTD() {
 
     var Category = $("#selCategory-button .ui-selectmenu-text").html();
     var FromDate = $("#id-date-picker-1").val();
     var ToDate = $("#id-date-picker-2").val();
 
     $.ajax({
-        url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisByCategoryDetail",
+        url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisOverallDetailYTD",
         type: "POST",
         data: { category: Category, fromDate: FromDate, toDate: ToDate },
         dataType: "JSON",
@@ -78,6 +100,96 @@ function LoadAJAXSalesAnalysisDetail() {
             if (data != null) {
                 $("#widget-bar-chart").show();
                 LoadBarChart(data, $("#flot-bar-chart"), false);
+                $("#flot-bar-chart div.flot-text div.flot-x-axis").css("left", "-12px");
+                LoadingComplete();
+            }
+            else {
+                alert("There is no data to show.");
+            }
+        },
+        error: function (request) {
+            LoadingComplete();
+            alert("Please try again. Something went wrong.");
+        }
+    });
+}
+
+function LoadAJAXSalesAnalysisOverallDetailMTD() {
+
+    var Category = $("#selCategory-button .ui-selectmenu-text").html();
+    var FromDate = $("#id-date-picker-1").val();
+    var ToDate = $("#id-date-picker-2").val();
+
+    $.ajax({
+        url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisOverallDetailMTD",
+        type: "POST",
+        data: { category: Category, fromDate: FromDate, toDate: ToDate },
+        dataType: "JSON",
+        success: function (data) {
+            if (data != null) {
+                $("#widget-bar-chart2").show();
+                LoadBarChart(data, $("#flot-bar-chart2"), false);
+                $("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("left", "-12px");
+                //$("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("font-size", "11px");
+            }
+            else {
+                LoadingComplete();
+                alert("There is no data to show.");
+            }
+        },
+        error: function (request) {
+            LoadingComplete();
+            alert("Please try again. Something went wrong.");
+        }
+    });
+}
+
+function LoadAJAXSalesAnalysisByCategoryDetailYTD() {
+
+    var Category = $("#selCategory-button .ui-selectmenu-text").html();
+    var FromDate = $("#id-date-picker-1").val();
+    var ToDate = $("#id-date-picker-2").val();
+
+    $.ajax({
+        url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisByCategoryDetailYTD",
+        type: "POST",
+        data: { category: Category, fromDate: FromDate, toDate: ToDate },
+        dataType: "JSON",
+        success: function (data) {
+            if (data != null) {
+                $("#widget-bar-chart").show();
+                LoadBarChart(data, $("#flot-bar-chart"), false);
+                $("#flot-bar-chart div.flot-text div.flot-x-axis").css("left", "-12px");
+                LoadingComplete();
+            }
+            else {
+                alert("There is no data to show.");
+            }
+        },
+        error: function (request) {
+            LoadingComplete();
+            alert("Please try again. Something went wrong.");
+        }
+    });
+}
+
+function LoadAJAXSalesAnalysisByCategoryDetailMTD() {
+
+    var Category = $("#selCategory-button .ui-selectmenu-text").html();
+    var FromDate = $("#id-date-picker-1").val();
+    var ToDate = $("#id-date-picker-2").val();
+
+    $.ajax({
+        url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisByCategoryDetailMTD",
+        type: "POST",
+        data: { category: Category, fromDate: FromDate, toDate: ToDate },
+        dataType: "JSON",
+        success: function (data) {
+            if (data != null) {
+                $("#widget-bar-chart2").show();
+                LoadBarChart(data, $("#flot-bar-chart2"), false);
+                $("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("left", "-12px");
+                //$("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("font-size", "11px");
                 LoadingComplete();
             }
             else {
@@ -123,6 +235,11 @@ function Validate() {
 
     if (dayDiff < 0) {
         alert("To date cannot be smaller than From date.");
+        return false;
+    }
+
+    if (dayDiff > 31449600000) {
+        alert("Please keep the date range less than or equal to 1 year.");
         return false;
     }
 

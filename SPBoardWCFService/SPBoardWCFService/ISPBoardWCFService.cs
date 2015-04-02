@@ -16,7 +16,7 @@ namespace SPBoardWCFService
         bool Login(string CompanyID, string CompanyPassword, out int Level4ID, out string Message);
 
         [OperationContract]
-        List<ChartData> GetSalesAnalysis(string CompanyID, string CompanyPassword, int Level4ID, int ReportType);
+        List<ChartData> GetSalesAnalysis(string CompanyID, string CompanyPassword, int Level4ID, int ReportType, DateTime FromDate, DateTime ToDate);
 
         [OperationContract]
         List<ChartData> GetSalesAnalysisByCategorySum(string CompanyID, string CompanyPassword, int Level4ID, int ReportType);
@@ -35,5 +35,8 @@ namespace SPBoardWCFService
 
         [OperationContract]
         ResourceUtilization GetResourceUtilizationOneDayPerTech(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true);
+
+        [OperationContract]
+        ResourceUtilization GetBookedJobsSummary(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate);
     }
 }

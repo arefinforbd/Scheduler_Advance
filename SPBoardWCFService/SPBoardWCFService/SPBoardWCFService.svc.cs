@@ -39,7 +39,7 @@ namespace SPBoardWCFService
             }
         }
 
-        public List<ChartData> GetSalesAnalysis(string CompanyID, string CompanyPassword, int Level4ID, int ReportType)
+        public List<ChartData> GetSalesAnalysis(string CompanyID, string CompanyPassword, int Level4ID, int ReportType, DateTime FromDate, DateTime ToDate)
         {
             string message = "";
             DataSet dsChart;
@@ -54,7 +54,7 @@ namespace SPBoardWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
-                message = sboard.ws_webgetsumsalesdata(Level4ID, ReportType, System.DateTime.Today.AddDays(-10), System.DateTime.Today, out saleDataset, out legend);
+                message = sboard.ws_webgetsumsalesdata(Level4ID, ReportType, FromDate, ToDate, out saleDataset, out legend);
                 dsChart = (DataSet)saleDataset;
                 dsLegend = (DataSet)legend;
 
@@ -323,7 +323,7 @@ namespace SPBoardWCFService
             ResourceUtilizationDetail detail = new ResourceUtilizationDetail();
             List<ResourceUtilizationDetail> details = new List<ResourceUtilizationDetail>();
 
-            StrongTypesNS.ds_summaryDataSet summaryDataset;
+            StrongTypesNS.ds_summary2DataSet summaryDataset;
             StrongTypesNS.ds_detailsDataSet detailsDataset;
             StrongTypesNS.ds_lvl2_oneDayPerTechDataSet techDataset;
 
@@ -404,7 +404,7 @@ namespace SPBoardWCFService
             ResourceUtilizationOneDayPerTech tech = new ResourceUtilizationOneDayPerTech();
             List<ResourceUtilizationOneDayPerTech> techs = new List<ResourceUtilizationOneDayPerTech>();
 
-            StrongTypesNS.ds_summaryDataSet summaryDataset;
+            StrongTypesNS.ds_summary2DataSet summaryDataset;
             StrongTypesNS.ds_detailsDataSet detailsDataset;
             StrongTypesNS.ds_lvl2_oneDayPerTechDataSet techDataset;
 
@@ -450,6 +450,68 @@ namespace SPBoardWCFService
                     }
                     resource.ResourceUtilizationOneDayPerTechs = techs.Count > 0 ? techs : null;
                     resource.Charts = charts.Count > 0 ? charts : null;
+                }
+
+                return resource;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public ResourceUtilization GetBookedJobsSummary(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate)
+        {
+            DataSet dsSummary;
+            DataSet dsArea;
+            DataSet dsSuburb;
+            DataSet dsPostCode;
+            DataSet dsTech;
+            ChartData chart = new ChartData();
+            List<ChartData> charts = new List<ChartData>();
+            ResourceUtilization resource = new ResourceUtilization();
+
+            JobSummary summary = new JobSummary();
+            List<JobSummary> summaries = new List<JobSummary>();
+            AreaAddress area = new AreaAddress();
+            List<AreaAddress> areas = new List<AreaAddress>();
+            Suburb suburb = new Suburb();
+            List<Suburb> suburbs = new List<Suburb>();
+            PostCode postCode = new PostCode();
+            List<PostCode> postCodes = new List<PostCode>();
+            Tech tech = new Tech();
+            List<Tech> techs = new List<Tech>();
+
+            StrongTypesNS.ds_summaryDataSet summaryDataset;
+            StrongTypesNS.ds_area2DataSet areaDataset;
+            StrongTypesNS.ds_suburbDataSet suburbDataset;
+            StrongTypesNS.ds_postCodeDataSet postCodeDataset;
+            StrongTypesNS.ds_techDataSet techDataset;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword);
+                SPBoard sboard = new SPBoard(conn);
+
+                sboard.ws_getJbSum(Level4ID, FromDate, ToDate, out summaryDataset, out areaDataset, out suburbDataset, out postCodeDataset, out techDataset);
+                dsSummary = (DataSet)summaryDataset;
+                dsArea = (DataSet)areaDataset;
+                dsSuburb = (DataSet)suburbDataset;
+                dsPostCode = (DataSet)postCodeDataset;
+                dsTech = (DataSet)techDataset;
+
+                if (dsSummary != null && dsSummary.Tables["tt_jobList_summary"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsSummary.Tables["tt_jobList_summary"].Rows)
+                    {
+                        //summary = new ResourceUtilizationSummary();
+
+                        //summary.UsedPercentage = Convert.ToDecimal(row["tt_s_used_percent"]);
+                        //summary.FreePercentage = Convert.ToDecimal(row["tt_s_free_percent"]);
+
+                        //summaries.Add(summary);
+                    }
+                    //resource.ResourceUtilizationSummaries = summaries;
                 }
 
                 return resource;

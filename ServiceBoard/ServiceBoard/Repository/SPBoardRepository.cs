@@ -9,12 +9,12 @@ namespace ServiceBoard.Repository
 {
     public class SPBoardRepository
     {
-        public List<ChartData> GetSalesAnalysis(int reportType)
+        public List<ChartData> GetSalesAnalysis(int reportType, DateTime fromDate, DateTime toDate)
         {
             SPBoardParser parser = new SPBoardParser();
             List<ChartData> charts = new List<ChartData>();
 
-            charts = parser.GetSalesAnalysis(reportType);
+            charts = parser.GetSalesAnalysis(reportType, fromDate, toDate);
 
             return charts;
         }

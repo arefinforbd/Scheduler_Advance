@@ -67,7 +67,7 @@ function LoadAJAXSalesAnalysis(ReportType) {
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
-                LoadBarChart(data, $("#flot-bar-chart"), false);
+                LoadBarChart(data, $("#flot-bar-chart"), true);
             }
             else {
                 alert("There is no data to show.");
@@ -88,7 +88,7 @@ function LoadAJAXSalesAnalysisByCategorySum(ReportType, YearOrMonth) {
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
-                LoadBarChart(data, $("#flot-bar-chart-cat"), false);
+                LoadBarChart(data, $("#flot-bar-chart-cat"), true);
             }
             else {
                 alert("There is no data to show.");

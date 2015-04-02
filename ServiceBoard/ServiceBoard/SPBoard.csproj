@@ -387,6 +387,7 @@
     <Content Include="Views\SPBoard\DebtorAnalysisDetail.cshtml" />
     <Content Include="Views\SPBoard\ResourceUtilizationDetail.cshtml" />
     <Content Include="Views\SPBoard\ResourceUtilizationOneDayPerTech.cshtml" />
+    <Content Include="Views\SPBoard\SalesAnalysisOverallDetail.cshtml" />
     <None Include="Service References\SPBoardWCFService\SPBoardWCFService.wsdl" />
     <None Include="Service References\SPBoardWCFService\SPBoardWCFService.xsd">
       <SubType>Designer</SubType>

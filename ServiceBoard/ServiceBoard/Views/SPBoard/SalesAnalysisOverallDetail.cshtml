@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "SPBoard";
-    ViewBag.SubTitle = "Sales Detail Analysis--By Category";
+    ViewBag.SubTitle = "Sales Detail Analysis--Overall";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
 <style>
     .page-content > .row .col-xs-12, .page-content > .row .col-sm-12, .page-content > .row .col-md-12, .page-content > .row .col-lg-12 {
         float: none;
-    } 
+    }
 
     .row {
         margin-bottom: 3px;
@@ -28,20 +28,20 @@
     #selCategory-menu {
         height: 320px;
         overflow-y: scroll;
-    } 
-    
+    }
+
     .ui-menu .ui-state-focus {
         margin: 0;
     }
 
-    .ui-datepicker{
+    .ui-datepicker {
         width: 240px;
     }
 
-    .datepicker-label{
-        float:left;
-        margin-right:10px;
-        padding-top:5px;
+    .datepicker-label {
+        float: left;
+        margin-right: 10px;
+        padding-top: 5px;
     }
 
     #selCharts-button {
@@ -50,15 +50,15 @@
         height: 34px;
         background-color: #FFFFFF;
     }
-    
+
     .form-control, select {
         color: #000000;
     }
 
     #selCharts-button .ui-selectmenu-text {
         padding-top: 6px;
-    } 
-    
+    }
+
     input[readonly] {
         background: none repeat scroll 0 0 #ffffff !important;
     }
@@ -75,21 +75,6 @@
                 <div class="widget-main no-padding">
                     <form>
                         <fieldset>
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-sm-3 col-xs-3">
-                                            <label class="block blue" for="Category-button">Category</label>
-                                        </div>
-                                        <div class="col-lg-8 col-sm-8 col-xs-8">
-                                            <select id="selCategory" name="selCategory" style="width: 200px; display: none;">
-                                                @Html.Raw(ViewBag.Categories)
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="row">
@@ -126,8 +111,8 @@
                         </fieldset>
 
                         <div class="form-actions left" style="padding-left: 16px;">
-                            <input class="btn btn-sm btn-info" type="button" id="btnPreviewByCategory" value="Preview" />
-                            <input class="btn btn-sm btn-success" type="button" id="btnResetByCategory" value="Reset" style="margin-left:5px;width:75px;" />
+                            <input class="btn btn-sm btn-info" type="button" id="btnPreviewOverall" value="Preview" />
+                            <input class="btn btn-sm btn-success" type="button" id="btnResetOverall" value="Reset" style="margin-left:5px;width:75px;" />
                         </div>
                     </form>
                 </div>
@@ -137,7 +122,7 @@
         <div id="divLoading" style="display:none;"></div>
         <div class="widget-box" id="widget-bar-chart" style="display:none;">
             <div class="widget-header">
-                <h4 class="widget-title">Category By YTD</h4>
+                <h4 class="widget-title">Overall YTD</h4>
             </div>
 
             <div class="widget-body" style="padding:10px;">
@@ -149,7 +134,7 @@
         <br />
         <div class="widget-box" id="widget-bar-chart2" style="display:none;">
             <div class="widget-header">
-                <h4 class="widget-title">Category By MTD</h4>
+                <h4 class="widget-title">Overall MTD</h4>
             </div>
 
             <div class="widget-body" style="padding:10px;">

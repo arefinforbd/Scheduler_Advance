@@ -149,7 +149,7 @@ namespace ServiceBoard.Controllers
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
 
-            charts = repository.GetSalesAnalysis(reportType);
+            charts = repository.GetSalesAnalysis(reportType, DateTime.Today.AddDays(-10), DateTime.Today);
 
             if (charts != null)
             {
@@ -185,6 +185,96 @@ namespace ServiceBoard.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SalesAnalysisOverallDetail()
+        {
+            if (Session["CompanyID"] == null)
+                return RedirectToAction("Index", "Login");
+
+            SPBoardHelper helper = new SPBoardHelper();
+
+            ViewBag.Categories = helper.LoadCategory();
+
+            return View();
+        }
+
+        private List<Dictionary<string, object>> GetBarDataForFreeDateRange(List<ChartData> charts)
+        {
+            string xAxisLabel = "";
+            Dictionary<string, object> chartDic;
+            List<Dictionary<string, object>> chartDics = new List<Dictionary<string, object>>();
+
+            var monthList = charts.GroupBy(i => new { Category = i.Label })
+                            .Select(group => new
+                            {
+                                MonthLabel = group.First().Label
+                            }).ToList();
+
+            foreach (var month in monthList)
+            {
+                chartDic = new Dictionary<string, object>();
+
+                var sortedCharts = charts.Where(c => c.Label == month.MonthLabel).ToList();
+
+                for (int loop = 0; loop < sortedCharts.Count; loop++)
+                {
+                    if (loop == 0)
+                        xAxisLabel = sortedCharts[0].DateLabel.Substring(0, 4) + "-";
+                    else
+                        xAxisLabel += month.MonthLabel + "-" + sortedCharts[1].DateLabel.Substring(0, 4);
+                }
+
+                chartDic.Add("BarXLabel", xAxisLabel);
+                foreach (var chart in charts.Where(c => c.Label == month.MonthLabel).ToList())
+                    chartDic.Add(chart.DateLabel.Substring(0, 4), chart.Point);
+
+                chartDics.Add(chartDic);
+            }
+
+            return chartDics;
+        }
+
+        [HttpPost]
+        public ActionResult SalesAnalysisOverallDetailYTD(DateTime fromDate, DateTime toDate)
+        {
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+            SPBoardRepository repository = new SPBoardRepository();
+
+            charts = repository.GetSalesAnalysis(3, fromDate, toDate);
+
+            if (charts != null && charts.Count > 0)
+            {
+                charts = charts.OrderBy(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
+                chartDics = GetBarDataForFreeDateRange(charts);
+                chartTypeObj.Bars = chartDics;
+
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SalesAnalysisOverallDetailMTD(DateTime fromDate, DateTime toDate)
+        {
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+            SPBoardRepository repository = new SPBoardRepository();
+
+            charts = repository.GetSalesAnalysis(3, fromDate, toDate);
+
+            if (charts != null && charts.Count > 0)
+            {
+                charts = charts.OrderBy(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
+                chartDics = GetBarDataForFreeDateRange(charts);
+                chartTypeObj.Bars = chartDics;
+
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult SalesAnalysisByCategoryDetail()
         {
             if (Session["CompanyID"] == null)
@@ -198,9 +288,8 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalesAnalysisByCategoryDetail(string category, DateTime fromDate, DateTime toDate)
+        public ActionResult SalesAnalysisByCategoryDetailYTD(string category, DateTime fromDate, DateTime toDate)
         {
-            string xAxisLabel = "";
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
@@ -209,37 +298,28 @@ namespace ServiceBoard.Controllers
 
             if (charts != null)
             {
-                Dictionary<string, object> chartDic;
-                List<Dictionary<string, object>> chartDics = new List<Dictionary<string, object>>();
+                charts = charts.OrderBy(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
+                chartTypeObj.Bars = GetBarDataForFreeDateRange(charts);
 
-                var monthList = charts.GroupBy(i => new { Category = i.Label })
-                             .Select(group => new
-                             {
-                                 MonthLabel = group.First().Label
-                             }).ToList();
+                return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
+            }
 
-                foreach (var month in monthList)
-                {
-                    chartDic = new Dictionary<string, object>();
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
 
-                    var sortedCharts = charts.Where(c => c.Label == month.MonthLabel).ToList();
+        [HttpPost]
+        public ActionResult SalesAnalysisByCategoryDetailMTD(string category, DateTime fromDate, DateTime toDate)
+        {
+            ChartType chartTypeObj = new ChartType();
+            List<ChartData> charts = new List<ChartData>();
+            SPBoardRepository repository = new SPBoardRepository();
 
-                    for (int loop = 0; loop < sortedCharts.Count; loop++)
-                    {
-                        if(loop == 0)
-                            xAxisLabel = sortedCharts[1].DateLabel.Substring(0, 4) + "<--";
-                        else
-                            xAxisLabel += month.MonthLabel + "-->" + sortedCharts[0].DateLabel.Substring(0, 4);
-                    }
+            charts = repository.GetSalesAnalysisByCategoryDetail(category, fromDate, toDate);
 
-                    chartDic.Add("BarXLabel", xAxisLabel);
-                    foreach (var chart in charts.Where(c => c.Label == month.MonthLabel).ToList())
-                        chartDic.Add(chart.DateLabel.Substring(0, 4), chart.Point);
-
-                    chartDics.Add(chartDic);
-                }
-
-                chartTypeObj.Bars = chartDics;
+            if (charts != null)
+            {
+                charts = charts.OrderBy(c => Convert.ToInt32(c.DateLabel.Substring(0, 4))).ToList();
+                chartTypeObj.Bars = GetBarDataForFreeDateRange(charts);
 
                 return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
             }
@@ -348,5 +428,7 @@ namespace ServiceBoard.Controllers
 
             return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
         }
-	}
+
+        public List<Dictionary<string, object>> chartDics { get; set; }
+    }
 }

@@ -179,11 +179,13 @@
 
                                     <div id="divYTDLoading" style="display:none;"></div>
                                     <div class="flot-chart-content" id="flot-bar-chart" style="margin:10px 0 0 15px;height:250px;width:450px;"></div>
+                                    <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisOverallDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
                                 </div>
 
                                 <div id="sales2ndTab" class="tab-pane">
                                     <div id="divYTDLoading2" style="display:none;"></div>
                                     <div id=""></div>
+                                    <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisOverallDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
                                 </div>
 
                                 <div id="sales3rdTab" class="tab-pane">
@@ -209,10 +211,10 @@
 
                                     <div id="divYTDLoading3" style="display:none;"></div>
                                     <div class="flot-chart-content" id="flot-bar-chart-cat" style="margin:10px 0 0 15px;height:250px;width:450px;"></div>
+                                    <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisByCategoryDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
                                 </div>
                             </div>
                         </div>
-                        <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisByCategoryDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
                     </div>
                 </div>
             </div>
@@ -283,7 +285,7 @@
                             Date From: <input type="text" class="popup-textbox" style="width: 100px;" />
                             Date To: <input type="text" class="popup-textbox" style="width: 100px;" />
 
-                            <button class="btn btn-xs btn-success" style="margin-left: 10px;">
+                            <button class="btn btn-xs btn-success" id="btnSearchBookedJobs" style="margin-left: 10px;">
                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                 Search
                             </button>
@@ -294,11 +296,11 @@
                             <div class="widget-box transparent" style="margin: 0px; border: 1px solid #CCCCCC; padding-bottom: 15px;">
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
-                                        Searched Jobs (12)
+                                        Searched Jobs <span id="spanNumberOfJobs">(0)</span>
                                     </h4>
                                 </div>
 
-                                <div class="widget-body">
+                                <div class="widget-body" id="bookedJobsList">
                                     <div id="divJoblist" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;">
                                         <div class="jobListItem">
                                             <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
@@ -383,6 +385,11 @@
 <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.stack.js")"></script>
 
 <script>
+
+    $("#btnSearchBookedJobs").click(function () {
+        $("#spanNumberOfJobs").html("(12)");
+        $("#bookedJobsList").show();
+    });
 
     $(".jobListItem a").click(function () {
 
