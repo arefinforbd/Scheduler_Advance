@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div id="divYTDDTP" class="row">
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="row">
                                         <div class="col-lg-3 col-sm-3 col-xs-3">
@@ -123,9 +123,32 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div id="divMTDDTP" class="row" style="display:none;">
+                                        <div class="col-lg-3 col-sm-3 col-xs-3">
+                                            <label id="lblMTD" class="block blue datepicker-label">Month</label>
+                                        </div>
+                                        <div class="col-lg-8 col-sm-8 col-xs-8">
+                                            <div class="input-group" style="width: 240px;">
+                                                <input class="form-control date-picker" id="id-date-picker-mtd" type="text" data-date-format="dd-mm-yyyy" placeholder="Click to select" readonly="" style="cursor: pointer;" />
+                                                <span class="input-group-addon" style="cursor: pointer;">
+                                                    <i class="fa fa-calendar bigger-110"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </fieldset>
 
                         <div class="form-actions left" style="padding-left: 16px;">
+                            <select id="selCharts" name="selCharts">
+                                <option selected="selected">YTD</option>
+                                <option>MTD</option>
+                            </select>
+
                             <input class="btn btn-sm btn-info" type="button" id="btnPreviewByCategory" value="Preview" />
                             <input class="btn btn-sm btn-success" type="button" id="btnResetByCategory" value="Reset" style="margin-left:5px;width:75px;" />
                         </div>
@@ -146,7 +169,7 @@
                 </div>
             </div>
         </div>
-        <br />
+
         <div class="widget-box" id="widget-bar-chart2" style="display:none;">
             <div class="widget-header">
                 <h4 class="widget-title">Category By MTD</h4>

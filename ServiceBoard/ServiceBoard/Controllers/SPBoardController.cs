@@ -23,11 +23,14 @@ namespace ServiceBoard.Controllers
             decimal usedPercentage = 0;
             SPBoardRepository repository = new SPBoardRepository();
             ResourceUtilization resource = new ResourceUtilization();
+            SPBoardHelper helper = new SPBoardHelper();
 
             resource = repository.GetResourceUtilization(DateTime.Today, DateTime.Today, false);
             usedPercentage = resource.ResourceUtilizationSummaries == null ? 0 : resource.ResourceUtilizationSummaries[0].UsedPercentage;
-
             ViewBag.ResourcePercentage = Math.Round((usedPercentage * 100), 2);
+
+            ViewBag.Areas = helper.LoadAreas(false);
+            ViewBag.Techs = helper.LoadTechs(false);
 
             return View();
         }
@@ -239,6 +242,7 @@ namespace ServiceBoard.Controllers
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
+            List<Dictionary<string, object>> chartDics = new List<Dictionary<string, object>>();
 
             charts = repository.GetSalesAnalysis(3, fromDate, toDate);
 
@@ -255,13 +259,14 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalesAnalysisOverallDetailMTD(DateTime fromDate, DateTime toDate)
+        public ActionResult SalesAnalysisOverallDetailMTD(DateTime mtdDate)
         {
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
+            List<Dictionary<string, object>> chartDics = new List<Dictionary<string, object>>();
 
-            charts = repository.GetSalesAnalysis(3, fromDate, toDate);
+            charts = repository.GetSalesAnalysis(3, mtdDate, mtdDate.AddDays(DateTime.DaysInMonth(mtdDate.Year, mtdDate.Month)-1));
 
             if (charts != null && charts.Count > 0)
             {
@@ -308,13 +313,13 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult SalesAnalysisByCategoryDetailMTD(string category, DateTime fromDate, DateTime toDate)
+        public ActionResult SalesAnalysisByCategoryDetailMTD(string category, DateTime mtdDate)
         {
             ChartType chartTypeObj = new ChartType();
             List<ChartData> charts = new List<ChartData>();
             SPBoardRepository repository = new SPBoardRepository();
 
-            charts = repository.GetSalesAnalysisByCategoryDetail(category, fromDate, toDate);
+            charts = repository.GetSalesAnalysisByCategoryDetail(category, mtdDate, mtdDate.AddDays(DateTime.DaysInMonth(mtdDate.Year, mtdDate.Month) - 1));
 
             if (charts != null)
             {
@@ -355,7 +360,7 @@ namespace ServiceBoard.Controllers
             SPBoardHelper helper = new SPBoardHelper();
 
             ViewBag.InvoiceTypes = helper.LoadInvoiceTypes();
-            ViewBag.Areas = helper.LoadAreas();
+            ViewBag.Areas = helper.LoadAreas(true);
             ViewBag.DateBalances = helper.LoadDateBalance();
 
             return View();
@@ -429,6 +434,18 @@ namespace ServiceBoard.Controllers
             return Json(chartTypeObj, JsonRequestBehavior.AllowGet);
         }
 
-        public List<Dictionary<string, object>> chartDics { get; set; }
+        [HttpPost]
+        public ActionResult GetBookedJobList(DateTime fromDate, DateTime toDate, string area, string suburb, string postCode, string tech)
+        {
+            List<Job> jobs = new List<Job>();
+            SPBoardRepository repository = new SPBoardRepository();
+
+            jobs = repository.GetBookedJobList(fromDate, toDate, area, suburb, postCode, tech);
+
+            if (jobs != null && jobs.Count > 0)
+                return Json(jobs, JsonRequestBehavior.AllowGet);
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 }

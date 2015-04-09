@@ -78,5 +78,25 @@ namespace ServiceBoard.Repository
 
             return resource;
         }
+
+        public List<Job> GetBookedJobsInfo(DateTime fromDate, DateTime toDate)
+        {
+            List<Job> jobs = new List<Job>();
+            SPBoardParser parser = new SPBoardParser();
+
+            jobs = parser.GetBookedJobsInfo(fromDate, toDate);
+
+            return jobs;
+        }
+
+        public List<Job> GetBookedJobList(DateTime fromDate, DateTime toDate, string area, string suburb, string postCode, string tech)
+        {
+            List<Job> jobs = new List<Job>();
+            SPBoardParser parser = new SPBoardParser();
+
+            jobs = parser.GetBookedJobList(fromDate, toDate, area, suburb, postCode, tech);
+
+            return jobs;
+        }
     }
 }

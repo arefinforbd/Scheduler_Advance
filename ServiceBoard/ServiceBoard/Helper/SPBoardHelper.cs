@@ -81,7 +81,7 @@ namespace ServiceBoard.Helper
             return sb.ToString();
         }
 
-        public string LoadAreas()
+        public string LoadAreas(bool isForDropDown)
         {
             StringBuilder sb = new StringBuilder("");
             List<Area> areas = new List<Area>();
@@ -93,9 +93,14 @@ namespace ServiceBoard.Helper
             areas = ((ComboClass)HttpContext.Current.Session["Combo"]).Areas;
 
             foreach (Area area in areas)
-                sb.Append("<option value='" + area.AreaCode + "'>" + area.AreaCode + "</option>");
+            {
+                if(isForDropDown)
+                    sb.Append("<option value='" + area.AreaCode + "'>" + area.AreaCode + "</option> ");
+                else
+                    sb.Append(area.AreaCode + ",");
+            }
 
-            return sb.ToString();
+            return sb.Length > 0 ? sb.ToString().Substring(0, sb.Length - 1) : "";
         }
 
         public string LoadInvoiceTypes()
@@ -141,6 +146,28 @@ namespace ServiceBoard.Helper
             }
 
             return sb.ToString();
+        }
+
+        public string LoadTechs(bool isForDropDown)
+        {
+            StringBuilder sb = new StringBuilder("");
+            List<Tech> techs = new List<Tech>();
+            SPBoardRepository repo = new SPBoardRepository();
+
+            if (HttpContext.Current.Session["Combo"] == null)
+                HttpContext.Current.Session["Combo"] = repo.GetCombo();
+
+            techs = ((ComboClass)HttpContext.Current.Session["Combo"]).Techs;
+
+            foreach (Tech tech in techs)
+            {
+                if (isForDropDown)
+                    sb.Append("<option value='" + tech.TechName + "'>" + tech.TechName + "</option> ");
+                else
+                    sb.Append(tech.TechName + ",");
+            }
+
+            return sb.Length > 0 ? sb.ToString().Substring(0, sb.Length - 1) : "";
         }
     }
 }

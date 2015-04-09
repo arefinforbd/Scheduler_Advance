@@ -9,7 +9,7 @@ namespace SPBoardWCFService.Model
     public class JobSummaryAll
     {
         [DataMember]
-        public List<JobSummary> JobSummaries { get; set; }
+        public List<Job> JobSummaries { get; set; }
         [DataMember]
         public List<AreaAddress> Areas { get; set; }
         [DataMember]

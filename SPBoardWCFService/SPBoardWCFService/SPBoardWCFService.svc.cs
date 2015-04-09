@@ -195,7 +195,6 @@ namespace SPBoardWCFService
                 SPBoard sboard = new SPBoard(conn);
 
                 sboard.ws_debtrp(Level4ID, InvoiceType, CustomerFrom, CustomerTo, SortBy, Area, PrintCredit, NameFrom, NameTo, AgeBal, UnIndJobs, BalanceDate, Retention, out debtorDataset, out legend);
-                //sboard.ws_debtrp(Level4ID, "[ALL]", 1, 100, 2, "[ALL]", false, "", "", 1, false, DateTime.Today, false, out debtorDataset, out legend);
                 dsChart = (DataSet)debtorDataset;
                 dsLegend = (DataSet)legend;
 
@@ -231,22 +230,16 @@ namespace SPBoardWCFService
 
         public ComboClass GetCombo(string CompanyID, string CompanyPassword, int Level4ID)
         {
-            DataSet dsCategory;
+            DataSet dsAll;
             Category category = new Category();
             List<Category> categories = new List<Category>();
-
-            DataSet dsArea;
             Area area = new Area();
             List<Area> areas = new List<Area>();
-
-            DataSet dsInvoiceType;
             InvoiceType invoiceType = new InvoiceType();
             List<InvoiceType> invoiceTypes = new List<InvoiceType>();
-
-            StrongTypesNS.ds_categoryDataSet categoryDataset;
-            StrongTypesNS.ds_areaDataSet areaDataset;
-            StrongTypesNS.ds_invTypeDataSet invoiceDataset;
-
+            Tech tech = new Tech();
+            List<Tech> techs = new List<Tech>();
+            StrongTypesNS.ds_allDataSet allDataset;
             ComboClass combo = new ComboClass();
 
             try
@@ -254,14 +247,12 @@ namespace SPBoardWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
-                sboard.ws_combo(Level4ID, out categoryDataset, out areaDataset, out invoiceDataset);
-                dsCategory = (DataSet)categoryDataset;
-                dsArea = (DataSet)areaDataset;
-                dsInvoiceType = (DataSet)invoiceDataset;
+                sboard.ws_combo(Level4ID, out allDataset);
+                dsAll = (DataSet)allDataset;
 
-                if (dsCategory != null && dsCategory.Tables["tt_pd_mstr"].Rows.Count > 0)
+                if (dsAll.Tables["tt_pd_mstr"].Rows.Count > 0)
                 {
-                    foreach (DataRow row in dsCategory.Tables["tt_pd_mstr"].Rows)
+                    foreach (DataRow row in dsAll.Tables["tt_pd_mstr"].Rows)
                     {
                         category = new Category();
 
@@ -273,9 +264,9 @@ namespace SPBoardWCFService
                     combo.Categories = categories;
                 }
 
-                if (dsArea != null && dsArea.Tables["tt_br_mstr"].Rows.Count > 0)
+                if (dsAll.Tables["tt_br_mstr"].Rows.Count > 0)
                 {
-                    foreach (DataRow row in dsArea.Tables["tt_br_mstr"].Rows)
+                    foreach (DataRow row in dsAll.Tables["tt_br_mstr"].Rows)
                     {
                         area = new Area();
 
@@ -287,9 +278,9 @@ namespace SPBoardWCFService
                     combo.Areas = areas;
                 }
 
-                if (dsInvoiceType != null && dsInvoiceType.Tables["tt_invType"].Rows.Count > 0)
+                if (dsAll.Tables["tt_invType"].Rows.Count > 0)
                 {
-                    foreach (DataRow row in dsInvoiceType.Tables["tt_invType"].Rows)
+                    foreach (DataRow row in dsAll.Tables["tt_invType"].Rows)
                     {
                         invoiceType = new InvoiceType();
 
@@ -299,6 +290,20 @@ namespace SPBoardWCFService
                         invoiceTypes.Add(invoiceType);
                     }
                     combo.InvoiceTypes = invoiceTypes;
+                }
+
+                if (dsAll.Tables["tt_tech"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsAll.Tables["tt_tech"].Rows)
+                    {
+                        tech = new Tech();
+
+                        tech.Sequence = Convert.ToInt32(row["tt_tc_seq"]);
+                        tech.TechName = row["tt_tc_tech"].ToString();
+
+                        techs.Add(tech);
+                    }
+                    combo.Techs = techs;
                 }
 
                 return combo;
@@ -460,61 +465,82 @@ namespace SPBoardWCFService
             }
         }
 
-        public ResourceUtilization GetBookedJobsSummary(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate)
+        public List<Job> GetBookedJobsInfo(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate)
         {
             DataSet dsSummary;
-            DataSet dsArea;
-            DataSet dsSuburb;
-            DataSet dsPostCode;
-            DataSet dsTech;
-            ChartData chart = new ChartData();
-            List<ChartData> charts = new List<ChartData>();
-            ResourceUtilization resource = new ResourceUtilization();
-
-            JobSummary summary = new JobSummary();
-            List<JobSummary> summaries = new List<JobSummary>();
-            AreaAddress area = new AreaAddress();
-            List<AreaAddress> areas = new List<AreaAddress>();
-            Suburb suburb = new Suburb();
-            List<Suburb> suburbs = new List<Suburb>();
-            PostCode postCode = new PostCode();
-            List<PostCode> postCodes = new List<PostCode>();
-            Tech tech = new Tech();
-            List<Tech> techs = new List<Tech>();
-
+            Job job = new Job();
+            List<Job> jobs = new List<Job>();
             StrongTypesNS.ds_summaryDataSet summaryDataset;
-            StrongTypesNS.ds_area2DataSet areaDataset;
-            StrongTypesNS.ds_suburbDataSet suburbDataset;
-            StrongTypesNS.ds_postCodeDataSet postCodeDataset;
-            StrongTypesNS.ds_techDataSet techDataset;
 
             try
             {
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
-                sboard.ws_getJbSum(Level4ID, FromDate, ToDate, out summaryDataset, out areaDataset, out suburbDataset, out postCodeDataset, out techDataset);
+                sboard.ws_getJbSum(Level4ID, FromDate, ToDate, out summaryDataset);
                 dsSummary = (DataSet)summaryDataset;
-                dsArea = (DataSet)areaDataset;
-                dsSuburb = (DataSet)suburbDataset;
-                dsPostCode = (DataSet)postCodeDataset;
-                dsTech = (DataSet)techDataset;
 
                 if (dsSummary != null && dsSummary.Tables["tt_jobList_summary"].Rows.Count > 0)
                 {
                     foreach (DataRow row in dsSummary.Tables["tt_jobList_summary"].Rows)
                     {
-                        //summary = new ResourceUtilizationSummary();
+                        job = new Job();
 
-                        //summary.UsedPercentage = Convert.ToDecimal(row["tt_s_used_percent"]);
-                        //summary.FreePercentage = Convert.ToDecimal(row["tt_s_free_percent"]);
+                        job.PostCode = row["tt_jl_postCode"].ToString();
+                        job.State = row["tt_jl_state"].ToString();
+                        job.JobDate = Convert.ToDateTime(row["tt_jl_date"]);
+                        job.JobNumber = Convert.ToInt32(row["tt_jl_jobNum"]);
+                        job.BookedBy = row["tt_jl_bookedBy"].ToString();
 
-                        //summaries.Add(summary);
+                        jobs.Add(job);
                     }
-                    //resource.ResourceUtilizationSummaries = summaries;
                 }
 
-                return resource;
+                return jobs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<Job> GetBookedJobList(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Suburb, string PostCode, string Tech)
+        {
+            Job job;
+            DataSet dsJobs;
+            string message = "";
+            List<Job> jobs = new List<Job>();
+            StrongTypesNS.ds_detailDataSet jobsDataset;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword);
+                SPBoard sboard = new SPBoard(conn);
+
+                message = sboard.ws_getJbDtl(Level4ID, FromDate, ToDate, Area, Suburb, PostCode, Tech, out jobsDataset);
+                dsJobs = (DataSet)jobsDataset;
+
+                if (dsJobs != null && dsJobs.Tables["tt_jobList_detail"].Rows.Count > 0)
+                {
+                    foreach (DataRow row in dsJobs.Tables["tt_jobList_detail"].Rows)
+                    {
+                        job = new Job();
+
+                        job.JobNumber = Convert.ToInt32(row["tt_dtl_jobno"]);
+                        job.JobDate = Convert.ToDateTime(row["tt_dtl_date"]);
+                        job.CustomerName = row["tt_dtl_custname"].ToString();
+                        job.SiteName = row["tt_dtl_sitename"].ToString();
+                        job.Address = row["tt_dtl_addr"].ToString();
+                        job.Tech = row["tt_dtl_tech"].ToString();
+                        job.Status = row["tt_dtl_status"].ToString();
+
+                        jobs.Add(job);
+                    }
+                }
+                else
+                    return null;
+
+                return jobs;
             }
             catch (Exception ex)
             {

@@ -349,6 +349,9 @@
     <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.ComboClass.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.Job.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\SPBoardWCFService\ServiceBoard.SPBoardWCFService.LoginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>

@@ -14,5 +14,7 @@ namespace SPBoardWCFService.Model
         public List<Area> Areas { get; set; }
         [DataMember]
         public List<InvoiceType> InvoiceTypes { get; set; }
+        [DataMember]
+        public List<Tech> Techs { get; set; }
     }
 }

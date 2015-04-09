@@ -3,6 +3,30 @@
     $("#selCategory").css('width', '240px').selectmenu({ position: {} });
     $("#selCharts").css('width', '80px').selectmenu({ position: {} });
 
+    if ($("#selCharts-button .ui-selectmenu-text").html() == "YTD") {
+        $("#divYTDDTP").show();
+        $("#divMTDDTP").hide();
+    }
+    else {
+        $("#divYTDDTP").hide();
+        $("#divMTDDTP").show();
+    }
+
+    $("ul#selCharts-menu").bind("click" ,function () {
+        var chartType = $("#selCharts-button .ui-selectmenu-text").html();
+
+        if (chartType == "YTD") {
+            $("#divYTDDTP").show();
+            $("#divMTDDTP").hide();
+        }
+        else {
+            $("#divYTDDTP").hide();
+            $("#divMTDDTP").show();
+        }
+        $("#widget-bar-chart").hide();
+        $("#widget-bar-chart2").hide();
+    });
+
     $('#id-date-picker-1').datepicker({
         dateFormat: "dd MM, yy",
         showOtherMonths: true,
@@ -43,6 +67,31 @@
     .next().on(ace.click_event, function () {
         $(this).prev().focus();
     });
+
+    $('#id-date-picker-mtd').datepicker({
+        dateFormat: "MM, yy",
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
+        onClose: function (dateText, inst) {
+            $(".ui-datepicker-calendar").hide();
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+    })
+
+    $("#id-date-picker-mtd").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $(".ui-datepicker-close").addClass("btn");
+        $(".ui-datepicker-close").addClass("btn-sm");
+        $(".ui-datepicker-close").addClass("btn-info");
+        $(".ui-datepicker-close").html("Select");
+        $(".ui-datepicker-current").hide();
+    });
     
     $("#btnPreviewOverall").click(function () {
 
@@ -51,8 +100,14 @@
 
         $("#divLoading").show();
         $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
-        LoadAJAXSalesAnalysisOverallDetailYTD();
-        LoadAJAXSalesAnalysisOverallDetailMTD();
+        $("#widget-bar-chart").hide();
+        $("#widget-bar-chart2").hide();
+
+        if ($("#selCharts-button .ui-selectmenu-text").html() == "YTD")
+            LoadAJAXSalesAnalysisOverallDetailYTD();
+        
+        if ($("#selCharts-button .ui-selectmenu-text").html() == "MTD")
+            LoadAJAXSalesAnalysisOverallDetailMTD();
     });
 
     $("#btnResetOverall").click(function () {
@@ -70,8 +125,14 @@
         legend = false;
         $("#divLoading").show();
         $("#divLoading").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/loading.gif' width='75px' />");
-        LoadAJAXSalesAnalysisByCategoryDetailYTD();
-        LoadAJAXSalesAnalysisByCategoryDetailMTD();
+        $("#widget-bar-chart").hide();
+        $("#widget-bar-chart2").hide();
+
+        if ($("#selCharts-button .ui-selectmenu-text").html() == "YTD")
+            LoadAJAXSalesAnalysisByCategoryDetailYTD();
+
+        if ($("#selCharts-button .ui-selectmenu-text").html() == "MTD")
+            LoadAJAXSalesAnalysisByCategoryDetailMTD();
     });
 
     $("#btnResetByCategory").click(function () {
@@ -87,14 +148,13 @@
 
 function LoadAJAXSalesAnalysisOverallDetailYTD() {
 
-    var Category = $("#selCategory-button .ui-selectmenu-text").html();
     var FromDate = $("#id-date-picker-1").val();
     var ToDate = $("#id-date-picker-2").val();
 
     $.ajax({
         url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisOverallDetailYTD",
         type: "POST",
-        data: { category: Category, fromDate: FromDate, toDate: ToDate },
+        data: { fromDate: FromDate, toDate: ToDate },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
@@ -116,21 +176,17 @@ function LoadAJAXSalesAnalysisOverallDetailYTD() {
 
 function LoadAJAXSalesAnalysisOverallDetailMTD() {
 
-    var Category = $("#selCategory-button .ui-selectmenu-text").html();
-    var FromDate = $("#id-date-picker-1").val();
-    var ToDate = $("#id-date-picker-2").val();
-
     $.ajax({
         url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisOverallDetailMTD",
         type: "POST",
-        data: { category: Category, fromDate: FromDate, toDate: ToDate },
+        data: { mtdDate: $("#id-date-picker-mtd").val() },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
                 $("#widget-bar-chart2").show();
                 LoadBarChart(data, $("#flot-bar-chart2"), false);
-                $("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("left", "-12px");
-                //$("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("font-size", "11px");
+                $("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("left", "-240px");
+                LoadingComplete();
             }
             else {
                 LoadingComplete();
@@ -182,14 +238,13 @@ function LoadAJAXSalesAnalysisByCategoryDetailMTD() {
     $.ajax({
         url: $("#hdnSiteURL").val() + "/SPBoard/SalesAnalysisByCategoryDetailMTD",
         type: "POST",
-        data: { category: Category, fromDate: FromDate, toDate: ToDate },
+        data: { category: Category, mtdDate: $("#id-date-picker-mtd").val() },
         dataType: "JSON",
         success: function (data) {
             if (data != null) {
                 $("#widget-bar-chart2").show();
                 LoadBarChart(data, $("#flot-bar-chart2"), false);
-                $("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("left", "-12px");
-                //$("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("font-size", "11px");
+                $("#flot-bar-chart2 div.flot-text div.flot-x-axis").css("left", "-240px");
                 LoadingComplete();
             }
             else {
@@ -218,29 +273,38 @@ function Validate() {
         return false;
     }
 
-    if ($("#id-date-picker-1").val().trim().length <= 0) {
-        alert("Please enter From Date.");
-        $("#id-date-picker-1").focus();
-        return false;
+    if ($("#selCharts-button .ui-selectmenu-text").html() == "YTD") {
+        if ($("#id-date-picker-1").val().trim().length <= 0) {
+            alert("Please select From Date.");
+            $("#id-date-picker-1").focus();
+            return false;
+        }
+
+        if ($("#id-date-picker-2").val().trim().length <= 0) {
+            alert("Please select To Date.");
+            $("#id-date-picker-2").focus();
+            return false;
+        }
+
+        var dayDiff = 0;
+        dayDiff = new Date($("#id-date-picker-2").datepicker('getDate')) - new Date($("#id-date-picker-1").datepicker('getDate'));
+
+        if (dayDiff < 0) {
+            alert("To date cannot be smaller than From date.");
+            return false;
+        }
+
+        if (dayDiff > 31449600000) {
+            alert("Please keep the date range less than or equal to 1 year.");
+            return false;
+        }
     }
-
-    if ($("#id-date-picker-2").val().trim().length <= 0) {
-        alert("Please enter To Date.");
-        $("#id-date-picker-2").focus();
-        return false;
-    }
-
-    var dayDiff = 0;
-    dayDiff = new Date($("#id-date-picker-2").datepicker('getDate')) - new Date($("#id-date-picker-1").datepicker('getDate'));
-
-    if (dayDiff < 0) {
-        alert("To date cannot be smaller than From date.");
-        return false;
-    }
-
-    if (dayDiff > 31449600000) {
-        alert("Please keep the date range less than or equal to 1 year.");
-        return false;
+    else {
+        if ($("#id-date-picker-mtd").val().trim().length <= 0) {
+            alert("Please select Date.");
+            $("#id-date-picker-mtd").focus();
+            return false;
+        }
     }
 
     return true;

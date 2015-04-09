@@ -53,6 +53,11 @@
         height: 27px;
         margin: 5px;
     }
+
+    #dialog-googlemap .ui-autocomplete{
+        height: 350px;
+        overflow: scroll;
+    }
 </style>
 
 <div class="row">
@@ -278,12 +283,10 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            Area: <input type="text" class="popup-textbox" style="width: 140px;" />
-                            Suburb: <input type="text" class="popup-textbox" style="width: 140px;" />
-                            Postcode: <input type="text" class="popup-textbox" style="width: 80px;" />
-                            Tech: <input type="text" class="popup-textbox" style="width: 120px;" />
-                            Date From: <input type="text" class="popup-textbox" style="width: 100px;" />
-                            Date To: <input type="text" class="popup-textbox" style="width: 100px;" />
+                            Area: <input id="txtArea" type="text" class="popup-textbox" style="width: 140px;" />
+                            Tech: <input id="txtTech" type="text" class="popup-textbox" style="width: 120px;" />
+                            Date From: <input id="txtFromDate" type="text" class="popup-textbox" style="width: 120px;" />
+                            Date To: <input id="txtToDate" type="text" class="popup-textbox" style="width: 120px;" />
 
                             <button class="btn btn-xs btn-success" id="btnSearchBookedJobs" style="margin-left: 10px;">
                                 <i class="ace-icon fa fa-search bigger-110"></i>
@@ -301,7 +304,7 @@
                                 </div>
 
                                 <div class="widget-body" id="bookedJobsList">
-                                    <div id="divJoblist" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;">
+                                    <div id="divJobList" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;">
                                         <div class="jobListItem">
                                             <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
                                             <br />
@@ -387,11 +390,43 @@
 <script>
 
     $("#btnSearchBookedJobs").click(function () {
-        $("#spanNumberOfJobs").html("(12)");
-        $("#bookedJobsList").show();
+        var html = "";
+        var FromDate = $("#txtFromDate").val();
+        var ToDate = $("#txtToDate").val();
+
+        $.ajax({
+            url: $("#hdnSiteURL").val() + "/SPBoard/GetBookedJobList",
+            type: "POST",
+            data: { fromDate: FromDate, toDate: ToDate, area: $("#txtArea").val(), suburb: "", postCode: "", tech: $("#txtTech").val() },
+            dataType: "JSON",
+            success: function (data) {
+                if (data != null) {
+                    $("#spanNumberOfJobs").html("(" + data.length + ")");
+                    $("#bookedJobsList").show();
+
+                    $.each(data, function (i, job) {
+                        html += '<div class="jobListItem">';
+                        html += '<a style="cursor: pointer;">' + job.Address + '</a><br />';
+                        html += job.CustomerName + '</div>';
+                    });
+
+                    $("#divJobList").html(html);
+                }
+                else {
+                    $("#spanNumberOfJobs").html("(0)");
+                    $("#divJobList").html("");
+                }
+            },
+            error: function (request) {
+                $("#spanNumberOfJobs").html("(0)");
+                $("#divJobList").html("");
+            }
+        });
     });
 
-    $(".jobListItem a").click(function () {
+    $('.jobListItem').on('click', 'a', function () {
+
+        alert("OK");
 
         var map;
         var address = $(this).html();
@@ -541,8 +576,56 @@
         //    label: "percentage"
         //});
 
-        LoadAJAXResourceUtilizationOneDayPerTech();
+        var areas = @Html.Raw(Json.Encode(ViewBag.Areas))
+        
+        $("#txtArea").autocomplete({
+            source: areas.split(','),
+            appendTo: "#dialog-googlemap"
+        });
 
+        var techs = @Html.Raw(Json.Encode(ViewBag.Techs))
+
+        $("#txtTech").autocomplete({
+            source: techs.split(','),
+            appendTo: "#dialog-googlemap"
+        });
+
+        $('#txtFromDate').datepicker({
+            dateFormat: "dd MM, yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
+            onSelect: function (date) {
+                if ($("#txtToDate").datepicker('getDate') == null) {
+                    $('#txtToDate').datepicker("setDate", $("#txtFromDate").datepicker('getDate'));
+                }
+            }
+        })
+
+        $('#txtToDate').datepicker({
+            dateFormat: "dd MM, yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            altFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: (new Date().getFullYear() - 5) + ':' + (new Date().getFullYear() + 2),
+            onSelect: function (date) {
+                var dayDiff = 0;
+                dayDiff = new Date($("#txtToDate").datepicker('getDate')) - new Date($("#txtFromDate").datepicker('getDate'));
+
+                if (dayDiff < 0) {
+                    alert("To date cannot be smaller than From date.");
+                    $("#txtToDate").val("");
+                    return;
+                }
+            }
+        })
+
+        LoadAJAXResourceUtilizationOneDayPerTech();
         GetGoogleMapLocation($('#googleMap'), 4, true, true);
 
         $("#vmore-googlemap").on('click', function (e) {
@@ -567,7 +650,7 @@
 
             GetGoogleMapLocation($('#googleMap-dialog'), 4, true, true);
             $("#ui-id-1").html("<i class='ace-icon fa fa-star orange'></i> Booked Jobs");
-            google.maps.event.trigger(map, 'resize');
+            //google.maps.event.trigger(map, 'resize');
         });
     });
 

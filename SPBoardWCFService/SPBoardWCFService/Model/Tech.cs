@@ -9,6 +9,8 @@ namespace SPBoardWCFService.Model
     public class Tech
     {
         [DataMember]
+        public int Sequence { get; set; }
+        [DataMember]
         public string TechName { get; set; }
     }
 }

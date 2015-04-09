@@ -42,19 +42,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Progress.Messages, Version=10.1.2.36659, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150401\Progress.Messages.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150409\Progress.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Progress.o4glrt, Version=10.1.2.36775, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150401\Progress.o4glrt.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150409\Progress.o4glrt.dll</HintPath>
     </Reference>
     <Reference Include="Progress.ssl, Version=10.1.2.36736, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150401\Progress.ssl.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150409\Progress.ssl.dll</HintPath>
     </Reference>
-    <Reference Include="SPBoard, Version=2.0.5549.24203, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SPBoard, Version=2.0.5577.29021, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\References - .NET\20150401\SPBoard.dll</HintPath>
+      <HintPath>..\..\..\..\References - .NET\20150409\SPBoard.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -87,7 +87,7 @@
     <Compile Include="Model\ChartLegend.cs" />
     <Compile Include="Model\ComboClass.cs" />
     <Compile Include="Model\InvoiceType.cs" />
-    <Compile Include="Model\JobSummary.cs" />
+    <Compile Include="Model\Job.cs" />
     <Compile Include="Model\JobSummaryAll.cs" />
     <Compile Include="Model\PostCode.cs" />
     <Compile Include="Model\ResourceUtilization.cs" />

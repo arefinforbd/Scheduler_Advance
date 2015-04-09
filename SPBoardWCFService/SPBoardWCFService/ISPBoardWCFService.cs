@@ -37,6 +37,9 @@ namespace SPBoardWCFService
         ResourceUtilization GetResourceUtilizationOneDayPerTech(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, bool Stacked = true);
 
         [OperationContract]
-        ResourceUtilization GetBookedJobsSummary(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate);
+        List<Job> GetBookedJobsInfo(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate);
+
+        [OperationContract]
+        List<Job> GetBookedJobList(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Suburb, string PostCode, string Tech);
     }
 }
