@@ -504,7 +504,7 @@ namespace SPBoardWCFService
             }
         }
 
-        public List<Job> GetBookedJobList(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Suburb, string PostCode, string Tech)
+        public List<Job> GetBookedJobList(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Tech)
         {
             Job job;
             DataSet dsJobs;
@@ -517,7 +517,7 @@ namespace SPBoardWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
-                message = sboard.ws_getJbDtl(Level4ID, FromDate, ToDate, Area, Suburb, PostCode, Tech, out jobsDataset);
+                message = sboard.ws_getJbDtl(Level4ID, FromDate, ToDate, Area, Tech, out jobsDataset);
                 dsJobs = (DataSet)jobsDataset;
 
                 if (dsJobs != null && dsJobs.Tables["tt_jobList_detail"].Rows.Count > 0)

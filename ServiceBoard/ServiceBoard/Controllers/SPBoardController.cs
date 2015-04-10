@@ -435,12 +435,12 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetBookedJobList(DateTime fromDate, DateTime toDate, string area, string suburb, string postCode, string tech)
+        public ActionResult GetBookedJobList(DateTime fromDate, DateTime toDate, string area, string tech)
         {
             List<Job> jobs = new List<Job>();
             SPBoardRepository repository = new SPBoardRepository();
 
-            jobs = repository.GetBookedJobList(fromDate, toDate, area, suburb, postCode, tech);
+            jobs = repository.GetBookedJobList(fromDate, toDate, area, tech);
 
             if (jobs != null && jobs.Count > 0)
                 return Json(jobs, JsonRequestBehavior.AllowGet);

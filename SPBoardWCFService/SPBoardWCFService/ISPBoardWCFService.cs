@@ -40,6 +40,6 @@ namespace SPBoardWCFService
         List<Job> GetBookedJobsInfo(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate);
 
         [OperationContract]
-        List<Job> GetBookedJobList(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Suburb, string PostCode, string Tech);
+        List<Job> GetBookedJobList(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Tech);
     }
 }

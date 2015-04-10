@@ -285,8 +285,8 @@
                         <div class="col-lg-12">
                             Area: <input id="txtArea" type="text" class="popup-textbox" style="width: 140px;" />
                             Tech: <input id="txtTech" type="text" class="popup-textbox" style="width: 120px;" />
-                            Date From: <input id="txtFromDate" type="text" class="popup-textbox" style="width: 120px;" />
-                            Date To: <input id="txtToDate" type="text" class="popup-textbox" style="width: 120px;" />
+                            Date From: <input id="txtFromDate" type="text" class="popup-textbox" style="width: 120px;" placeholder="Select Date" />
+                            Date To: <input id="txtToDate" type="text" class="popup-textbox" style="width: 120px;" placeholder="Select Date" />
 
                             <button class="btn btn-xs btn-success" id="btnSearchBookedJobs" style="margin-left: 10px;">
                                 <i class="ace-icon fa fa-search bigger-110"></i>
@@ -390,6 +390,27 @@
 <script>
 
     $("#btnSearchBookedJobs").click(function () {
+
+        if ($("#txtFromDate").val().trim().length <= 0) {
+            alert("Please select From Date.");
+            $("#txtFromDate").focus();
+            return false;
+        }
+
+        if ($("#txtToDate").val().trim().length <= 0) {
+            alert("Please select To Date.");
+            $("#txtToDate").focus();
+            return false;
+        }
+
+        var dayDiff = 0;
+        dayDiff = new Date($("#txtToDate").datepicker('getDate')) - new Date($("#txtFromDate").datepicker('getDate'));
+
+        if (dayDiff < 0) {
+            alert("To date cannot be smaller than From date.");
+            return false;
+        }
+
         var html = "";
         var FromDate = $("#txtFromDate").val();
         var ToDate = $("#txtToDate").val();
@@ -397,7 +418,7 @@
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/GetBookedJobList",
             type: "POST",
-            data: { fromDate: FromDate, toDate: ToDate, area: $("#txtArea").val(), suburb: "", postCode: "", tech: $("#txtTech").val() },
+            data: { fromDate: FromDate, toDate: ToDate, area: $("#txtArea").val(), tech: $("#txtTech").val() },
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
@@ -424,9 +445,7 @@
         });
     });
 
-    $('.jobListItem').on('click', 'a', function () {
-
-        alert("OK");
+    $(document.body).on('click', '#divJobList div.jobListItem a', function () {
 
         var map;
         var address = $(this).html();
@@ -441,24 +460,27 @@
         var pinColors = ['green-dot.png', 'red-dot.png', 'blue-dot.png', 'red-dot.png', 'green-dot.png'];
 
         $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=true', null, function (data) {
+            if (data.status == "OK"){
+                var p = data.results[0].geometry.location
+                var latlng = new google.maps.LatLng(p.lat, p.lng);
+                var bookedDate = (new Date().getDate()) + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
+                var tooltipText = "Address: <span style='font-weight: bold;'>" + address + "</span><br/>Booked on: <span style='font-weight: bold;'>" + bookedDate + "</span><br/>Booked by: <span style='font-weight: bold;'>William factory</span>";
 
-            var p = data.results[0].geometry.location
-            var latlng = new google.maps.LatLng(p.lat, p.lng);
-            var bookedDate = (new Date().getDate()) + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
-            var tooltipText = "Address: <span style='font-weight: bold;'>" + address + "</span><br/>Booked on: <span style='font-weight: bold;'>" + bookedDate + "</span><br/>Booked by: <span style='font-weight: bold;'>William factory</span>";
+                infowindow.close();
+                map.setCenter(new google.maps.LatLng(p.lat, p.lng));
 
-            infowindow.close();
-            map.setCenter(new google.maps.LatLng(p.lat, p.lng));
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    icon: pinIconUrl + pinColors[0]
+                });
 
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                icon: pinIconUrl + pinColors[0]
-            });
-
-            infowindow.setContent(tooltipText);
-            infowindow.open(map, marker);
-        });
+                infowindow.setContent(tooltipText);
+                infowindow.open(map, marker);
+            }
+            else
+                alert("Address Not Found. Please check again.");
+        })
     });
 
     function GetGoogleMapLocation(googlemap, zoomLevel, showTooltip, showLabel) {
@@ -629,6 +651,11 @@
         GetGoogleMapLocation($('#googleMap'), 4, true, true);
 
         $("#vmore-googlemap").on('click', function (e) {
+
+            $("#txtArea").val("[ALL]");
+            $("#txtTech").val("[ALL]");
+            $("#txtFromDate").val("");
+            $("#txtToDate").val("");
 
             var dialog = $("#dialog-googlemap").removeClass('hide').dialog({
                 modal: true,
