@@ -46,7 +46,7 @@
     
     .jobListItem {
         border-bottom: 1px dotted #CCCCCC;
-        padding-bottom: 8px;
+        padding: 4px 0 8px 0;
     }
 
     .popup-textbox {
@@ -299,13 +299,13 @@
                             <div class="widget-box transparent" style="margin: 0px; border: 1px solid #CCCCCC; padding-bottom: 15px;">
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
-                                        Searched Jobs <span id="spanNumberOfJobs">(0)</span>
+                                        Searched Jobs (<span id="spanNumberOfJobs">0</span>)
                                     </h4>
                                 </div>
 
                                 <div class="widget-body" id="bookedJobsList">
                                     <div id="divJobList" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;">
-                                        <div class="jobListItem">
+                                        @*<div class="jobListItem">
                                             <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
                                             <br />
                                             William Factory
@@ -326,45 +326,10 @@
                                             William Factory
                                         </div>
                                         <div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
                                             <a style="cursor: pointer;">329 Elizabeth Street, Surry Hills, NSW 2010</a>
                                             <br />
                                             William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">111 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -415,6 +380,8 @@
         var FromDate = $("#txtFromDate").val();
         var ToDate = $("#txtToDate").val();
 
+        $("#divJobList").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loader-bar.gif' />");
+
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/GetBookedJobList",
             type: "POST",
@@ -422,25 +389,30 @@
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
-                    $("#spanNumberOfJobs").html("(" + data.length + ")");
+                    $("#spanNumberOfJobs").html(data.length);
                     $("#bookedJobsList").show();
 
                     $.each(data, function (i, job) {
                         html += '<div class="jobListItem">';
                         html += '<a style="cursor: pointer;">' + job.Address + '</a><br />';
-                        html += job.CustomerName + '</div>';
+                        html += '<b>Tech: </b>' + job.Tech + '<br/>';
+                        html += '<b>Client: </b>' + job.CustomerName + '<br/>';
+                        html += '<b>Job Date: </b>' + ToDateTimeString(job.JobDate) + '<br/>';
+                        html += '<b>Job Status: </b>' + job.Status + '</div>';
                     });
 
                     $("#divJobList").html(html);
                 }
                 else {
-                    $("#spanNumberOfJobs").html("(0)");
+                    $("#spanNumberOfJobs").html("0");
                     $("#divJobList").html("");
+                    //alert("No job found. Try again with other criteria.");
                 }
             },
             error: function (request) {
-                $("#spanNumberOfJobs").html("(0)");
+                $("#spanNumberOfJobs").html("0");
                 $("#divJobList").html("");
+                alert("No job found. Try again with other criteria.");
             }
         });
     });
@@ -587,6 +559,26 @@
         });
     }
 
+    function LoadNumbersByPostCode() {
+
+        $.ajax({
+            url: $("#hdnSiteURL").val() + "/SPBoard/GetJobNumberByPostCode",
+            type: "POST",
+            data: {},
+            dataType: "JSON",
+            success: function (data) {
+                if (data != null) {
+                    $.each(data, function (i, job) {
+                        statePostCode.push(job.StatePostCode);
+                        numbersOfJobs.push(job.NumbersOfJob);
+                    });
+                }
+            },
+            error: function (request) {
+            }
+        });
+    }
+
     $(function () {
 
         //var g = new JustGage({
@@ -656,6 +648,8 @@
             $("#txtTech").val("[ALL]");
             $("#txtFromDate").val("");
             $("#txtToDate").val("");
+            $("#divJobList").html("");
+            $("#spanNumberOfJobs").html("0");
 
             var dialog = $("#dialog-googlemap").removeClass('hide').dialog({
                 modal: true,

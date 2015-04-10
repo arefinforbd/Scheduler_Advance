@@ -307,3 +307,12 @@ function FormatCustomDate(datevalue) {
 
     return finalDate;
 }
+
+function ToDateTimeString(dateTime) {
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    var convertedDate = new Date(parseInt(dateTime.replace("/Date(", "").replace(")/", "")))
+
+    return (convertedDate.getDate() + " " + monthNames[convertedDate.getMonth()] + ", " + convertedDate.getFullYear());
+}

@@ -194,6 +194,7 @@
     <Content Include="Content\css\select2x2.png" />
     <Content Include="Content\css\ui.jqgrid.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\ajax-loader-bar.gif" />
     <Content Include="Content\images\email1.png" />
     <Content Include="Content\images\email2.png" />
     <Content Include="Content\images\email3.png" />

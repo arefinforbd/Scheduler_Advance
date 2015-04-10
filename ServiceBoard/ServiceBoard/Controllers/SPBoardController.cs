@@ -435,6 +435,29 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
+        public ActionResult GetJobNumberByPostCode()
+        {
+            List<Job> jobs = new List<Job>();
+            SPBoardRepository repository = new SPBoardRepository();
+
+            jobs = repository.GetBookedJobsInfo(DateTime.Today.AddYears(-1), DateTime.Today);
+                
+            if (jobs != null && jobs.Count > 0)
+            {
+                var jobNumbers = jobs.GroupBy(j => new { PostCode = j.PostCode })
+                                .Select(group => new
+                                {
+                                    StatePostCode = (group.First().State + "-" + group.First().PostCode),
+                                    NumbersOfJob = group.Count()
+                                }).ToList();
+
+                return Json(jobNumbers, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult GetBookedJobList(DateTime fromDate, DateTime toDate, string area, string tech)
         {
             List<Job> jobs = new List<Job>();

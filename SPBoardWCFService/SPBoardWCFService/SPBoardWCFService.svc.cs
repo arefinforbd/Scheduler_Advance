@@ -494,6 +494,12 @@ namespace SPBoardWCFService
 
                         jobs.Add(job);
                     }
+
+                    //var jobNumbers = jobs.GroupBy(j => new { PostCode = j.PostCode })
+                    //                .Select(group => new
+                    //                {
+                    //                    NumbersOfJob = group.Count(), PCode = group.First().PostCode
+                    //                }).ToList();
                 }
 
                 return jobs;
