@@ -440,7 +440,7 @@ namespace ServiceBoard.Controllers
             List<Job> jobs = new List<Job>();
             SPBoardRepository repository = new SPBoardRepository();
 
-            jobs = repository.GetBookedJobsInfo(DateTime.Today.AddYears(-1), DateTime.Today);
+            jobs = repository.GetBookedJobsInfo(DateTime.Today.AddMonths(-3), DateTime.Today);
                 
             if (jobs != null && jobs.Count > 0)
             {

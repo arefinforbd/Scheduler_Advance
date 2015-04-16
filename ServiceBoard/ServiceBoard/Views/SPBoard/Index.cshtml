@@ -304,33 +304,7 @@
                                 </div>
 
                                 <div class="widget-body" id="bookedJobsList">
-                                    <div id="divJobList" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;">
-                                        @*<div class="jobListItem">
-                                            <a style="cursor: pointer;">1 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">97 Eastern Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">22 Trentino Road, Turramurra, NSW 2074</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">208 Coward Street, Mascot, NSW 2020</a>
-                                            <br />
-                                            William Factory
-                                        </div>
-                                        <div class="jobListItem">
-                                            <a style="cursor: pointer;">329 Elizabeth Street, Surry Hills, NSW 2010</a>
-                                            <br />
-                                            William Factory
-                                        </div>*@
-                                    </div>
+                                    <div id="divJobList" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -353,6 +327,10 @@
 <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.stack.js")"></script>
 
 <script>
+
+    var index = 0;
+    var statePostCode = [];
+    var numbersOfJobs = [];
 
     $("#btnSearchBookedJobs").click(function () {
 
@@ -395,10 +373,10 @@
                     $.each(data, function (i, job) {
                         html += '<div class="jobListItem">';
                         html += '<a style="cursor: pointer;">' + job.Address + '</a><br />';
-                        html += '<b>Tech: </b>' + job.Tech + '<br/>';
-                        html += '<b>Client: </b>' + job.CustomerName + '<br/>';
-                        html += '<b>Job Date: </b>' + ToDateTimeString(job.JobDate) + '<br/>';
-                        html += '<b>Job Status: </b>' + job.Status + '</div>';
+                        html += '<b>Tech: </b><span class="spanTech">' + job.Tech + '</span><br/>';
+                        html += '<b>Client: </b><span class="spanClient">' + job.CustomerName + '</span><br/>';
+                        html += '<b>Job Date: </b><span class="spanJobDate">' + ToDateTimeString(job.JobDate) + '</span><br/>';
+                        html += '<b>Job Status: </b><span class="spanJobStatus">' + job.Status + '</span></div>';
                     });
 
                     $("#divJobList").html(html);
@@ -430,13 +408,27 @@
         var infowindow = new google.maps.InfoWindow();
         var pinIconUrl = 'http://maps.google.com/mapfiles/ms/icons/';
         var pinColors = ['green-dot.png', 'red-dot.png', 'blue-dot.png', 'red-dot.png', 'green-dot.png'];
+        var statuses = ["Checked", "Booked", "Assign", "Complete", "Quote"];
+
+        $("#divJobList .jobListItem").each(function () {
+            $(this).css("background-color", "#FFFFFF");
+        });
+
+        var divJobItem = $(this).parent();
+        divJobItem.css("background-color", "#EEEEEE");
 
         $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=true', null, function (data) {
-            if (data.status == "OK"){
+            if (data.status == "OK") {
+                var statusText = divJobItem.find(".spanJobStatus").text();
                 var p = data.results[0].geometry.location
                 var latlng = new google.maps.LatLng(p.lat, p.lng);
                 var bookedDate = (new Date().getDate()) + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
-                var tooltipText = "Address: <span style='font-weight: bold;'>" + address + "</span><br/>Booked on: <span style='font-weight: bold;'>" + bookedDate + "</span><br/>Booked by: <span style='font-weight: bold;'>William factory</span>";
+
+                var tooltipText = "Address: <span style='font-weight: bold;'>" + address + "</span><br/>";
+                tooltipText += "Tech: <span style='font-weight: bold;'>" + divJobItem.find(".spanTech").text() + "</span><br/>";
+                tooltipText += "Client: <span style='font-weight: bold;'>" + divJobItem.find(".spanClient").text() + "</span><br/>";
+                tooltipText += "Job Date: <span style='font-weight: bold;'>" + divJobItem.find(".spanJobDate").text() + "</span><br/>";
+                tooltipText += "Status: <span style='font-weight: bold;'>" + statusText + "</span>";
 
                 infowindow.close();
                 map.setCenter(new google.maps.LatLng(p.lat, p.lng));
@@ -444,7 +436,7 @@
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: map,
-                    icon: pinIconUrl + pinColors[0]
+                    icon: pinIconUrl + pinColors[statuses.indexOf(statusText)]
                 });
 
                 infowindow.setContent(tooltipText);
@@ -455,79 +447,71 @@
         })
     });
 
+    function MapMaker(map, statePostCode, infowindow) {
+
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + statePostCode + '&sensor=true', null, function (data) {
+
+            var p = data.results[0].geometry.location
+            var latlng = new google.maps.LatLng(p.lat, p.lng);
+            var tooltipText = "Address: <span style='font-weight: bold;'>" + statePostCode + "</span>";
+
+            infowindow.close();
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Click to get info'
+            });
+
+            var labelText = "<div style='background-color: yellow;'>" + numbersOfJobs[index] + "</div>";
+
+            var labelOption = {
+                content: labelText
+                        , boxStyle: {
+                            border: "1px solid black"
+                            , textAlign: "center"
+                            , fontSize: "8pt"
+                            , width: "20px"
+                        }
+                , disableAutoPan: true
+                , pixelOffset: new google.maps.Size(-10, 0)
+                , position: latlng
+                , closeBoxURL: ""
+                , isHidden: false
+                , pane: "mapPane"
+                , enableEventPropagation: true
+            };
+
+            var ibLabel = new InfoBox(labelOption);
+            ibLabel.open(map, marker);
+
+            var getMapClickListener = function (m) {
+                return function () {
+                    infowindow.setContent(tooltipText);
+                    infowindow.open(m, marker);
+                };
+            };
+
+            google.maps.event.addListener(marker, 'click', getMapClickListener(map));
+            index++;
+        });
+    }
+
     function GetGoogleMapLocation(googlemap, zoomLevel, showTooltip, showLabel) {
         var map;
-        var index = 0;
 
         var myOptions = {
             zoom: zoomLevel,
             center: new google.maps.LatLng(-29.908451, 133.150296),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-
         map = new google.maps.Map(googlemap[0], myOptions);
         var infowindow = new google.maps.InfoWindow();
 
-        //var addresses = ['1 Trentino Road, Turramurra, NSW 2074', '208 Coward Street, Mascot, NSW 2020', '37, Britannina Drive, Glenfield, NSW 2164'];
-        var addresses = ['NSW 2074', 'NSW 2020', 'NSW 2167', 'VIC 3000', 'WA 6000'];
-        var pinIconUrl = 'http://maps.google.com/mapfiles/ms/icons/';
-        var pinColors = ['green-dot.png', 'red-dot.png', 'blue-dot.png', 'red-dot.png', 'green-dot.png'];
-
-        for (var x = 0; x < addresses.length; x++) {
-            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addresses[x] + '&sensor=true', null, function (data) {
-
-                var p = data.results[0].geometry.location
-                var latlng = new google.maps.LatLng(p.lat, p.lng);
-                var bookedDate = (new Date().getDate() - index) + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear();
-                var tooltipText = "Address: <span style='font-weight: bold;'>" + addresses[index] + "</span><br/>Booked on: <span style='font-weight: bold;'>" + bookedDate + "</span><br/>Booked by: <span style='font-weight: bold;'>William factory</span>";
-
-                infowindow.close();
-                //map.setCenter(new google.maps.LatLng(p.lat, p.lng));
-
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    title: showTooltip == true ? 'Click to get info' : "",
-                    icon: pinIconUrl + pinColors[index]
-                });
-
-                if (showLabel) {
-                    var labelText = "<div style='background-color: yellow;'>" + (10 * (index + 1)) + "</div>";
-
-                    var labelOption = {
-                        content: labelText
-                                , boxStyle: {
-                                    border: "1px solid black"
-                                  , textAlign: "center"
-                                  , fontSize: "8pt"
-                                  , width: "20px"
-                                }
-                        , disableAutoPan: true
-                        , pixelOffset: new google.maps.Size(-10, 0)
-                        , position: latlng
-                        , closeBoxURL: ""
-                        , isHidden: false
-                        , pane: "mapPane"
-                        , enableEventPropagation: true
-                    };
-
-                    var ibLabel = new InfoBox(labelOption);
-                    ibLabel.open(map, marker);
-                }
-
-                var getMapClickListener = function (m) {
-                    return function () {
-                        if (showTooltip) {
-                            infowindow.setContent(tooltipText);
-                            infowindow.open(m, marker);
-                        }
-                    };
-                };
-
-                google.maps.event.addListener(marker, 'click', getMapClickListener(map));
-                index++;
-            });
+        for (var x = 0; x < statePostCode.length; x++) {
+            setTimeout(MapMaker(map, statePostCode[x], infowindow), 5000);
         }
+        index = 0;
     }
 
     function LoadAJAXResourceUtilizationOneDayPerTech() {
@@ -572,6 +556,7 @@
                         statePostCode.push(job.StatePostCode);
                         numbersOfJobs.push(job.NumbersOfJob);
                     });
+                    GetGoogleMapLocation($('#googleMap'), 4, true, true);
                 }
             },
             error: function (request) {
@@ -590,6 +575,7 @@
         //    label: "percentage"
         //});
 
+        LoadNumbersByPostCode();
         var areas = @Html.Raw(Json.Encode(ViewBag.Areas))
         
         $("#txtArea").autocomplete({
@@ -640,7 +626,6 @@
         })
 
         LoadAJAXResourceUtilizationOneDayPerTech();
-        GetGoogleMapLocation($('#googleMap'), 4, true, true);
 
         $("#vmore-googlemap").on('click', function (e) {
 

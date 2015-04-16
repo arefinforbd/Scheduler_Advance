@@ -385,7 +385,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\SPBoard\Index.cshtml" />
     <Content Include="Views\SPBoard\Widgets.cshtml" />
-    <Content Include="Views\SPBoard\Index_Old.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\SPBoard\SalesAnalysisByCategoryDetail.cshtml" />
     <Content Include="Views\SPBoard\DebtorAnalysisDetail.cshtml" />
