@@ -486,7 +486,7 @@ namespace SPBoardWCFService
                     {
                         job = new Job();
 
-                        job.PostCode = row["tt_jl_postCode"].ToString();
+                        job.PostCode = row["tt_jl_postCode"].ToString() + " Australia";
                         job.State = row["tt_jl_state"].ToString();
                         job.JobDate = Convert.ToDateTime(row["tt_jl_date"]);
                         job.JobNumber = Convert.ToInt32(row["tt_jl_jobNum"]);
@@ -494,12 +494,6 @@ namespace SPBoardWCFService
 
                         jobs.Add(job);
                     }
-
-                    //var jobNumbers = jobs.GroupBy(j => new { PostCode = j.PostCode })
-                    //                .Select(group => new
-                    //                {
-                    //                    NumbersOfJob = group.Count(), PCode = group.First().PostCode
-                    //                }).ToList();
                 }
 
                 return jobs;

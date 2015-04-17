@@ -292,10 +292,18 @@
                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                 Search
                             </button>
+                            <button class="btn btn-xs btn-success" id="btnTableSlide" style="margin-left: 10px;">
+                                <i class="ace-icon fa fa-search bigger-110"></i>
+                                Table Slide
+                            </button>
+                            <button class="btn btn-xs btn-success" id="btnMapSlide" style="margin-left: 10px;">
+                                <i class="ace-icon fa fa-search bigger-110"></i>
+                                Map Slide
+                            </button>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px;">
-                        <div class="col-lg-3 col-sm-3" style="padding-left:7px;padding-right:5px;">
+                        <div class="col-lg-3 col-sm-3" style="padding-left:7px;padding-right:5px;" id="leftJobs">
                             <div class="widget-box transparent" style="margin: 0px; border: 1px solid #CCCCCC; padding-bottom: 15px;">
                                 <div class="widget-header widget-header-flat">
                                     <h4 class="widget-title lighter">
@@ -308,7 +316,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-sm-9" style="padding-left: 0px; padding-right: 8px;">
+                        <div class="col-lg-9 col-sm-9" style="padding-left: 0px; padding-right: 8px;" id="rightMap">
                             <div id="googleMap-dialog" style="height:450px;width:890px;"></div>
                         </div>
                     </div>
@@ -328,9 +336,57 @@
 
 <script>
 
+    var map;
     var index = 0;
     var statePostCode = [];
     var numbersOfJobs = [];
+
+    var myOptions = {
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("googleMap-dialog"), myOptions);
+
+    $("#btnTableSlide").click(function () {
+        $("#rightMap").fadeOut(500);
+        $("#leftJobs").delay(500).animate(
+            { width: "100%" },
+            {
+                duration: 1500,
+                specialEasings: 'linear'
+            }
+        );
+    });
+
+    $("#btnMapSlide").click(function () {
+        //var center = new google.maps.LatLng(-29.908451, 133.150296);
+        //google.maps.event.trigger(map, 'resize');
+        
+
+        $("#leftJobs .widget-header .widget-title").fadeOut(300);
+        $("#leftJobs").animate({ width: 'toggle' }, 850);
+        $("#rightMap").delay(500).animate(
+            { width: "100%" },
+            {
+                duration: 1500,
+                specialEasings: 'linear'
+            }
+        );
+
+        $("#googleMap-dialog").delay(500).animate(
+            { width: "100%" },
+            {
+                duration: 1500,
+                specialEasings: 'linear'
+            }
+        );
+        
+        //google.maps.event.trigger(map, 'resize');
+        //map.checkResize();
+        //map.setCenter(center);
+        map.setZoom(5);
+    });
 
     $("#btnSearchBookedJobs").click(function () {
 
@@ -397,9 +453,8 @@
 
     $(document.body).on('click', '#divJobList div.jobListItem a', function () {
 
-        var map;
         var address = $(this).html();
-        var myOptions = {
+        myOptions = {
             zoom: 17,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -498,9 +553,8 @@
     }
 
     function GetGoogleMapLocation(googlemap, zoomLevel, showTooltip, showLabel) {
-        var map;
 
-        var myOptions = {
+        myOptions = {
             zoom: zoomLevel,
             center: new google.maps.LatLng(-29.908451, 133.150296),
             mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -655,7 +709,7 @@
             });
 
             GetGoogleMapLocation($('#googleMap-dialog'), 4, true, true);
-            $("#ui-id-1").html("<i class='ace-icon fa fa-star orange'></i> Booked Jobs");
+            $("#ui-id-3").html("<i class='ace-icon fa fa-star orange'></i> Booked Jobs");
             //google.maps.event.trigger(map, 'resize');
         });
     });
