@@ -359,20 +359,10 @@
         );
     });
 
-    $("#btnMapSlide").click(function () {
-        //var center = new google.maps.LatLng(-29.908451, 133.150296);
-        //google.maps.event.trigger(map, 'resize');
-        
+    $("#btnMapSlide").click(function () {        
 
         $("#leftJobs .widget-header .widget-title").fadeOut(300);
         $("#leftJobs").animate({ width: 'toggle' }, 850);
-        $("#rightMap").delay(500).animate(
-            { width: "100%" },
-            {
-                duration: 1500,
-                specialEasings: 'linear'
-            }
-        );
 
         $("#googleMap-dialog").delay(500).animate(
             { width: "100%" },
@@ -382,10 +372,12 @@
             }
         );
         
-        //google.maps.event.trigger(map, 'resize');
-        //map.checkResize();
-        //map.setCenter(center);
-        map.setZoom(5);
+        $('#rightMap').delay(500).animate({ width: '100%' },
+        {
+            progress: function ()
+            { google.maps.event.trigger(map, 'resize'); },
+            duration: 1500
+        });
     });
 
     $("#btnSearchBookedJobs").click(function () {
