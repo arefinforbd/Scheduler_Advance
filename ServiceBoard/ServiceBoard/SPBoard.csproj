@@ -195,6 +195,8 @@
     <Content Include="Content\css\ui.jqgrid.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\ajax-loader-bar.gif" />
+    <Content Include="Content\images\button-booked-jobs-map.png" />
+    <Content Include="Content\images\button-booked-jobs-text.png" />
     <Content Include="Content\images\email1.png" />
     <Content Include="Content\images\email2.png" />
     <Content Include="Content\images\email3.png" />
@@ -229,10 +231,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg%2523glyphicons_halflingsregular" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\opensans-light.woff" />
     <Content Include="Content\fonts\opensans-light.woff2" />
     <Content Include="Content\fonts\opensans.woff" />
