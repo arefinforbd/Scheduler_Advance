@@ -294,11 +294,11 @@
                             </button>
                             <button class="btn btn-xs btn-success" id="btnTableSlide" style="margin-left: 10px;">
                                 <i class="ace-icon fa fa-search bigger-110"></i>
-                                Table Slide
+                                Tabular Search
                             </button>
                             <button class="btn btn-xs btn-success" id="btnMapSlide" style="margin-left: 10px;">
                                 <i class="ace-icon fa fa-search bigger-110"></i>
-                                Map Slide
+                                Map Search
                             </button>
                         </div>
                     </div>
@@ -309,12 +309,12 @@
                                     <h4 class="widget-title lighter">
                                         Jobs (<span id="spanNumberOfJobs">0</span>)
                                     </h4>
-                                    <img src="@SPBoardHelper.GetSiteUrl()/Content/images/button-booked-jobs-map.png" style="width: 40px; float: right; cursor: pointer;" alt="Enlarge MAP" />
-                                    <img src="@SPBoardHelper.GetSiteUrl()/Content/images/button-booked-jobs-text.png" style="width: 40px; float: right; cursor: pointer;" alt="Enlarge TABLE" />
+                                    @*<img src="@SPBoardHelper.GetSiteUrl()/Content/images/button-booked-jobs-map.png" style="width: 40px; float: right; cursor: pointer;" alt="Enlarge MAP" />
+                                    <img src="@SPBoardHelper.GetSiteUrl()/Content/images/button-booked-jobs-text.png" style="width: 40px; float: right; cursor: pointer;" alt="Enlarge TABLE" />*@
                                 </div>
 
                                 <div class="widget-body" id="bookedJobsList">
-                                    <div id="divJobList" class="widget-main" style="height: 391px; overflow:auto; padding: 5px;"></div>
+                                    <div id="divJobList" class="widget-main" style="height: 394px; overflow:auto; padding: 5px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -351,70 +351,41 @@
     map = new google.maps.Map(document.getElementById("googleMap-dialog"), myOptions);
 
     $("#btnTableSlide").click(function () {
+        $("#rightMap").fadeOut(150);
+        if ($("#leftJobs").is(':visible') == false)
+            $("#leftJobs").delay(350).fadeIn(300);
 
-
-        if ($("#rightMap").is(":visible")) {
-            $("#rightMap").fadeToggle(500);
-            $("#leftJobs").delay(500).animate(
-                { width: "100%" },
-                {
-                    duration: 1500,
-                    specialEasings: 'linear'
-                }
-            );
-        }
-        else {
-            $("#leftJobs").animate(
-                { width: "25%" },
-                {
-                    duration: 1500,
-                    specialEasings: 'linear'
-                }
-            );
-            $("#rightMap").delay(1500).fadeToggle(500);
-        }
+        $("#leftJobs").delay(200).animate(
+            { width: "100%" },
+            {
+                duration: 1500,
+                specialEasings: 'linear'
+            }
+        );
     });
 
     $("#btnMapSlide").click(function () {
+        $("#leftJobs .widget-header .widget-title").fadeOut(300);
+        $("#leftJobs").animate({ width: '0px' }, 850);
+        $("#leftJobs").fadeOut(300);
 
-        if ($("#leftJobs").is(":visible")) {
-            $("#leftJobs .widget-header .widget-title").fadeOut(300);
-            $("#leftJobs").animate({ width: 'toggle' }, 850);
+        if ($("#rightMap").is(':visible') == false)
+            $("#rightMap").delay(1150).fadeIn(200);
 
-            $("#googleMap-dialog").delay(500).animate(
-                { width: "100%" },
-                {
-                    duration: 1500,
-                    specialEasings: 'linear'
-                }
-            );
-
-            $('#rightMap').delay(500).animate({ width: "100%" },
+        $("#googleMap-dialog").delay(500).animate(
+            { width: "100%" },
             {
-                progress: function ()
-                { google.maps.event.trigger(map, 'resize'); },
-                duration: 1500
-            });
-        }
-        else {
-            $("#googleMap-dialog").animate(
-                { width: "890px" },
-                {
-                    duration: 1500,
-                    specialEasings: 'linear'
-                }
-            );
+                duration: 1500,
+                specialEasings: 'linear'
+            }
+        );
 
-            $('#rightMap').animate({ width: "890px" },
-            {
-                progress: function ()
-                { google.maps.event.trigger(map, 'resize'); },
-                duration: 1500
-            });
-
-            $("#leftJobs").delay(1500).animate({ width: 'toggle' }, 1500);
-            $("#leftJobs .widget-header .widget-title").delay(2500).fadeIn(300);
-        }
+        $('#rightMap').delay(500).animate({ width: "100%" },
+        {
+            progress: function ()
+            { google.maps.event.trigger(map, 'resize'); },
+            duration: 1500
+        });
     });
 
     $("#btnSearchBookedJobs").click(function () {
