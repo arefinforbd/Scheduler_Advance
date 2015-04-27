@@ -26,7 +26,7 @@
     #flot-bar-chart3 .flot-text .flot-x-axis {
         margin: 5px 0 0 35px;
     }
-    
+
     .flot-chart-content {
         width: 100%;
         height: 100%;
@@ -40,10 +40,10 @@
         border: 1px solid #CCCCCC;
     }
 
-    .widget-box{
+    .widget-box {
         margin: 0px;
-    } 
-    
+    }
+
     .jobListItem {
         border-bottom: 1px dotted #CCCCCC;
         padding: 4px 0 8px 0;
@@ -54,9 +54,13 @@
         margin: 5px;
     }
 
-    #dialog-googlemap .ui-autocomplete{
+    #dialog-googlemap .ui-autocomplete {
         height: 350px;
         overflow: scroll;
+    }
+
+    .ui-datepicker{
+        width: 18em;
     }
 </style>
 
@@ -248,7 +252,7 @@
                             <canvas id="flot-line-chart" width="490" height="300"></canvas>
                         </div>
                         <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/DebtorAnalysisDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="margin-bottom: 10px; font-size:12px;">View More...</a>
-                        <br/><br />
+                        <br /><br />
                     </div>
                 </div>
             </div>
@@ -306,11 +310,9 @@
                         <div class="col-lg-3 col-sm-3" style="padding-left:7px;padding-right:5px;" id="leftJobs">
                             <div class="widget-box transparent" style="margin: 0px; border: 1px solid #CCCCCC; padding-bottom: 15px;">
                                 <div class="widget-header widget-header-flat">
-                                    <h4 class="widget-title lighter">
+                                    <h4 class="widget-title lighter" style="margin-left:5px;">
                                         Jobs (<span id="spanNumberOfJobs">0</span>)
                                     </h4>
-                                    @*<img src="@SPBoardHelper.GetSiteUrl()/Content/images/button-booked-jobs-map.png" style="width: 40px; float: right; cursor: pointer;" alt="Enlarge MAP" />
-                                    <img src="@SPBoardHelper.GetSiteUrl()/Content/images/button-booked-jobs-text.png" style="width: 40px; float: right; cursor: pointer;" alt="Enlarge TABLE" />*@
                                 </div>
 
                                 <div class="widget-body" id="bookedJobsList">
@@ -319,7 +321,7 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-sm-9" style="padding-left: 0px; padding-right: 8px;" id="rightMap">
-                            <div id="googleMap-dialog" style="height:450px;width:890px;"></div>
+                            <div id="googleMap-dialog" style="height:450px;width:100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -342,6 +344,7 @@
     var index = 0;
     var statePostCode = [];
     var numbersOfJobs = [];
+    var leftJobsDivWidth = 0;
 
     var myOptions = {
         zoom: 4,
@@ -350,8 +353,81 @@
 
     map = new google.maps.Map(document.getElementById("googleMap-dialog"), myOptions);
 
+    function Validate() {
+        if ($("#txtFromDate").val().trim().length <= 0) {
+            alert("Please select From Date.");
+            $("#txtFromDate").focus();
+            return false;
+        }
+
+        if ($("#txtToDate").val().trim().length <= 0) {
+            alert("Please select To Date.");
+            $("#txtToDate").focus();
+            return false;
+        }
+
+        var dayDiff = 0;
+        dayDiff = new Date($("#txtToDate").datepicker('getDate')) - new Date($("#txtFromDate").datepicker('getDate'));
+
+        if (dayDiff < 0) {
+            alert("To date cannot be smaller than From date.");
+            return false;
+        }
+
+        return true;
+    }
+
+    function LoadTabularData() {
+        var html = "";
+        var FromDate = $("#txtFromDate").val();
+        var ToDate = $("#txtToDate").val();
+
+        $("#divJobList").html("<img alt='' src='" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loader-bar.gif' />");
+
+        $.ajax({
+            url: $("#hdnSiteURL").val() + "/SPBoard/GetBookedJobList",
+            type: "POST",
+            data: { fromDate: FromDate, toDate: ToDate, area: $("#txtArea").val(), tech: $("#txtTech").val() },
+            dataType: "JSON",
+            success: function (data) {
+                if (data != null) {
+                    $("#spanNumberOfJobs").html(data.length);
+                    $("#bookedJobsList").show();
+
+                    html += '<table class="table table-striped table-bordered table-hover" id="datatablefiles" style="font-size: 12px;"><thead><tr><th>Address</th><th>Tech</th><th>Customer Name</th><th>Job date</th><th>Status</th></tr></thead><tbody>';
+
+                    $.each(data, function (i, job) {
+                        html += '<tr>';
+                        html += '<td>' + job.Address + '</td>';
+                        html += '<td>' + job.Tech + '</td>';
+                        html += '<td>' + job.CustomerName + '</td>';
+                        html += '<td>' + ToDateTimeString(job.JobDate) + '</td>';
+                        html += '<td>' + job.Status + '</td>';
+                        html += '</tr>';
+                    });
+
+                    $("#divJobList").html(html);
+                }
+                else {
+                    $("#spanNumberOfJobs").html("0");
+                    $("#divJobList").html("");
+                }
+            },
+            error: function (request) {
+                $("#spanNumberOfJobs").html("0");
+                $("#divJobList").html("");
+                alert("No job found. Try again with other criteria.");
+            }
+        });
+    }
+
     $("#btnTableSlide").click(function () {
-        $("#rightMap").fadeOut(150);
+
+        if (Validate() == false)
+            return;
+
+        $("#rightMap").fadeOut(300);
+        $("#leftJobs .widget-header .widget-title").fadeIn(200);
         if ($("#leftJobs").is(':visible') == false)
             $("#leftJobs").delay(350).fadeIn(300);
 
@@ -362,12 +438,24 @@
                 specialEasings: 'linear'
             }
         );
+
+        LoadTabularData();
+        $("#divJobList").delay(2000).fadeIn(500);
     });
 
     $("#btnMapSlide").click(function () {
+
+        if (Validate() == false)
+            return;
+
+        var FromDate = $("#txtFromDate").val();
+        var ToDate = $("#txtToDate").val();
+
         $("#leftJobs .widget-header .widget-title").fadeOut(300);
         $("#leftJobs").animate({ width: '0px' }, 850);
         $("#leftJobs").fadeOut(300);
+
+        LoadJobNumbersByPostCode(FromDate, ToDate, $('#googleMap-dialog'));
 
         if ($("#rightMap").is(':visible') == false)
             $("#rightMap").delay(1150).fadeIn(200);
@@ -390,25 +478,22 @@
 
     $("#btnSearchBookedJobs").click(function () {
 
-        if ($("#txtFromDate").val().trim().length <= 0) {
-            alert("Please select From Date.");
-            $("#txtFromDate").focus();
-            return false;
+        if (Validate() == false)
+            return;
+
+        var mapDelay = 0;
+        if ($("#leftJobs").width() > 1000) {
+            mapDelay = 1000;
         }
 
-        if ($("#txtToDate").val().trim().length <= 0) {
-            alert("Please select To Date.");
-            $("#txtToDate").focus();
-            return false;
-        }
-
-        var dayDiff = 0;
-        dayDiff = new Date($("#txtToDate").datepicker('getDate')) - new Date($("#txtFromDate").datepicker('getDate'));
-
-        if (dayDiff < 0) {
-            alert("To date cannot be smaller than From date.");
-            return false;
-        }
+        $("#leftJobs").animate(
+            { width: "25%" },
+            {
+                duration: 1000,
+                specialEasings: 'linear'
+            }
+        );
+        $("#rightMap").delay(mapDelay).fadeIn(300);
 
         var html = "";
         var FromDate = $("#txtFromDate").val();
@@ -448,6 +533,28 @@
                 $("#divJobList").html("");
                 alert("No job found. Try again with other criteria.");
             }
+        });
+
+        $("#leftJobs").delay(0).fadeIn(300);
+        $("#leftJobs .widget-header .widget-title").delay(0).fadeIn(300);
+
+        var leftJobsWidth = $("#leftJobs").width();
+        if ($("#leftJobs").width() == 0 || $("#leftJobs").width() > 1000) {
+            leftJobsWidth = leftJobsDivWidth;
+        }
+
+        $("#googleMap-dialog").delay(mapDelay).animate(
+            { width: (leftJobsWidth * 3.06) },
+            {
+                duration: 1000,
+                specialEasings: 'linear'
+            }
+        );
+
+        $('#rightMap').delay(mapDelay).animate({ width: (leftJobsWidth * 3.06) },
+        {
+            progress: function ()
+            { google.maps.event.trigger(map, 'resize'); }
         });
     });
 
@@ -597,12 +704,12 @@
         });
     }
 
-    function LoadNumbersByPostCode() {
+    function LoadJobNumbersByPostCode(FromDate, ToDate, mapControl) {
 
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/GetJobNumberByPostCode",
             type: "POST",
-            data: {},
+            data: { fromDate: FromDate, toDate: ToDate },
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
@@ -610,7 +717,7 @@
                         statePostCode.push(job.StatePostCode);
                         numbersOfJobs.push(job.NumbersOfJob);
                     });
-                    GetGoogleMapLocation($('#googleMap'), 4, true, true);
+                    GetGoogleMapLocation(mapControl, 4, true, true);
                 }
             },
             error: function (request) {
@@ -629,9 +736,14 @@
         //    label: "percentage"
         //});
 
-        LoadNumbersByPostCode();
+        var date = new Date();
+        var newdate = new Date(date);
+        newdate.setDate(newdate.getDate() - 30);
+        var pd = new Date(newdate);
+
+        LoadJobNumbersByPostCode(FormatCustomDate(pd), FormatCustomDate(date), $('#googleMap'));
         var areas = @Html.Raw(Json.Encode(ViewBag.Areas))
-        
+
         $("#txtArea").autocomplete({
             source: areas.split(','),
             appendTo: "#dialog-googlemap"
@@ -692,7 +804,7 @@
 
             var dialog = $("#dialog-googlemap").removeClass('hide').dialog({
                 modal: true,
-                width: "1200px",
+                width: "100%",
                 show: {
                     effect: "blind",
                     duration: 500
@@ -710,7 +822,7 @@
 
             GetGoogleMapLocation($('#googleMap-dialog'), 4, true, true);
             $("#ui-id-3").html("<i class='ace-icon fa fa-star orange'></i> Booked Jobs");
-            //google.maps.event.trigger(map, 'resize');
+            leftJobsDivWidth = $("#leftJobs").width() + 2;
         });
     });
 
