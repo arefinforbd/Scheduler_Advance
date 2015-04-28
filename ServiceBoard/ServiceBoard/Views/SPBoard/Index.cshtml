@@ -6,6 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="@Url.Content("~/Content/css/animateModal/animate.min.css")" rel="stylesheet" type="text/css" />
+
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.js")"></script>
 <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.pie.js")"></script>
@@ -61,6 +63,12 @@
 
     .ui-datepicker{
         width: 18em;
+    }
+
+    .closebt {
+        margin: 8px;
+        cursor: pointer;
+        width: 30px;
     }
 </style>
 
@@ -283,12 +291,30 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <div id="animatedModal">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="close-animatedModal" style="width: 100%; text-align: left;">
+                                <img class="closebt" src="@SPBoardHelper.GetSiteUrl()/Content/images/fullscreen-close.jpg">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="close-animatedModal" style="width: 100%; text-align: right;">
+                                <img class="closebt" src="@SPBoardHelper.GetSiteUrl()/Content/images/fullscreen-close.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-content">
+                        <div id="googleMap-fullscreen" style="width: 100%; border: 1px solid #FFFFFF;"></div>
+                    </div>
+                </div>
+
                 <div id="dialog-googlemap" class="hide">
 
                     <div class="row">
                         <div class="col-lg-12">
-                            Area: <input id="txtArea" type="text" class="popup-textbox" style="width: 140px;" />
-                            Tech: <input id="txtTech" type="text" class="popup-textbox" style="width: 120px;" />
+                            Area: <input id="txtArea" type="text" class="popup-textbox" style="width: 140px;" placeholder="[ALL]" />
+                            Tech: <input id="txtTech" type="text" class="popup-textbox" style="width: 120px;" placeholder="[ALL]" />
                             Date From: <input id="txtFromDate" type="text" class="popup-textbox" style="width: 120px;" placeholder="Select Date" />
                             Date To: <input id="txtToDate" type="text" class="popup-textbox" style="width: 120px;" placeholder="Select Date" />
 
@@ -304,6 +330,7 @@
                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                 Map Search
                             </button>
+                            <a id="fullScreenMap" href="#animatedModal" style="float: right; margin-top: 10px; text-decoration: underline;">FullScreen Map</a>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10px;">
@@ -337,6 +364,7 @@
 <script src="@Url.Content("~/Scripts/js/justGage/justgage.1.0.1.js")"></script>
 <script src="@Url.Content("~/Scripts/js/infobox.js")"></script>
 <script src="@Url.Content("~/Scripts/js/flot/jquery.flot.stack.js")"></script>
+<script src="@Url.Content("~/Scripts/js/animateModal/animatedModal.min.js")"></script>
 
 <script>
 
@@ -345,6 +373,8 @@
     var statePostCode = [];
     var numbersOfJobs = [];
     var leftJobsDivWidth = 0;
+    var mapLatitude = -27.908451;
+    var mapLongitude = 133.150296;
 
     var myOptions = {
         zoom: 4,
@@ -471,7 +501,11 @@
         $('#rightMap').delay(500).animate({ width: "100%" },
         {
             progress: function ()
-            { google.maps.event.trigger(map, 'resize'); },
+            {
+                google.maps.event.trigger(map, 'resize');
+                var centerMap = new google.maps.LatLng(mapLatitude, mapLongitude);
+                map.panTo(centerMap);
+            },
             duration: 1500
         });
     });
@@ -554,7 +588,11 @@
         $('#rightMap').delay(mapDelay).animate({ width: (leftJobsWidth * 3.06) },
         {
             progress: function ()
-            { google.maps.event.trigger(map, 'resize'); }
+            {
+                google.maps.event.trigger(map, 'resize');
+                var centerMap = new google.maps.LatLng(mapLatitude, mapLongitude);
+                map.panTo(centerMap);
+            }
         });
     });
 
@@ -663,7 +701,7 @@
 
         myOptions = {
             zoom: zoomLevel,
-            center: new google.maps.LatLng(-29.908451, 133.150296),
+            center: new google.maps.LatLng(mapLatitude, mapLongitude),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(googlemap[0], myOptions);
@@ -726,7 +764,6 @@
     }
 
     $(function () {
-
         //var g = new JustGage({
         //    id: "flot-bar-chart3",
         //    value: getRandomInt(0, 100),
@@ -735,6 +772,7 @@
         //    title: "Utilization",
         //    label: "percentage"
         //});
+        $("#fullScreenMap").animatedModal();
 
         var date = new Date();
         var newdate = new Date(date);
@@ -795,8 +833,8 @@
 
         $("#vmore-googlemap").on('click', function (e) {
 
-            $("#txtArea").val("[ALL]");
-            $("#txtTech").val("[ALL]");
+            //$("#txtArea").val("[ALL]");
+            //$("#txtTech").val("[ALL]");
             $("#txtFromDate").val("");
             $("#txtToDate").val("");
             $("#divJobList").html("");
@@ -823,6 +861,11 @@
             GetGoogleMapLocation($('#googleMap-dialog'), 4, true, true);
             $("#ui-id-3").html("<i class='ace-icon fa fa-star orange'></i> Booked Jobs");
             leftJobsDivWidth = $("#leftJobs").width() + 2;
+        });
+
+        $("#fullScreenMap").on('click', function (e) {
+            $("#googleMap-fullscreen").height($("#animatedModal").height() - $(".close-animatedModal").height() - 21);
+            GetGoogleMapLocation($('#googleMap-fullscreen'), 5, true, true);
         });
     });
 
