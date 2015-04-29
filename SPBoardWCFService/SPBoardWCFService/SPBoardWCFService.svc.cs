@@ -465,7 +465,7 @@ namespace SPBoardWCFService
             }
         }
 
-        public List<Job> GetBookedJobsInfo(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate)
+        public List<Job> GetBookedJobsInfo(string CompanyID, string CompanyPassword, int Level4ID, DateTime FromDate, DateTime ToDate, string Area, string Tech)
         {
             DataSet dsSummary;
             Job job = new Job();
@@ -477,7 +477,7 @@ namespace SPBoardWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword);
                 SPBoard sboard = new SPBoard(conn);
 
-                sboard.ws_getJbSum(Level4ID, FromDate, ToDate, out summaryDataset);
+                sboard.ws_getJbSum(Level4ID, FromDate, ToDate, Area, Tech, out summaryDataset);
                 dsSummary = (DataSet)summaryDataset;
 
                 if (dsSummary != null && dsSummary.Tables["tt_jobList_summary"].Rows.Count > 0)

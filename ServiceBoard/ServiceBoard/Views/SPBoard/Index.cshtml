@@ -370,6 +370,7 @@
 
     var map;
     var index = 0;
+    var markers = [];
     var statePostCode = [];
     var numbersOfJobs = [];
     var leftJobsDivWidth = 0;
@@ -424,13 +425,13 @@
                     $("#spanNumberOfJobs").html(data.length);
                     $("#bookedJobsList").show();
 
-                    html += '<table class="table table-striped table-bordered table-hover" id="datatablefiles" style="font-size: 12px;"><thead><tr><th>Address</th><th>Tech</th><th>Customer Name</th><th>Job date</th><th>Status</th></tr></thead><tbody>';
+                    html += '<table class="table table-striped table-bordered table-hover" id="datatablefiles" style="font-size: 12px;"><thead><tr><th>Address</th><th>Customer Name</th><th>Tech</th><th>Job date</th><th>Status</th></tr></thead><tbody>';
 
                     $.each(data, function (i, job) {
                         html += '<tr>';
                         html += '<td>' + job.Address + '</td>';
-                        html += '<td>' + job.Tech + '</td>';
                         html += '<td>' + job.CustomerName + '</td>';
+                        html += '<td>' + job.Tech + '</td>';
                         html += '<td>' + ToDateTimeString(job.JobDate) + '</td>';
                         html += '<td>' + job.Status + '</td>';
                         html += '</tr>';
@@ -548,8 +549,8 @@
                     $.each(data, function (i, job) {
                         html += '<div class="jobListItem">';
                         html += '<a style="cursor: pointer;">' + job.Address + '</a><br />';
-                        html += '<b>Tech: </b><span class="spanTech">' + job.Tech + '</span><br/>';
                         html += '<b>Client: </b><span class="spanClient">' + job.CustomerName + '</span><br/>';
+                        html += '<b>Tech: </b><span class="spanTech">' + job.Tech + '</span><br/>';
                         html += '<b>Job Date: </b><span class="spanJobDate">' + ToDateTimeString(job.JobDate) + '</span><br/>';
                         html += '<b>Job Status: </b><span class="spanJobStatus">' + job.Status + '</span></div>';
                     });
@@ -577,15 +578,17 @@
             leftJobsWidth = leftJobsDivWidth;
         }
 
+        LoadJobNumbersByPostCode(FromDate, ToDate, $('#googleMap-dialog'));
+
         $("#googleMap-dialog").delay(mapDelay).animate(
-            { width: (leftJobsWidth * 3.06) },
+            { width: (leftJobsWidth * 3.08) },
             {
                 duration: 1000,
                 specialEasings: 'linear'
             }
         );
 
-        $('#rightMap').delay(mapDelay).animate({ width: (leftJobsWidth * 3.06) },
+        $('#rightMap').delay(mapDelay).animate({ width: (leftJobsWidth * 3.08) },
         {
             progress: function ()
             {
@@ -662,6 +665,7 @@
                 map: map,
                 title: 'Click to get info'
             });
+            markers.push(marker);
 
             var labelText = "<div style='background-color: yellow;'>" + numbersOfJobs[index] + "</div>";
 
@@ -744,10 +748,13 @@
 
     function LoadJobNumbersByPostCode(FromDate, ToDate, mapControl) {
 
+        for (var i = 0; i < markers.length; i++)
+            markers[i].setMap(null);
+
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/GetJobNumberByPostCode",
             type: "POST",
-            data: { fromDate: FromDate, toDate: ToDate },
+            data: { fromDate: FromDate, toDate: ToDate, area: $("#txtArea").val(), tech: $("#txtTech").val() },
             dataType: "JSON",
             success: function (data) {
                 if (data != null) {
@@ -761,6 +768,10 @@
             error: function (request) {
             }
         });
+
+        markers = [];
+        statePostCode = [];
+        numbersOfJobs = [];
     }
 
     $(function () {

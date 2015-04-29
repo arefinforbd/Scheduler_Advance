@@ -79,12 +79,12 @@ namespace ServiceBoard.Repository
             return resource;
         }
 
-        public List<Job> GetBookedJobsInfo(DateTime fromDate, DateTime toDate)
+        public List<Job> GetBookedJobsInfo(DateTime fromDate, DateTime toDate, string area, string tech)
         {
             List<Job> jobs = new List<Job>();
             SPBoardParser parser = new SPBoardParser();
 
-            jobs = parser.GetBookedJobsInfo(fromDate, toDate);
+            jobs = parser.GetBookedJobsInfo(fromDate, toDate, area, tech);
 
             return jobs;
         }

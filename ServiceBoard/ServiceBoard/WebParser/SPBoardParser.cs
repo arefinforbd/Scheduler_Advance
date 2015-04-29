@@ -134,7 +134,7 @@ namespace ServiceBoard.WebParser
             return resource;
         }
 
-        public List<Job> GetBookedJobsInfo(DateTime fromDate, DateTime toDate)
+        public List<Job> GetBookedJobsInfo(DateTime fromDate, DateTime toDate, string area, string tech)
         {
             List<Job> jobs = new List<Job>();
             SPBoardWCFServiceClient sp = new SPBoardWCFServiceClient();
@@ -142,7 +142,7 @@ namespace ServiceBoard.WebParser
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
-            jobs = sp.GetBookedJobsInfo(companyID, companyPassword, level4ID, fromDate, toDate);
+            jobs = sp.GetBookedJobsInfo(companyID, companyPassword, level4ID, fromDate, toDate, area, tech);
 
             return jobs;
         }

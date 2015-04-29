@@ -435,12 +435,14 @@ namespace ServiceBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetJobNumberByPostCode(DateTime fromDate, DateTime toDate)
+        public ActionResult GetJobNumberByPostCode(DateTime fromDate, DateTime toDate, string area, string tech)
         {
             List<Job> jobs = new List<Job>();
             SPBoardRepository repository = new SPBoardRepository();
 
-            jobs = repository.GetBookedJobsInfo(fromDate, toDate);
+            area = string.IsNullOrWhiteSpace(area) ? "[All]" : area;
+            tech = string.IsNullOrWhiteSpace(tech) ? "[All]" : tech;
+            jobs = repository.GetBookedJobsInfo(fromDate, toDate, area, tech);
                 
             if (jobs != null && jobs.Count > 0)
             {
@@ -448,7 +450,7 @@ namespace ServiceBoard.Controllers
                                 .Select(group => new
                                 {
                                     StatePostCode = (group.First().State + "-" + group.First().PostCode),
-                                    NumbersOfJob = group.Count()
+                                    NumbersOfJob = group.Sum(s => s.JobNumber)
                                 }).ToList();
 
                 return Json(jobNumbers, JsonRequestBehavior.AllowGet);
