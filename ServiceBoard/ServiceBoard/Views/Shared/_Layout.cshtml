@@ -63,7 +63,7 @@
                             <img class="nav-user-photo" src="@Url.Content("~/Content/avatars/avatar1.png")" alt="Jason's Photo" />
                             <span class="user-info">
                                 <small>Welcome,</small>
-                                Jason
+                                @HttpContext.Current.Session["CompanyID"].ToString()
                             </span>
 
                             <i class="ace-icon fa fa-caret-down"></i>

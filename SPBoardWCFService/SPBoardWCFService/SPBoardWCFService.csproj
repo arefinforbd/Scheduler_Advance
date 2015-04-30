@@ -52,7 +52,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References - .NET\20150429\Progress.ssl.dll</HintPath>
     </Reference>
-    <Reference Include="SPBoard, Version=2.0.5578.18318, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SPBoard, Version=2.0.5597.27137, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\References - .NET\20150429\SPBoard.dll</HintPath>
     </Reference>

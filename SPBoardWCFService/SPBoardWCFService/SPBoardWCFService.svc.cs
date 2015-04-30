@@ -489,7 +489,7 @@ namespace SPBoardWCFService
                         job.PostCode = row["tt_jl_postCode"].ToString() + " Australia";
                         job.State = row["tt_jl_state"].ToString();
                         job.JobDate = Convert.ToDateTime(row["tt_jl_date"]);
-                        job.JobNumber = Convert.ToInt32(row["tt_jl_jobNum"]);
+                        job.NumberOfJobs = Convert.ToInt32(row["tt_jl_jobNum"]);
                         job.BookedBy = row["tt_jl_bookedBy"].ToString();
 
                         jobs.Add(job);
@@ -528,6 +528,8 @@ namespace SPBoardWCFService
 
                         job.JobNumber = Convert.ToInt32(row["tt_dtl_jobno"]);
                         job.JobDate = Convert.ToDateTime(row["tt_dtl_date"]);
+                        job.LineNumber = Convert.ToInt32(row["tt_dtl_lineno"]);
+                        job.ScheduleNumber = Convert.ToInt32(row["tt_dtl_schno"]);
                         job.CustomerName = row["tt_dtl_custname"].ToString();
                         job.SiteName = row["tt_dtl_sitename"].ToString();
                         job.Address = row["tt_dtl_addr"].ToString();

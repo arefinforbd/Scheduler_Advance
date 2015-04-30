@@ -405,6 +405,11 @@
             return false;
         }
 
+        if (dayDiff > 5184000000) {
+            alert("Please keep the date range less than or equal to 60 days.");
+            return false;
+        }
+
         return true;
     }
 

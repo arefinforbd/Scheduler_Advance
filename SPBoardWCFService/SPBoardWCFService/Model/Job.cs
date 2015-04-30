@@ -13,6 +13,10 @@ namespace SPBoardWCFService.Model
         [DataMember]
         public DateTime JobDate { get; set; }
         [DataMember]
+        public int LineNumber { get; set; }
+        [DataMember]
+        public int ScheduleNumber { get; set; }
+        [DataMember]
         public string CustomerName { get; set; }
         [DataMember]
         public string SiteName { get; set; }
@@ -28,5 +32,7 @@ namespace SPBoardWCFService.Model
         public string State { get; set; }
         [DataMember]
         public string BookedBy { get; set; }
+        [DataMember]
+        public int NumberOfJobs { get; set; }
     }
 }

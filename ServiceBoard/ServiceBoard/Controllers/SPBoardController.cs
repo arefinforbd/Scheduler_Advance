@@ -450,7 +450,7 @@ namespace ServiceBoard.Controllers
                                 .Select(group => new
                                 {
                                     StatePostCode = (group.First().State + "-" + group.First().PostCode),
-                                    NumbersOfJob = group.Sum(s => s.JobNumber)
+                                    NumbersOfJob = group.Sum(s => s.NumberOfJobs)
                                 }).ToList();
 
                 return Json(jobNumbers, JsonRequestBehavior.AllowGet);
