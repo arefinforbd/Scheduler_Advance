@@ -105,7 +105,7 @@
                             <div class="tab-content padding-8" style="padding-left:0px;">
                                 <div id="resource1stTab" class="tab-pane active">
                                     <div class="row">
-                                        <div class="col-lg-7" style="padding-left:25px;">
+                                        <div class="col-lg-7 col-lg-offset-2" style="">
                                             <canvas id="gauge1" width="250" height="250"
                                                     data-type="canv-gauge"
                                                     data-title="Resource"
@@ -122,7 +122,9 @@
                                                     data-highlights="0 20 #F54949, 20 40 #F58B49, 40 60 #F5CA49, 60 80 #B5FCB1, 80 100 #26CF1D"
                                                     data-onready="Gauge.Collection.get('gauge1').setValue(@ViewBag.ResourcePercentage)"></canvas>
                                         </div>
-                                        <div class="col-lg-5" style="color: #1e8b04; font-size: 11px; position: absolute; left: 60%; top: 35%;">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-5" style="color: #1e8b04; font-size: 11px; left: 25%;">
                                             <span>Booked Resource: @ViewBag.ResourcePercentage%</span>
                                             <br />
                                             <span>Available Resource: @(100 - ViewBag.ResourcePercentage)%</span>
@@ -195,7 +197,7 @@
                                     </div>
 
                                     <div id="divYTDLoading" style="display:none;"></div>
-                                    <div class="flot-chart-content" id="flot-bar-chart" style="margin:10px 0 0 15px;height:250px;width:450px;"></div>
+                                    <div class="flot-chart-content" id="flot-bar-chart" style="margin:10px 0 0 15px;height:250px;width:100%;"></div>
                                     <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisOverallDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
                                 </div>
 
@@ -227,7 +229,7 @@
                                     </div>
 
                                     <div id="divYTDLoading3" style="display:none;"></div>
-                                    <div class="flot-chart-content" id="flot-bar-chart-cat" style="margin:10px 0 0 15px;height:250px;width:450px;"></div>
+                                    <div class="flot-chart-content" id="flot-bar-chart-cat" style="margin:10px 0 0 15px;height:250px;width:100%;"></div>
                                     <a href="@SPBoardHelper.GetSiteUrl()/SPBoard/SalesAnalysisByCategoryDetail" class="btn btn-white btn-yellow btn-sm pull-right view-more" style="font-size:12px;">View More...</a>
                                 </div>
                             </div>
@@ -371,6 +373,7 @@
     var map;
     var index = 0;
     var markers = [];
+    var ibLabels = [];
     var statePostCode = [];
     var numbersOfJobs = [];
     var leftJobsDivWidth = 0;
@@ -668,7 +671,8 @@
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: 'Click to get info'
+                title: 'Click to get info'/*,
+                icon: 'http://www.edmonton.ca/icon_environment_32x32.png'*/
             });
             markers.push(marker);
 
@@ -693,6 +697,7 @@
 
             var ibLabel = new InfoBox(labelOption);
             ibLabel.open(map, marker);
+            ibLabels.push(ibLabel);
 
             var getMapClickListener = function (m) {
                 return function () {
@@ -753,8 +758,10 @@
 
     function LoadJobNumbersByPostCode(FromDate, ToDate, mapControl) {
 
-        for (var i = 0; i < markers.length; i++)
+        for (var i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
+            ibLabels[i].setMap(null);
+        }
 
         $.ajax({
             url: $("#hdnSiteURL").val() + "/SPBoard/GetJobNumberByPostCode",
@@ -775,6 +782,7 @@
         });
 
         markers = [];
+        ibLabels = [];
         statePostCode = [];
         numbersOfJobs = [];
     }
