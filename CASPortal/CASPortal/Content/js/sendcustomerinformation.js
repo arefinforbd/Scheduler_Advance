@@ -13,14 +13,14 @@
         $("#lastname").attr("readonly", true);
     if ($("#email").val() != "")
         $("#email").attr("readonly", true);
-    if ($("#houseno").val() != "")
-        $("#houseno").attr("readonly", true);
+    if ($("#streetno").val() != "")
+        $("#streetno").attr("readonly", true);
     if ($("#streetname").val() != "")
         $("#streetname").attr("readonly", true);
-    if ($("#address").val() != "")
-        $("#address").attr("readonly", true);
-    if ($("#city").val() != "")
-        $("#city").attr("readonly", true);
+    if ($("#streetname2").val() != "")
+        $("#streetname2").attr("readonly", true);
+    if ($("#suburb").val() != "")
+        $("#suburb").attr("readonly", true);
     if ($("#state").val() != "")
         $("#state").attr("readonly", true);
     if ($("#postcode").val() != "")
@@ -48,10 +48,10 @@ $("#btnSubmit").click(function () {
             var firstName = $("#firstname").val().trim();
             var lastName = $("#lastname").val().trim();
             var email = $("#email").val().trim();
-            var houseNo = $("#houseno").val().trim();
+            var streetNo = $("#streetno").val().trim();
             var streetName = $("#streetname").val().trim();
-            var address = $("#address").val().trim();
-            var city = $("#city").val().trim();
+            var streetName2 = $("#streetname2").val().trim();
+            var suburb = $("#suburb").val().trim();
             var state = $("#state").val().trim();
             var postCode = $("#postcode").val().trim();
             var phoneNo = $("#phoneno").val().trim();
@@ -61,7 +61,7 @@ $("#btnSubmit").click(function () {
             $.ajax({
                 url: $("#hdnSiteURL").val() + "/Scheduler/SendCustomerInformation",
                 type: "POST",
-                data: { firstname: firstName, lastname: lastName, email: email, houseno: houseNo, streetname: streetName, address: address, city: city, state: state, postcode: postCode, phoneno: phoneNo, mobileno: mobileNo },
+                data: { firstname: firstName, lastname: lastName, email: email, streetno: streetNo, streetname: streetName, streetname2: streetName2, suburb: suburb, state: state, postcode: postCode, phoneno: phoneNo, mobileno: mobileNo },
                 dataType: "JSON",
                 success: function (data) {
                     if (data != null && data == "successfull") {
@@ -105,9 +105,9 @@ function Validate() {
         return false;
     }
 
-    if ($("#houseno").val().trim().length <= 0) {
+    if ($("#streetno").val().trim().length <= 0) {
         alert("Please enter House No.");
-        $("#houseno").focus();
+        $("#streetno").focus();
         return false;
     }
 
@@ -117,9 +117,9 @@ function Validate() {
         return false;
     }
 
-    if ($("#city").val().trim().length <= 0) {
+    if ($("#suburb").val().trim().length <= 0) {
         alert("Please enter City.");
-        $("#city").focus();
+        $("#suburb").focus();
         return false;
     }
 

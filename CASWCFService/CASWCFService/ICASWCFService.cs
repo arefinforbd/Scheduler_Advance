@@ -46,7 +46,7 @@ namespace CASWCFService
         List<DayHour> GetBusinessTime(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID);
 
         [OperationContract]
-        List<TimeSlot> GetScheduledTime(string CompanyID, string CompanyPassword, string CustomerPassword, DateTime startDate);
+        List<TimeSlot> GetScheduledTime(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, DateTime startDate);
 
         [OperationContract]
         SiteNItem GetCategoryProductService(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID);
@@ -89,5 +89,8 @@ namespace CASWCFService
 
         [OperationContract]
         List<Advertisement> GetAdvertisement();
+
+        [OperationContract]
+        bool SendCustomerInformationForSchedule(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, string Firstname, string Lastname, string Email, string Phoneno, string Mobileno, string StreetNo, string StreetName, string StreetName2, string Suburb, string State, string PostCode, int SiteNo, int SiteCode, string Category, string Product, int LineNo, string ItemID, decimal TotalAmount, decimal TaxAmount, DateTime ScheduledDate, string StartTime, string EndTime, string Duration, string SpecialInstruction);
     }
 }

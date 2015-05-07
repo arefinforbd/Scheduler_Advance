@@ -50,7 +50,14 @@ namespace CASPortal.Helper
             ReportRepository repository = new ReportRepository();
 
             sb.Append("<li style='cursor:pointer'><a>Select Contract</a></li>");
-            contracts = repository.GetContracts(siteNo);
+
+            if (HttpContext.Current.Session["ContractList"] != null)
+                contracts = (List<Contract>)HttpContext.Current.Session["ContractList"];
+            else
+            {
+                contracts = repository.GetContracts(siteNo);
+                HttpContext.Current.Session.Add("ContractList", contracts);
+            }
 
             if (contracts == null)
                 return sb.ToString();
@@ -79,7 +86,7 @@ namespace CASPortal.Helper
                 return sb.ToString();
 
             foreach (var item in siteNitem.listOfItems)
-                sb.Append("<li id=" + item.ItemID + " duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemName + "</a></li>");
+                sb.Append("<li id='" + item.ItemID + "' duration='" + item.Duration + "' desc='" + item.Description + "' style='cursor:pointer'><a>" + item.ItemID + "</a></li>");
 
             return sb.ToString();
         }
@@ -88,7 +95,15 @@ namespace CASPortal.Helper
         {
             ReportRepository repository = new ReportRepository();
             StringBuilder sb = new StringBuilder("");
-            TreeNode trNode = repository.GetTrendAnalysisTreeNodes();
+            TreeNode trNode;
+
+            if (HttpContext.Current.Session["TrendAnalysisTreeNodes"] != null)
+                trNode = (TreeNode)HttpContext.Current.Session["TrendAnalysisTreeNodes"];
+            else
+            {
+                trNode = repository.GetTrendAnalysisTreeNodes();
+                HttpContext.Current.Session.Add("TrendAnalysisTreeNodes", trNode);
+            }
 
             if (trNode != null && trNode.listLeve1.Count() > 0)
             {
@@ -113,15 +128,6 @@ namespace CASPortal.Helper
                             string nodeID = t1.SectionID + "#" + t1.SectionCaption + "#" + t2.QuestionID + "#" + t2.QuestionCaption + "#" + t3.AnswerID + "#" + t3.AnswerCaption;
                             sb.Append("<li id='" + nodeID + "'>");
                             sb.Append(t3.AnswerCaption);
-                            //sb.Append("<ul>");
-
-                            //foreach (TreeNodeLevel4 t4 in trNode.listLeve4.Where(t => t.SectionID == t1.SectionID && t.QuestionID == t2.QuestionID && t.AnswerID == t3.AnswerID))
-                            //{
-                            //    sb.Append("<li>");
-                            //    sb.Append(t4.AdditionalAnswerCaption);
-                            //    sb.Append("</li>");
-                            //}
-                            //sb.Append("</ul>");
                             sb.Append("</li>");
                         }
                         sb.Append("</ul>");
@@ -142,7 +148,15 @@ namespace CASPortal.Helper
         {
             ReportRepository repository = new ReportRepository();
             StringBuilder sbArea = new StringBuilder("");
-            TreeNode trNode = repository.GetTrendAnalysisTreeNodes();
+            TreeNode trNode;
+
+            if (HttpContext.Current.Session["TrendAnalysisTreeNodes"] != null)
+                trNode = (TreeNode)HttpContext.Current.Session["TrendAnalysisTreeNodes"];
+            else
+            {
+                trNode = repository.GetTrendAnalysisTreeNodes();
+                HttpContext.Current.Session.Add("TrendAnalysisTreeNodes", trNode);
+            }
 
             sbArea.Append("<li style='cursor:pointer'><a>[ALL]</a></li>");
             foreach (string area in trNode.listAreaName)

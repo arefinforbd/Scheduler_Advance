@@ -23,6 +23,17 @@
     <link href="@Url.Content("~/Content/css/casportal.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/js/jquery-ui-1.11.1/jquery-ui.css")" rel="stylesheet" type="text/css" />
 
+    <script>
+        $(function () {
+            if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()) == false) {
+                if ($("#leftLogo").height() > 80)
+                    $("#leftLogo").height(80);
+
+                $("#rightLogo").height($("#leftLogo").height());
+            }
+        });
+    </script>
+
     @{
         if(!BaseHelper.AdvertisementStatus){
             <script>

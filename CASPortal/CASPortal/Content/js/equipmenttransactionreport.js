@@ -104,7 +104,11 @@ function Validate() {
     if ($("#rdoReplaced").prop("checked") == true)
         advanceVal = "Single Replaced";
 
-    $("#divLoading").html("<img alt='' title='' src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%' />");
+    $("#process").val("Please wait...");
+    $("#process").addClass("btn-disabled");
+    $("#process").removeClass("btn-info");
+    $("#process").attr("disabled", "disabled");
+    $("#divLoading").html("<img alt='' title='' src=" + $("#hdnSiteURL").val() + "/Content/Images/ajax-loading.gif width='10%'>");
     $("#process").attr("disabled", "disabled");
 
     var url = $("#hdnSiteURL").val() + "/Report/EquipmentTransaction";
@@ -119,22 +123,35 @@ function Validate() {
         },
         dataType: "json",
         success: function (resp) {
-            if (resp == "No BLOB")
+            if (resp == "No BLOB"){
+                setTimeout(function ()
+                {
+                    $("#divLoading").html("");
+                    $("#process").val("Preview");
+                    $("#process").addClass("btn-info");
+                    $("#process").removeClass("btn-disabled");
+                    $("#process").removeAttr("disabled");
+                }, 1000);
                 alert("There is no data to show.");
+            }
             else {
                 $("#hdnFormSubmit").val("BLOB");
                 $('#eqtransrepoform').submit();
-                $("#divLoading").html("");
-                $("#process").removeAttr("disabled");
+
+                setTimeout(function ()
+                {
+                    $("#divLoading").html("");
+                    $("#process").val("Preview");
+                    $("#process").addClass("btn-info");
+                    $("#process").removeClass("btn-disabled");
+                    $("#process").removeAttr("disabled");
+                }, 1000);
+
                 return true;
             }
-            $("#divLoading").html("");
-            $("#process").removeAttr("disabled");
             return false;
         }
     })
-    $("#divLoading").html("");
-    $("#process").removeAttr("disabled");
     return true;
 }
 

@@ -18,9 +18,11 @@ namespace CASWCFService.Model
         [DataMember]
         public string ProductName { get; set; }
         [DataMember]
-        public int ItemID { get; set; }
+        public string ItemID { get; set; }
         [DataMember]
         public string ItemName { get; set; }
+        [DataMember]
+        public int LineNo { get; set; }
         [DataMember]
         public string Description { get; set; }
         [DataMember]

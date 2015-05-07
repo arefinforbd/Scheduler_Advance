@@ -104,5 +104,15 @@ namespace CASPortal.Repository
             }
             return service;
         }
+
+        public bool SendCustomerInformationForSchedule(string firstname, string lastname, string email, string phoneno, string mobileno, string streetNo, string streetName, string streetName2, string suburb, string state, string postCode, int siteNo, int siteCode, string category, string product, int lineNo, string itemID, decimal totalAmount, decimal taxAmount, DateTime scheduledDate, string startTime, string endTime, string duration, string specialInstruction)
+        {
+            bool response;
+            SchedulerParser parser = new SchedulerParser();
+
+            response = parser.SendCustomerInformationForSchedule(firstname, lastname, email, phoneno, mobileno, streetNo, streetName, streetName2, suburb, state, postCode, siteNo, siteCode, category, product, lineNo, itemID, totalAmount, taxAmount, scheduledDate, startTime, endTime, duration, specialInstruction);
+
+            return response;
+        }
     }
 }

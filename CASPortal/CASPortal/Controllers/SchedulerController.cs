@@ -47,7 +47,7 @@ namespace CASPortal.Controllers
             return View();
         }
 
-        public ActionResult GetTimeSlots(string dateStartedFrom, int itemID)
+        public ActionResult GetTimeSlots(string dateStartedFrom, string itemID)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostTimeSlot(string siteID, string itemID, string timeSlots)
+        public ActionResult PostTimeSlot(string siteNo, string itemID, string timeSlots)
         {
             if (Request["customerid"] == null)
             {
@@ -85,9 +85,17 @@ namespace CASPortal.Controllers
             if (Session["Sites"] != null)
             {
                 var sites = (List<Site>)Session["Sites"];
-                var siteInfo = sites.Where(s => s.SiteCode == Convert.ToInt32(siteID)).SingleOrDefault();
-                TempData["SiteInfo"] = siteInfo;
+                var siteInfo = sites.Where(s => s.SiteNo == Convert.ToInt32(siteNo)).SingleOrDefault();
+                Session.Add("SiteObject", siteInfo);
             }
+
+            if (Session["Items"] != null)
+            {
+                var items = (List<Service>)Session["Items"];
+                var itemInfo = items.Where(i => i.ItemID == itemID).SingleOrDefault();
+                Session.Add("ItemObject", itemInfo);
+            }
+
             var selectedItemSlots = Serializer.Deserialize<List<TimeSlot>>(timeSlots);
             var timeSlotList = selectedItemSlots.OrderBy(d => DateTime.Parse(d.Date)).ThenBy(t => Convert.ToInt32(t.StartTime.Replace(":", ""))).ToList();
             TempData["TimeSlots"] = timeSlotList;
@@ -104,9 +112,9 @@ namespace CASPortal.Controllers
                     return RedirectToAction("Index", "Login");
             }
 
-            if (TempData["SiteInfo"] != null)
+            if (Session["SiteObject"] != null)
             {
-                var siteInfo = (Site)TempData["SiteInfo"];
+                var siteInfo = (Site)Session["SiteObject"];
 
                 ViewData["LastName"] = siteInfo.LastName;
                 ViewData["CompanyName"] = siteInfo.CompanyName;
@@ -128,10 +136,13 @@ namespace CASPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendCustomerInformation(string firstname, string lastname, string email, string houseno, string streetname, string address, string city, string state, string postcode, string phoneno, string mobileno)
+        public ActionResult SendCustomerInformation(string firstname, string lastname, string email, string streetno, string streetname, string streetname2, string suburb, string state, string postcode, string phoneno, string mobileno)
         {
             try
             {
+                bool response;
+                SchedulerRepository repo = new SchedulerRepository();
+
                 if (Request["customerid"] == null)
                 {
                     BaseHelper helper = new BaseHelper();
@@ -139,12 +150,28 @@ namespace CASPortal.Controllers
                         return RedirectToAction("Index", "Login");
                 }
 
-                string output = firstname;
-
-                if (TempData["TimeSlots"] != null)
+                if (Session["SiteObject"] != null && Session["ItemObject"] != null)
                 {
-                    var timeSlots = (List<TimeSlot>)TempData["TimeSlots"];
-                    return Json("successfull", JsonRequestBehavior.AllowGet);
+                    Site site = (Site)Session["SiteObject"];
+                    Service item = (Service)Session["ItemObject"];
+                    List<TimeSlot> timeSlots = (List<TimeSlot>)TempData["TimeSlots"];
+
+                    DateTime scheduledDate;
+                    string startTime = "";
+                    string endTime = "";
+                    string specialInstruction = "";
+
+                    scheduledDate = Convert.ToDateTime(timeSlots[0].Date);
+                    startTime = timeSlots[0].StartTime;
+                    endTime = timeSlots[0].EndTime;
+                    specialInstruction= timeSlots[0].SpecialInstruction;
+
+                    response = repo.SendCustomerInformationForSchedule(firstname, lastname, email, phoneno, mobileno, streetno, streetname, streetname2, suburb, state, postcode, site.SiteNo, site.SiteCode, item.CategoryName, item.ProductName, item.LineNo, item.ItemID, 0, 0, scheduledDate, startTime, endTime, item.Duration.ToString(), specialInstruction);
+
+                    if (response)
+                        return Json("successfull", JsonRequestBehavior.AllowGet);
+                    else
+                        return Json("error", JsonRequestBehavior.AllowGet);
                 }
 
                 return Json("error", JsonRequestBehavior.AllowGet);

@@ -124,10 +124,11 @@ namespace CASPortal.WebParser
             string companyID = HttpContext.Current.Session["CompanyID"].ToString();
             string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
             string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
 
             dateStart = dateStart.Substring(0, dateStart.IndexOf("GMT") - 1);
             //ds = cas.GetScheduledTime("kevorkt", "", "1.000", Convert.ToDateTime(dateStart));
-            timeSlotArr = cas.GetScheduledTime(companyID, companyPassword, customerPassword, DateTime.Parse(dateStart, new CultureInfo("en-US")));
+            timeSlotArr = cas.GetScheduledTime(companyID, companyPassword, customerPassword, level4ID, DateTime.Parse(dateStart, new CultureInfo("en-US")));
 
             if (timeSlotArr != null && timeSlotArr.Count() > 0)
             {
@@ -161,7 +162,10 @@ namespace CASPortal.WebParser
 
         public SiteNItem GetSiteNItems()
         {
+            Site site;
+            Service item;
             SiteNItem siteNitem;
+            List<Site> sites = new List<Site>();
             List<Service> items = new List<Service>();
             DataSet ds = new DataSet();
             CASWCFServiceClient cas = new CASWCFServiceClient();
@@ -177,6 +181,46 @@ namespace CASPortal.WebParser
 
             if (siteNitem != null && siteNitem.sites.Count() > 0 && siteNitem.listOfItems.Count() > 0)
             {
+                foreach (Site siteItem in siteNitem.sites)
+                {
+                    site = new Site();
+
+                    site.CompanyName = siteItem.CompanyName;
+                    site.LastName = siteItem.LastName;
+                    site.Address1 = siteItem.Address1;
+                    site.Address2 = siteItem.Address2;
+                    site.Address3 = siteItem.Address3;
+                    site.Suburb = siteItem.Suburb;
+                    site.PostCode = siteItem.PostCode;
+                    site.State = siteItem.State;
+                    site.PhoneNo = siteItem.PhoneNo;
+                    site.MobileNo = siteItem.MobileNo;
+                    site.Email = siteItem.Email;
+                    site.SiteNo = siteItem.SiteNo;
+                    site.StreetNo = siteItem.StreetNo;
+                    site.SiteCode = siteItem.SiteCode;
+                    site.Level4 = siteItem.Level4;
+
+                    sites.Add(site);
+                }
+                HttpContext.Current.Session.Add("Sites", sites);
+
+                foreach (Service sItem in siteNitem.listOfItems)
+                {
+                    item = new Service();
+
+                    item.CategoryName = sItem.CategoryName;
+                    item.ProductName = sItem.ProductName;
+                    item.ItemID = sItem.ItemID;
+                    item.LineNo = sItem.LineNo;
+                    item.Description = sItem.Description;
+                    item.Price = sItem.Price;
+                    item.Duration = sItem.Duration;
+
+                    items.Add(item);
+                }
+                HttpContext.Current.Session.Add("Items", items);
+
                 return siteNitem;
             }
 
@@ -233,6 +277,22 @@ namespace CASPortal.WebParser
         {
             BaseHelper helper = new BaseHelper();
             helper.SetSessions("kevorkt", "", "1.000", "1.000", 1);
+        }
+
+        public bool SendCustomerInformationForSchedule(string firstname, string lastname, string email, string phoneno, string mobileno, string streetNo, string streetName, string streetName2, string suburb, string state, string postCode, int siteNo, int siteCode, string category, string product, int lineNo, string itemID, decimal totalAmount, decimal taxAmount, DateTime scheduledDate, string startTime, string endTime, string duration, string specialInstruction)
+        {
+            bool response;
+            CASWCFServiceClient cas = new CASWCFServiceClient();
+
+            string companyID = HttpContext.Current.Session["CompanyID"].ToString();
+            string companyPassword = HttpContext.Current.Session["CompanyPassword"].ToString();
+            string customerPassword = HttpContext.Current.Session["CustomerPassword"].ToString();
+            decimal customerID = Convert.ToDecimal(HttpContext.Current.Session["CustomerID"]);
+            int level4ID = Convert.ToInt32(HttpContext.Current.Session["Level4ID"].ToString());
+
+            response = cas.SendCustomerInformationForSchedule (companyID, companyPassword, customerID, customerPassword, level4ID, firstname, lastname, email, phoneno, mobileno, streetNo, streetName, streetName2, suburb, state, postCode, siteNo, siteCode, category, product, lineNo, itemID, totalAmount, taxAmount, scheduledDate, startTime, endTime, duration, specialInstruction);
+
+            return true;
         }
     }
 }

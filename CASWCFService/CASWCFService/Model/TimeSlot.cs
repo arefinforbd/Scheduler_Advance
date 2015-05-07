@@ -10,7 +10,7 @@ namespace CASWCFService.Model
     public class TimeSlot
     {
         [DataMember]
-        public int ItemID { get; set; }
+        public string ItemID { get; set; }
         [DataMember]
         public string Date { get; set; }
         [DataMember]

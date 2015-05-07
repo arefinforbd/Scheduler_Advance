@@ -438,7 +438,7 @@ namespace CASWCFService
             }
         }
 
-        public List<TimeSlot> GetScheduledTime(string CompanyID, string CompanyPassword, string CustomerPassword, DateTime startDate)
+        public List<TimeSlot> GetScheduledTime(string CompanyID, string CompanyPassword, string CustomerPassword, int Level4ID, DateTime startDate)
         {
             DataSet ds;
             TimeSlot timeSlot;
@@ -450,7 +450,7 @@ namespace CASWCFService
                 Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
                 CustWebAccProj cus = new CustWebAccProj(conn);
 
-                cus.p_webgetschtime(startDate, out dsTimeSlot);
+                cus.p_webgetschtime(Level4ID, startDate, out dsTimeSlot);
                 ds = (DataSet)dsTimeSlot;
 
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -577,8 +577,8 @@ namespace CASWCFService
 
                         item.CategoryName = row["pd_category"].ToString();
                         item.ProductName = row["pd_code"].ToString();
-                        item.ItemName = row["pdl_prcode"].ToString();
-                        item.ItemID = Convert.ToInt32(row["pdl_lineno"]);
+                        item.ItemID = row["pdl_prcode"].ToString();
+                        item.LineNo = Convert.ToInt32(row["pdl_lineno"]);
                         item.Description = row["pdl_desc"].ToString();
                         item.Price = Convert.ToDouble(row["pdl_price"]);
                         item.Duration = Convert.ToInt32(row["pdl_duration"]);
@@ -1284,6 +1284,25 @@ namespace CASWCFService
             };
 
             return ads;
+        }
+
+        public bool SendCustomerInformationForSchedule(string CompanyID, string CompanyPassword, decimal CustomerID, string CustomerPassword, int Level4ID, string Firstname, string Lastname, string Email, string Phoneno, string Mobileno, string StreetNo, string StreetName, string StreetName2, string Suburb, string State, string PostCode, int SiteNo, int SiteCode, string Category, string Product, int LineNo, string ItemID, decimal TotalAmount, decimal TaxAmount, DateTime ScheduledDate, string StartTime, string EndTime, string Duration, string SpecialInstruction)
+        {
+            bool response;
+
+            try
+            {
+                Connection conn = GetConnection(CompanyID, CompanyPassword, CustomerPassword);
+                CustWebAccProj cus = new CustWebAccProj(conn);
+
+                cus.p_webputschjob(Level4ID, CustomerID, Firstname, Lastname, Email, Phoneno, Mobileno, StreetNo, StreetName, StreetName2, Suburb, State, PostCode, SiteNo, SiteCode, Category, Product, LineNo, ItemID, TotalAmount, TaxAmount, ScheduledDate, StartTime, EndTime, Duration, SpecialInstruction, out response);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
         
         private Connection GetConnection(string CompanyID, string CompanyPassword, string CustomerPassword)

@@ -429,6 +429,9 @@
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.NavigationMenu.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.SendCustomerInformationForScheduleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Service References\CASWCFService\CASPortal.CASWCFService.Site.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>

@@ -863,12 +863,12 @@ function generateDays(day) {
 $("#btnContinue").click(function () {
 
     var customerid = "";
-    var siteID = $('#ulSites li.selected').attr('id');
+    var siteNO = $('#ulSites li.selected').attr('id');
 
     $.ajax({
         url: $("#hdnSiteURL").val() + "/Scheduler/PostTimeSlot",
         type: "POST",
-        data: { siteID: siteID, itemID: $("#hdnItemID").val().trim(), timeSlots: JSON.stringify(_timeSlots) },
+        data: { siteNo: siteNO, itemID: $("#hdnItemID").val().trim(), timeSlots: JSON.stringify(_timeSlots) },
         dataType: "JSON",
         success: function (data) {
             if (data != null && data == "successfull") {
