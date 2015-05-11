@@ -287,11 +287,6 @@ $(document.body).on('click', '#divJobList div.jobListItem a', function () {
 
 function LoadJobNumbersByPostCode(FromDate, ToDate, mapControl) {
 
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-        ibLabels[i].setMap(null);
-    }
-
     $.ajax({
         url: $("#hdnSiteURL").val() + "/SPBoard/GetJobNumberByPostCode",
         type: "POST",
