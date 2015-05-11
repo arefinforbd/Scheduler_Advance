@@ -1,10 +1,10 @@
-﻿function MapMaker(map, address, infowindow) {
+﻿function MapMaker(map, addressCode, infowindow) {
 
-    $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=true', null, function (data) {
+    $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + addressCode + '&sensor=true', null, function (data) {
 
         var p = data.results[0].geometry.location
         var latlng = new google.maps.LatLng(p.lat, p.lng);
-        var tooltipText = "Address: <span style='font-weight: bold;'>" + address + "</span>";
+        var tooltipText = "Address: <span style='font-weight: bold;'>" + addressCode + "</span>";
 
         infowindow.close();
 
@@ -61,8 +61,8 @@ function GetGoogleMapLocation(googlemap, zoomLevel, showTooltip, showLabel) {
     map = new google.maps.Map(googlemap[0], myOptions);
     var infowindow = new google.maps.InfoWindow();
 
-    for (var x = 0; x < address.length; x++) {
-        setTimeout(MapMaker(map, address[x], infowindow), 5000);
+    for (var x = 0; x < statePostCode.length; x++) {
+        setTimeout(MapMaker(map, statePostCode[x], infowindow), 5000);
     }
     index = 0;
 }
