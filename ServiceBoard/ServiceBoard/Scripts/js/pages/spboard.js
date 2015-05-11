@@ -227,12 +227,18 @@ $.fn.UseTooltip = function () {
                 var x = 0;
                 var color = item.series.color;
 
-                if (previousLabel == "Used Percentage")
+                if (previousLabel == "Used Percentage"){
                     x = item.datapoint[1].toFixed(2);
-                else
+                    toolTipContent = "<strong>" + previousLabel + ": " + x + "%</strong>";
+                }   
+                else if (previousLabel == "Free Percentage"){
                     x = 100 - item.datapoint[2].toFixed(2);
-
-                toolTipContent = "<strong>" + previousLabel + ": " + x + "%</strong>";
+                    toolTipContent = "<strong>" + previousLabel + ": " + x + "%</strong>";
+                }    
+                else{
+                    x = item.datapoint[1].toFixed(2);
+                    toolTipContent = "<strong>" + x + "</strong>";
+                }
 
                 showTooltip(item.pageX,
                 item.pageY,

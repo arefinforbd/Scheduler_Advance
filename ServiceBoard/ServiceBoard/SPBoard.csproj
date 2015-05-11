@@ -333,8 +333,9 @@
     <Content Include="Scripts\js\morris\raphael.js" />
     <Content Include="Scripts\js\morris\raphael.min.js" />
     <Content Include="Scripts\js\pages\bootstrap-multiselect-modified.js" />
+    <Content Include="Scripts\js\pages\googlemap.js" />
     <Content Include="Scripts\js\pages\salesanalysisdetail.js" />
-    <Content Include="Scripts\js\pages\salesanalysishome.js" />
+    <Content Include="Scripts\js\pages\spboardhome.js" />
     <Content Include="Scripts\js\pages\spboard.js" />
     <Content Include="Scripts\js\prettify.min.js" />
     <Content Include="Scripts\js\respond.min.js" />
