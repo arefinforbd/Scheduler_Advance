@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html class="fuelux" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServicePRO-Web</title>
+    <meta name="description" content="Easiest HTML admin template to work with! Have your site up &amp; running in five minutes!">
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/jquery-ui-1.10.3.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/style(1).css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/responsive.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/_demo.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/fontello.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/jquery.toolbar.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/kendo/2015.1.429/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.429/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.429/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.429/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.1.429/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.429/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.429/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.429/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.429/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    @*<link rel="shortcut icon" type="image/png" href="http://slater.webfactoryltd.com/favicon.ico">*@
+    <link href="@Url.Content("~/Content/css/customfont.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="loader-overlay finished">
+        <div class="loader-spinner">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="sidebar">
+            <a href="http://slater.webfactoryltd.com/index.html">
+                <div class="logo-container" id="step1">
+                    <h1>ServicePRO-Web</h1>
+                </div>
+            </a>
+
+            <div class="sidebar-profile">
+                <div class="user-avatar" style="width:40px;height:40px;">
+                    <img src="~/Content/images/profile-40x40.jpg" />
+                </div>
+                <div class="user-info" style="padding-top: 0px;">
+                    <a href="#">Logges As:</a>
+                    <span>TemiSoft User</span>
+                </div>
+            </div>
+            <div class="responsive-menu">
+                <a href="#"><i class="fa fa-bars"></i></a>
+            </div>
+            <ul class="menu">
+                <li class="lightblue active">
+                    <a href="#">
+                        <span class="menu-icon"><i class="fontello-desktop"></i></span>
+                        <span class="menu-text">Contract Reports</span>
+                    </a>
+                </li>
+                <li class="lightblue">
+                    <a href="#">
+                        <span class="menu-icon"><i class="fontello-desktop"></i></span>
+                        <span class="menu-text">Job Reports</span>
+                    </a>
+                </li>
+                <li class="parent lightyellow">
+                    <a href="">
+                        <span class="menu-icon"><i class="fontello-paper-plane"></i></span>
+                        <span class="menu-text">Misc Reports</span>
+                    </a>
+                    <ul class="child">
+                        <li>
+                            <a href="#">Report 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Report 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content-liquid-full">
+            <div class="container">
+                <div class="row header-bar" id="step2">
+                    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4 hidden-xs hidden-sm">
+                        <ul class="left-icons icon-list">
+                            <li>
+                                <a href="#" style="color: #FFFFFF; width: auto !important;">
+                                    Jobs
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" style="color: #FFFFFF; width: auto !important;">
+                                    Maintenance
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="fulla">
+                                    Reports
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-8">
+                        <ul class="right-icons" id="step3">
+                            <li>
+                                <a href="#" class="dropdown-toggle email" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fa fa-envelope-o"></i>Inbox</a></li>
+                                    <li><a href="#"><i class="fa fa-reply-all"></i>Send</a></li>
+                                    <li><a href="#"><i class="fa fa-folder"></i>Draft</a></li>
+                                    <li><a href="#"><i class="fa fa-pencil-square-o"></i>Compose</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle user" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fa fa-cogs"></i>Settings</a></li>
+                                    <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                                    <li><a href="#"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container" id="main-area">
+                    <div class="row mini-header-container">
+                        <div class="mini-header" style="padding: 5px 10px;">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <h5 class="thin" style="font-size: 18px; margin-bottom: 0px;">Dashboard</h5>
+                                    <p class="text-muted" style="font-weight:normal;">Welcome to Ultimate Dashboard</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @RenderBody()
+
+                </div>
+
+                <div class="footer-line">
+                    © All rights reserved by TemiSoft Pty ltd
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="@Url.Content("~/Scripts/js/all-pages.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/scripts.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery.toolbar.js")"></script>
+</body>
+</html>

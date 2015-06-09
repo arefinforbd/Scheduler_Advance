@@ -1,0 +1,175 @@
+﻿@using ServicePROWeb.Models;
+
+@{
+    ViewBag.Title = "Scheduler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .k-scheduler-layout {
+        table-layout: fixed;
+    }
+
+    #schedulerHorizontal .k-scheduler-layout > tbody > tr > td:first-child,
+    #schedulerBasic .k-scheduler-layout > tbody > tr > td:first-child {
+        width: 80px;
+    }
+
+    #schedulerHorizontal .k-scheduler-content .k-scheduler-table,
+    #schedulerHorizontal .k-scheduler-header .k-scheduler-table {
+        width: 1500px;
+    }
+
+    #schedulerVertical .k-scheduler-layout > tbody > tr > td:first-child,
+    #schedulerSample .k-scheduler-layout > tbody > tr > td:first-child {
+        width: 220px;
+    }
+</style>
+
+
+
+<div class="container-fluid" style="margin-top: 10px;">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            <div class="panel widget-info-box">
+                <div class="panel-body" style="padding-top: 15px;">
+
+                    @(Html.Kendo().Scheduler<TaskViewModel>()
+                        .Name("schedulerBasic")
+                        .Date(new DateTime(2015, 5, 24))
+                        .StartTime(new DateTime(2015, 5, 24, 7, 00, 00))
+                        .Height(600)
+                        .Views(views =>
+                        {
+                            views.DayView();
+                            views.WeekView(weekView => weekView.Selected(true));
+                            views.MonthView();
+                            views.TimelineView();
+                        })
+                        .Selectable(true)
+                        .Timezone("Etc/UTC")
+                        .ShowWorkHours(false)
+                        .DataSource(d => d
+                            .Model(m =>
+                            {
+                                m.Id(f => f.TaskID);
+                            })
+                            .Read("Job_Read", "Scheduler")
+                            .Create("Job_Create", "Scheduler")
+                            .Destroy("Job_Delete", "Scheduler")
+                            .Update("Job_Update", "Scheduler")
+                        )
+                    )
+
+                    <br/><br />
+
+                    @(Html.Kendo().Scheduler<TaskViewModel>()
+                        .Name("schedulerHorizontal")
+                        .Date(new DateTime(2015, 5, 24))
+                        .StartTime(new DateTime(2015, 5, 24, 7, 00, 00))
+                        .Height(600)
+                        .Views(views =>
+                        {
+                            views.DayView();
+                            views.WeekView(weekView => weekView.Selected(true));
+                            views.MonthView();
+                            views.TimelineView();
+                        })
+                        .Timezone("Etc/UTC")
+                        .Group(group => group.Resources("Techs"))
+                        .Resources(resource =>
+                        {
+                            resource.Add(m => m.TechID)
+                                .Title("Tech")
+                                .Name("Techs")
+                                .DataTextField("TechName")
+                                .DataValueField("TechID")
+                                .DataColorField("Color")
+                                .DataSource(d => d.Read("Techs", "Scheduler"));
+                        })
+                        .DataSource(d => d
+                            .Model(m =>
+                            {
+                                m.Id(f => f.TechID);
+                                m.Id(f => f.TaskID);
+                            })
+                            .Read("Resource_Read", "Scheduler")
+                            .Create("Resource_Create", "Scheduler")
+                            .Destroy("Resource_Delete", "Scheduler")
+                            .Update("Resource_Update", "Scheduler")
+                        )
+                    )
+
+                    <br /><br />
+
+                    @(Html.Kendo().Scheduler<TaskViewModel>()
+                        .Name("schedulerVertical")
+                        .Date(new DateTime(2015, 5, 24))
+                        .StartTime(new DateTime(2015, 5, 24, 7, 00, 00))
+                        .Height(600)
+                        .Views(views =>
+                        {
+                            views.DayView();
+                            views.WeekView(weekView => weekView.Selected(true));
+                            views.MonthView();
+                            views.TimelineView();
+                        })
+                        .Timezone("Etc/UTC")
+                        .Group(group => group.Resources("Skills", "Techs").Orientation(SchedulerGroupOrientation.Vertical))
+                        .Resources(resource =>
+                        {
+                            resource.Add(m => m.SkillID)
+                                .Title("Skills")
+                                .Name("Skills")
+                                .DataTextField("SkillName")
+                                .DataValueField("SkillID")
+                                .DataSource(d => d.Read("Skills", "Scheduler"));
+                            resource.Add(m => m.TechID)
+                                .Title("Techs")
+                                .Name("Techs")
+                                .DataTextField("TechName")
+                                .DataValueField("TechID")
+                                .DataSource(d => d.Read("Techs", "Scheduler"));
+                        })
+                        .DataSource(d => d
+                            .Model(m =>
+                            {
+                                m.Id(f => f.SkillID);
+                                m.Id(r => r.TechID);
+                                m.Id(f => f.TaskID);
+                            })
+                            .Read("Vertical_Read", "Scheduler")
+                            .Create("Vertical_Create", "Scheduler")
+                            .Destroy("Vertical_Delete", "Scheduler")
+                            .Update("Vertical_Update", "Scheduler")
+                        )
+                    )
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #scheduler {
+        font-size: 14px;
+    }
+    #team-schedule {
+        height: 115px;
+        position: relative;
+    }
+
+    #people {
+        background: url('@Url.Content("~/Content/images/")scheduler-people.png') no-repeat;
+        width: 345px;
+        height: 115px;
+        position: absolute;
+        right: 0;
+    }
+</style>
+
+<script>
+    $("div[data-container-for='Techs']").hide();
+    $("label[for='Techs']").hide();
+</script>

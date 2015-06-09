@@ -1,0 +1,308 @@
+/***** 1680px Width *****/
+@media (max-width: 1680px) {
+
+  .ui-tabs-vertical .ui-tabs-nav {
+    float: none;
+    width: 100% !important;
+  }
+
+  .ui-tabs-vertical .ui-tabs-nav li {
+    background-color: #E4E4E4 !important;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .ui-tabs-vertical .ui-tabs-nav li a {
+    display: block;
+    width: 100%;
+  }
+
+  .ui-tabs-vertical .ui-tabs-panel {
+    width: 100% !important;
+  }
+  
+  .widget-info-box .counter {
+    font-size: 20px;
+  }
+
+}
+
+/***** 980px Width *****/
+@media (max-width: 980px) {
+
+  .sidebar {
+    width: 100%;
+    position: relative !important;
+    min-height: 0px !important;
+  }
+
+  body.horizontal-menu .sidebar {
+    min-height: 50px !important;
+  }
+
+  body.horizontal-menu .sidebar .responsive-menu a {
+  }
+
+  body.horizontal-menu .sidebar .menu {
+    text-align: left;
+  }
+
+  body.horizontal-menu .sidebar .menu li {
+    width: 100%;
+  }
+
+  body.horizontal-menu .sidebar .menu {
+    border-top:0px;
+  }
+
+  body.horizontal-menu .sidebar li .child {
+    position: relative;
+    top:0;
+    left:0;
+  }
+
+  body.horizontal-menu .sidebar li .child li {
+    padding-left: 35px;
+  }
+
+  body.horizontal-menu .responsive-spacer {
+    display: block;
+    width:100%;
+    height:50px;
+    background-color: #FFFFFF;
+  }
+
+  .sidebar .responsive-menu {
+    position: absolute;
+    top: 8px;
+    right: 50px;
+    display: block;
+  }
+
+  .sidebar .logo-container {
+    display: block;
+    max-width: 50%;
+    border-bottom:0px;
+    border-right:0px;
+  }
+  
+  .sidebar {
+    background-color: #1B83BB;
+    border-bottom:1px solid #D5DDDF;
+  }
+
+  .sidebar .sidebar-profile {
+    display: none;
+  }
+
+  .sidebar ul.menu {
+    display: none;
+  }
+
+  .content-liquid-full {
+    width: 100%;
+    margin-left: 0px !important;
+  }
+
+  ul.left-icons {
+    float:none !important;
+  }
+
+  ul.right-icons .notify {
+
+  }
+
+}
+
+/***** 768px Width *****/
+@media (max-width: 768px) {
+
+  .sidebar>a {
+    display: block;
+    width: 50%;
+  }
+
+  .sidebar .logo-container {
+    border-bottom:0px;
+    border-right:0px;
+  }
+
+  .sidebar {
+    background-color: #1B83BB;
+    border-bottom:1px solid #D5DDDF;
+  }
+  
+    .timeline-container.recent-tasks .timeline-panel .avatar {
+    float: none !important;
+    text-align: center;
+  }  
+  
+  .timeline-container.recent-tasks .timeline-panel .info {
+    float: none !important;
+    text-align: center;
+  }
+  
+  .timeline-container.recent-tasks .timeline-panel .notification {
+    padding: 0px;
+  }
+  
+  .areaLegend,
+  .plotLegend {
+    display: none;
+  }
+  
+  .todo-list .item-content {
+    max-width:150px;
+  }
+  
+  .mini-header .col-sm-12 {
+    width:50%;
+  }
+  
+  .logo-container h4 {
+    display:none;
+  }
+  
+  .profile .profile-data .profile-avatar {
+    max-width: 55px;
+    height:55px;
+  }
+  
+  .profile .profile-data .profile-avatar img {
+    max-width: 100%;
+  }
+  
+  .profile .profile-data .send-msg .btn{
+    max-width:100%;
+    white-space: normal;
+  }
+
+}
+
+/***** 640px Width *****/
+@media (max-width: 640px) {
+  
+  .info-box-icon {
+    display: none;
+  }
+  
+  .widget-info-box .counter {
+    font-size: 21px;
+  }
+  
+  .timeline-container.recent-tasks .content .info {
+    max-width: 185px;
+  }
+  
+}
+
+/***** 360px Width *****/
+@media (max-width: 366px) {
+  
+  .widget-info-box .counter {
+    font-size:16px;
+  }
+  
+  .mini-header .col-sm-12 {
+    width:100%;
+  }
+
+  .right-icons {
+    text-align: center !important;
+  }
+
+  span.in-progress, span.shipped,
+  span.delayed, span.on-hold {
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+    border-radius:50% !important;
+    font-size: 0px;
+    vertical-align: middle;
+  }
+  
+  .logo-container h4 {
+    display:none;
+  }
+  
+  .sidebar .responsive-menu a i {
+    color:#fff;
+  }
+  
+  .mini-header h1,
+  .mini-header p,
+  .mini-header .text-right {
+    text-align: center;
+  }
+  
+  .timeline-container.recent-tasks .content .info {
+    max-width:115px;
+  }
+  
+  .timeline-container.recent-tasks .timeline-panel .avatar {
+    float: none !important;
+    text-align: center;
+  }  
+  
+  .timeline-container.recent-tasks .timeline-panel .info {
+    float: none !important;
+    text-align: center;
+  }
+  
+  .timeline-container.recent-tasks .timeline-panel .notification {
+    padding: 0px;
+  }
+  
+  .areaLegend,
+  .plotLegend {
+    display: none;
+  }
+  
+  .todo-list .item-content {
+    max-width:150px;
+  }
+  
+  .profile .title {
+    text-align: center;
+  }
+  
+  .profile .title .share-profile {
+    float: none;
+  }
+
+}
+
+@media (max-width: 1250px) {
+
+  ul.left-icons {
+    float:right !important;
+  }
+
+  ul.right-icons {
+    width: 100%;
+    float: none !important;
+    text-align: right;
+  }
+
+}
+
+@media (max-width: 1280px) {
+
+  .profile .footer h4 {
+    text-align: center;
+  }
+
+  .profile-socials {
+    text-align: center !important;
+  }
+
+}
+
+
+@media (min-width: 1250px) and (max-width: 1280px) {
+
+  .sidebar ul.menu {
+    display: block;
+  }
+
+}

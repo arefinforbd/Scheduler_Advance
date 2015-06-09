@@ -1,0 +1,24 @@
+.buy-button a {
+  display: inline-block;
+  padding: 10px 30px;
+  background: #F75D3F;
+  color: #fff;
+  margin-top: 15px;
+  border-radius:5px;
+}
+
+.fulla {
+  width: auto !important;
+  display: inline-block;
+  background: #F75D3F;
+  color: #fff;
+  font-weight: bold;
+}
+
+.fulla:hover {
+  color: #fff;
+}
+
+.header-bar .left-icons li:hover {
+	background-color: #5DB8F5;
+}

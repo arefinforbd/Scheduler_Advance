@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    div.k-grid-content table tbody tr{
+        cursor: pointer;
+    }
+</style>
+
+<div class="container-fluid" style="margin-top: 10px;">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            <div class="panel widget-info-box">
+                <div class="panel-body" style="padding-top: 15px;">
+                    @(Html.Kendo().Grid<ServicePROWeb.Models.OrderViewModel>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.OrderID).Filterable(false);
+                        columns.Bound(p => p.Freight);
+                        columns.Bound(p => p.OrderDate).Format("{0:MM/dd/yyyy}");
+                        columns.Bound(p => p.ShipName);
+                        columns.Bound(p => p.ShipCity);
+                    })
+                    .Pageable()
+                    .Sortable()
+                    .Scrollable()
+                    .Filterable()
+                    .HtmlAttributes(new { style = "height:530px;" })
+                    .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(15)
+                    .Read(read => read.Action("Orders_Read", "Grid")))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#grid tbody").on("dblclick", "tr[role='row']", function (e) {
+            var grid = $("#grid").data("kendoGrid");
+            var model = grid.dataItem(this);
+            var windowWidth = screen.width - (screen.width * 0.2);
+            var windowHeight = screen.height - (screen.height * 0.2);
+            var top = (screen.height / 2) - (windowHeight / 2);
+            var left = (screen.width / 2) - (windowWidth / 2);
+
+            //alert(top + " Left: " + left);
+
+            window.open("/Home/NewWindow", "_blank", "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=" + windowWidth + ",height=" + windowHeight + ", top=" + top + ", left=" + left);
+        });
+    });
+</script>
